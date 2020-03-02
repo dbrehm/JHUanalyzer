@@ -1,0 +1,11 @@
+root://cmsxrootd.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfiles/QCDHT700_hh17.root
+root://cmsxrootd.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfiles/QCDHT1000_hh17.root
+root://cmsxrootd.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfiles/QCDHT1500_hh17.root
+root://cmsxrootd.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfiles/QCDHT2000_hh17.root
+root://cmsxrootd.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfiles/dataB_hh17.root
+root://cmsxrootd.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfiles/dataC_hh17.root
+root://cmsxrootd.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfiles/dataD_hh17.root
+root://cmsxrootd.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfiles/dataE_hh17.root
+root://cmsxrootd.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfiles/dataF_hh17.root
+root://cmsxrootd.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfiles/ttbar-semilep_hh17.root
+root://cmsxrootd.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfiles/ttbar_hh17.root

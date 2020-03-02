@@ -1,0 +1,4 @@
+root://cmsxrootd.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfiles/singlemuonA_hh18.root
+root://cmsxrootd.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfiles/singlemuonB_hh18.root
+root://cmsxrootd.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfiles/singlemuonC_hh18.root
+root://cmsxrootd.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfiles/singlemuonD_hh18.root
