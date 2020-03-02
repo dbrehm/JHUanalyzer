@@ -23,17 +23,17 @@ namespace analyzer {
             // float deltaR1 = sqrt(pow(v1.Eta()-test.Eta(),2)+pow(v1.Phi()-test.Phi(),2));
             // float deltaR2 = sqrt(pow(v2.Eta()-test.Eta(),2)+pow(v2.Phi()-test.Phi(),2));
             // cout << "First index = " << first << " Second index = " << second << "third index = " << i << " mass of 3 jets = " << testMass << endl;
-            if ((abs(Jphi[first]-Jphi[i]) < M_PI_2 ) && (abs(Jphi[second]-Jphi[i]) < M_PI_2 )){
+            float deltaPhi1 = ROOT::Math::VectorUtil::DeltaPhi(v1,test);
+            float deltaPhi2 = ROOT::Math::VectorUtil::DeltaPhi(v2,test);
+            if ((deltaPhi1 < M_PI_2 ) && (deltaPhi2 < M_PI_2 )){
                 // cout << "Jets in same hemisphere" << endl;
                 if (deltaR == -1.0){
                     deltaR = std::min(deltaR1,deltaR2);
-                    ROOT::Math::PtEtaPhiMVector minJet(Jpt[i],Jeta[i],Jphi[i],Jmass[i]);
-                    Mass = (v1+v2+minJet).M();
+                    Mass = (v1+v2+test).M();
                 }
                 else if (deltaR  > std::min(deltaR1,deltaR2)){
                     deltaR = std::min(deltaR1,deltaR2);
-                    ROOT::Math::PtEtaPhiMVector minJet(Jpt[i],Jeta[i],Jphi[i],Jmass[i]);
-                    Mass = (v1+v2+minJet).M();
+                    Mass = (v1+v2+test).M();
                 }
             }
         }
