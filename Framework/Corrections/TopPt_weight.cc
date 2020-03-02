@@ -11,19 +11,22 @@ namespace analyzer {
 
         float genTpt = 0;
         float genTBpt = 0;
-        float wTPt, wTbarPt; 
+        float wTPt, wTbarPt, wTPtAlphaup, wTbarPtAlphaup, wTPtAlphadown, wTbarPtAlphadown ,wTPtBetaup, wTbarPtBetaup, wTPtBetadown, wTbarPtBetadown; 
         bool pair_exists = 0.0;
+
+        float alpha = 0.0615;
+        float beta = 0.0005;
 
         // For all gen particles
         for (int i =0; i < nGenJet; i++){
             if ((GPpdgId[i] == -6) && (GPstatusFlags[i] & (1 << 13))){ 
                 ROOT::Math::PtEtaPhiMVector antitop_lv(GPpt[i],GPeta[i],GPphi[i],GPmass[i]);
-                if ((sqrt((antitop_lv.Eta()-jet0.Eta())*(antitop_lv.Eta()-jet0.Eta()) + (deltaPhi(antitop_lv.Phi(),jet0.Phi()))*(deltaPhi(antitop_lv.Phi(),jet0.Phi()))) <0.8) || (sqrt((antitop_lv.Eta()-jet1.Eta())*(antitop_lv.Eta()-jet1.Eta()) + (deltaPhi(antitop_lv.Phi(),jet1.Phi()))*(deltaPhi(antitop_lv.Phi(),jet1.Phi()))) <0.8)){
+                if ((ROOT::Math::VectorUtil::DeltaR(antitop_lv,jet0) <0.8) || (ROOT::Math::VectorUtil::DeltaR(antitop_lv,jet1)) <0.8){
                     genTBpt = GPpt[i];
                 }
             }else if ((GPpdgId[i] == 6) && (GPstatusFlags[i] & (1 << 13))){ 
                 ROOT::Math::PtEtaPhiMVector top_lv(GPpt[i],GPeta[i],GPphi[i],GPmass[i]);
-                if ((sqrt((top_lv.Eta()-jet0.Eta())*(top_lv.Eta()-jet0.Eta()) + (deltaPhi(top_lv.Phi(),jet0.Phi()))*(deltaPhi(top_lv.Phi(),jet0.Phi()))) <0.8) || (sqrt((top_lv.Eta()-jet1.Eta())*(top_lv.Eta()-jet1.Eta()) + (deltaPhi(top_lv.Phi(),jet1.Phi()))*(deltaPhi(top_lv.Phi(),jet1.Phi()))) <0.8)){
+                if ((ROOT::Math::VectorUtil::DeltaR(top_lv,jet0) <0.8) || (ROOT::Math::VectorUtil::DeltaR(top_lv,jet1)) <0.8){
                     genTpt = GPpt[i];
                 }
             }
@@ -38,18 +41,38 @@ namespace analyzer {
         if (genTpt == 0){ 
             wTPt = 1.0;
         }else{
-            wTPt = exp(0.0615-0.0005*genTpt);
+            wTPt = exp(alpha-beta*genTpt);
+            wTPtAlphaup = exp(2*alpha-beta*genTpt);
+            wTPtAlphadown = exp(0.5*alpha-beta*genTpt);
+            wTPtBetaup = exp(alpha-2*beta*genTpt);
+            wTPtBetadown = exp(alpha-0.5*beta*genTpt);
         }
 
         if (genTBpt == 0){ 
             wTbarPt = 1.0;
         }else{
-            wTbarPt = exp(0.0615-0.0005*genTBpt);
+            wTbarPt = exp(alpha-beta*genTBpt);
+            wTbarPtAlphaup = exp(2*alpha-beta*genTpt);
+            wTbarPtAlphadown = exp(0.5*alpha-beta*genTpt);
+            wTbarPtBetaup = exp(alpha-2*beta*genTpt);
+            wTbarPtBetadown = exp(alpha-0.5*beta*genTpt);
         }
 
         out.push_back(sqrt(wTPt*wTbarPt));
-        out.push_back(1.25*sqrt(wTPt*wTbarPt));
-        out.push_back(0.75*sqrt(wTPt*wTbarPt));
+        /// Here we are making varying shapes for up and down on Alpha and Beta
+        out.push_back(sqrt(wTPt*wTbarPt));
+        out.push_back(2.0*sqrt(wTPt*wTbarPt));
+        out.push_back(0.5*sqrt(wTPt*wTbarPt));
+        // out.push_back(sqrt(wTPtAlphaup*wTbarPt));
+        // out.push_back(sqrt(wTPtAlphadown*wTbarPt));
+        // out.push_back(sqrt(wTPtBetaup*wTbarPt));
+        // out.push_back(sqrt(wTPtBetadown*wTbarPt));
+
+        // out.push_back(sqrt(wTPt*wTbarPtAlphaup));
+        // out.push_back(sqrt(wTPt*wTbarPtAlphadown));
+        // out.push_back(sqrt(wTPt*wTbarPtBetaup));
+        // out.push_back(sqrt(wTPt*wTbarPtBetadown));
+	    
         out.push_back(pair_exists);
         return out;
     }
