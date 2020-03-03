@@ -1,0 +1,12 @@
+-i NanoAOD16_lists/dataG_loc.txt -o HHtrigger16_dataG_btagHbb.root -c hh16_config.json -y 16 -d btagHbb
+-i NanoAOD16_lists/dataG_loc.txt -o HHtrigger16_dataG_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD
+-i NanoAOD16_lists/dataG_loc.txt -o HHtrigger16_dataG_deepTagMD_ZHbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_ZHbbvsQCD
+-i NanoAOD16_lists/dataG_loc.txt -o HHtrigger16_dataG_btagDDBvL.root -c hh16_config.json -y 16 -d btagDDBvL
+-i NanoAOD17_lists/dataE_loc.txt -o HHtrigger17_dataE_btagHbb.root -c hh17_config.json -y 17 -d btagHbb
+-i NanoAOD17_lists/dataE_loc.txt -o HHtrigger17_dataE_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD
+-i NanoAOD17_lists/dataE_loc.txt -o HHtrigger17_dataE_deepTagMD_ZHbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_ZHbbvsQCD
+-i NanoAOD17_lists/dataE_loc.txt -o HHtrigger17_dataE_btagDDBvL.root -c hh17_config.json -y 17 -d btagDDBvL
+-i NanoAOD18_lists/QCDHT700_loc.txt -o HHtrigger18_QCDHT700_btagHbb.root -c hh18_config.json -y 18 -d btagHbb
+-i NanoAOD18_lists/QCDHT700_loc.txt -o HHtrigger18_QCDHT700_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD
+-i NanoAOD18_lists/QCDHT700_loc.txt -o HHtrigger18_QCDHT700_deepTagMD_ZHbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_ZHbbvsQCD
+-i NanoAOD18_lists/QCDHT700_loc.txt -o HHtrigger18_QCDHT700_btagDDBvL.root -c hh18_config.json -y 18 -d btagDDBvL
