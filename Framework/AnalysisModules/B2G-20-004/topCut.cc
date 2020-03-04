@@ -9,7 +9,7 @@ using rvec_f = const RVec<float> &;
 namespace analyzer {
      RVec<float> topCut(int first, int second, rvec_f Jpt, rvec_f Jeta, rvec_f Jphi, rvec_f Jmass, unsigned int Jnjets){
         RVec<float> out;
-        float deltaR = -1.0;
+        float deltaR = 9999999.0;
         ROOT::Math::PtEtaPhiMVector v1(Jpt[first],Jeta[first],Jphi[first],Jmass[first]);
         ROOT::Math::PtEtaPhiMVector v2(Jpt[second],Jeta[second],Jphi[second],Jmass[second]);
         float Mass = 0.0;
@@ -25,13 +25,9 @@ namespace analyzer {
             // cout << "First index = " << first << " Second index = " << second << "third index = " << i << " mass of 3 jets = " << testMass << endl;
             float deltaPhi1 = ROOT::Math::VectorUtil::DeltaPhi(v1,test);
             float deltaPhi2 = ROOT::Math::VectorUtil::DeltaPhi(v2,test);
-            if ((deltaPhi1 < M_PI_2 ) && (deltaPhi2 < M_PI_2 )){
+            if ((abs(deltaPhi1) < M_PI_2 ) && (abs(deltaPhi2) < M_PI_2 )){
                 // cout << "Jets in same hemisphere" << endl;
-                if (deltaR == -1.0){
-                    deltaR = std::min(deltaR1,deltaR2);
-                    Mass = (v1+v2+test).M();
-                }
-                else if (deltaR  > std::min(deltaR1,deltaR2)){
+                if (deltaR  > std::min(deltaR1,deltaR2)){
                     deltaR = std::min(deltaR1,deltaR2);
                     Mass = (v1+v2+test).M();
                 }

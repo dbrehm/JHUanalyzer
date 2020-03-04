@@ -37,7 +37,7 @@ namespace analyzer {
         for (unsigned int ijet = 0; ijet<Jnjets; ijet++){
             //cout << "ijet = " << ijet+1 << " Jnjets = " << Jnjets << endl;
             ROOT::Math::PtEtaPhiMVector test(Jpt[ijet],Jeta[ijet],Jphi[ijet],Jmass[ijet]);
-            if ((ROOT::Math::VectorUtil::DeltaPhi(candidateFatJet,test)) > M_PI_2 ){
+            if (abs(ROOT::Math::VectorUtil::DeltaPhi(candidateFatJet,test)) > M_PI_2 ){
                 candidateJetIndices.emplace_back(ijet);
                 //cout << "Jet " << ijet << " passed." << endl;
             }
