@@ -58,7 +58,6 @@ namespace analyzer {
             wTbarPtBetadown = exp(alpha-0.5*beta*genTpt);
         }
 
-        out.push_back(sqrt(wTPt*wTbarPt));
         /// Here we are making varying shapes for up and down on Alpha and Beta
         out.push_back(sqrt(wTPt*wTbarPt));
         // out.push_back(2.0*sqrt(wTPt*wTbarPt));
