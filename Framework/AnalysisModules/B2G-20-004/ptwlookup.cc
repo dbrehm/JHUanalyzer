@@ -62,16 +62,10 @@ namespace analyzer {
         out.push_back(sqrt(wTPt*wTbarPt));
         // out.push_back(2.0*sqrt(wTPt*wTbarPt));
         // out.push_back(0.5*sqrt(wTPt*wTbarPt));
-        out.push_back(sqrt(wTPtAlphaup*wTbarPt));
-        out.push_back(sqrt(wTPtAlphadown*wTbarPt));
-        out.push_back(sqrt(wTPtBetaup*wTbarPt));
-        out.push_back(sqrt(wTPtBetadown*wTbarPt));
-
-        out.push_back(sqrt(wTPt*wTbarPtAlphaup));
-        out.push_back(sqrt(wTPt*wTbarPtAlphadown));
-        out.push_back(sqrt(wTPt*wTbarPtBetaup));
-        out.push_back(sqrt(wTPt*wTbarPtBetadown));
-	    
+        out.push_back(sqrt(wTPtAlphaup*wTbarPtAlphaup));
+        out.push_back(sqrt(wTPtAlphadown*wTbarPtAlphadown));
+        out.push_back(sqrt(wTPtBetaup*wTbarPtBetaup));
+        out.push_back(sqrt(wTPtBetadown*wTbarPtBetadown));
         out.push_back(pair_exists);
         return out;
     }
