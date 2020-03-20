@@ -12,7 +12,7 @@ namespace analyzer {
         float genTpt = 0;
         float genTBpt = 0;
         float wTPt, wTbarPt, wTPtAlphaup, wTbarPtAlphaup, wTPtAlphadown, wTbarPtAlphadown ,wTPtBetaup, wTbarPtBetaup, wTPtBetadown, wTbarPtBetadown; 
-        bool pair_exists = 0.0;
+        float pair_exists = 0.0;
 
         float alpha = 0.0615;
         float beta = 0.0005;
