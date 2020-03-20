@@ -11,7 +11,7 @@ namespace analyzer {
 
         std::vector<float> out;
 
-        if (var < 2000.0){
+        if (var < 3500.0){
             int bin0 = TRP->FindBin(var); 
             float jetTriggerWeight = TRP->GetBinContent(bin0);
             // Check that we're not in an empty bin in the fully efficient region
