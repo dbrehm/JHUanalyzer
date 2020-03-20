@@ -67,6 +67,7 @@ namespace analyzer {
         out.push_back(sqrt(wTPtBetaup*wTbarPtBetaup));
         out.push_back(sqrt(wTPtBetadown*wTbarPtBetadown));
         out.push_back(pair_exists);
+        cout << "Top vector is: " << sqrt(wTPt*wTbarPt) << " " << sqrt(wTPtAlphaup*wTbarPtAlphaup) << " " << sqrt(wTPtAlphadown*wTbarPtAlphadown) << " " << sqrt(wTPtBetaup*wTbarPtBetaup) << " " << sqrt(wTPtBetadown*wTbarPtBetadown)<< " " << endl;
         return out;
     }
 }
