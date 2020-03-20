@@ -40,6 +40,10 @@ namespace analyzer {
         
         if (genTpt == 0){ 
             wTPt = 1.0;
+            wTPtAlphaup = 1;
+            wTPtAlphadown = 1;
+            wTPtBetaup = 1;
+            wTPtBetadown = 1;
         }else{
             wTPt = exp(alpha-beta*genTpt);
             wTPtAlphaup = exp(2*alpha-beta*genTpt);
@@ -50,6 +54,10 @@ namespace analyzer {
 
         if (genTBpt == 0){ 
             wTbarPt = 1.0;
+            wTbarPtAlphaup = 1;
+            wTbarPtAlphadown = 1;
+            wTbarPtBetaup = 1;
+            wTbarPtBetadown = 1;
         }else{
             wTbarPt = exp(alpha-beta*genTBpt);
             wTbarPtAlphaup = exp(2*alpha-beta*genTpt);
