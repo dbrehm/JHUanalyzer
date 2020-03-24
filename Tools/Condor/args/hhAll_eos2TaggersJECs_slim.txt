@@ -1,7 +1,6 @@
 -i root://cmsxrootd.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfiles/dataA_hh18.root -o HHpreselection18_dataA_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD
 -i root://cmsxrootd.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfiles/dataB_hh18.root -o HHpreselection18_dataB_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD
 -i root://cmsxrootd.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfiles/dataC1_hh18.root -o HHpreselection18_dataC1_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD
--i root://cmsxrootd.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfiles/dataC2_hh18.root -o HHpreselection18_dataC2_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD
 -i root://cmsxrootd.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfiles/dataD_hh18.root -o HHpreselection18_dataD_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD
 -i NanoAOD_lists_private/QCDHT1000_loc.txt -o HHpreselection16_QCDHT1000_btagHbb.root -c hh16_config.json -y 16 -d btagHbb
 -i NanoAOD_lists_private/QCDHT1500_loc.txt -o HHpreselection16_QCDHT1500_btagHbb.root -c hh16_config.json -y 16 -d btagHbb
