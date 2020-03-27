@@ -25,10 +25,12 @@ namespace analyzer {
 
             Weight = jetTriggerWeight;
             float deltaTriggerEff  = 0.5*(1.0-jetTriggerWeight);
+            float errorUp = TEff->GetEfficiencyErrorUp(bin0);
+            float errorDown = TEff->GetEfficiencyErrorLow(bin0);
             float one = 1.0;
             float zero = 0.0;
-            Weightup = std::min(one,(jetTriggerWeight + sqrt(pow((deltaTriggerEff),2) + pow(TEff->GetEfficiencyErrorUp(bin0),2) ))) ;
-            Weightdown = std::max(zero,(jetTriggerWeight - sqrt(pow((deltaTriggerEff),2) + pow(TEff->GetEfficiencyErrorLow(bin0),2) )));
+            Weightup = std::min(one,(jetTriggerWeight + sqrt(pow((deltaTriggerEff),2) + pow(errorUp,2) ))) ;
+            Weightdown = std::max(zero,(jetTriggerWeight - sqrt(pow((deltaTriggerEff),2) + pow(errorDown,2) )));
 
         }    
         out.push_back(Weight);
