@@ -9,7 +9,7 @@ namespace analyzer {
         double Weightup = 1;
         double Weightdown = 1;
 
-        std::vector<float> out;
+        std::vector<double> out;
 
         if (var < 4000.0){
             int bin0 = TRP->FindBin(var); 
