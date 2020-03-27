@@ -13,7 +13,7 @@ namespace analyzer {
 
         if (var < 4000.0){
             int bin0 = TRP->FindBin(var); 
-            float jetTriggerWeight = TEff->GetBinContent(bin0);
+            float jetTriggerWeight = TEff->GetEfficiency(bin0);
             // Check that we're not in an empty bin in the fully efficient region
             if (jetTriggerWeight == 0){
                 if ((TEff->GetEfficiency(bin0-1) == 1.0) && (TEff->GetEfficiency(bin0+1) == 1.0)){
