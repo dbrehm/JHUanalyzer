@@ -5,7 +5,7 @@ import time, os
 from optparse import OptionParser
 from  array import array
 
-from JHUanalyzer.Analyzer.analyzer import analyzer, Group, VarGroup, CutGroup, Nminus1
+from JHUanalyzer.Analyzer.analyzer import analyzer, Group, VarGroup, CutGroup, Nminus1, SetCFunc
 from JHUanalyzer.Tools.Common import openJSON,CutflowHist
 from JHUanalyzer.Analyzer.Cscripts import CommonCscripts, CustomCscripts
 commonc = CommonCscripts()
@@ -62,11 +62,16 @@ a = analyzer(options.input)
 if '_loc.txt' in options.input: setname = options.input.split('/')[-1].split('_loc.txt')[0]
 elif '.root' in options.input: setname = options.input.split('/')[-1].split('_hh'+options.year+'.root')[0]
 else: setname = ''
+print("Setname="+setname)
 if os.path.exists(options.config):
     print('JSON config imported')
     c = openJSON(options.config)
     if setname != '' and not a.isData:
-        xsec = c['XSECS'][setname]
+        if 'QCD' in setname and options.year == '16':
+            xsec = c['XSECS'][setname]
+        else:  
+            xsec = c['XSECS'][setname]
+
         lumi = c['lumi']
     else: 
         xsec = 1.
@@ -86,50 +91,43 @@ if not a.isData:
         sublead['JEScorr'] = "1.0"
     lead['JERcorr'] = 'FatJet_corr_JER_'+options.JER+"[0]"
     sublead["JERcorr"] = 'FatJet_corr_JER_'+options.JER+"[1]"
-    lead["JMScorr"] = 'FatJet_corr_JMS_'+options.JMS+"[0]"
-    sublead["JMScorr"] = 'FatJet_corr_JMS_'+options.JMS+"[1]"
-    lead["JMRcorr"] = 'FatJet_groomed_corr_JMR_'+options.JMR+"[0]"
-    sublead["JMRcorr"] = 'FatJet_groomed_corr_JMR_'+options.JMR+"[1]"
 if not a.isData:
     lead['pt'] = "*"+lead['JEScorr']+"*"+lead['JERcorr']
     sublead['pt'] = "*"+sublead['JEScorr']+"*"+sublead['JERcorr']
     lead['SDmass'] = "*"+lead['JEScorr']+"*"+lead['JERcorr']
     sublead['SDmass'] = "*"+sublead['JEScorr']+"*"+sublead['JERcorr']
-    if 'ttbar' not in setname:
-        lead['SDmass'] += "*"+lead['JMScorr']+"*"+lead['JMRcorr']
-        sublead['SDmass'] += "*"+sublead['JMScorr']+"*"+sublead['JMRcorr']
 ###Apply corrections
-# if not a.isData:
-#     mass0 = "FatJet_msoftdrop_nom[0]"+lead['SDmass']
-#     mass1 = "FatJet_msoftdrop_nom[1]"+sublead['SDmass']
-#     pt0 = "FatJet_pt_nom[0]"+lead['pt']
-#     pt1 = "FatJet_pt_nom[1]"+sublead['pt']
-# else:
-#     mass0 = "FatJet_msoftdrop_nom[0]"
-#     mass1 = "FatJet_msoftdrop_nom[1]"
-#     pt0 = "FatJet_pt_nom[0]"
-#     pt1 = "FatJet_pt_nom[1]"
-# eta0 = "FatJet_eta[0]"
-# eta1 = "FatJet_eta[1]"
-# phi0 = "FatJet_phi[0]"
-# phi1 = "FatJet_phi[1]"
-
 if not a.isData:
-    mass1 = "FatJet_msoftdrop_nom[0]"+lead['SDmass']
-    mass0 = "FatJet_msoftdrop_nom[1]"+sublead['SDmass']
-    pt1 = "FatJet_pt_nom[0]"+lead['pt']
-    pt0 = "FatJet_pt_nom[1]"+sublead['pt']
-
+    mass0 = "FatJet_msoftdrop_raw[0]"+lead['SDmass']
+    mass1 = "FatJet_msoftdrop_raw[1]"+sublead['SDmass']
+    pt0 = "FatJet_pt_nom[0]"+lead['pt']
+    pt1 = "FatJet_pt_nom[1]"+sublead['pt']
 else:
-    mass1 = "FatJet_msoftdrop_nom[0]"
-    mass0 = "FatJet_msoftdrop_nom[1]"
-    pt1 = "FatJet_pt_nom[0]"
-    pt0 = "FatJet_pt_nom[1]"
+    mass0 = "FatJet_msoftdrop_raw[0]"
+    mass1 = "FatJet_msoftdrop_raw[1]"
+    pt0 = "FatJet_pt_nom[0]"
+    pt1 = "FatJet_pt_nom[1]"
+eta0 = "FatJet_eta[0]"
+eta1 = "FatJet_eta[1]"
+phi0 = "FatJet_phi[0]"
+phi1 = "FatJet_phi[1]"
 
-eta0 = "FatJet_eta[1]"
-eta1 = "FatJet_eta[0]"
-phi0 = "FatJet_phi[1]"
-phi1 = "FatJet_phi[0]"
+# if not a.isData:
+#     mass1 = "FatJet_msoftdrop_nom[0]"+lead['SDmass']
+#     mass0 = "FatJet_msoftdrop_nom[1]"+sublead['SDmass']
+#     pt1 = "FatJet_pt_nom[0]"+lead['pt']
+#     pt0 = "FatJet_pt_nom[1]"+sublead['pt']
+
+# else:
+#     mass1 = "FatJet_msoftdrop_nom[0]"
+#     mass0 = "FatJet_msoftdrop_nom[1]"
+#     pt1 = "FatJet_pt_nom[0]"
+#     pt0 = "FatJet_pt_nom[1]"
+
+# eta0 = "FatJet_eta[1]"
+# eta1 = "FatJet_eta[0]"
+# phi0 = "FatJet_phi[1]"
+# phi1 = "FatJet_phi[0]"
 
 print("mass 0 = "+ mass0)
 print("mass 1 = "+ mass1)
@@ -193,10 +191,10 @@ if not a.isData:
 
 ## Sets custom functions for use by RDF
 
-a.SetCFunc(commonc.deltaPhi)
-a.SetCFunc(commonc.vector)
-a.SetCFunc(commonc.invariantMass)
-a.SetCFunc(commonc.invariantMassThree)
+SetCFunc(commonc.deltaPhi)
+SetCFunc(commonc.vector)
+SetCFunc(commonc.invariantMass)
+SetCFunc(commonc.invariantMassThree)
 customc.Import("JHUanalyzer/Framework/AnalysisModules/B2G-20-004/pdfweights.cc","pdfweights")
 customc.Import("JHUanalyzer/Framework/AnalysisModules/B2G-20-004/hemispherize.cc","hemispherize")
 customc.Import("JHUanalyzer/Framework/AnalysisModules/B2G-20-004/triggerlookup.cc","triggerlookup")
@@ -249,9 +247,13 @@ mbbColumn.Add("mbb","analyzer::invariantMass(b_lead_vect,b_sublead_vect)")
 mbbColumn.Add("topMassVec","analyzer::topCut(Hemispherized[0],Hemispherized[1],Jet_pt,Jet_eta,Jet_phi,Jet_mass,nJet)")
 mbbColumn.Add("topMass","topMassVec[0]")
 mbbColumn.Add("topDeltaR","topMassVec[1]")
+mbbColumn.Add("bpt0","b_lead_vect.Pt()")
+mbbColumn.Add("bpt1","b_sublead_vect.Pt()")
+mbbColumn.Add("beta0","b_lead_vect.Eta()")
+mbbColumn.Add("beta1","b_sublead_vect.Eta()")
 
 mred21Column = VarGroup("mred21Column")
-mred21Column.Add("mreduced21","analyzer::invariantMassThree(sublead_vect,b_lead_vect,b_sublead_vect) - (mh1-125.0) - (mbb-125)")
+mred21Column.Add("mreduced21","analyzer::invariantMassThree(lead_vect,b_lead_vect,b_sublead_vect) - (mh-125.0) - (mbb-125)")
 
 # Perform final column calculations (done last after selection to save on CPU time)
 correctionColumns = VarGroup("correctionColumns")
@@ -266,20 +268,19 @@ if not a.isData:
     #### Trigger correction code
 
     triggerFile = ROOT.TFile("TriggerWeights.root","READ")
+    triggerHistTightEff = triggerFile.Get(doubleB_name+'11'+options.year+'Effplot')
     triggerHistTight = triggerFile.Get(doubleB_name+'tight'+options.year)
     # triggerHistLoose = triggerFile.Get(doubleB_name+'11'+options.year)
+    triggerHist21Eff = triggerFile.Get(doubleB_name+'21'+options.year+'Effplot')
     triggerHist21 = triggerFile.Get(doubleB_name+'21'+options.year)
+    ROOT.gInterpreter.ProcessLine("auto tEff = "+doubleB_name+"11"+options.year+"Effplot"+";")
     ROOT.gInterpreter.ProcessLine("auto tHistT = "+doubleB_name+"tight"+options.year+";")
-    correctionColumns.Add("triggerTight","analyzer::TriggerLookup(mreduced,tHistT)")
+    correctionColumns.Add("triggerTight","analyzer::TriggerLookup(mreduced,tHistT, tEff)")
     # ROOT.gInterpreter.ProcessLine("auto tHistL = "+doubleB_name+"loose"+options.year+";")
-    correctionColumns.Add("triggerLoose","analyzer::TriggerLookup(mreduced,tHistT)")
+    correctionColumns.Add("triggerLoose","analyzer::TriggerLookup(mreduced,tHistT, tEff)")
+    ROOT.gInterpreter.ProcessLine("auto tEff21 = "+doubleB_name+"21"+options.year+"Effplot"+";")
     ROOT.gInterpreter.ProcessLine("auto tHist21 = "+doubleB_name+"21"+options.year+";")
-    correctionColumns21.Add("trigger21","analyzer::TriggerLookup(mreduced21,tHist21)")
-
-## top reweighting code if necessary
-if not a.isData and 'ttbar' in options.output:
-    correctionColumns.Add("topptvector","analyzer::PTWLookup(nGenPart, GenPart_pdgId, GenPart_statusFlags, GenPart_pt, GenPart_eta, GenPart_phi, GenPart_mass, lead_vect, sublead_vect)")
-    correctionColumns.Add("topptvectorcheck","topptvector[0]")
+    correctionColumns21.Add("trigger21","analyzer::TriggerLookup(mreduced21,tHist21, tEff21)")
 
 #### B tag SF
 if "btagHbb" in options.doublebtagger:
@@ -305,18 +306,6 @@ if "btagHbb" in options.doublebtagger:
         correctionColumns.Add("dbSFuptight","0.97*("+pt0+"<350)+0.89*("+pt0+">350)")
         correctionColumns.Add("dbSFdowntight","0.85*("+pt0+"<350)+0.79*("+pt0+">350)")
 elif "deepTagMD_HbbvsQCD" in options.doublebtagger:
-
-# Fit a TF1 to the distribution you want to fit. The fit result will be the nominal values of the parameters of the fit and their uncertainties 
-# (so for a line, a value +/- uncertainty on each the intercept and slope).
-# Take the nominal post-fit TF1 shape and evaluate it as needed to make the nominal distribution that you want.
-# Make the "up" intercept uncertainty template by varying the TF1 intercept value you up 
-# (so manually set the value of the parameter before evaluating the TF1) and then evaluate it as you did for the nominal distribution but fill the "up" distribution.
-# Repeat (3) but for the "down" intercept value and for the "up" and "down" of the slope.
-# You'll have one nominal distribution and four templates - two "up" and two "down".
-# Assign them to systematic uncertainties in the 2D Alphabet json config so Combine knows about them.
-    # dak8SFdict = {"16":[],"17":[],"18":[]}
-    # dak8SFerrordict = {"16":[],"17":[],"18":[]}
-
     # correctionColumns.Add("dbSFnomloose","1.1*("+pt0+"<350)+1.1*("+pt0+">350)")
     # correctionColumns.Add("dbSFuploose","1.3*("+pt0+"<350)+1.3*("+pt0+">350)")
     # correctionColumns.Add("dbSFdownloose","0.9*("+pt0+"<350)+0.9*("+pt0+">350)") 
@@ -353,39 +342,65 @@ else:
     correctionColumns.Add("dbSFdowntight","1*("+pt0+"<350)+1*("+pt0+">350)")
 
 if not a.isData:
-    if 'ttbar' in options.input:
+    if 'ttbar' in setname:
+        correctionColumns.Add("topptvector","analyzer::PTWLookup(nGenPart, GenPart_pdgId, GenPart_statusFlags, GenPart_pt, GenPart_eta, GenPart_phi, GenPart_mass, lead_vect, sublead_vect)")
+        correctionColumns.Add("topptvectorcheck","topptvector[0]")
+
         topstringnom = "*topptvector[0]"
-        topstringup = "*topptvector[1]"
-        topstringdown = "*topptvector[2]"
+        topstringalphaup = "*topptvector[1]"
+        topstringalphadown = "*topptvector[2]"
+        topstringbetaup = "*topptvector[3]"
+        topstringbetadown = "*topptvector[4]"
 
-        correctionColumns11.Add("topptweight_tight_up","dbSFnomtight*(dbSFnomtight)*triggerTight[0]*puWeight"+topstringup+"")
-        correctionColumns11.Add("topptweight_tight_down","dbSFnomtight*(dbSFnomtight)*triggerTight[0]*puWeight"+topstringdown+"")
-        correctionColumns11.Add("topptweight_loose_up","dbSFnomloose*(dbSFnomloose)*triggerLoose[0]*puWeight"+topstringup+"")
-        correctionColumns11.Add("topptweight_loose_down","dbSFnomloose*(dbSFnomloose)*triggerLoose[0]*puWeight"+topstringdown+"")
+        correctionColumns11.Add("topptweight_tight_Alphaup","dbSFnomtight*(dbSFnomtight)*triggerTight[0]*puWeight"+topstringalphaup+"")
+        correctionColumns11.Add("topptweight_tight_Alphadown","dbSFnomtight*(dbSFnomtight)*triggerTight[0]*puWeight"+topstringalphadown+"")
+        correctionColumns11.Add("topptweight_loose_Alphaup","dbSFnomloose*(dbSFnomloose)*triggerLoose[0]*puWeight"+topstringalphaup+"")
+        correctionColumns11.Add("topptweight_loose_Alphadown","dbSFnomloose*(dbSFnomloose)*triggerLoose[0]*puWeight"+topstringalphadown+"")
 
-        correctionColumns11.Add("topptweight_tight_upFailFullSF","dbSFnomtight*(1-dbSFnomtight)*triggerTight[0]*puWeight"+topstringup+"")
-        correctionColumns11.Add("topptweight_tight_downFailFullSF","dbSFnomtight*(1-dbSFnomtight)*triggerTight[0]*puWeight"+topstringdown+"")
-        correctionColumns11.Add("topptweight_loose_upFailFullSF","dbSFnomloose*(1-dbSFnomloose)*triggerLoose[0]*puWeight"+topstringup+"")
-        correctionColumns11.Add("topptweight_loose_downFailFullSF","dbSFnomloose*(1-dbSFnomloose)*triggerLoose[0]*puWeight"+topstringdown+"")
+        correctionColumns11.Add("topptweight_tight_AlphaupFailFullSF","dbSFnomtight*(1-dbSFnomtight)*triggerTight[0]*puWeight"+topstringalphaup+"")
+        correctionColumns11.Add("topptweight_tight_AlphadownFailFullSF","dbSFnomtight*(1-dbSFnomtight)*triggerTight[0]*puWeight"+topstringalphadown+"")
+        correctionColumns11.Add("topptweight_loose_AlphaupFailFullSF","dbSFnomloose*(1-dbSFnomloose)*triggerLoose[0]*puWeight"+topstringalphaup+"")
+        correctionColumns11.Add("topptweight_loose_AlphadownFailFullSF","dbSFnomloose*(1-dbSFnomloose)*triggerLoose[0]*puWeight"+topstringalphadown+"")
 
-        correctionColumns11.Add("topptweight_tight_upFailHalfSF","(dbSFnomtight)*triggerTight[0]*puWeight"+topstringup+"")
-        correctionColumns11.Add("topptweight_tight_downFailHalfSF","(dbSFnomtight)*triggerTight[0]*puWeight"+topstringdown+"")
-        correctionColumns11.Add("topptweight_loose_upFailHalfSF","(dbSFnomloose)*triggerLoose[0]*puWeight"+topstringup+"")
-        correctionColumns11.Add("topptweight_loose_downFailHalfSF","(dbSFnomloose)*triggerLoose[0]*puWeight"+topstringdown+"")
+        correctionColumns11.Add("topptweight_tight_AlphaupFailHalfSF","(dbSFnomtight)*triggerTight[0]*puWeight"+topstringalphaup+"")
+        correctionColumns11.Add("topptweight_tight_AlphadownFailHalfSF","(dbSFnomtight)*triggerTight[0]*puWeight"+topstringalphadown+"")
+        correctionColumns11.Add("topptweight_loose_AlphaupFailHalfSF","(dbSFnomloose)*triggerLoose[0]*puWeight"+topstringalphaup+"")
+        correctionColumns11.Add("topptweight_loose_AlphadownFailHalfSF","(dbSFnomloose)*triggerLoose[0]*puWeight"+topstringalphadown+"")
 
-        correctionColumns21.Add("topptweight_up","dbSFnomloose*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringup+"")
-        correctionColumns21.Add("topptweight_down","dbSFnomloose*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringdown+"")
+        correctionColumns11.Add("topptweight_tight_Betaup","dbSFnomtight*(dbSFnomtight)*triggerTight[0]*puWeight"+topstringbetaup+"")
+        correctionColumns11.Add("topptweight_tight_Betadown","dbSFnomtight*(dbSFnomtight)*triggerTight[0]*puWeight"+topstringbetadown+"")
+        correctionColumns11.Add("topptweight_loose_Betaup","dbSFnomloose*(dbSFnomloose)*triggerLoose[0]*puWeight"+topstringbetaup+"")
+        correctionColumns11.Add("topptweight_loose_Betadown","dbSFnomloose*(dbSFnomloose)*triggerLoose[0]*puWeight"+topstringbetadown+"")
 
-        correctionColumns21.Add("topptweight_upFailFullSF","(1-dbSFnomloose)*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringup+"")
-        correctionColumns21.Add("topptweight_downFailFullSF","(1-dbSFnomloose)*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringdown+"")
+        correctionColumns11.Add("topptweight_tight_BetaupFailFullSF","dbSFnomtight*(1-dbSFnomtight)*triggerTight[0]*puWeight"+topstringbetaup+"")
+        correctionColumns11.Add("topptweight_tight_BetadownFailFullSF","dbSFnomtight*(1-dbSFnomtight)*triggerTight[0]*puWeight"+topstringbetadown+"")
+        correctionColumns11.Add("topptweight_loose_BetaupFailFullSF","dbSFnomloose*(1-dbSFnomloose)*triggerLoose[0]*puWeight"+topstringbetaup+"")
+        correctionColumns11.Add("topptweight_loose_BetadownFailFullSF","dbSFnomloose*(1-dbSFnomloose)*triggerLoose[0]*puWeight"+topstringbetadown+"")
 
-        correctionColumns21.Add("topptweight_upFailHalfSF","trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringup+"")
-        correctionColumns21.Add("topptweight_downFailHalfSF","trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringdown+"")
+        correctionColumns11.Add("topptweight_tight_BetaupFailHalfSF","(dbSFnomtight)*triggerTight[0]*puWeight"+topstringbetaup+"")
+        correctionColumns11.Add("topptweight_tight_BetadownFailHalfSF","(dbSFnomtight)*triggerTight[0]*puWeight"+topstringbetadown+"")
+        correctionColumns11.Add("topptweight_loose_BetaupFailHalfSF","(dbSFnomloose)*triggerLoose[0]*puWeight"+topstringbetaup+"")
+        correctionColumns11.Add("topptweight_loose_BetadownFailHalfSF","(dbSFnomloose)*triggerLoose[0]*puWeight"+topstringbetadown+"")
+
+        correctionColumns21.Add("topptweight_Alphaup","dbSFnomloose*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringalphaup+"")
+        correctionColumns21.Add("topptweight_Alphadown","dbSFnomloose*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringalphadown+"")
+
+        correctionColumns21.Add("topptweight_AlphaupFailFullSF","(1-dbSFnomloose)*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringalphaup+"")
+        correctionColumns21.Add("topptweight_AlphadownFailFullSF","(1-dbSFnomloose)*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringalphadown+"")
+
+        correctionColumns21.Add("topptweight_AlphaupFailHalfSF","trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringalphaup+"")
+        correctionColumns21.Add("topptweight_AlphadownFailHalfSF","trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringalphadown+"")
+
+        correctionColumns21.Add("topptweight_Betaup","dbSFnomloose*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringbetaup+"")
+        correctionColumns21.Add("topptweight_Betadown","dbSFnomloose*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringbetadown+"")
+
+        correctionColumns21.Add("topptweight_BetaupFailFullSF","(1-dbSFnomloose)*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringbetaup+"")
+        correctionColumns21.Add("topptweight_BetadownFailFullSF","(1-dbSFnomloose)*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringbetadown+"")
+
+        correctionColumns21.Add("topptweight_BetaupFailHalfSF","trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringbetaup+"")
+        correctionColumns21.Add("topptweight_BetadownFailHalfSF","trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringbetadown+"")
     else:
         topstringnom = ""
-        topstringup = ""
-        topstringdown = ""
-
 
     correctionColumns.Add("finalweightTight","dbSFnomtight*(dbSFnomtight)*triggerTight[0]*puWeight"+topstringnom+"")
     correctionColumns.Add("finalweightLoose","dbSFnomloose*(dbSFnomloose)*triggerLoose[0]*puWeight"+topstringnom+"")
@@ -523,7 +538,7 @@ inverted_DoubleB_sublead_loose = "FatJet_"+doubleB_name+"[1] < "+str(cutsDict[do
 srttString = "("+DoubleB_lead_tight+" && "+DoubleB_sublead_tight+") == 1"
 srllString = "(("+DoubleB_lead_loose+" && "+DoubleB_sublead_loose+") && !("+srttString+")) == 1"
 atttString = "(!("+DoubleB_lead_loose+") && ("+DoubleB_sublead_tight+")) == 1"
-atllString = "(!("+DoubleB_lead_loose+") && ("+DoubleB_sublead_loose+") && !("+DoubleB_lead_tight+")) == 1"
+atllString = "(!("+DoubleB_lead_loose+") && ("+DoubleB_sublead_loose+") && !("+DoubleB_sublead_tight+")) == 1"
 
 
 ### Control region algorithm
@@ -535,7 +550,10 @@ pass21String = "FatJet_"+doubleB_name+"[0] > "+str(cutsDict[doubleB_short+'tag']
 fail21String = "FatJet_"+doubleB_name+"[0] < "+str(cutsDict[doubleB_short+'tag'][0])+""
 
 run21String = "((!("+srttString+") && (!("+atttString+")) && (!("+srllString+")) && (!("+atllString+"))) == 1)"
+# run21String = "((!("+srttString+") && (!("+atttString+")) && (!("+srllString+"))) == 1)"
+
 cand21String = "((!(nFatJet > 1) || !(pt0 > 300 && pt1 > 300) || !(abs("+eta0+") < 2.4 && abs("+eta1+") < 2.4) || !(abs("+eta0+" - "+eta1+") < 1.3) || !(mreduced > 750.) || !((110 < mh1) && (mh1 < 140))) == 1)"
+# cand21String = "((!(nFatJet > 1) || !(pt0 > 300 && pt1 > 300) || !(abs("+eta0+") < 2.4 && abs("+eta1+") < 2.4) || !(abs("+eta0+" - "+eta1+") < 1.3) || !(mreduced > 750.)) == 1)"
 
 ### Make selection columns
 selectionColumns = VarGroup("selectionColumns")
@@ -590,23 +608,22 @@ preselection21.Add("nJets21","nJet >= 2")
 
 preselection22 = CutGroup('preselection22')
 preselection22.Add("bb_pairs_check","(Hemispherized[0] != 0) && (Hemispherized[1] != 0)")
-preselection22.Add("eta","abs("+eta0+") < 2.4")
-preselection22.Add("b_eta","abs(Jet_eta[Hemispherized[0]]) < 2.0 && abs(Jet_eta[Hemispherized[1]]) < 2.0")
-preselection22.Add("pt","(pt1 > 300)")
-preselection22.Add("b_pt","Jet_pt[Hemispherized[0]] > 30 && Jet_pt[Hemispherized[1]] > 30")
+preselection22.Add("eta","abs(lead_vect.Eta()) < 2.4")
+preselection22.Add("b_eta","abs(b_lead_vect.Eta()) < 2.0 && abs(b_sublead_vect.Eta()) < 2.0")
+preselection22.Add("pt","(pt0 > 300)")
+preselection22.Add("b_pt","b_lead_vect.Pt() > 30 && b_sublead_vect.Pt() > 30")
 preselection22.Add("jetID","((FatJet_jetId[1] & 2) == 2)")
-# preselection22.Add("DeepCSV","(0.4184 < Jet_btagDeepB[Hemispherized[0]] && Jet_btagDeepB[Hemispherized[0]] < 1) && (0.4184 < Jet_btagDeepB[Hemispherized[1]] && Jet_btagDeepB[Hemispherized[1]] < 1)")
-preselection22.Add("DeepCSV","(0.6324 < Jet_btagDeepB[Hemispherized[0]] && Jet_btagDeepB[Hemispherized[0]] < 1) && (0.6324 < Jet_btagDeepB[Hemispherized[1]] && Jet_btagDeepB[Hemispherized[1]] < 1)")
-preselection22.Add("deltaEta21","abs("+eta1+" - (Jet_eta[Hemispherized[0]]+Jet_eta[Hemispherized[1]])) < 1.3")
-
+preselection22.Add("DeepCSV","(0.4184 < Jet_btagDeepB[Hemispherized[0]] && Jet_btagDeepB[Hemispherized[0]] < 1) && (0.4184 < Jet_btagDeepB[Hemispherized[1]] && Jet_btagDeepB[Hemispherized[1]] < 1)")
+# preselection22.Add("DeepCSV","(0.6324 < Jet_btagDeepB[Hemispherized[0]] && Jet_btagDeepB[Hemispherized[0]] < 1) && (0.6324 < Jet_btagDeepB[Hemispherized[1]] && Jet_btagDeepB[Hemispherized[1]] < 1)")
+preselection22.Add("deltaEta21","abs(lead_vect.Eta() - (b_lead_vect+b_sublead_vect).Eta()) < 1.3")
+preselection22.Add("mbbCut","90.0 < mbb && mbb < 140.0")
+# preselection22.Add("mbbCut","105.0 < mbb && mbb < 135.0")
+# preselection22.Add("msoftdrop_1","(110 < mh1) && (mh1 < 140)")
 
 preselection23 = CutGroup('preselection23')
-# preselection23.Add("mbbCut","90.0 < mbb && mbb < 140.0")
-preselection23.Add("mbbCut","105.0 < mbb && mbb < 135.0")
-# preselection23.Add("topMass","topMass > 200.0 || topMass < 140.0")
-preselection23.Add("topMass","topMass > 200.0")
+# preselection23.Add("topMass","topMass > 200.0")
 # preselection23.Add("topMass","topMass > 220.0")
-preselection23.Add("topDeltaR","topDeltaR > 1.0")
+# preselection23.Add("topDeltaR","topDeltaR > 1.0")
 
 plotsColumn = VarGroup("plotsColumn")
 plotsColumn.Add("eta0",""+eta0+"")
@@ -615,14 +632,26 @@ plotsColumn.Add("deltaEta","abs("+eta0+" - "+eta1+")")
 plotsColumn.Add("FJtau21","FatJet_tau2[0]/FatJet_tau1[0]")
 plotsColumn.Add("tagger","FatJet_"+doubleB_name+"[0]")
 
+
+kinematicCuts = CutGroup("kinematicCuts")
+kinematicCuts.Add("pt0",""+pt0+" > 300")
+kinematicCuts.Add("eta0","abs("+eta0+") < 2.4")
+kinematicCuts.Add("bb_pairs_check","(Hemispherized[0] != 0) && (Hemispherized[1] != 0)")
+kinematicCuts.Add("b_eta","abs(Jet_eta[Hemispherized[0]]) < 2.4 && abs(Jet_eta[Hemispherized[1]]) < 2.4")
+kinematicCuts.Add("DeepCSV","(0.2219 < Jet_btagDeepB[Hemispherized[0]] && Jet_btagDeepB[Hemispherized[0]] < 1) && (0.2219 < Jet_btagDeepB[Hemispherized[1]] && Jet_btagDeepB[Hemispherized[1]] < 1)")
+kinematicCuts.Add("candidate21","("+cand21String+") || ("+run21String+")")
+kinematicCuts.Add("cut_mreduced","mreduced21 > 700.")
+
 # Apply all groups in list order to the base RDF loaded in during analyzer() initialization
 slimandskim = a.Apply([triggerGroup,slim_skim,filters])
 
-nminus1_11 = a.Apply([triggerGroup,newcolumns,selectionColumns,correctionColumns,correctionColumns11,plotsColumn])
-nminus1_21 = a.Apply([triggerGroup,newcolumns,bbColumn,mbbColumn,mred21Column,selectionColumns21,correctionColumns,correctionColumns21,plotsColumn])
-
+# if not a.isData:
+#     nminus1_11 = a.Apply([triggerGroup,newcolumns,selectionColumns,correctionColumns,correctionColumns11,plotsColumn])
+#     nminus1_21 = a.Apply([triggerGroup,newcolumns,bbColumn,mbbColumn,mred21Column,selectionColumns21,correctionColumns,correctionColumns21,plotsColumn])
+kinematicDistributions = slimandskim.Apply([newcolumns,bbColumn,mbbColumn,mred21Column,plotsColumn,kinematicCuts])
 preselected = slimandskim.Apply([preselection11,newcolumns,preselection12,selectionColumns,correctionColumns,correctionColumns11,plotsColumn])
-preselected21 = slimandskim.Apply([newcolumns,preselection21,bbColumn,preselection22,mbbColumn,preselection23,mred21Column,selectionColumns21,correctionColumns,correctionColumns21])
+cutTest21 = slimandskim.Apply([newcolumns,preselection21,bbColumn,mbbColumn,mred21Column,preselection22,selectionColumns21,correctionColumns,correctionColumns21]).Cut("Pass21","Pass21==1")
+preselected21 = slimandskim.Apply([newcolumns,preselection21,bbColumn,mbbColumn,mred21Column,preselection22,preselection23,selectionColumns21,correctionColumns,correctionColumns21,plotsColumn])
 
 # Since four analysis regions are covered with relatively complicated cuts to define them, a manual forking is simplest though a Discriminate function does exist for when you need to keep pass and fail of a selection
 SRTT = preselected.Cut("SRTT","SRTT==1")
@@ -642,56 +671,44 @@ print("Outfile booked")
 
 # Need to call DataFrame attribute since Histo2D/Histo1D is a method of RDataFrame - this means at any point, you have access to the plain RDataFrame object corresponding to each node!
 ##### Make histos for kinematic checks
+# nom_check_plot = slimandskim.DataFrame.Histo2D(("nom_check_plot","nom_check_plot",50 ,150 ,1500 ,50 ,0 ,400),"FatJet_pt_nom[0]","FatJet_msoftdrop_nom[0]")
+# raw_check_plot = slimandskim.DataFrame.Histo2D(("raw_check_plot","raw_check_plot",50 ,150 ,1500 ,50 ,0 ,400),"FatJet_pt_nom[0]","FatJet_msoftdrop_raw[0]")
 
-if not a.isData:
-    hpt0TT = preselected.DataFrame.Histo1D(("pt0TT","pt0TT",50 ,150 ,1500),"pt0","finalweightTight")
-    hpt1TT = preselected.DataFrame.Histo1D(("pt1TT","pt1TT",50 ,150 ,1500),"pt1","finalweightTight")
-    heta0TT = preselected.DataFrame.Histo1D(("eta0TT","eta0TT",50 ,-3.5 ,3.5),"eta0","finalweightTight")
-    heta1TT = preselected.DataFrame.Histo1D(("eta1TT","eta1TT",50 ,-3.5 ,3.5),"eta1","finalweightTight")
-    hdeltaEtaTT = preselected.DataFrame.Histo1D(("deltaEtaTT","deltaEtaTT",50 ,0 ,3.5),"deltaEta","finalweightTight")
-    hmredTT = preselected.DataFrame.Histo1D(("mredTT","mredTT",28 ,700 ,3500),"mreduced","finalweightTight")
-    hmsd0TT = preselected.DataFrame.Histo1D(("msd0TT","msd0TT",50 ,0 ,400),"mh","finalweightTight")
-    hmsd1TT = preselected.DataFrame.Histo1D(("msd1TT","msd1TT",50 ,0 ,400),"mh1","finalweightTight")
-    htau21TT = preselected.DataFrame.Histo1D(("tau21TT","tau21TT",50 ,0 ,1),"FJtau21","finalweightTight")
+deltaRCheck = cutTest21.DataFrame.Histo1D(("deltaRCheck","deltaRCheck",50,0,5),"topDeltaR")
+trijetMassCheck = cutTest21.DataFrame.Histo1D(("trijetMassCheck","trijetMassCheck",50,100,1000),"topMass")
+trijetMassDeltaR = cutTest21.Cut("DeltaR","topDeltaR > 1.0").DataFrame.Histo1D(("trijetMassCheckDeltaR","trijetMassCheckDeltaR",50,100,1000),"topMass")
+hmred21 = preselected21.DataFrame.Histo1D(("mred21","mred21",50 ,500 ,2000),"mreduced21")
 
-    hpt0LL = preselected.DataFrame.Histo1D(("pt0LL","pt0LL",50 ,150 ,1500),"pt0","finalweightLoose")
-    hpt1LL = preselected.DataFrame.Histo1D(("pt1LL","pt1LL",50 ,150 ,1500),"pt1","finalweightLoose")
-    heta0LL = preselected.DataFrame.Histo1D(("eta0LL","eta0LL",50 ,-3.5 ,3.5),"eta0","finalweightLoose")
-    heta1LL = preselected.DataFrame.Histo1D(("eta1LL","eta1LL",50 ,-3.5 ,3.5),"eta1","finalweightLoose")
-    hdeltaEtaLL = preselected.DataFrame.Histo1D(("deltaEtaLL","deltaEtaLL",50 ,0 ,3.5),"deltaEta","finalweightLoose")
-    hmredLL = preselected.DataFrame.Histo1D(("mredLL","mredLL",28 ,700 ,3500),"mreduced","finalweightLoose")
-    hmsd0LL = preselected.DataFrame.Histo1D(("msd0LL","msd0LL",50 ,0 ,400),"mh","finalweightLoose")
-    hmsd1LL = preselected.DataFrame.Histo1D(("msd1LL","msd1LL",50 ,0 ,400),"mh1","finalweightLoose")
-    htau21LL = preselected.DataFrame.Histo1D(("tau21LL","tau21LL",50 ,0 ,1),"FJtau21","finalweightLoose")
+hpt0TT = kinematicDistributions.DataFrame.Histo1D(("pt0TT","pt0TT",50 ,150 ,1500),"pt0")
+hpt1TT = kinematicDistributions.DataFrame.Histo1D(("pt1TT","pt1TT",50 ,150 ,1500),"pt1")
+heta0TT = kinematicDistributions.DataFrame.Histo1D(("eta0TT","eta0TT",50 ,-3.5 ,3.5),"eta0")
+heta1TT = kinematicDistributions.DataFrame.Histo1D(("eta1TT","eta1TT",50 ,-3.5 ,3.5),"eta1")
+hdeltaEtaTT = kinematicDistributions.DataFrame.Histo1D(("deltaEtaTT","deltaEtaTT",50 ,0 ,3.5),"deltaEta")
+hmredTT = kinematicDistributions.DataFrame.Histo1D(("mredTT","mredTT",28 ,700 ,3500),"mreduced")
+hmsd0TT = kinematicDistributions.DataFrame.Histo1D(("msd0TT","msd0TT",50 ,0 ,400),"mh")
+hmsd1TT = kinematicDistributions.DataFrame.Histo1D(("msd1TT","msd1TT",50 ,0 ,400),"mh1")
+htau21TT = kinematicDistributions.DataFrame.Histo1D(("tau21TT","tau21TT",50 ,0 ,1),"FJtau21")
 
+hpt0LL = kinematicDistributions.DataFrame.Histo1D(("pt0LL","pt0LL",50 ,150 ,1500),"pt0")
+hpt1LL = kinematicDistributions.DataFrame.Histo1D(("pt1LL","pt1LL",50 ,150 ,1500),"pt1")
+heta0LL = kinematicDistributions.DataFrame.Histo1D(("eta0LL","eta0LL",50 ,-3.5 ,3.5),"eta0")
+heta1LL = kinematicDistributions.DataFrame.Histo1D(("eta1LL","eta1LL",50 ,-3.5 ,3.5),"eta1")
+hdeltaEtaLL = kinematicDistributions.DataFrame.Histo1D(("deltaEtaLL","deltaEtaLL",50 ,0 ,3.5),"deltaEta")
+hmredLL = kinematicDistributions.DataFrame.Histo1D(("mredLL","mredLL",28 ,700 ,3500),"mreduced")
+hmsd0LL = kinematicDistributions.DataFrame.Histo1D(("msd0LL","msd0LL",50 ,0 ,400),"mh")
+hmsd1LL = kinematicDistributions.DataFrame.Histo1D(("msd1LL","msd1LL",50 ,0 ,400),"mh1")
+htau21LL = kinematicDistributions.DataFrame.Histo1D(("tau21LL","tau21LL",50 ,0 ,1),"FJtau21")
 
-    htaggerTT = preselected.DataFrame.Histo1D(("FatJet_"+doubleB_name+"[0]","FatJet_"+doubleB_name+"[0]_TT",50 ,-1 ,1),"tagger","finalweightTight")
-    htaggerLL = preselected.DataFrame.Histo1D(("FatJet_"+doubleB_name+"[0]","FatJet_"+doubleB_name+"[0]_LL",50 ,-1 ,1),"tagger","finalweightLoose")
-
-
-else:
-    hpt0TT = preselected.DataFrame.Histo1D(("pt0TT","pt0TT",50 ,150 ,1500),"pt0")
-    hpt1TT = preselected.DataFrame.Histo1D(("pt1TT","pt1TT",50 ,150 ,1500),"pt1")
-    heta0TT = preselected.DataFrame.Histo1D(("eta0TT","eta0TT",50 ,-3.5 ,3.5),"eta0")
-    heta1TT = preselected.DataFrame.Histo1D(("eta1TT","eta1TT",50 ,-3.5 ,3.5),"eta1")
-    hdeltaEtaTT = preselected.DataFrame.Histo1D(("deltaEtaTT","deltaEtaTT",50 ,0 ,3.5),"deltaEta")
-    hmredTT = preselected.DataFrame.Histo1D(("mredTT","mredTT",28 ,700 ,3500),"mreduced")
-    hmsd0TT = preselected.DataFrame.Histo1D(("msd0TT","msd0TT",50 ,0 ,400),"mh")
-    hmsd1TT = preselected.DataFrame.Histo1D(("msd1TT","msd1TT",50 ,0 ,400),"mh1")
-    htau21TT = preselected.DataFrame.Histo1D(("tau21TT","tau21TT",50 ,0 ,1),"FJtau21")
-
-    hpt0LL = preselected.DataFrame.Histo1D(("pt0LL","pt0LL",50 ,150 ,1500),"pt0")
-    hpt1LL = preselected.DataFrame.Histo1D(("pt1LL","pt1LL",50 ,150 ,1500),"pt1")
-    heta0LL = preselected.DataFrame.Histo1D(("eta0LL","eta0LL",50 ,-3.5 ,3.5),"eta0")
-    heta1LL = preselected.DataFrame.Histo1D(("eta1LL","eta1LL",50 ,-3.5 ,3.5),"eta1")
-    hdeltaEtaLL = preselected.DataFrame.Histo1D(("deltaEtaLL","deltaEtaLL",50 ,0 ,3.5),"deltaEta")
-    hmredLL = preselected.DataFrame.Histo1D(("mredLL","mredLL",28 ,700 ,3500),"mreduced")
-    hmsd0LL = preselected.DataFrame.Histo1D(("msd0LL","msd0LL",50 ,0 ,400),"mh")
-    hmsd1LL = preselected.DataFrame.Histo1D(("msd1LL","msd1LL",50 ,0 ,400),"mh1")
-    htau21LL = preselected.DataFrame.Histo1D(("tau21LL","tau21LL",50 ,0 ,1),"FJtau21")
-
-    htaggerTT = preselected.DataFrame.Histo1D(("FatJet_"+doubleB_name+"[0]","FatJet_"+doubleB_name+"[0]_TT",50 ,-1 ,1),"tagger")
-    htaggerLL = preselected.DataFrame.Histo1D(("FatJet_"+doubleB_name+"[0]","FatJet_"+doubleB_name+"[0]_LL",50 ,-1 ,1),"tagger")
+hpt021 = kinematicDistributions.DataFrame.Histo1D(("pt121","pt121",50 ,150 ,1500),"pt1")
+bpt021 = kinematicDistributions.DataFrame.Histo1D(("bpt021","bpt021",50 ,150 ,1500),"bpt0")
+bpt121 = kinematicDistributions.DataFrame.Histo1D(("bpt121","bpt121",50 ,150 ,1500),"bpt1")
+heta021 = kinematicDistributions.DataFrame.Histo1D(("eta021","eta021",50 ,-3.5 ,3.5),"eta1")
+beta021 = kinematicDistributions.DataFrame.Histo1D(("beta021","beta021",50 ,-3.5 ,3.5),"beta0")
+heta021 = kinematicDistributions.DataFrame.Histo1D(("beta121","beta121",50 ,-3.5 ,3.5),"beta1")
+hdeltaEta21 = kinematicDistributions.DataFrame.Histo1D(("deltaEta21","deltaEta21",50 ,0 ,3.5),"deltaEta")
+hmred21 = kinematicDistributions.DataFrame.Histo1D(("mred21","mred21",28 ,700 ,3500),"mreduced21")
+hmsd021 = kinematicDistributions.DataFrame.Histo1D(("msd021","msd021",50 ,0 ,400),"mh1")
+hmbb21 = kinematicDistributions.DataFrame.Histo1D(("mbb21","mbb21",50 ,0 ,400),"mbb")
 
 
 if not a.isData:
@@ -704,9 +721,9 @@ if not a.isData:
     hATLL11 = ATLL.DataFrame.Histo2D(("ATLL_11","ATLL_11",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced","finalweightLooseFailHalfSF")
 
 
-    hSRTT21 = Pass.DataFrame.Histo2D(("Pass_21","Pass_21",18 ,45 ,225 ,13 ,700 ,2000),'mh1','mreduced21',"finalweight21")
-    hSFTT21 = Pass.DataFrame.Histo2D(("SFFail_21","ATTT_21",18 ,45 ,225 ,13 ,700 ,2000),"mh1","mreduced21","finalweight21FailFullSF")
-    hATTT21 = Fail.DataFrame.Histo2D(("Fail_21","ATTT_21",18 ,45 ,225 ,13 ,700 ,2000),"mh1","mreduced21","finalweight21FailHalfSF")
+    hSRTT21 = Pass.DataFrame.Histo2D(("Pass_21","Pass_21",18 ,45 ,225 ,13 ,700 ,2000),'mh','mreduced21',"finalweight21")
+    hSFTT21 = Pass.DataFrame.Histo2D(("SFFail_21","ATTT_21",18 ,45 ,225 ,13 ,700 ,2000),"mh","mreduced21","finalweight21FailFullSF")
+    hATTT21 = Fail.DataFrame.Histo2D(("Fail_21","ATTT_21",18 ,45 ,225 ,13 ,700 ,2000),"mh","mreduced21","finalweight21FailHalfSF")
 
 else:
     hSRTT11 = SRTT.DataFrame.Histo2D(("SRTT_11","SRTT_11",18 ,45 ,225 ,28 ,700 ,3500),'mh','mreduced')
@@ -714,8 +731,8 @@ else:
     hSRLL11 = SRLL.DataFrame.Histo2D(("SRLL_11","SRLL_11",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced")
     hATLL11 = ATLL.DataFrame.Histo2D(("ATLL_11","ATLL_11",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced")
 
-    hSRTT21 = Pass.DataFrame.Histo2D(("Pass_21","Pass_21",18 ,45 ,225 ,13 ,700 ,2000),'mh1','mreduced21')
-    hATTT21 = Fail.DataFrame.Histo2D(("Fail_21","Fail_21",18 ,45 ,225 ,13 ,700 ,2000),"mh1","mreduced21")
+    hSRTT21 = Pass.DataFrame.Histo2D(("Pass_21","Pass_21",18 ,45 ,225 ,13 ,700 ,2000),'mh','mreduced21')
+    hATTT21 = Fail.DataFrame.Histo2D(("Fail_21","Fail_21",18 ,45 ,225 ,13 ,700 ,2000),"mh","mreduced21")
 
 ### Implement control region
 if not a.isData:
@@ -728,12 +745,12 @@ else:
     hATCR11 = ATCR.DataFrame.Histo2D(("ATCR_11","ATCR_11",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced")
 
 
-mhbins = list(range(45,235,10))
-print(mhbins)
-mredbins11 = list(range(700,3600,100))
-print(mredbins11)
-mredbins21 = list(range(700,2100,100))
-print(mredbins21)
+# mhbins = list(range(45,235,10))
+# print(mhbins)
+# mredbins11 = list(range(700,3600,100))
+# print(mredbins11)
+# mredbins21 = list(range(700,2100,100))
+# print(mredbins21)
 ### Shape based templates
 
 if not a.isData:
@@ -787,21 +804,21 @@ if not a.isData:
     hATLL11_triggerloose_down = ATLL.DataFrame.Histo2D(("ATLL_11_trigger_down","ATLL_11_triggerDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'triggerloose_downFailHalfSF')
     hSFLL11_triggerloose_down = SRLL.DataFrame.Histo2D(("SFLL_11_trigger_down","ATLL_11_triggerDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'triggerloose_downFailFullSF')
 
-    hSRTT11_dbsftight_up = SRTT.DataFrame.Histo3D(("SRTT_11_dbsf_up","SRTT_11_dbsfUp",4,array('d',[300,400,500,600,2000]),18 ,array('d',mhbins) ,28 ,array('d',mredbins11)),'pt0','mh','mreduced','dbsftight_up')
-    hATTT11_dbsftight_up = ATTT.DataFrame.Histo3D(("ATTT_11_dbsf_up","ATTT_11_dbsfUp",4,array('d',[300,400,500,600,2000]),18 ,array('d',mhbins) ,28 ,array('d',mredbins11)),"pt0","mh","mreduced",'dbsftight_upFailHalfSF')
-    hSFTT11_dbsftight_up = SRTT.DataFrame.Histo3D(("SFTT_11_dbsf_up","ATTT_11_dbsfUp",4,array('d',[300,400,500,600,2000]),18 ,array('d',mhbins) ,28 ,array('d',mredbins11)),"pt0","mh","mreduced",'dbsftight_upFailFullSF')
+    hSRTT11_dbsftight_up = SRTT.DataFrame.Histo2D(("SRTT_11_dbsf_up","SRTT_11_dbsfUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'dbsftight_up')
+    hATTT11_dbsftight_up = ATTT.DataFrame.Histo2D(("ATTT_11_dbsf_up","ATTT_11_dbsfUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'dbsftight_upFailHalfSF')
+    hSFTT11_dbsftight_up = SRTT.DataFrame.Histo2D(("SFTT_11_dbsf_up","ATTT_11_dbsfUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'dbsftight_upFailFullSF')
 
-    hSRLL11_dbsfloose_up = SRLL.DataFrame.Histo3D(("SRLL_11_dbsf_up","SRLL_11_dbsfUp",4,array('d',[300,400,500,600,2000]),18 ,array('d',mhbins) ,28 ,array('d',mredbins11)),"pt0","mh","mreduced",'dbsfloose_up')
-    hATLL11_dbsfloose_up = ATLL.DataFrame.Histo3D(("ATLL_11_dbsf_up","ATLL_11_dbsfUp",4,array('d',[300,400,500,600,2000]),18 ,array('d',mhbins) ,28 ,array('d',mredbins11)),"pt0","mh","mreduced",'dbsfloose_upFailHalfSF')
-    hSFLL11_dbsfloose_up = SRLL.DataFrame.Histo3D(("SFLL_11_dbsf_up","ATLL_11_dbsfUp",4,array('d',[300,400,500,600,2000]),18 ,array('d',mhbins) ,28 ,array('d',mredbins11)),"pt0","mh","mreduced",'dbsfloose_upFailFullSF')
+    hSRLL11_dbsfloose_up = SRLL.DataFrame.Histo2D(("SRLL_11_dbsf_up","SRLL_11_dbsfUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'dbsfloose_up')
+    hATLL11_dbsfloose_up = ATLL.DataFrame.Histo2D(("ATLL_11_dbsf_up","ATLL_11_dbsfUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'dbsfloose_upFailHalfSF')
+    hSFLL11_dbsfloose_up = SRLL.DataFrame.Histo2D(("SFLL_11_dbsf_up","ATLL_11_dbsfUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'dbsfloose_upFailFullSF')
 
-    hSRTT11_dbsftight_down = SRTT.DataFrame.Histo3D(("SRTT_11_dbsf_down","SRTT_11_dbsfDown",4,array('d',[300,400,500,600,2000]),18 ,array('d',mhbins) ,28 ,array('d',mredbins11)),"pt0",'mh','mreduced','dbsftight_down')
-    hATTT11_dbsftight_down = ATTT.DataFrame.Histo3D(("ATTT_11_dbsf_down","ATTT_11_dbsfDown",4,array('d',[300,400,500,600,2000]),18 ,array('d',mhbins) ,28 ,array('d',mredbins11)),"pt0","mh","mreduced",'dbsftight_downFailHalfSF')
-    hSFTT11_dbsftight_down = SRTT.DataFrame.Histo3D(("SFTT_11_dbsf_down","ATTT_11_dbsfDown",4,array('d',[300,400,500,600,2000]),18 ,array('d',mhbins) ,28 ,array('d',mredbins11)),"pt0","mh","mreduced",'dbsftight_downFailFullSF')
+    hSRTT11_dbsftight_down = SRTT.DataFrame.Histo2D(("SRTT_11_dbsf_down","SRTT_11_dbsfDown",18 ,45 ,225 ,28 ,700 ,3500),'mh','mreduced','dbsftight_down')
+    hATTT11_dbsftight_down = ATTT.DataFrame.Histo2D(("ATTT_11_dbsf_down","ATTT_11_dbsfDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'dbsftight_downFailHalfSF')
+    hSFTT11_dbsftight_down = SRTT.DataFrame.Histo2D(("SFTT_11_dbsf_down","ATTT_11_dbsfDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'dbsftight_downFailFullSF')
 
-    hSRLL11_dbsfloose_down = SRLL.DataFrame.Histo3D(("SRLL_11_dbsf_down","SRLL_11_dbsfDown",4,array('d',[300,400,500,600,2000]),18 ,array('d',mhbins) ,28 ,array('d',mredbins11)),"pt0","mh","mreduced",'dbsfloose_down')
-    hATLL11_dbsfloose_down = ATLL.DataFrame.Histo3D(("ATLL_11_dbsf_down","ATLL_11_dbsfDown",4,array('d',[300,400,500,600,2000]),18 ,array('d',mhbins) ,28 ,array('d',mredbins11)),"pt0","mh","mreduced",'dbsfloose_downFailHalfSF')
-    hSFLL11_dbsfloose_down = SRLL.DataFrame.Histo3D(("SFLL_11_dbsf_down","ATLL_11_dbsfDown",4,array('d',[300,400,500,600,2000]),18 ,array('d',mhbins) ,28 ,array('d',mredbins11)),"pt0","mh","mreduced",'dbsfloose_downFailFullSF')
+    hSRLL11_dbsfloose_down = SRLL.DataFrame.Histo2D(("SRLL_11_dbsf_down","SRLL_11_dbsfDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'dbsfloose_down')
+    hATLL11_dbsfloose_down = ATLL.DataFrame.Histo2D(("ATLL_11_dbsf_down","ATLL_11_dbsfDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'dbsfloose_downFailHalfSF')
+    hSFLL11_dbsfloose_down = SRLL.DataFrame.Histo2D(("SFLL_11_dbsf_down","ATLL_11_dbsfDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'dbsfloose_downFailFullSF')
 
 ##### Control Region templates
 
@@ -829,92 +846,125 @@ if not a.isData:
     hATCR11_triggerloose_down = ATCR.DataFrame.Histo2D(("ATCR_11_trigger_down","ATCR_11_triggerDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'triggerloose_downFailHalfSF')
     hSFCR11_triggerloose_down = SRCR.DataFrame.Histo2D(("SFCR_11_trigger_down","ATCR_11_triggerDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'triggerloose_downFailFullSF')
 
-    hSRCR11_dbsfloose_up = SRCR.DataFrame.Histo3D(("SRCR_11_dbsf_up","SRCR_11_dbsfUp",4,array('d',[300,400,500,600,2000]),18 ,array('d',mhbins) ,28 ,array('d',mredbins11)),"pt0","mh","mreduced",'dbsfloose_up')
-    hATCR11_dbsfloose_up = ATCR.DataFrame.Histo3D(("ATCR_11_dbsf_up","ATCR_11_dbsfUp",4,array('d',[300,400,500,600,2000]),18 ,array('d',mhbins) ,28 ,array('d',mredbins11)),"pt0","mh","mreduced",'dbsfloose_upFailHalfSF')
-    hSFCR11_dbsfloose_up = SRCR.DataFrame.Histo3D(("SFCR_11_dbsf_up","ATCR_11_dbsfUp",4,array('d',[300,400,500,600,2000]),18 ,array('d',mhbins) ,28 ,array('d',mredbins11)),"pt0","mh","mreduced",'dbsfloose_upFailFullSF')
+    hSRCR11_dbsfloose_up = SRCR.DataFrame.Histo2D(("SRCR_11_dbsf_up","SRCR_11_dbsfUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'dbsfloose_up')
+    hATCR11_dbsfloose_up = ATCR.DataFrame.Histo2D(("ATCR_11_dbsf_up","ATCR_11_dbsfUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'dbsfloose_upFailHalfSF')
+    hSFCR11_dbsfloose_up = SRCR.DataFrame.Histo2D(("SFCR_11_dbsf_up","ATCR_11_dbsfUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'dbsfloose_upFailFullSF')
 
-    hSRCR11_dbsfloose_down = SRCR.DataFrame.Histo3D(("SRCR_11_dbsf_down","SRCR_11_dbsfDown",4,array('d',[300,400,500,600,2000]),18 ,array('d',mhbins) ,28 ,array('d',mredbins11)),"pt0","mh","mreduced",'dbsfloose_down')
-    hATCR11_dbsfloose_down = ATCR.DataFrame.Histo3D(("ATCR_11_dbsf_down","ATCR_11_dbsfDown",4,array('d',[300,400,500,600,2000]),18 ,array('d',mhbins) ,28 ,array('d',mredbins11)),"pt0","mh","mreduced",'dbsfloose_downFailHalfSF')
-    hSFCR11_dbsfloose_down = SRCR.DataFrame.Histo3D(("SFCR_11_dbsf_down","ATCR_11_dbsfDown",4,array('d',[300,400,500,600,2000]),18 ,array('d',mhbins) ,28 ,array('d',mredbins11)),"pt0","mh","mreduced",'dbsfloose_downFailFullSF')
+    hSRCR11_dbsfloose_down = SRCR.DataFrame.Histo2D(("SRCR_11_dbsf_down","SRCR_11_dbsfDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'dbsfloose_down')
+    hATCR11_dbsfloose_down = ATCR.DataFrame.Histo2D(("ATCR_11_dbsf_down","ATCR_11_dbsfDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'dbsfloose_downFailHalfSF')
+    hSFCR11_dbsfloose_down = SRCR.DataFrame.Histo2D(("SFCR_11_dbsf_down","ATCR_11_dbsfDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'dbsfloose_downFailFullSF')
 
 ##### Now for 2+1 template histo calls.
 
-    hSRTT21_pdfUp = Pass.DataFrame.Histo2D(("SRTT_21_pdfUp","SRTT_21_pdfUp",18 ,45 ,225 ,13 ,700 ,2000),'mh1','mreduced21','Pdfweight_up')
-    hATTT21_pdfUp = Fail.DataFrame.Histo2D(("ATTT_21_pdfUp","ATTT_21_pdfUp",18 ,45 ,225 ,13 ,700 ,2000),"mh1","mreduced21",'Pdfweight_upFailHalfSF')
-    hSFTT21_pdfUp = Pass.DataFrame.Histo2D(("SFTT_21_pdfUp","SFTT_21_pdfUp",18 ,45 ,225 ,13 ,700 ,2000),"mh1","mreduced21",'Pdfweight_upFailFullSF')
+    hSRTT21_pdfUp = Pass.DataFrame.Histo2D(("SRTT_21_pdfUp","SRTT_21_pdfUp",18 ,45 ,225 ,13 ,700 ,2000),'mh','mreduced21','Pdfweight_up')
+    hATTT21_pdfUp = Fail.DataFrame.Histo2D(("ATTT_21_pdfUp","ATTT_21_pdfUp",18 ,45 ,225 ,13 ,700 ,2000),"mh","mreduced21",'Pdfweight_upFailHalfSF')
+    hSFTT21_pdfUp = Pass.DataFrame.Histo2D(("SFTT_21_pdfUp","SFTT_21_pdfUp",18 ,45 ,225 ,13 ,700 ,2000),"mh","mreduced21",'Pdfweight_upFailFullSF')
 
-    hSRTT21_pdfDown = Pass.DataFrame.Histo2D(("SRTT_21_pdfDown","SRTT_21_pdfDown",18 ,45 ,225 ,13 ,700 ,2000),'mh1','mreduced21','Pdfweight_down')
-    hATTT21_pdfDown = Fail.DataFrame.Histo2D(("ATTT_21_pdfDown","ATTT_21_pdfDown",18 ,45 ,225 ,13 ,700 ,2000),"mh1","mreduced21",'Pdfweight_downFailHalfSF')
-    hSFTT21_pdfDown = Pass.DataFrame.Histo2D(("SFTT_21_pdfDown","ATTT_21_pdfDown",18 ,45 ,225 ,13 ,700 ,2000),"mh1","mreduced21",'Pdfweight_downFailFullSF')
+    hSRTT21_pdfDown = Pass.DataFrame.Histo2D(("SRTT_21_pdfDown","SRTT_21_pdfDown",18 ,45 ,225 ,13 ,700 ,2000),'mh','mreduced21','Pdfweight_down')
+    hATTT21_pdfDown = Fail.DataFrame.Histo2D(("ATTT_21_pdfDown","ATTT_21_pdfDown",18 ,45 ,225 ,13 ,700 ,2000),"mh","mreduced21",'Pdfweight_downFailHalfSF')
+    hSFTT21_pdfDown = Pass.DataFrame.Histo2D(("SFTT_21_pdfDown","ATTT_21_pdfDown",18 ,45 ,225 ,13 ,700 ,2000),"mh","mreduced21",'Pdfweight_downFailFullSF')
 
-    hSRTT21_pileupUp = Pass.DataFrame.Histo2D(("SRTT_21_pileupUp","SRTT_21_pileupUp",18 ,45 ,225 ,13 ,700 ,2000),'mh1','mreduced21','pileupweight_up')
-    hATTT21_pileupUp = Fail.DataFrame.Histo2D(("ATTT_21_pileupUp","ATTT_21_pileupUp",18 ,45 ,225 ,13 ,700 ,2000),"mh1","mreduced21",'pileupweight_upFailHalfSF')
-    hSFTT21_pileupUp = Pass.DataFrame.Histo2D(("SFTT_21_pileupUp","SFTT_21_pileupUp",18 ,45 ,225 ,13 ,700 ,2000),"mh1","mreduced21",'pileupweight_upFailFullSF')
+    hSRTT21_pileupUp = Pass.DataFrame.Histo2D(("SRTT_21_pileupUp","SRTT_21_pileupUp",18 ,45 ,225 ,13 ,700 ,2000),'mh','mreduced21','pileupweight_up')
+    hATTT21_pileupUp = Fail.DataFrame.Histo2D(("ATTT_21_pileupUp","ATTT_21_pileupUp",18 ,45 ,225 ,13 ,700 ,2000),"mh","mreduced21",'pileupweight_upFailHalfSF')
+    hSFTT21_pileupUp = Pass.DataFrame.Histo2D(("SFTT_21_pileupUp","SFTT_21_pileupUp",18 ,45 ,225 ,13 ,700 ,2000),"mh","mreduced21",'pileupweight_upFailFullSF')
 
-    hSRTT21_pileupDown = Pass.DataFrame.Histo2D(("SRTT_21_pileupDown","SRTT_21_pileupDown",18 ,45 ,225 ,13 ,700 ,2000),'mh1','mreduced21','pileupweight_down')
-    hATTT21_pileupDown = Fail.DataFrame.Histo2D(("ATTT_21_pileupDown","ATTT_21_pileupDown",18 ,45 ,225 ,13 ,700 ,2000),"mh1","mreduced21",'pileupweight_downFailHalfSF')
-    hSFTT21_pileupDown = Pass.DataFrame.Histo2D(("SFTT_21_pileupDown","ATTT_21_pileupDown",18 ,45 ,225 ,13 ,700 ,2000),"mh1","mreduced21",'pileupweight_downFailFullSF')
+    hSRTT21_pileupDown = Pass.DataFrame.Histo2D(("SRTT_21_pileupDown","SRTT_21_pileupDown",18 ,45 ,225 ,13 ,700 ,2000),'mh','mreduced21','pileupweight_down')
+    hATTT21_pileupDown = Fail.DataFrame.Histo2D(("ATTT_21_pileupDown","ATTT_21_pileupDown",18 ,45 ,225 ,13 ,700 ,2000),"mh","mreduced21",'pileupweight_downFailHalfSF')
+    hSFTT21_pileupDown = Pass.DataFrame.Histo2D(("SFTT_21_pileupDown","ATTT_21_pileupDown",18 ,45 ,225 ,13 ,700 ,2000),"mh","mreduced21",'pileupweight_downFailFullSF')
 
-    hSRTT21_trigger_up = Pass.DataFrame.Histo2D(("SRTT_21_trigger_up","SRTT_21_triggerUp",18 ,45 ,225 ,13 ,700 ,2000),'mh1','mreduced21','trigger_up')
-    hATTT21_trigger_up = Fail.DataFrame.Histo2D(("ATTT_21_trigger_up","ATTT_21_triggerUp",18 ,45 ,225 ,13 ,700 ,2000),"mh1","mreduced21",'trigger_upFailHalfSF')
-    hSFTT21_trigger_up = Pass.DataFrame.Histo2D(("SFTT_21_trigger_up","SFTT_21_triggerUp",18 ,45 ,225 ,13 ,700 ,2000),"mh1","mreduced21",'trigger_upFailFullSF')
+    hSRTT21_trigger_up = Pass.DataFrame.Histo2D(("SRTT_21_trigger_up","SRTT_21_triggerUp",18 ,45 ,225 ,13 ,700 ,2000),'mh','mreduced21','trigger_up')
+    hATTT21_trigger_up = Fail.DataFrame.Histo2D(("ATTT_21_trigger_up","ATTT_21_triggerUp",18 ,45 ,225 ,13 ,700 ,2000),"mh","mreduced21",'trigger_upFailHalfSF')
+    hSFTT21_trigger_up = Pass.DataFrame.Histo2D(("SFTT_21_trigger_up","SFTT_21_triggerUp",18 ,45 ,225 ,13 ,700 ,2000),"mh","mreduced21",'trigger_upFailFullSF')
 
-    hSRTT21_trigger_down = Pass.DataFrame.Histo2D(("SRTT_21_trigger_down","SRTT_21_triggerDown",18 ,45 ,225 ,13 ,700 ,2000),'mh1','mreduced21','trigger_down')
-    hATTT21_trigger_down = Fail.DataFrame.Histo2D(("ATTT_21_trigger_down","ATTT_21_triggerDown",18 ,45 ,225 ,13 ,700 ,2000),"mh1","mreduced21",'trigger_downFailHalfSF')
-    hSFTT21_trigger_down = Pass.DataFrame.Histo2D(("SFTT_21_trigger_down","ATTT_21_triggerDown",18 ,45 ,225 ,13 ,700 ,2000),"mh1","mreduced21",'trigger_downFailFullSF')
+    hSRTT21_trigger_down = Pass.DataFrame.Histo2D(("SRTT_21_trigger_down","SRTT_21_triggerDown",18 ,45 ,225 ,13 ,700 ,2000),'mh','mreduced21','trigger_down')
+    hATTT21_trigger_down = Fail.DataFrame.Histo2D(("ATTT_21_trigger_down","ATTT_21_triggerDown",18 ,45 ,225 ,13 ,700 ,2000),"mh","mreduced21",'trigger_downFailHalfSF')
+    hSFTT21_trigger_down = Pass.DataFrame.Histo2D(("SFTT_21_trigger_down","ATTT_21_triggerDown",18 ,45 ,225 ,13 ,700 ,2000),"mh","mreduced21",'trigger_downFailFullSF')
 
-    hSRTT21_btagsfUp = Pass.DataFrame.Histo2D(("hSRTT_21_btagsfUp","SRTT_21_btagsfUp",18 ,45 ,225 ,13 ,700 ,2000),'mh1','mreduced21','btagsfweight_up')
-    hATTT21_btagsfUp = Fail.DataFrame.Histo2D(("hATTT_21_btagsfUp","ATTT_21_btagsfUp",18 ,45 ,225 ,13 ,700 ,2000),"mh1","mreduced21",'btagsfweight_upFailHalfSF')
-    hSFTT21_btagsfUp = Pass.DataFrame.Histo2D(("hSFTT_21_btagsfUp","SFTT_21_btagsfUp",18 ,45 ,225 ,13 ,700 ,2000),"mh1","mreduced21",'btagsfweight_upFailFullSF')
+    hSRTT21_btagsfUp = Pass.DataFrame.Histo2D(("hSRTT_21_btagsfUp","SRTT_21_btagsfUp",18 ,45 ,225 ,13 ,700 ,2000),'mh','mreduced21','btagsfweight_up')
+    hATTT21_btagsfUp = Fail.DataFrame.Histo2D(("hATTT_21_btagsfUp","ATTT_21_btagsfUp",18 ,45 ,225 ,13 ,700 ,2000),"mh","mreduced21",'btagsfweight_upFailHalfSF')
+    hSFTT21_btagsfUp = Pass.DataFrame.Histo2D(("hSFTT_21_btagsfUp","SFTT_21_btagsfUp",18 ,45 ,225 ,13 ,700 ,2000),"mh","mreduced21",'btagsfweight_upFailFullSF')
 
-    hSRTT21_btagsfDown = Pass.DataFrame.Histo2D(("hSRTT_21_btagsfDown","SRTT_21_btagsfDown",18 ,45 ,225 ,13 ,700 ,2000),'mh1','mreduced21','btagsfweight_down')
-    hATTT21_btagsfDown = Fail.DataFrame.Histo2D(("hATTT_21_btagsfDown","ATTT_21_btagsfDown",18 ,45 ,225 ,13 ,700 ,2000),"mh1","mreduced21",'btagsfweight_downFailHalfSF')
-    hSFTT21_btagsfDown = Pass.DataFrame.Histo2D(("hSFTT_21_btagsfDown","ATTT_21_btagsfDown",18 ,45 ,225 ,13 ,700 ,2000),"mh1","mreduced21",'btagsfweight_downFailFullSF')
+    hSRTT21_btagsfDown = Pass.DataFrame.Histo2D(("hSRTT_21_btagsfDown","SRTT_21_btagsfDown",18 ,45 ,225 ,13 ,700 ,2000),'mh','mreduced21','btagsfweight_down')
+    hATTT21_btagsfDown = Fail.DataFrame.Histo2D(("hATTT_21_btagsfDown","ATTT_21_btagsfDown",18 ,45 ,225 ,13 ,700 ,2000),"mh","mreduced21",'btagsfweight_downFailHalfSF')
+    hSFTT21_btagsfDown = Pass.DataFrame.Histo2D(("hSFTT_21_btagsfDown","ATTT_21_btagsfDown",18 ,45 ,225 ,13 ,700 ,2000),"mh","mreduced21",'btagsfweight_downFailFullSF')
 
-    hSRTT21_dbsf_up = Pass.DataFrame.Histo3D(("SRTT_21_dbsf_up","SRTT_21_dbsfUp",4,array('d',[300,400,500,600,2000]),18 ,array('d',mhbins) ,13 ,array('d',mredbins21)),'pt1','mh1','mreduced21','dbsfup')
-    hATTT21_dbsf_up = Fail.DataFrame.Histo3D(("ATTT_21_dbsf_up","ATTT_21_dbsfUp",4,array('d',[300,400,500,600,2000]),18 ,array('d',mhbins) ,13 ,array('d',mredbins21)),"pt1","mh1","mreduced21",'dbsfupFailHalfSF')
-    hSFTT21_dbsf_up = Pass.DataFrame.Histo3D(("SFTT_21_dbsf_up","SFTT_21_dbsfUp",4,array('d',[300,400,500,600,2000]),18 ,array('d',mhbins) ,13 ,array('d',mredbins21)),"pt1","mh1","mreduced21",'dbsfupFailFullSF')
+    hSRTT21_dbsf_up = Pass.DataFrame.Histo2D(("SRTT_21_dbsf_up","SRTT_21_dbsfUp",18 ,45 ,225 ,13 ,700 ,2000),'mh','mreduced21','dbsfup')
+    hATTT21_dbsf_up = Fail.DataFrame.Histo2D(("ATTT_21_dbsf_up","ATTT_21_dbsfUp",18 ,45 ,225 ,13 ,700 ,2000),'mh','mreduced21','dbsfupFailHalfSF')
+    hSFTT21_dbsf_up = Pass.DataFrame.Histo2D(("SFTT_21_dbsf_up","SFTT_21_dbsfUp",18 ,45 ,225 ,13 ,700 ,2000),'mh','mreduced21','dbsfupFailFullSF')
 
-    hSRTT21_dbsf_down = Pass.DataFrame.Histo3D(("SRTT_21_dbsf_down","SRTT_21_dbsfDown",4,array('d',[300,400,500,600,2000]),18 ,array('d',mhbins) ,13 ,array('d',mredbins21)),"pt1",'mh1','mreduced21','dbsfdown')
-    hATTT21_dbsf_down = Fail.DataFrame.Histo3D(("ATTT_21_dbsf_down","ATTT_21_dbsfDown",4,array('d',[300,400,500,600,2000]),18 ,array('d',mhbins) ,13 ,array('d',mredbins21)),"pt1","mh1","mreduced21",'dbsfdownFailHalfSF')
-    hSFTT21_dbsf_down = Pass.DataFrame.Histo3D(("SFTT_21_dbsf_down","ATTT_21_dbsfDown",4,array('d',[300,400,500,600,2000]),18 ,array('d',mhbins) ,13 ,array('d',mredbins21)),"pt1","mh1","mreduced21",'dbsfdownFailFullSF')
+    hSRTT21_dbsf_down = Pass.DataFrame.Histo2D(("SRTT_21_dbsf_down","SRTT_21_dbsfDown",18 ,45 ,225 ,13 ,700 ,2000),'mh','mreduced21','dbsfdown')
+    hATTT21_dbsf_down = Fail.DataFrame.Histo2D(("ATTT_21_dbsf_down","ATTT_21_dbsfDown",18 ,45 ,225 ,13 ,700 ,2000),'mh','mreduced21','dbsfdownFailHalfSF')
+    hSFTT21_dbsf_down = Pass.DataFrame.Histo2D(("SFTT_21_dbsf_down","ATTT_21_dbsfDown",18 ,45 ,225 ,13 ,700 ,2000),'mh','mreduced21','dbsfdownFailFullSF')
 
-    if 'ttbar' in options.input:
+    if 'ttbar' in setname:
 #### 1+1 Templates
-        hSRTT11_topptUp = SRTT.DataFrame.Histo2D(("SRTT_11_topptUp","SRTT_11_topptUp",18 ,45 ,225 ,28 ,700 ,3500),'mh','mreduced','topptweight_tight_up')
-        hATTT11_topptUp = ATTT.DataFrame.Histo2D(("ATTT_11_topptUp","ATTT_11_topptUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_tight_upFailHalfSF')
-        hSFTT11_topptUp = SRTT.DataFrame.Histo2D(("SFTT_11_topptUp","ATTT_11_topptUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_tight_upFailFullSF')
+        hSRTT11_topptAlphaUp = SRTT.DataFrame.Histo2D(("SRTT_11_topptAlphaUp","SRTT_11_topptAlphaUp",18 ,45 ,225 ,28 ,700 ,3500),'mh','mreduced','topptweight_tight_Alphaup')
+        hATTT11_topptAlphaUp = ATTT.DataFrame.Histo2D(("ATTT_11_topptAlphaUp","ATTT_11_topptAlphaUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_tight_AlphaupFailHalfSF')
+        hSFTT11_topptAlphaUp = SRTT.DataFrame.Histo2D(("SFTT_11_topptAlphaUp","ATTT_11_topptAlphaUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_tight_AlphaupFailFullSF')
 
-        hSRLL11_topptUp = SRLL.DataFrame.Histo2D(("SRLL_11_topptUp","SRLL_11_topptUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_loose_up')
-        hATLL11_topptUp = ATLL.DataFrame.Histo2D(("ATLL_11_topptUp","ATLL_11_topptUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_loose_upFailHalfSF')
-        hSFLL11_topptUp = SRLL.DataFrame.Histo2D(("SFLL_11_topptUp","ATLL_11_topptUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_loose_upFailFullSF')
+        hSRLL11_topptAlphaUp = SRLL.DataFrame.Histo2D(("SRLL_11_topptAlphaUp","SRLL_11_topptAlphaUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_loose_Alphaup')
+        hATLL11_topptAlphaUp = ATLL.DataFrame.Histo2D(("ATLL_11_topptAlphaUp","ATLL_11_topptAlphaUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_loose_AlphaupFailHalfSF')
+        hSFLL11_topptAlphaUp = SRLL.DataFrame.Histo2D(("SFLL_11_topptAlphaUp","ATLL_11_topptAlphaUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_loose_AlphaupFailFullSF')
 
-        hSRTT11_topptDown = SRTT.DataFrame.Histo2D(("SRTT_11_topptDown","SRTT_11_topptDown",18 ,45 ,225 ,28 ,700 ,3500),'mh','mreduced','topptweight_tight_down')
-        hATTT11_topptDown = ATTT.DataFrame.Histo2D(("ATTT_11_topptDown","ATTT_11_topptDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_tight_downFailHalfSF')
-        hSFTT11_topptDown = SRTT.DataFrame.Histo2D(("SFTT_11_topptDown","ATTT_11_topptDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_tight_downFailFullSF')
+        hSRTT11_topptAlphaDown = SRTT.DataFrame.Histo2D(("SRTT_11_topptAlphaDown","SRTT_11_topptAlphaDown",18 ,45 ,225 ,28 ,700 ,3500),'mh','mreduced','topptweight_tight_Alphadown')
+        hATTT11_topptAlphaDown = ATTT.DataFrame.Histo2D(("ATTT_11_topptAlphaDown","ATTT_11_topptAlphaDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_tight_AlphadownFailHalfSF')
+        hSFTT11_topptAlphaDown = SRTT.DataFrame.Histo2D(("SFTT_11_topptAlphaDown","ATTT_11_topptAlphaDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_tight_AlphadownFailFullSF')
 
-        hSRLL11_topptDown = SRLL.DataFrame.Histo2D(("SRLL_11_topptDown","SRLL_11_topptDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_loose_down')
-        hATLL11_topptDown = ATLL.DataFrame.Histo2D(("ATLL_11_topptDown","ATLL_11_topptDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_loose_downFailHalfSF')
-        hSFLL11_topptDown = SRLL.DataFrame.Histo2D(("SFLL_11_topptDown","ATLL_11_topptDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_loose_downFailFullSF')
+        hSRLL11_topptAlphaDown = SRLL.DataFrame.Histo2D(("SRLL_11_topptAlphaDown","SRLL_11_topptAlphaDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_loose_Alphadown')
+        hATLL11_topptAlphaDown = ATLL.DataFrame.Histo2D(("ATLL_11_topptAlphaDown","ATLL_11_topptAlphaDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_loose_AlphadownFailHalfSF')
+        hSFLL11_topptAlphaDown = SRLL.DataFrame.Histo2D(("SFLL_11_topptAlphaDown","ATLL_11_topptAlphaDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_loose_AlphadownFailFullSF')
+
+        hSRTT11_topptBetaUp = SRTT.DataFrame.Histo2D(("SRTT_11_topptBetaUp","SRTT_11_topptBetaUp",18 ,45 ,225 ,28 ,700 ,3500),'mh','mreduced','topptweight_tight_Betaup')
+        hATTT11_topptBetaUp = ATTT.DataFrame.Histo2D(("ATTT_11_topptBetaUp","ATTT_11_topptBetaUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_tight_BetaupFailHalfSF')
+        hSFTT11_topptBetaUp = SRTT.DataFrame.Histo2D(("SFTT_11_topptBetaUp","ATTT_11_topptBetaUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_tight_BetaupFailFullSF')
+
+        hSRLL11_topptBetaUp = SRLL.DataFrame.Histo2D(("SRLL_11_topptBetaUp","SRLL_11_topptBetaUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_loose_Betaup')
+        hATLL11_topptBetaUp = ATLL.DataFrame.Histo2D(("ATLL_11_topptBetaUp","ATLL_11_topptBetaUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_loose_BetaupFailHalfSF')
+        hSFLL11_topptBetaUp = SRLL.DataFrame.Histo2D(("SFLL_11_topptBetaUp","ATLL_11_topptBetaUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_loose_BetaupFailFullSF')
+
+        hSRTT11_topptBetaDown = SRTT.DataFrame.Histo2D(("SRTT_11_topptBetaDown","SRTT_11_topptBetaDown",18 ,45 ,225 ,28 ,700 ,3500),'mh','mreduced','topptweight_tight_Betadown')
+        hATTT11_topptBetaDown = ATTT.DataFrame.Histo2D(("ATTT_11_topptBetaDown","ATTT_11_topptBetaDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_tight_BetadownFailHalfSF')
+        hSFTT11_topptBetaDown = SRTT.DataFrame.Histo2D(("SFTT_11_topptBetaDown","ATTT_11_topptBetaDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_tight_BetadownFailFullSF')
+
+        hSRLL11_topptBetaDown = SRLL.DataFrame.Histo2D(("SRLL_11_topptBetaDown","SRLL_11_topptBetaDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_loose_Betadown')
+        hATLL11_topptBetaDown = ATLL.DataFrame.Histo2D(("ATLL_11_topptBetaDown","ATLL_11_topptBetaDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_loose_BetadownFailHalfSF')
+        hSFLL11_topptBetaDown = SRLL.DataFrame.Histo2D(("SFLL_11_topptBetaDown","ATLL_11_topptBetaDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_loose_BetadownFailFullSF')
+
+
 
 ### Now Control Region templates
-        hSRCR11_topptUp = SRCR.DataFrame.Histo2D(("SRCR_11_topptUp","SRCR_11_topptUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_loose_up')
-        hATCR11_topptUp = ATCR.DataFrame.Histo2D(("ATCR_11_topptUp","ATCR_11_topptUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_loose_upFailHalfSF')
-        hSFCR11_topptUp = SRCR.DataFrame.Histo2D(("SFCR_11_topptUp","ATCR_11_topptUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_loose_upFailFullSF')
+        hSRCR11_topptAlphaUp = SRCR.DataFrame.Histo2D(("SRCR_11_topptAlphaUp","SRCR_11_topptAlphaUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_loose_Alphaup')
+        hATCR11_topptAlphaUp = ATCR.DataFrame.Histo2D(("ATCR_11_topptAlphaUp","ATCR_11_topptAlphaUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_loose_AlphaupFailHalfSF')
+        hSFCR11_topptAlphaUp = SRCR.DataFrame.Histo2D(("SFCR_11_topptAlphaUp","ATCR_11_topptAlphaUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_loose_AlphaupFailFullSF')
 
-        hSRCR11_topptDown = SRCR.DataFrame.Histo2D(("SRCR_11_topptDown","SRCR_11_topptDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_loose_down')
-        hATCR11_topptDown = ATCR.DataFrame.Histo2D(("ATCR_11_topptDown","ATCR_11_topptDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_loose_downFailHalfSF')
-        hSFCR11_topptDown = SRCR.DataFrame.Histo2D(("SFCR_11_topptDown","ATCR_11_topptDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_loose_downFailFullSF')
+        hSRCR11_topptAlphaDown = SRCR.DataFrame.Histo2D(("SRCR_11_topptAlphaDown","SRCR_11_topptAlphaDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_loose_Alphadown')
+        hATCR11_topptAlphaDown = ATCR.DataFrame.Histo2D(("ATCR_11_topptAlphaDown","ATCR_11_topptAlphaDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_loose_AlphadownFailHalfSF')
+        hSFCR11_topptAlphaDown = SRCR.DataFrame.Histo2D(("SFCR_11_topptAlphaDown","ATCR_11_topptAlphaDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_loose_AlphadownFailFullSF')
+
+        hSRCR11_topptBetaUp = SRCR.DataFrame.Histo2D(("SRCR_11_topptBetaUp","SRCR_11_topptBetaUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_loose_Betaup')
+        hATCR11_topptBetaUp = ATCR.DataFrame.Histo2D(("ATCR_11_topptBetaUp","ATCR_11_topptBetaUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_loose_BetaupFailHalfSF')
+        hSFCR11_topptBetaUp = SRCR.DataFrame.Histo2D(("SFCR_11_topptBetaUp","ATCR_11_topptBetaUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_loose_BetaupFailFullSF')
+
+        hSRCR11_topptBetaDown = SRCR.DataFrame.Histo2D(("SRCR_11_topptBetaDown","SRCR_11_topptBetaDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_loose_Betadown')
+        hATCR11_topptBetaDown = ATCR.DataFrame.Histo2D(("ATCR_11_topptBetaDown","ATCR_11_topptBetaDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_loose_BetadownFailHalfSF')
+        hSFCR11_topptBetaDown = SRCR.DataFrame.Histo2D(("SFCR_11_topptBetaDown","ATCR_11_topptBetaDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_loose_BetadownFailFullSF')
 
 ### Now 2+1 top templates
-        hSRTT21_topptUp = Pass.DataFrame.Histo2D(("SRTT_21_topptUp","SRTT_21_topptUp",18 ,45 ,225 ,13 ,700 ,2000),'mh1','mreduced21','topptweight_up')
-        hATTT21_topptUp = Fail.DataFrame.Histo2D(("ATTT_21_topptUp","ATTT_21_topptUp",18 ,45 ,225 ,13 ,700 ,2000),"mh1","mreduced21",'topptweight_upFailHalfSF')
-        hSFTT21_topptUp = Pass.DataFrame.Histo2D(("SFTT_21_topptUp","SFTT_21_topptUp",18 ,45 ,225 ,13 ,700 ,2000),"mh1","mreduced21",'topptweight_upFailFullSF')
+        hSRTT21_topptAlphaUp = Pass.DataFrame.Histo2D(("SRTT_21_topptAlphaUp","SRTT_21_topptAlphaUp",18 ,45 ,225 ,13 ,700 ,2000),'mh','mreduced21','topptweight_Alphaup')
+        hATTT21_topptAlphaUp = Fail.DataFrame.Histo2D(("ATTT_21_topptAlphaUp","ATTT_21_topptAlphaUp",18 ,45 ,225 ,13 ,700 ,2000),"mh","mreduced21",'topptweight_AlphaupFailHalfSF')
+        hSFTT21_topptAlphaUp = Pass.DataFrame.Histo2D(("SFTT_21_topptAlphaUp","SFTT_21_topptAlphaUp",18 ,45 ,225 ,13 ,700 ,2000),"mh","mreduced21",'topptweight_AlphaupFailFullSF')
 
+        hSRTT21_topptAlphaDown = Pass.DataFrame.Histo2D(("SRTT_21_topptAlphaDown","SRTT_21_topptAlphaDown",18 ,45 ,225 ,13 ,700 ,2000),'mh','mreduced21','topptweight_Alphadown')
+        hATTT21_topptAlphaDown = Fail.DataFrame.Histo2D(("ATTT_21_topptAlphaDown","ATTT_21_topptAlphaDown",18 ,45 ,225 ,13 ,700 ,2000),"mh","mreduced21",'topptweight_AlphadownFailHalfSF')
+        hSFTT21_topptAlphaDown = Pass.DataFrame.Histo2D(("SFTT_21_topptAlphaDown","ATTT_21_topptAlphaDown",18 ,45 ,225 ,13 ,700 ,2000),"mh","mreduced21",'topptweight_AlphadownFailFullSF')
 
-        hSRTT21_topptDown = Pass.DataFrame.Histo2D(("SRTT_21_topptDown","SRTT_21_topptDown",18 ,45 ,225 ,13 ,700 ,2000),'mh1','mreduced21','topptweight_down')
-        hATTT21_topptDown = Fail.DataFrame.Histo2D(("ATTT_21_topptDown","ATTT_21_topptDown",18 ,45 ,225 ,13 ,700 ,2000),"mh1","mreduced21",'topptweight_downFailHalfSF')
-        hSFTT21_topptDown = Pass.DataFrame.Histo2D(("SFTT_21_topptDown","ATTT_21_topptDown",18 ,45 ,225 ,13 ,700 ,2000),"mh1","mreduced21",'topptweight_downFailFullSF')
+        hSRTT21_topptBetaUp = Pass.DataFrame.Histo2D(("SRTT_21_topptBetaUp","SRTT_21_topptBetaUp",18 ,45 ,225 ,13 ,700 ,2000),'mh','mreduced21','topptweight_Betaup')
+        hATTT21_topptBetaUp = Fail.DataFrame.Histo2D(("ATTT_21_topptBetaUp","ATTT_21_topptBetaUp",18 ,45 ,225 ,13 ,700 ,2000),"mh","mreduced21",'topptweight_BetaupFailHalfSF')
+        hSFTT21_topptBetaUp = Pass.DataFrame.Histo2D(("SFTT_21_topptBetaUp","SFTT_21_topptBetaUp",18 ,45 ,225 ,13 ,700 ,2000),"mh","mreduced21",'topptweight_BetaupFailFullSF')
+
+        hSRTT21_topptBetaDown = Pass.DataFrame.Histo2D(("SRTT_21_topptBetaDown","SRTT_21_topptBetaDown",18 ,45 ,225 ,13 ,700 ,2000),'mh','mreduced21','topptweight_Betadown')
+        hATTT21_topptBetaDown = Fail.DataFrame.Histo2D(("ATTT_21_topptBetaDown","ATTT_21_topptBetaDown",18 ,45 ,225 ,13 ,700 ,2000),"mh","mreduced21",'topptweight_BetadownFailHalfSF')
+        hSFTT21_topptBetaDown = Pass.DataFrame.Histo2D(("SFTT_21_topptBetaDown","ATTT_21_topptBetaDown",18 ,45 ,225 ,13 ,700 ,2000),"mh","mreduced21",'topptweight_BetadownFailFullSF')
 
 
         top_check = preselected.DataFrame.Histo1D("topptvectorcheck")
@@ -971,27 +1021,40 @@ if not a.isData:
     hATTT21_dbsf_up.Add(hSFTT21_dbsf_up.GetPtr())
     hATTT21_dbsf_down.Add(hSFTT21_dbsf_down.GetPtr())
 
-    if 'ttbar' in options.input:
+    if 'ttbar' in setname:
 #### 1+1 Templates
 
-        hATTT11_topptUp.Add(hSFTT11_topptUp.GetPtr())
-        hATLL11_topptUp.Add(hSFLL11_topptUp.GetPtr())
-        hATTT11_topptDown.Add(hSFTT11_topptDown.GetPtr())
-        hATLL11_topptDown.Add(hSFLL11_topptDown.GetPtr())
+        hATTT11_topptAlphaUp.Add(hSFTT11_topptAlphaUp.GetPtr())
+        hATLL11_topptAlphaUp.Add(hSFLL11_topptAlphaUp.GetPtr())
+        hATTT11_topptAlphaDown.Add(hSFTT11_topptAlphaDown.GetPtr())
+        hATLL11_topptAlphaDown.Add(hSFLL11_topptAlphaDown.GetPtr())
+
+        hATTT11_topptBetaUp.Add(hSFTT11_topptBetaUp.GetPtr())
+        hATLL11_topptBetaUp.Add(hSFLL11_topptBetaUp.GetPtr())
+        hATTT11_topptBetaDown.Add(hSFTT11_topptBetaDown.GetPtr())
+        hATLL11_topptBetaDown.Add(hSFLL11_topptBetaDown.GetPtr())
 
 ### Now Control Region templates
 
-        hATCR11_topptUp.Add(hSFCR11_topptUp.GetPtr())
-        hATCR11_topptDown.Add(hSFCR11_topptDown.GetPtr())       
+        hATCR11_topptAlphaUp.Add(hSFCR11_topptAlphaUp.GetPtr())
+        hATCR11_topptAlphaDown.Add(hSFCR11_topptAlphaDown.GetPtr())
+
+        hATCR11_topptBetaUp.Add(hSFCR11_topptBetaUp.GetPtr())
+        hATCR11_topptBetaDown.Add(hSFCR11_topptBetaDown.GetPtr())        
 
 ### Now 2+1 top templates
 
-        hATTT21_topptUp.Add(hSFTT21_topptUp.GetPtr())
-        hATTT21_topptDown.Add(hSFTT21_topptDown.GetPtr())
+        hATTT21_topptAlphaUp.Add(hSFTT21_topptAlphaUp.GetPtr())
+        hATTT21_topptAlphaDown.Add(hSFTT21_topptAlphaDown.GetPtr())
 
+        hATTT21_topptBetaUp.Add(hSFTT21_topptBetaUp.GetPtr())
+        hATTT21_topptBetaDown.Add(hSFTT21_topptBetaDown.GetPtr())
 #### Now we can process the histograms
 hists = [hSRTT11,hATTT11,hSRLL11,hATLL11,hSRTT21,hATTT21,hSRCR11,hATCR11,        
-        hpt0TT,hpt1TT,heta0TT,heta1TT,hdeltaEtaTT,hmredTT,hmsd1TT,htau21TT,hmsd0TT,hpt0LL,hpt1LL,heta0LL,heta1LL,hdeltaEtaLL,hmredLL,hmsd1LL,htau21LL,hmsd0LL,htaggerTT,htaggerLL]
+        hpt0TT,hpt1TT,heta0TT,heta1TT,hdeltaEtaTT,hmredTT,hmsd1TT,htau21TT,hmsd0TT,hpt0LL,hpt1LL,heta0LL,heta1LL,hdeltaEtaLL,hmredLL,hmsd1LL,htau21LL,hmsd0LL,
+        hpt021,bpt021,bpt121,heta021,beta021,heta021,hdeltaEta21,hmred21,hmsd021,hmbb21,
+        deltaRCheck,trijetMassCheck,trijetMassDeltaR]
+        # nom_check_plot,raw_check_plot]
 
 if not a.isData:
     hists.extend([hSRTT11_pdfUp,hATTT11_pdfUp,hSRLL11_pdfUp,hATLL11_pdfUp,hSRTT11_pdfDown,hATTT11_pdfDown,hSRLL11_pdfDown,hATLL11_pdfDown,
@@ -1004,10 +1067,13 @@ if not a.isData:
         hSRCR11_pileupUp,hATCR11_pileupUp,hSRCR11_pileupDown,hATCR11_pileupDown,
         hSRCR11_triggerloose_up,hATCR11_triggerloose_up,hSRCR11_triggerloose_down,hATCR11_triggerloose_down,
         hSRCR11_dbsfloose_up,hATCR11_dbsfloose_up,hSRCR11_dbsfloose_down,hATCR11_dbsfloose_down])
-    if 'ttbar' in options.input:
-        hists.extend([hSRTT11_topptUp,hATTT11_topptUp,hSRLL11_topptUp,hATLL11_topptUp,hSRTT11_topptDown,hATTT11_topptDown,hSRLL11_topptDown,hATLL11_topptDown,
-            hSRCR11_topptUp,hATCR11_topptUp,hSRCR11_topptDown,hATCR11_topptDown,        
-            hSRTT21_topptUp,hATTT21_topptUp,hSRTT21_topptDown,hATTT21_topptDown])
+    if 'ttbar' in setname:
+        hists.extend([hSRTT11_topptAlphaUp,hATTT11_topptAlphaUp,hSRLL11_topptAlphaUp,hATLL11_topptAlphaUp,hSRTT11_topptAlphaDown,hATTT11_topptAlphaDown,hSRLL11_topptAlphaDown,hATLL11_topptAlphaDown,
+            hSRCR11_topptAlphaUp,hATCR11_topptAlphaUp,hSRCR11_topptAlphaDown,hATCR11_topptAlphaDown,        
+            hSRTT21_topptAlphaUp,hATTT21_topptAlphaUp,hSRTT21_topptAlphaDown,hATTT21_topptAlphaDown,
+            hSRTT11_topptBetaUp,hATTT11_topptBetaUp,hSRLL11_topptBetaUp,hATLL11_topptBetaUp,hSRTT11_topptBetaDown,hATTT11_topptBetaDown,hSRLL11_topptBetaDown,hATLL11_topptBetaDown,
+            hSRCR11_topptBetaUp,hATCR11_topptBetaUp,hSRCR11_topptBetaDown,hATCR11_topptBetaDown,        
+            hSRTT21_topptBetaUp,hATTT21_topptBetaUp,hSRTT21_topptBetaDown,hATTT21_topptBetaDown])
 
 norm_hist = ROOT.TH1F('norm','norm',1,0,1)
 norm_hist.SetBinContent(1,norm)
@@ -1017,37 +1083,27 @@ norm_hist.Write()
 SRTT_cuts = slim_skim+filters+preselection11+preselection12
 SRTT_cuts.Add("SRTT","SRTT==1")
 SRTT_cutflow = CutflowHist('cutflow11',SRTT) # SRTT.DataFrame already has the cuts and numbers, SRTT_cuts is just to name the histogram bins (but that means they must match up!)
+# SRTT_cutflow.Scale(lumi/a.genEventCount)
 SRTT_cutflow.Write()
 
 Pass21_cuts = slim_skim+filters+preselection21+preselection22+preselection23
 Pass21_cuts.Add("Pass21","Pass21==1")
 Pass21_cutflow = CutflowHist('cutflow21',Pass) 
+# Pass21_cutflow.Scale(lumi/a.genEventCount)
 Pass21_cutflow.Write()
 
-nminus1_21_node = Nminus1(nminus1_21,Pass21_cuts)
-if not a.isData:
-    trijetDeltaRhist = nminus1_21_node["topDeltaR"].DataFrame.Histo1D(("trijetDeltaR","trijetDeltaR",50 ,0 ,5),"topDeltaR","finalweightTight")
-    trijetMasshist = nminus1_21_node["topMass"].DataFrame.Histo1D(("trijetMass","trijetMass",50 ,100 ,1000),"topMass","finalweightTight")
-else:
-    trijetDeltaRhist = nminus1_21_node["topDeltaR"].DataFrame.Histo1D(("trijetDeltaR","trijetDeltaR",50 ,0 ,5),"topDeltaR")
-    trijetMasshist = nminus1_21_node["topMass"].DataFrame.Histo1D(("trijetMass","trijetMass",50 ,100 ,1000),"topMass")
+# if not a.isData:
+#     nminus1_21_node = Nminus1(nminus1_21,Pass21_cuts)
 
-hists.extend([trijetDeltaRhist,trijetMasshist])
+#     trijetDeltaRhist = nminus1_21_node["topDeltaR"].DataFrame.Histo1D(("trijetDeltaR","trijetDeltaR",50 ,0 ,5),"topDeltaR","finalweightTight")
+#     trijetMasshist = nminus1_21_node["topMass"].DataFrame.Histo1D(("trijetMass","trijetMass",50 ,100 ,1000),"topMass","finalweightTight")
+
+#     hists.extend([trijetDeltaRhist,trijetMasshist])
 
 for h in hists: 
     h.Scale(norm)
     h.Write()
 
-dbsflist = [hSRTT11_dbsftight_up,hATTT11_dbsftight_up,hSRLL11_dbsfloose_up,hATLL11_dbsfloose_up,hSRTT11_dbsftight_down,hATTT11_dbsftight_down,hSRLL11_dbsfloose_down,hATLL11_dbsfloose_down]
-for h in dbsflist:
-    h.GetXaxis().SetRangeUser(300.0,400.0)
-    h.Project3D("34_zy").Write()
-    h.GetXaxis().SetRangeUser(400.0,500.0)
-    h.Project3D("45_zy").Write()
-    h.GetXaxis().SetRangeUser(500.0,600.0)
-    h.Project3D("56_zy").Write()
-    h.GetXaxis().SetRangeUser(600.0,2000.0)
-    h.Project3D("6p_zy").Write()
 # Cleanup
 out_f.Close()
 print("Total time: "+str((time.time()-start_time)/60.) + ' min')
