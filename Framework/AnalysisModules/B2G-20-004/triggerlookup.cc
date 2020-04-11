@@ -5,9 +5,9 @@ using namespace ROOT::VecOps;
 
 namespace analyzer {
     std::vector<double> TriggerLookup(float var, TH1D* TRP, TEfficiency* TEff ){
-        double Weight = 1;
-        double Weightup = 1;
-        double Weightdown = 1;
+        double Weight = 1.0;
+        double Weightup = 1.0;
+        double Weightdown = 1.0;
 
         std::vector<double> out;
 
@@ -23,7 +23,12 @@ namespace analyzer {
                 }
             }
 
-            Weight = jetTriggerWeight;
+            if (jetTriggerWeight < 0){
+                Weight = 0;
+            }else if (0 < jetTriggerWeight && jetTriggerWeight < 1.0){
+                Weight = jetTriggerWeight;
+            }
+
             cout << "Trigger eff is : " << Weight << endl; 
             double deltaTriggerEff  = 0.5*(1.0-jetTriggerWeight);
             double errorUp = TEff->GetEfficiencyErrorUp(bin0);
