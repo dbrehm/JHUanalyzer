@@ -640,18 +640,18 @@ kinematicCuts.Add("bb_pairs_check","(Hemispherized[0] != 0) && (Hemispherized[1]
 kinematicCuts.Add("b_eta","abs(Jet_eta[Hemispherized[0]]) < 2.4 && abs(Jet_eta[Hemispherized[1]]) < 2.4")
 kinematicCuts.Add("DeepCSV","(0.2219 < Jet_btagDeepB[Hemispherized[0]] && Jet_btagDeepB[Hemispherized[0]] < 1) && (0.2219 < Jet_btagDeepB[Hemispherized[1]] && Jet_btagDeepB[Hemispherized[1]] < 1)")
 kinematicCuts.Add("candidate21","("+cand21String+") || ("+run21String+")")
-kinematicCuts.Add("cut_mreduced","mreduced21 > 700.")
+kinematicCuts.Add("cut_mreduced","mreduced21 > 750.")
 
 # Apply all groups in list order to the base RDF loaded in during analyzer() initialization
 slimandskim = a.Apply([triggerGroup,slim_skim,filters])
-
+setup = slimandskim.Apply([newcolumns,bbColumn,mbbColumn,mred21Column,plotsColumn,selectionColumns,correctionColumns,correctionColumns11,selectionColumns21,correctionColumns21,plotsColumn])
 # if not a.isData:
 #     nminus1_11 = a.Apply([triggerGroup,newcolumns,selectionColumns,correctionColumns,correctionColumns11,plotsColumn])
 #     nminus1_21 = a.Apply([triggerGroup,newcolumns,bbColumn,mbbColumn,mred21Column,selectionColumns21,correctionColumns,correctionColumns21,plotsColumn])
-kinematicDistributions = slimandskim.Apply([newcolumns,bbColumn,mbbColumn,mred21Column,plotsColumn,kinematicCuts])
-preselected = slimandskim.Apply([preselection11,newcolumns,preselection12,selectionColumns,correctionColumns,correctionColumns11,plotsColumn])
-cutTest21 = slimandskim.Apply([newcolumns,preselection21,bbColumn,mbbColumn,mred21Column,preselection22,selectionColumns21,correctionColumns,correctionColumns21]).Cut("Pass21","Pass21==1")
-preselected21 = slimandskim.Apply([newcolumns,preselection21,bbColumn,mbbColumn,mred21Column,preselection22,preselection23,selectionColumns21,correctionColumns,correctionColumns21,plotsColumn])
+kinematicDistributions = setup.Apply([kinematicCuts])
+preselected = setup.Apply([preselection11,preselection12])
+cutTest21 = setup.Apply([preselection21,preselection22]).Cut("Pass21","Pass21==1")
+preselected21 = setup.Apply([preselection21,preselection22,preselection23,])
 
 # Since four analysis regions are covered with relatively complicated cuts to define them, a manual forking is simplest though a Discriminate function does exist for when you need to keep pass and fail of a selection
 SRTT = preselected.Cut("SRTT","SRTT==1")
