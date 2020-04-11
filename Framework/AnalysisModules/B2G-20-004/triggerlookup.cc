@@ -24,6 +24,7 @@ namespace analyzer {
             }
 
             Weight = jetTriggerWeight;
+            cout << "Trigger eff is : " << Weight << endl; 
             double deltaTriggerEff  = 0.5*(1.0-jetTriggerWeight);
             double errorUp = TEff->GetEfficiencyErrorUp(bin0);
             double errorDown = TEff->GetEfficiencyErrorLow(bin0);
