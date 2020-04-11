@@ -28,8 +28,7 @@ namespace analyzer {
             }else if (0 < jetTriggerWeight && jetTriggerWeight < 1.0){
                 Weight = jetTriggerWeight;
             }
-
-            cout << "Trigger eff is : " << Weight << endl; 
+ 
             double deltaTriggerEff  = 0.5*(1.0-jetTriggerWeight);
             double errorUp = TEff->GetEfficiencyErrorUp(bin0);
             double errorDown = TEff->GetEfficiencyErrorLow(bin0);
@@ -39,6 +38,7 @@ namespace analyzer {
             Weightdown = std::max(zero,(jetTriggerWeight - sqrt(pow((deltaTriggerEff),2) + pow(errorDown,2) )));
 
         }    
+        cout << "Trigger eff is : " << Weight << endl;
         out.push_back(Weight);
         out.push_back(Weightup);
         out.push_back(Weightdown);
