@@ -626,9 +626,9 @@ preselection23 = CutGroup('preselection23')
 # preselection23.Add("topDeltaR","topDeltaR > 1.0")
 
 plotsColumn = VarGroup("plotsColumn")
-plotsColumn.Add("eta0",""+eta0+"")
-plotsColumn.Add("eta1",""+eta1+"")
-plotsColumn.Add("deltaEta","abs("+eta0+" - "+eta1+")")
+plotsColumn.Add("eta0","lead_vect.Eta()")
+plotsColumn.Add("eta1","sublead_vect.Eta()")
+plotsColumn.Add("deltaEta","abs(eta0 - eta1)")
 plotsColumn.Add("FJtau21","FatJet_tau2[0]/FatJet_tau1[0]")
 plotsColumn.Add("tagger","FatJet_"+doubleB_name+"[0]")
 
