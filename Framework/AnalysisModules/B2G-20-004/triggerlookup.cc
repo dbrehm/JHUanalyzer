@@ -43,7 +43,7 @@ namespace analyzer {
             Weightdown = std::max(zero,(jetTriggerWeight - sqrt(pow((deltaTriggerEff),2) + pow(errorDown,2) )));
 
         }    
-        cout << "Trigger eff is : " << Weight << " error up is: " << Weightup << " error down is: "<< Weightdown << endl;
+        //cout << "Trigger eff is : " << Weight << " error up is: " << Weightup << " error down is: "<< Weightdown << endl;
         out.push_back(Weight);
         out.push_back(Weightup);
         out.push_back(Weightdown);
