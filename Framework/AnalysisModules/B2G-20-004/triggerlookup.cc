@@ -28,8 +28,13 @@ namespace analyzer {
             }else if (0 < jetTriggerWeight && jetTriggerWeight < 1.0){
                 Weight = jetTriggerWeight;
             }
- 
-            double deltaTriggerEff  = 0.5*(1.0-jetTriggerWeight);
+
+            if (var < 1200.0){
+                double deltaTriggerEff  = 0.1*(1.0-jetTriggerWeight);
+            }else{
+                double deltaTriggerEff  = 0.5*(1.0-jetTriggerWeight);
+            }
+            
             double errorUp = TEff->GetEfficiencyErrorUp(bin0);
             double errorDown = TEff->GetEfficiencyErrorLow(bin0);
             double one = 1.0;
