@@ -28,10 +28,10 @@ namespace analyzer {
             }else if (0 < jetTriggerWeight && jetTriggerWeight < 1.0){
                 Weight = jetTriggerWeight;
             }
-            
+
             double deltaTriggerEff;
             if (var < 1200.0){
-                deltaTriggerEff  = 0.1*(1.0-jetTriggerWeight);
+                deltaTriggerEff  = 0.05*(1.0-jetTriggerWeight);
             }else{
                 deltaTriggerEff  = 0.5*(1.0-jetTriggerWeight);
             }
