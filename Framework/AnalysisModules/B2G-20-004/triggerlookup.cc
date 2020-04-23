@@ -8,8 +8,6 @@ namespace analyzer {
         double Weight = 1.0;
         double Weightup = 1.0;
         double Weightdown = 1.0;
-        bool upFlag = false;
-        bool downFlag = false;
 
         std::vector<double> out;
 
@@ -37,24 +35,10 @@ namespace analyzer {
             double one = 1.0;
             double zero = 0.0;
 
-            if (errorUp > deltaTriggerEff){
-                upFlag = true;
-            }
-            if (errorDown > deltaTriggerEff){
-                downFlag = true;
-            }
+            Weightup = std::min(one,(jetTriggerWeight + std::max(deltaTriggerEff,errorUp))) ;
 
-            if (upFlag == true){
-                Weightup = std::min(one,(jetTriggerWeight + errorUp)) ;
-            }else{
-                Weightup = std::min(one,(jetTriggerWeight + sqrt(pow((std::max(deltaTriggerEff,errorUp)),2) + pow(errorUp,2) ))) ;
-            }
-            if (downFlag == true){
-                Weightdown = std::max(zero,(jetTriggerWeight - errorDown));
-            }
-            else{
-                Weightdown = std::max(zero,(jetTriggerWeight - sqrt(pow((std::max(deltaTriggerEff,errorDown)),2) + pow(errorDown,2) )));
-            }
+            Weightdown = std::max(zero,(jetTriggerWeight - std::max(deltaTriggerEff,errorDown)));
+        
 
         }    
         //cout << "Trigger eff is : " << Weight << " error up is: " << Weightup << " error down is: "<< Weightdown << endl;
