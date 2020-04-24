@@ -532,8 +532,6 @@ DoubleB_lead_tight = "FatJet_"+doubleB_name+"[0] > "+str(cutsDict[doubleB_short+
 DoubleB_lead_loose = "FatJet_"+doubleB_name+"[0] > "+str(cutsDict[doubleB_short+'tagLoose'][0])+" && FatJet_"+doubleB_name+"[0] < "+str(cutsDict[doubleB_short+'tagLoose'][1])+""
 DoubleB_sublead_tight = "FatJet_"+doubleB_name+"[1] > "+str(cutsDict[doubleB_short+'tagTight'][0])+" && FatJet_"+doubleB_name+"[1] < "+str(cutsDict[doubleB_short+'tagTight'][1])+""
 DoubleB_sublead_loose = "FatJet_"+doubleB_name+"[1] > "+str(cutsDict[doubleB_short+'tagLoose'][0])+" && FatJet_"+doubleB_name+"[1] < "+str(cutsDict[doubleB_short+'tagLoose'][1])+""
-inverted_DoubleB_lead_loose = "FatJet_"+doubleB_name+"[0] < "+str(cutsDict[doubleB_short+'tagLoose'][0])
-inverted_DoubleB_sublead_loose = "FatJet_"+doubleB_name+"[1] < "+str(cutsDict[doubleB_short+'tagLoose'][0])
 
 srttString = "("+DoubleB_lead_tight+" && "+DoubleB_sublead_tight+") == 1"
 srllString = "(("+DoubleB_lead_loose+" && "+DoubleB_sublead_loose+") && !("+srttString+")) == 1"
@@ -542,8 +540,9 @@ atllString = "(!("+DoubleB_lead_loose+") && ("+DoubleB_sublead_loose+") && !("+D
 
 
 ### Control region algorithm
-invertedCR = "("+inverted_DoubleB_lead_loose+" && "+inverted_DoubleB_sublead_loose+")"
-invertedCRFail = "!("+invertedCR+") "
+invertedCR = "("+DoubleB_lead_loose+" && !("+DoubleB_sublead_loose+") && !("+DoubleB_sublead_tight+")) == 1"
+invertedCRFail ="(!("+DoubleB_lead_loose+") && !("+DoubleB_sublead_loose+") && !("+DoubleB_sublead_tight+")) == 1"
+
 
 #### 2+1 Algorithm
 pass21String = "FatJet_"+doubleB_name+"[0] > "+str(cutsDict[doubleB_short+'tag'][0])+" && "+"FatJet_"+doubleB_name+"[0] < "+str(cutsDict[doubleB_short+'tag'][1])+""
@@ -562,7 +561,7 @@ selectionColumns.Add("SRLL",srllString)
 selectionColumns.Add("ATTT",atttString)
 selectionColumns.Add("ATLL",atllString)
 selectionColumns.Add("CR",invertedCR)
-selectionColumns.Add("CRF",invertedCRFail)
+selectionColumns.Add("CRFail",invertedCRFail)
 
 selectionColumns21 = VarGroup("selectionColumns21")
 selectionColumns21.Add("Pass21",pass21String)
@@ -612,11 +611,17 @@ preselection22.Add("eta","abs(lead_vect.Eta()) < 2.4")
 preselection22.Add("b_eta","abs(b_lead_vect.Eta()) < 2.0 && abs(b_sublead_vect.Eta()) < 2.0")
 preselection22.Add("pt","(pt0 > 300)")
 preselection22.Add("b_pt","b_lead_vect.Pt() > 30 && b_sublead_vect.Pt() > 30")
-preselection22.Add("jetID","((FatJet_jetId[1] & 2) == 2)")
-preselection22.Add("DeepCSV","(0.4184 < Jet_btagDeepB[Hemispherized[0]] && Jet_btagDeepB[Hemispherized[0]] < 1) && (0.4184 < Jet_btagDeepB[Hemispherized[1]] && Jet_btagDeepB[Hemispherized[1]] < 1)")
+preselection22.Add("jetID","((FatJet_jetId[0] & 2) == 2)")
+if '16' in options.output: 
+    preselection22.Add("DeepCSV","(0.6321 < Jet_btagDeepB[Hemispherized[0]] && Jet_btagDeepB[Hemispherized[0]] < 1) && (0.6321 < Jet_btagDeepB[Hemispherized[1]] && Jet_btagDeepB[Hemispherized[1]] < 1)")
+if '17' in options.output: 
+    preselection22.Add("DeepCSV","(0.4941 < Jet_btagDeepB[Hemispherized[0]] && Jet_btagDeepB[Hemispherized[0]] < 1) && (0.4941 < Jet_btagDeepB[Hemispherized[1]] && Jet_btagDeepB[Hemispherized[1]] < 1)")
+if '18' in options.output: 
+    preselection22.Add("DeepCSV","(0.4184 < Jet_btagDeepB[Hemispherized[0]] && Jet_btagDeepB[Hemispherized[0]] < 1) && (0.4184 < Jet_btagDeepB[Hemispherized[1]] && Jet_btagDeepB[Hemispherized[1]] < 1)")
 # preselection22.Add("DeepCSV","(0.6324 < Jet_btagDeepB[Hemispherized[0]] && Jet_btagDeepB[Hemispherized[0]] < 1) && (0.6324 < Jet_btagDeepB[Hemispherized[1]] && Jet_btagDeepB[Hemispherized[1]] < 1)")
 preselection22.Add("deltaEta21","abs(lead_vect.Eta() - (b_lead_vect+b_sublead_vect).Eta()) < 1.3")
 preselection22.Add("mbbCut","90.0 < mbb && mbb < 140.0")
+preselection22.Add("cut_mreduced21","mreduced21 > 750.")
 # preselection22.Add("mbbCut","105.0 < mbb && mbb < 135.0")
 # preselection22.Add("msoftdrop_1","(110 < mh1) && (mh1 < 140)")
 
@@ -640,18 +645,18 @@ kinematicCuts.Add("bb_pairs_check","(Hemispherized[0] != 0) && (Hemispherized[1]
 kinematicCuts.Add("b_eta","abs(Jet_eta[Hemispherized[0]]) < 2.4 && abs(Jet_eta[Hemispherized[1]]) < 2.4")
 kinematicCuts.Add("DeepCSV","(0.2219 < Jet_btagDeepB[Hemispherized[0]] && Jet_btagDeepB[Hemispherized[0]] < 1) && (0.2219 < Jet_btagDeepB[Hemispherized[1]] && Jet_btagDeepB[Hemispherized[1]] < 1)")
 kinematicCuts.Add("candidate21","("+cand21String+") || ("+run21String+")")
-kinematicCuts.Add("cut_mreduced","mreduced21 > 750.")
+kinematicCuts.Add("cut_mreduced21","mreduced21 > 750.")
 
 # Apply all groups in list order to the base RDF loaded in during analyzer() initialization
 slimandskim = a.Apply([triggerGroup,slim_skim,filters])
-setup = slimandskim.Apply([newcolumns,bbColumn,mbbColumn,mred21Column,plotsColumn,selectionColumns,correctionColumns,correctionColumns11,selectionColumns21,correctionColumns21,plotsColumn])
+setup = slimandskim.Apply([newcolumns,bbColumn,mbbColumn,mred21Column,selectionColumns,correctionColumns,correctionColumns11,selectionColumns21,correctionColumns21,plotsColumn])
 # if not a.isData:
 #     nminus1_11 = a.Apply([triggerGroup,newcolumns,selectionColumns,correctionColumns,correctionColumns11,plotsColumn])
 #     nminus1_21 = a.Apply([triggerGroup,newcolumns,bbColumn,mbbColumn,mred21Column,selectionColumns21,correctionColumns,correctionColumns21,plotsColumn])
 kinematicDistributions = setup.Apply([kinematicCuts])
 preselected = setup.Apply([preselection11,preselection12])
 cutTest21 = setup.Apply([preselection21,preselection22]).Cut("Pass21","Pass21==1")
-preselected21 = setup.Apply([preselection21,preselection22,preselection23,])
+preselected21 = setup.Apply([preselection21,preselection22,preselection23])
 
 # Since four analysis regions are covered with relatively complicated cuts to define them, a manual forking is simplest though a Discriminate function does exist for when you need to keep pass and fail of a selection
 SRTT = preselected.Cut("SRTT","SRTT==1")
@@ -659,7 +664,7 @@ ATTT = preselected.Cut("ATTT","ATTT==1")
 SRLL = preselected.Cut("SRLL","SRLL==1")
 ATLL = preselected.Cut("ATLL","ATLL==1")
 SRCR = preselected.Cut("CR","CR==1")
-ATCR = preselected.Cut("CRF","CRF==1")
+ATCR = preselected.Cut("CRFail","CRFail==1")
 
 Pass = preselected21.Cut("Pass21","Pass21==1")
 Fail = preselected21.Cut("Fail21","Fail21==1")
