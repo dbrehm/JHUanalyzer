@@ -1,0 +1,225 @@
+imax 6
+jmax 2
+kmax 20
+------------------------------------------------------------------------------------------------------------------------
+shapes                              data_obs          *                 base_HH17TT.root  w_HH17TT:data_obs_$CHANNEL
+shapes                              qcd               *                 base_HH17TT.root  w_HH17TT:qcd_$CHANNEL
+shapes                              ttbar             *                 base_HH17TT.root  w_HH17TT:ttbar_$CHANNEL  w_HH17TT:ttbar_$CHANNEL_$SYSTEMATIC
+shapes                              RadNar-1500       *                 base_HH17TT.root  w_HH17TT:RadNar-1500_$CHANNEL  w_HH17TT:RadNar-1500_$CHANNEL_$SYSTEMATIC
+------------------------------------------------------------------------------------------------------------------------
+bin                               pass_LOW_HH17TT  pass_SIG_HH17TT  pass_HIGH_HH17TT fail_LOW_HH17TT  fail_SIG_HH17TT  fail_HIGH_HH17TT 
+observation                       -1               -1               -1               -1               -1               -1               
+------------------------------------------------------------------------------------------------------------------------
+bin                               pass_LOW_HH17TT  pass_LOW_HH17TT  pass_LOW_HH17TT  pass_SIG_HH17TT  pass_SIG_HH17TT  pass_SIG_HH17TT  pass_HIGH_HH17TT pass_HIGH_HH17TT pass_HIGH_HH17TT fail_LOW_HH17TT  fail_LOW_HH17TT  fail_LOW_HH17TT  fail_SIG_HH17TT  fail_SIG_HH17TT  fail_SIG_HH17TT  fail_HIGH_HH17TT fail_HIGH_HH17TT fail_HIGH_HH17TT 
+process                           ttbar            RadNar-1500      qcd              ttbar            RadNar-1500      qcd              ttbar            RadNar-1500      qcd              ttbar            RadNar-1500      qcd              ttbar            RadNar-1500      qcd              ttbar            RadNar-1500      qcd              
+process                           1                0                3                1                0                3                1                0                3                1                0                3                1                0                3                1                0                3                
+rate                              -1               -1               1                -1               -1               1                -1               -1               1                -1               -1               1                -1               -1               1                -1               -1               1                
+------------------------------------------------------------------------------------------------------------------------
+Trig17           shape            1.0              1.0              -                1.0              1.0              -                1.0              1.0              -                1.0              1.0              -                1.0              1.0              -                1.0              1.0              -                
+TptBeta          shape            1.0              -                -                1.0              -                -                1.0              -                -                1.0              -                -                1.0              -                -                1.0              -                -                
+jmr17            shape            -                -                -                -                -                -                -                -                -                -                -                -                -                -                -                -                -                -                
+TptAlpha         shape            1.0              -                -                1.0              -                -                1.0              -                -                1.0              -                -                1.0              -                -                1.0              -                -                
+ttbar_xsec       lnN              1.2              -                -                1.2              -                -                1.2              -                -                1.2              -                -                1.2              -                -                1.2              -                -                
+lumi17           lnN              1.023            1.023            -                1.023            1.023            -                1.023            1.023            -                1.023            1.023            -                1.023            1.023            -                1.023            1.023            -                
+htag             lnN              -                1.2              -                -                1.2              -                -                1.2              -                -                1.2              -                -                1.2              -                -                1.2              -                
+jmr18            shape            -                -                -                -                -                -                -                -                -                -                -                -                -                -                -                -                -                -                
+pdf17            shape            1.0              1.0              -                1.0              1.0              -                1.0              1.0              -                1.0              1.0              -                1.0              1.0              -                1.0              1.0              -                
+jms18            shape            -                -                -                -                -                -                -                -                -                -                -                -                -                -                -                -                -                -                
+btagSF17         shape            -                -                -                -                -                -                -                -                -                -                -                -                -                -                -                -                -                -                
+Tpt              shape            -                -                -                -                -                -                -                -                -                -                -                -                -                -                -                -                -                -                
+jer18            shape            -                1.0              -                -                1.0              -                -                1.0              -                -                1.0              -                -                1.0              -                -                1.0              -                
+jes17            shape            1.0              -                -                1.0              -                -                1.0              -                -                1.0              -                -                1.0              -                -                1.0              -                -                
+T21              lnN              -                -                -                -                -                -                -                -                -                -                -                -                -                -                -                -                -                -                
+jer17            shape            1.0              -                -                1.0              -                -                1.0              -                -                1.0              -                -                1.0              -                -                1.0              -                -                
+Pileup17         shape            1.0              1.0              -                1.0              1.0              -                1.0              1.0              -                1.0              1.0              -                1.0              1.0              -                1.0              1.0              -                
+jes18            shape            -                1.0              -                -                1.0              -                -                1.0              -                -                1.0              -                -                1.0              -                -                1.0              -                
+dbSF17           shape            1.0              1.0              -                1.0              1.0              -                1.0              1.0              -                1.0              1.0              -                1.0              1.0              -                1.0              1.0              -                
+jms17            shape            -                -                -                -                -                -                -                -                -                -                -                -                -                -                -                -                -                -                
+generic6_HH17TT       flatParam
+generic3_HH17TT       flatParam
+generic5_HH17TT       flatParam
+generic1_HH17TT       flatParam
+generic4_HH17TT       flatParam
+generic0_HH17TT       flatParam
+generic2_HH17TT       flatParam
+Fail_LOW_bin_1-1_HH17TT  flatParam
+Fail_LOW_bin_2-1_HH17TT  flatParam
+Fail_LOW_bin_3-1_HH17TT  flatParam
+Fail_LOW_bin_1-2_HH17TT  flatParam
+Fail_LOW_bin_2-2_HH17TT  flatParam
+Fail_LOW_bin_3-2_HH17TT  flatParam
+Fail_LOW_bin_1-3_HH17TT  flatParam
+Fail_LOW_bin_2-3_HH17TT  flatParam
+Fail_LOW_bin_3-3_HH17TT  flatParam
+Fail_LOW_bin_1-4_HH17TT  flatParam
+Fail_LOW_bin_2-4_HH17TT  flatParam
+Fail_LOW_bin_3-4_HH17TT  flatParam
+Fail_LOW_bin_1-5_HH17TT  flatParam
+Fail_LOW_bin_2-5_HH17TT  flatParam
+Fail_LOW_bin_3-5_HH17TT  flatParam
+Fail_LOW_bin_1-6_HH17TT  flatParam
+Fail_LOW_bin_2-6_HH17TT  flatParam
+Fail_LOW_bin_3-6_HH17TT  flatParam
+Fail_LOW_bin_1-7_HH17TT  flatParam
+Fail_LOW_bin_2-7_HH17TT  flatParam
+Fail_LOW_bin_3-7_HH17TT  flatParam
+Fail_LOW_bin_1-8_HH17TT  flatParam
+Fail_LOW_bin_2-8_HH17TT  flatParam
+Fail_LOW_bin_3-8_HH17TT  flatParam
+Fail_LOW_bin_1-9_HH17TT  flatParam
+Fail_LOW_bin_2-9_HH17TT  flatParam
+Fail_LOW_bin_3-9_HH17TT  flatParam
+Fail_LOW_bin_1-10_HH17TT  flatParam
+Fail_LOW_bin_2-10_HH17TT  flatParam
+Fail_LOW_bin_3-10_HH17TT  flatParam
+Fail_LOW_bin_1-11_HH17TT  flatParam
+Fail_LOW_bin_2-11_HH17TT  flatParam
+Fail_LOW_bin_3-11_HH17TT  flatParam
+Fail_LOW_bin_2-12_HH17TT  flatParam
+Fail_LOW_bin_3-12_HH17TT  flatParam
+Fail_LOW_bin_1-13_HH17TT  flatParam
+Fail_SIG_bin_1-1_HH17TT  flatParam
+Fail_SIG_bin_2-1_HH17TT  flatParam
+Fail_SIG_bin_3-1_HH17TT  flatParam
+Fail_SIG_bin_4-1_HH17TT  flatParam
+Fail_SIG_bin_1-2_HH17TT  flatParam
+Fail_SIG_bin_2-2_HH17TT  flatParam
+Fail_SIG_bin_3-2_HH17TT  flatParam
+Fail_SIG_bin_4-2_HH17TT  flatParam
+Fail_SIG_bin_1-3_HH17TT  flatParam
+Fail_SIG_bin_2-3_HH17TT  flatParam
+Fail_SIG_bin_3-3_HH17TT  flatParam
+Fail_SIG_bin_4-3_HH17TT  flatParam
+Fail_SIG_bin_1-4_HH17TT  flatParam
+Fail_SIG_bin_2-4_HH17TT  flatParam
+Fail_SIG_bin_3-4_HH17TT  flatParam
+Fail_SIG_bin_4-4_HH17TT  flatParam
+Fail_SIG_bin_1-5_HH17TT  flatParam
+Fail_SIG_bin_2-5_HH17TT  flatParam
+Fail_SIG_bin_3-5_HH17TT  flatParam
+Fail_SIG_bin_4-5_HH17TT  flatParam
+Fail_SIG_bin_1-6_HH17TT  flatParam
+Fail_SIG_bin_2-6_HH17TT  flatParam
+Fail_SIG_bin_3-6_HH17TT  flatParam
+Fail_SIG_bin_4-6_HH17TT  flatParam
+Fail_SIG_bin_1-7_HH17TT  flatParam
+Fail_SIG_bin_2-7_HH17TT  flatParam
+Fail_SIG_bin_3-7_HH17TT  flatParam
+Fail_SIG_bin_4-7_HH17TT  flatParam
+Fail_SIG_bin_1-8_HH17TT  flatParam
+Fail_SIG_bin_2-8_HH17TT  flatParam
+Fail_SIG_bin_3-8_HH17TT  flatParam
+Fail_SIG_bin_4-8_HH17TT  flatParam
+Fail_SIG_bin_1-9_HH17TT  flatParam
+Fail_SIG_bin_2-9_HH17TT  flatParam
+Fail_SIG_bin_3-9_HH17TT  flatParam
+Fail_SIG_bin_4-9_HH17TT  flatParam
+Fail_SIG_bin_1-10_HH17TT  flatParam
+Fail_SIG_bin_2-10_HH17TT  flatParam
+Fail_SIG_bin_3-10_HH17TT  flatParam
+Fail_SIG_bin_4-10_HH17TT  flatParam
+Fail_SIG_bin_1-11_HH17TT  flatParam
+Fail_SIG_bin_2-11_HH17TT  flatParam
+Fail_SIG_bin_3-11_HH17TT  flatParam
+Fail_SIG_bin_4-11_HH17TT  flatParam
+Fail_SIG_bin_1-12_HH17TT  flatParam
+Fail_SIG_bin_2-12_HH17TT  flatParam
+Fail_SIG_bin_4-12_HH17TT  flatParam
+Fail_SIG_bin_1-13_HH17TT  flatParam
+Fail_SIG_bin_2-13_HH17TT  flatParam
+Fail_SIG_bin_3-13_HH17TT  flatParam
+Fail_HIGH_bin_1-1_HH17TT  flatParam
+Fail_HIGH_bin_2-1_HH17TT  flatParam
+Fail_HIGH_bin_3-1_HH17TT  flatParam
+Fail_HIGH_bin_4-1_HH17TT  flatParam
+Fail_HIGH_bin_5-1_HH17TT  flatParam
+Fail_HIGH_bin_6-1_HH17TT  flatParam
+Fail_HIGH_bin_7-1_HH17TT  flatParam
+Fail_HIGH_bin_8-1_HH17TT  flatParam
+Fail_HIGH_bin_1-2_HH17TT  flatParam
+Fail_HIGH_bin_2-2_HH17TT  flatParam
+Fail_HIGH_bin_3-2_HH17TT  flatParam
+Fail_HIGH_bin_4-2_HH17TT  flatParam
+Fail_HIGH_bin_5-2_HH17TT  flatParam
+Fail_HIGH_bin_6-2_HH17TT  flatParam
+Fail_HIGH_bin_7-2_HH17TT  flatParam
+Fail_HIGH_bin_8-2_HH17TT  flatParam
+Fail_HIGH_bin_1-3_HH17TT  flatParam
+Fail_HIGH_bin_2-3_HH17TT  flatParam
+Fail_HIGH_bin_3-3_HH17TT  flatParam
+Fail_HIGH_bin_4-3_HH17TT  flatParam
+Fail_HIGH_bin_5-3_HH17TT  flatParam
+Fail_HIGH_bin_6-3_HH17TT  flatParam
+Fail_HIGH_bin_7-3_HH17TT  flatParam
+Fail_HIGH_bin_8-3_HH17TT  flatParam
+Fail_HIGH_bin_1-4_HH17TT  flatParam
+Fail_HIGH_bin_2-4_HH17TT  flatParam
+Fail_HIGH_bin_3-4_HH17TT  flatParam
+Fail_HIGH_bin_4-4_HH17TT  flatParam
+Fail_HIGH_bin_5-4_HH17TT  flatParam
+Fail_HIGH_bin_6-4_HH17TT  flatParam
+Fail_HIGH_bin_7-4_HH17TT  flatParam
+Fail_HIGH_bin_8-4_HH17TT  flatParam
+Fail_HIGH_bin_1-5_HH17TT  flatParam
+Fail_HIGH_bin_2-5_HH17TT  flatParam
+Fail_HIGH_bin_3-5_HH17TT  flatParam
+Fail_HIGH_bin_4-5_HH17TT  flatParam
+Fail_HIGH_bin_5-5_HH17TT  flatParam
+Fail_HIGH_bin_6-5_HH17TT  flatParam
+Fail_HIGH_bin_7-5_HH17TT  flatParam
+Fail_HIGH_bin_8-5_HH17TT  flatParam
+Fail_HIGH_bin_1-6_HH17TT  flatParam
+Fail_HIGH_bin_2-6_HH17TT  flatParam
+Fail_HIGH_bin_3-6_HH17TT  flatParam
+Fail_HIGH_bin_4-6_HH17TT  flatParam
+Fail_HIGH_bin_5-6_HH17TT  flatParam
+Fail_HIGH_bin_6-6_HH17TT  flatParam
+Fail_HIGH_bin_7-6_HH17TT  flatParam
+Fail_HIGH_bin_8-6_HH17TT  flatParam
+Fail_HIGH_bin_1-7_HH17TT  flatParam
+Fail_HIGH_bin_2-7_HH17TT  flatParam
+Fail_HIGH_bin_3-7_HH17TT  flatParam
+Fail_HIGH_bin_4-7_HH17TT  flatParam
+Fail_HIGH_bin_5-7_HH17TT  flatParam
+Fail_HIGH_bin_6-7_HH17TT  flatParam
+Fail_HIGH_bin_7-7_HH17TT  flatParam
+Fail_HIGH_bin_8-7_HH17TT  flatParam
+Fail_HIGH_bin_1-8_HH17TT  flatParam
+Fail_HIGH_bin_2-8_HH17TT  flatParam
+Fail_HIGH_bin_3-8_HH17TT  flatParam
+Fail_HIGH_bin_4-8_HH17TT  flatParam
+Fail_HIGH_bin_5-8_HH17TT  flatParam
+Fail_HIGH_bin_6-8_HH17TT  flatParam
+Fail_HIGH_bin_7-8_HH17TT  flatParam
+Fail_HIGH_bin_8-8_HH17TT  flatParam
+Fail_HIGH_bin_1-9_HH17TT  flatParam
+Fail_HIGH_bin_2-9_HH17TT  flatParam
+Fail_HIGH_bin_3-9_HH17TT  flatParam
+Fail_HIGH_bin_4-9_HH17TT  flatParam
+Fail_HIGH_bin_5-9_HH17TT  flatParam
+Fail_HIGH_bin_6-9_HH17TT  flatParam
+Fail_HIGH_bin_7-9_HH17TT  flatParam
+Fail_HIGH_bin_8-9_HH17TT  flatParam
+Fail_HIGH_bin_1-10_HH17TT  flatParam
+Fail_HIGH_bin_2-10_HH17TT  flatParam
+Fail_HIGH_bin_3-10_HH17TT  flatParam
+Fail_HIGH_bin_4-10_HH17TT  flatParam
+Fail_HIGH_bin_5-10_HH17TT  flatParam
+Fail_HIGH_bin_6-10_HH17TT  flatParam
+Fail_HIGH_bin_7-10_HH17TT  flatParam
+Fail_HIGH_bin_8-10_HH17TT  flatParam
+Fail_HIGH_bin_1-11_HH17TT  flatParam
+Fail_HIGH_bin_3-11_HH17TT  flatParam
+Fail_HIGH_bin_4-11_HH17TT  flatParam
+Fail_HIGH_bin_5-11_HH17TT  flatParam
+Fail_HIGH_bin_6-11_HH17TT  flatParam
+Fail_HIGH_bin_7-11_HH17TT  flatParam
+Fail_HIGH_bin_8-11_HH17TT  flatParam
+Fail_HIGH_bin_1-12_HH17TT  flatParam
+Fail_HIGH_bin_2-12_HH17TT  flatParam
+Fail_HIGH_bin_3-12_HH17TT  flatParam
+Fail_HIGH_bin_4-12_HH17TT  flatParam
+Fail_HIGH_bin_5-12_HH17TT  flatParam
+Fail_HIGH_bin_7-12_HH17TT  flatParam
+Fail_HIGH_bin_2-13_HH17TT  flatParam
+Fail_HIGH_bin_3-13_HH17TT  flatParam
