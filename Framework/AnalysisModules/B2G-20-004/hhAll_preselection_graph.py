@@ -84,15 +84,15 @@ lead = {}
 sublead = {}
 if not a.isData:
     if options.JES != 'nom':
-        lead['JEScorr'] = 'FatJet_corr_JES_Total'+options.JES.capitalize()+"[0]"
-        sublead['JEScorr'] = 'FatJet_corr_JES_Total'+options.JES.capitalize()+"[1]"
+        lead['JEScorr'] = 'FatJet_corr_JESTotal'+options.JES+"[0]"
+        sublead['JEScorr'] = 'FatJet_corr_JESTotal'+options.JES+"[1]"
         lead['JERcorr'] = 'FatJet_corr_JER_'+options.JER+"[0]"
         sublead["JERcorr"] = 'FatJet_corr_JER_'+options.JER+"[1]"
     else:
         lead['JEScorr'] = "1.0"
         sublead['JEScorr'] = "1.0"
-        lead['JERcorr'] = 'FatJet_corr_JER'++"[0]"
-        sublead["JERcorr"] = 'FatJet_corr_JER'++"[1]"
+        lead['JERcorr'] = 'FatJet_corr_JER[0]'
+        sublead["JERcorr"] = 'FatJet_corr_JER[1]'
 if not a.isData:
     lead['pt'] = "*"+lead['JEScorr']+"*"+lead['JERcorr']
     sublead['pt'] = "*"+sublead['JEScorr']+"*"+sublead['JERcorr']
