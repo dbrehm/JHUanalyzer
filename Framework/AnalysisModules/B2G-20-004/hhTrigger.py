@@ -4,7 +4,7 @@ ROOT.ROOT.EnableImplicitMT(4)
 import time, os
 from optparse import OptionParser
 
-from JHUanalyzer.Analyzer.analyzer import analyzer, Group, VarGroup, CutGroup, Nminus1
+from JHUanalyzer.Analyzer.analyzer import analyzer, Group, VarGroup, CutGroup, Nminus1, SetCFunc
 from JHUanalyzer.Tools.Common import openJSON,CutflowHist
 from JHUanalyzer.Analyzer.Cscripts import CommonCscripts, CustomCscripts
 commonc = CommonCscripts()
@@ -157,10 +157,10 @@ doubleB_name = options.doublebtagger
 doubleB_title = doubleB_titles[doubleB_name]
 doubleB_short = doubleB_abreviations[doubleB_name]
 
-a.SetCFunc(commonc.deltaPhi)
-a.SetCFunc(commonc.vector)
-a.SetCFunc(commonc.invariantMass)
-a.SetCFunc(commonc.invariantMassThree)
+SetCFunc(commonc.deltaPhi)
+SetCFunc(commonc.vector)
+SetCFunc(commonc.invariantMass)
+SetCFunc(commonc.invariantMassThree)
 customc.Import("JHUanalyzer/Framework/AnalysisModules/B2G-20-004/pdfweights.cc","pdfweights")
 customc.Import("JHUanalyzer/Framework/AnalysisModules/B2G-20-004/hemispherize.cc","hemispherize")
 customc.Import("JHUanalyzer/Framework/AnalysisModules/B2G-20-004/triggerlookup.cc","triggerlookup")
