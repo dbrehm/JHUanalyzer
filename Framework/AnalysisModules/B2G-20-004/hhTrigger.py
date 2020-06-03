@@ -266,8 +266,8 @@ preselection22.Add("pt","(pt1 > 300)")
 preselection22.Add("b_pt","Jet_pt[Hemispherized[0]] > 30 && Jet_pt[Hemispherized[1]] > 30")
 preselection22.Add("jetID","((FatJet_jetId[1] & 2) == 2)")
 # preselection22.Add("DeepCSV","(0.4184 < Jet_btagDeepB[Hemispherized[0]] && Jet_btagDeepB[Hemispherized[0]] < 1) && (0.4184 < Jet_btagDeepB[Hemispherized[1]] && Jet_btagDeepB[Hemispherized[1]] < 1)")
-preselection22.Add("DeepCSV","(0.6324 < Jet_btagDeepB[Hemispherized[0]] && Jet_btagDeepB[Hemispherized[0]] < 1) && (0.6324 < Jet_btagDeepB[Hemispherized[1]] && Jet_btagDeepB[Hemispherized[1]] < 1)")
-preselection22.Add("deltaEta21","abs("+eta1+" - (Jet_eta[Hemispherized[0]]+Jet_eta[Hemispherized[1]])) < 1.3")
+# preselection22.Add("DeepCSV","(0.6324 < Jet_btagDeepB[Hemispherized[0]] && Jet_btagDeepB[Hemispherized[0]] < 1) && (0.6324 < Jet_btagDeepB[Hemispherized[1]] && Jet_btagDeepB[Hemispherized[1]] < 1)")
+# preselection22.Add("deltaEta21","abs("+eta1+" - (Jet_eta[Hemispherized[0]]+Jet_eta[Hemispherized[1]])) < 1.3")
 
 
 preselection23 = CutGroup('preselection23')
@@ -282,13 +282,13 @@ preselection23.Add("topDeltaR","topDeltaR > 1.0")
 slimandskim = a.Apply([triggerGroup,slim_skim,filters])
 
 print("Doing 1+1 preselection.")
-presel11 = slimandskim.Apply([preselection11,newcolumns,preselection12])
+presel11 = slimandskim.Apply([preselection11,newcolumns])
 
 num = presel11.Cut("num","numerator==1")
 den = presel11.Cut("den","denominator==1")
 
 print("Doing 2+1 preselection.")
-presel21 = slimandskim.Apply([newcolumns,preselection21,bbColumn,preselection22,mbbColumn,preselection23,mred21Column])
+presel21 = slimandskim.Apply([newcolumns,preselection21,bbColumn,preselection22,mbbColumn,mred21Column])
 
 num21 = presel21.Cut("num21","numerator==1")
 den21 = presel21.Cut("den21","denominator==1")
