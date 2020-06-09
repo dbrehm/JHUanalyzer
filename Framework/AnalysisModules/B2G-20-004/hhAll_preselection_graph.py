@@ -88,16 +88,30 @@ if not a.isData:
         sublead['JEScorr'] = 'FatJet_corr_JESTotal'+options.JES+"[1]"
         lead['JERcorr'] = 'FatJet_corr_JER_'+options.JER+"[0]"
         sublead["JERcorr"] = 'FatJet_corr_JER_'+options.JER+"[1]"
+        if options.JMS = 'up':
+            lead['JMScorr'] = "(FatJet_corr_JMS_"+options.JMS+"[0]*1.0)"
+            sublead['JMScorr'] = "(FatJet_corr_JMS_"+options.JMS+"[1]*1.0)"
+        if options.JMS = 'down':
+            lead['JMScorr'] = "(FatJet_corr_JMS_"+options.JMS+"[0]*(-1.0))"
+            sublead['JMScorr'] = "(FatJet_corr_JMS_"+options.JMS+"[1]*(-1.0))"
+        lead['JMRcorr'] = "FatJet_corr_JMR_"+options.JMR+"[0]"
+        sublead['JMRcorr'] = "FatJet_corr_JMR_"+options.JMR+"[1]"
     else:
         lead['JEScorr'] = "1.0"
         sublead['JEScorr'] = "1.0"
+        lead['JMScorr'] = "0.0"
+        sublead['JMScorr'] = "0.0"
         lead['JERcorr'] = 'FatJet_corr_JER[0]'
         sublead["JERcorr"] = 'FatJet_corr_JER[1]'
+        lead['JMRcorr'] = "1.0"
+        sublead['JMRcorr'] = "1.0"
+
+
 if not a.isData:
     lead['pt'] = "*"+lead['JEScorr']+"*"+lead['JERcorr']
     sublead['pt'] = "*"+sublead['JEScorr']+"*"+sublead['JERcorr']
-    lead['SDmass'] = "*"+lead['JEScorr']+"*"+lead['JERcorr']
-    sublead['SDmass'] = "*"+sublead['JEScorr']+"*"+sublead['JERcorr']
+    lead['SDmass'] = "*("+lead['JEScorr']+"*"+lead['JERcorr']+"*"+lead['JMRcorr']+")+"+sublead['JMScorr']
+    sublead['SDmass'] = "*("+sublead['JEScorr']+"*"+sublead['JERcorr']+"*"+sublead['JMRcorr']+")+"+sublead['JMScorr']
 ###Apply corrections
 if not a.isData:
     mass0 = "FatJet_msoftdrop_raw[0]"+lead['SDmass']
@@ -1062,6 +1076,40 @@ hists = [hSRTT11,hATTT11,hSRLL11,hATLL11,hSRTT21,hATTT21,hSRCR11,hATCR11,
         hpt021,bpt021,bpt121,heta021,beta021,heta021,hdeltaEta21,hmred21,hmsd021,hmbb21,
         deltaRCheck,trijetMassCheck,trijetMassDeltaR]
         # nom_check_plot,raw_check_plot]
+
+#### Create smearing for JMR up/down templates
+if not a.isData:
+    def smear(iVar,iDataHist,iScale=0.1):
+        lDM     = ROOT.RooRealVar("Xshift","Xshift", 1.,0.,2.)
+        lVar    = iDataHist.createHistogram("x").GetMean()
+        lInt    = iDataHist.createHistogram("x").Integral()
+        lShift  = ROOT.RooFormulaVar("Xsmear","("+iVar.GetName()+"-"+str(lVar)+")/Xshift+"+str(lVar),ROOT.RooArgList(iVar,lDM))  
+        lHPdf   = ROOT.RooHistPdf(iDataHist.GetName()+"S",iDataHist.GetName()+"S", ROOT.RooArgList(lShift),ROOT.RooArgList(iVar),iDataHist,0)
+        lDM.setVal(1.+iScale)
+        lHUp = lHPdf.createHistogram("x")
+        lHUp.Scale(lInt)
+        lUp = ROOT.RooDataHist(iDataHist.GetName()+"_smearUp",iDataHist.GetName()+"_smearUp", ROOT.RooArgList(iVar),lHUp)    
+        lDM.setVal(1.-iScale)
+        lHDown = lHPdf.createHistogram("x")
+        lHDown.Scale(lInt)
+        lDown  = ROOT.RooDataHist(iDataHist.GetName()+"_smearDown",iDataHist.GetName()+"_smearDown", ROOT.RooArgList(iVar),lHDown)
+        return [lUp,lDown]
+
+    if options.JMR = 'up':
+
+        hSRTT11 = smear()[0]
+        hATTT11 = 
+        hSRLL11 = 
+        hATLL11 = 
+
+        hSRTT21 = 
+        hATTT21 = 
+
+        hSRCR11 = 
+        hATCR11 = 
+
+    if options.JMR = 'down':    
+
 
 if not a.isData:
     hists.extend([hSRTT11_pdfUp,hATTT11_pdfUp,hSRLL11_pdfUp,hATLL11_pdfUp,hSRTT11_pdfDown,hATTT11_pdfDown,hSRLL11_pdfDown,hATLL11_pdfDown,
