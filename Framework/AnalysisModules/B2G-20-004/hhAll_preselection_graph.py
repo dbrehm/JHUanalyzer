@@ -1076,40 +1076,6 @@ hists = [hSRTT11,hATTT11,hSRLL11,hATLL11,hSRTT21,hATTT21,hSRCR11,hATCR11,
         deltaRCheck,trijetMassCheck,trijetMassDeltaR]
         # nom_check_plot,raw_check_plot]
 
-#### Create smearing for JMR up/down templates
-if not a.isData:
-    def smear(iVar,iDataHist,iScale=0.1):
-        lDM     = ROOT.RooRealVar("Xshift","Xshift", 1.,0.,2.)
-        lVar    = iDataHist.createHistogram("x").GetMean()
-        lInt    = iDataHist.createHistogram("x").Integral()
-        lShift  = ROOT.RooFormulaVar("Xsmear","("+iVar.GetName()+"-"+str(lVar)+")/Xshift+"+str(lVar),ROOT.RooArgList(iVar,lDM))  
-        lHPdf   = ROOT.RooHistPdf(iDataHist.GetName()+"S",iDataHist.GetName()+"S", ROOT.RooArgList(lShift),ROOT.RooArgList(iVar),iDataHist,0)
-        lDM.setVal(1.+iScale)
-        lHUp = lHPdf.createHistogram("x")
-        lHUp.Scale(lInt)
-        lUp = ROOT.RooDataHist(iDataHist.GetName()+"_smearUp",iDataHist.GetName()+"_smearUp", ROOT.RooArgList(iVar),lHUp)    
-        lDM.setVal(1.-iScale)
-        lHDown = lHPdf.createHistogram("x")
-        lHDown.Scale(lInt)
-        lDown  = ROOT.RooDataHist(iDataHist.GetName()+"_smearDown",iDataHist.GetName()+"_smearDown", ROOT.RooArgList(iVar),lHDown)
-        return [lUp,lDown]
-
-    if options.JMR = 'up':
-
-        hSRTT11 = smear()[0]
-        hATTT11 = 
-        hSRLL11 = 
-        hATLL11 = 
-
-        hSRTT21 = 
-        hATTT21 = 
-
-        hSRCR11 = 
-        hATCR11 = 
-
-    if options.JMR = 'down':    
-
-
 if not a.isData:
     hists.extend([hSRTT11_pdfUp,hATTT11_pdfUp,hSRLL11_pdfUp,hATLL11_pdfUp,hSRTT11_pdfDown,hATTT11_pdfDown,hSRLL11_pdfDown,hATLL11_pdfDown,
         hSRTT11_pileupUp,hATTT11_pileupUp,hSRLL11_pileupUp,hATLL11_pileupUp,hSRTT11_pileupDown,hATTT11_pileupDown,hSRLL11_pileupDown,hATLL11_pileupDown,
