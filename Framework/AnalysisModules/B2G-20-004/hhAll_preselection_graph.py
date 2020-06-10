@@ -83,7 +83,7 @@ else: norm = 1.
 lead = {}
 sublead = {}
 if not a.isData:
-    if options.JES != 'nom':
+    if options.JES or options.JER or options.JMS or options.JMR != 'nom':
         lead['JEScorr'] = 'FatJet_corr_JESTotal'+options.JES+"[0]"
         sublead['JEScorr'] = 'FatJet_corr_JESTotal'+options.JES+"[1]"
 
