@@ -86,21 +86,20 @@ if not a.isData:
     if options.JES != 'nom':
         lead['JEScorr'] = 'FatJet_corr_JESTotal'+options.JES+"[0]"
         sublead['JEScorr'] = 'FatJet_corr_JESTotal'+options.JES+"[1]"
+
         lead['JERcorr'] = 'FatJet_corr_JER_'+options.JER+"[0]"
         sublead["JERcorr"] = 'FatJet_corr_JER_'+options.JER+"[1]"
-        if options.JMS = 'up':
-            lead['JMScorr'] = "(FatJet_corr_JMS_"+options.JMS+"[0]*1.0)"
-            sublead['JMScorr'] = "(FatJet_corr_JMS_"+options.JMS+"[1]*1.0)"
-        if options.JMS = 'down':
-            lead['JMScorr'] = "(FatJet_corr_JMS_"+options.JMS+"[0]*(-1.0))"
-            sublead['JMScorr'] = "(FatJet_corr_JMS_"+options.JMS+"[1]*(-1.0))"
-        lead['JMRcorr'] = "FatJet_corr_JMR_"+options.JMR+"[0]"
-        sublead['JMRcorr'] = "FatJet_corr_JMR_"+options.JMR+"[1]"
+
+        lead['JMScorr'] = "(std::abs(FatJet_corr_JMS_"+options.JMS+"[0] - FatJet_corr_JMS[0])/FatJet_corr_JMS[0])"
+        sublead['JMScorr'] = "(std::abs(FatJet_corr_JMS_"+options.JMS+"[1] - FatJet_corr_JMS[1])/FatJet_corr_JMS[1])"
+
+        lead['JMRcorr'] = "(std::abs(FatJet_corr_JMR_"+options.JMR+"[0] - FatJet_corr_JMR[0])/FatJet_corr_JMR[0])"
+        sublead['JMRcorr'] = "(std::abs(FatJet_corr_JMR_"+options.JMR+"[1] - FatJet_corr_JMR[1])/FatJet_corr_JMR[1])"
     else:
         lead['JEScorr'] = "1.0"
         sublead['JEScorr'] = "1.0"
-        lead['JMScorr'] = "0.0"
-        sublead['JMScorr'] = "0.0"
+        lead['JMScorr'] = "1.0"
+        sublead['JMScorr'] = "1.0"
         lead['JERcorr'] = 'FatJet_corr_JER[0]'
         sublead["JERcorr"] = 'FatJet_corr_JER[1]'
         lead['JMRcorr'] = "1.0"
@@ -110,8 +109,8 @@ if not a.isData:
 if not a.isData:
     lead['pt'] = "*"+lead['JEScorr']+"*"+lead['JERcorr']
     sublead['pt'] = "*"+sublead['JEScorr']+"*"+sublead['JERcorr']
-    lead['SDmass'] = "*("+lead['JEScorr']+"*"+lead['JERcorr']+"*"+lead['JMRcorr']+")+"+sublead['JMScorr']
-    sublead['SDmass'] = "*("+sublead['JEScorr']+"*"+sublead['JERcorr']+"*"+sublead['JMRcorr']+")+"+sublead['JMScorr']
+    lead['SDmass'] = "*"+lead['JEScorr']+"*"+lead['JERcorr']+"*"+lead['JMRcorr']+"*"+sublead['JMScorr']
+    sublead['SDmass'] = "*"+sublead['JEScorr']+"*"+sublead['JERcorr']+"*"+sublead['JMRcorr']+"*"+sublead['JMScorr']
 ###Apply corrections
 if not a.isData:
     mass0 = "FatJet_msoftdrop_raw[0]"+lead['SDmass']
