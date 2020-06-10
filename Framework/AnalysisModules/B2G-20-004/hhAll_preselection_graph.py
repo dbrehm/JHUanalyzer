@@ -83,27 +83,31 @@ else: norm = 1.
 lead = {}
 sublead = {}
 if not a.isData:
-    if options.JES or options.JER or options.JMS or options.JMR != 'nom':
+    lead['JEScorr'] = "1.0"
+    sublead['JEScorr'] = "1.0"
+    lead['JMScorr'] = "1.0"
+    sublead['JMScorr'] = "1.0"
+    lead['JERcorr'] = 'FatJet_corr_JER[0]'
+    sublead["JERcorr"] = 'FatJet_corr_JER[1]'
+    lead['JMRcorr'] = "1.0"
+    sublead['JMRcorr'] = "1.0"
+
+    if options.JES != 'nom': 
         lead['JEScorr'] = 'FatJet_corr_JESTotal'+options.JES+"[0]"
         sublead['JEScorr'] = 'FatJet_corr_JESTotal'+options.JES+"[1]"
 
+    if options.JER != 'nom':
         lead['JERcorr'] = 'FatJet_corr_JER_'+options.JER+"[0]"
         sublead["JERcorr"] = 'FatJet_corr_JER_'+options.JER+"[1]"
 
+    if options.JMS != 'nom':
         lead['JMScorr'] = "(std::abs(FatJet_corr_JMS_"+options.JMS+"[0] - FatJet_corr_JMS[0])/FatJet_corr_JMS[0])"
         sublead['JMScorr'] = "(std::abs(FatJet_corr_JMS_"+options.JMS+"[1] - FatJet_corr_JMS[1])/FatJet_corr_JMS[1])"
 
+    if options.JMR != 'nom':
         lead['JMRcorr'] = "(std::abs(FatJet_corr_JMR_"+options.JMR+"[0] - FatJet_corr_JMR[0])/FatJet_corr_JMR[0])"
         sublead['JMRcorr'] = "(std::abs(FatJet_corr_JMR_"+options.JMR+"[1] - FatJet_corr_JMR[1])/FatJet_corr_JMR[1])"
-    else:
-        lead['JEScorr'] = "1.0"
-        sublead['JEScorr'] = "1.0"
-        lead['JMScorr'] = "1.0"
-        sublead['JMScorr'] = "1.0"
-        lead['JERcorr'] = 'FatJet_corr_JER[0]'
-        sublead["JERcorr"] = 'FatJet_corr_JER[1]'
-        lead['JMRcorr'] = "1.0"
-        sublead['JMRcorr'] = "1.0"
+
 
 
 if not a.isData:
