@@ -631,11 +631,11 @@ preselection22.Add("b_eta","abs(b_lead_vect.Eta()) < 2.0 && abs(b_sublead_vect.E
 preselection22.Add("pt","(pt0 > 300)")
 preselection22.Add("b_pt","b_lead_vect.Pt() > 30 && b_sublead_vect.Pt() > 30")
 preselection22.Add("jetID","((FatJet_jetId[0] & 2) == 2)")
-if '16' in options.output: 
+if options.year == '16': 
     preselection22.Add("DeepJet","(0.3093 < Jet_btagDeepFlavB[Hemispherized[0]] && Jet_btagDeepFlavB[Hemispherized[0]] < 1) && (0.3093 < Jet_btagDeepFlavB[Hemispherized[1]] && Jet_btagDeepFlavB[Hemispherized[1]] < 1)")
-if '17' in options.output: 
+if options.year == '17': 
     preselection22.Add("DeepJet","(0.3033  < Jet_btagDeepFlavB[Hemispherized[0]] && Jet_btagDeepFlavB[Hemispherized[0]] < 1) && (0.3033  < Jet_btagDeepFlavB[Hemispherized[1]] && Jet_btagDeepFlavB[Hemispherized[1]] < 1)")
-if '18' in options.output: 
+if options.year == '18': 
     preselection22.Add("DeepJet","(0.2770 < Jet_btagDeepFlavB[Hemispherized[0]] && Jet_btagDeepFlavB[Hemispherized[0]] < 1) && (0.2770 < Jet_btagDeepFlavB[Hemispherized[1]] && Jet_btagDeepFlavB[Hemispherized[1]] < 1)")
 # preselection22.Add("DeepCSV","(0.6324 < Jet_btagDeepB[Hemispherized[0]] && Jet_btagDeepB[Hemispherized[0]] < 1) && (0.6324 < Jet_btagDeepB[Hemispherized[1]] && Jet_btagDeepB[Hemispherized[1]] < 1)")
 preselection22.Add("deltaEta21","abs(lead_vect.Eta() - (b_lead_vect+b_sublead_vect).Eta()) < 1.3")
