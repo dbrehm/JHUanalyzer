@@ -188,15 +188,15 @@ if not a.isData:
     btagLoadCode = '''
         string btagfilename;
         if (year == "16"){
-              btagfilename = "JHUanalyzer/data/OfficialSFs/DeepCSV_2016LegacySF_V1.csv";
+              btagfilename = "JHUanalyzer/data/OfficialSFs/DeepJet_2016LegacySF_V1_TuneCP5.csv";
           }else if (year == "17"){
-              btagfilename = "JHUanalyzer/data/OfficialSFs/DeepCSV_94XSF_V4_B_F.csv";
+              btagfilename = "JHUanalyzer/data/OfficialSFs/DeepFlavour_94XSF_V4_B_F.csv";
           }else if (year ==  "18"){
-              btagfilename = "JHUanalyzer/data/OfficialSFs/DeepCSV_102XSF_V1.csv";
+              btagfilename = "JHUanalyzer/data/OfficialSFs/DeepJet_102XSF_V2.csv";
           }
-        BTagCalibration calib("DeepCSV", btagfilename);
+        BTagCalibration calib("DeepJet", btagfilename);
 
-        BTagCalibrationReader reader(BTagEntry::OP_LOOSE,  // operating point
+        BTagCalibrationReader reader(BTagEntry::OP_MEDIUM,  // operating point
                                  "central",             // central sys type
                                  {"up", "down"});      // other sys types
 
@@ -632,11 +632,11 @@ preselection22.Add("pt","(pt0 > 300)")
 preselection22.Add("b_pt","b_lead_vect.Pt() > 30 && b_sublead_vect.Pt() > 30")
 preselection22.Add("jetID","((FatJet_jetId[0] & 2) == 2)")
 if '16' in options.output: 
-    preselection22.Add("DeepCSV","(0.6321 < Jet_btagDeepB[Hemispherized[0]] && Jet_btagDeepB[Hemispherized[0]] < 1) && (0.6321 < Jet_btagDeepB[Hemispherized[1]] && Jet_btagDeepB[Hemispherized[1]] < 1)")
+    preselection22.Add("DeepJet","(0.3093 < Jet_btagDeepFlavB[Hemispherized[0]] && Jet_btagDeepFlavB[Hemispherized[0]] < 1) && (0.3093 < Jet_btagDeepFlavB[Hemispherized[1]] && Jet_btagDeepFlavB[Hemispherized[1]] < 1)")
 if '17' in options.output: 
-    preselection22.Add("DeepCSV","(0.4941 < Jet_btagDeepB[Hemispherized[0]] && Jet_btagDeepB[Hemispherized[0]] < 1) && (0.4941 < Jet_btagDeepB[Hemispherized[1]] && Jet_btagDeepB[Hemispherized[1]] < 1)")
+    preselection22.Add("DeepJet","(0.3033  < Jet_btagDeepFlavB[Hemispherized[0]] && Jet_btagDeepFlavB[Hemispherized[0]] < 1) && (0.3033  < Jet_btagDeepFlavB[Hemispherized[1]] && Jet_btagDeepFlavB[Hemispherized[1]] < 1)")
 if '18' in options.output: 
-    preselection22.Add("DeepCSV","(0.4184 < Jet_btagDeepB[Hemispherized[0]] && Jet_btagDeepB[Hemispherized[0]] < 1) && (0.4184 < Jet_btagDeepB[Hemispherized[1]] && Jet_btagDeepB[Hemispherized[1]] < 1)")
+    preselection22.Add("DeepJet","(0.2770 < Jet_btagDeepFlavB[Hemispherized[0]] && Jet_btagDeepFlavB[Hemispherized[0]] < 1) && (0.2770 < Jet_btagDeepFlavB[Hemispherized[1]] && Jet_btagDeepFlavB[Hemispherized[1]] < 1)")
 # preselection22.Add("DeepCSV","(0.6324 < Jet_btagDeepB[Hemispherized[0]] && Jet_btagDeepB[Hemispherized[0]] < 1) && (0.6324 < Jet_btagDeepB[Hemispherized[1]] && Jet_btagDeepB[Hemispherized[1]] < 1)")
 preselection22.Add("deltaEta21","abs(lead_vect.Eta() - (b_lead_vect+b_sublead_vect).Eta()) < 1.3")
 preselection22.Add("mbbCut","90.0 < mbb && mbb < 140.0")
