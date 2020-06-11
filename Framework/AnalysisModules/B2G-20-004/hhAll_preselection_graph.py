@@ -93,8 +93,8 @@ if not a.isData:
     sublead['JMRcorr'] = "1.0"
 
     if options.JES != 'nom': 
-        lead['JEScorr'] = 'FatJet_corr_JESTotal'+options.JES+"[0]"
-        sublead['JEScorr'] = 'FatJet_corr_JESTotal'+options.JES+"[1]"
+        lead['JEScorr'] = 'FatJet_corr_JESTotal_'+options.JES+"[0]"
+        sublead['JEScorr'] = 'FatJet_corr_JESTotal_'+options.JES+"[1]"
 
     if options.JER != 'nom':
         lead['JERcorr'] = 'FatJet_corr_JER_'+options.JER+"[0]"
