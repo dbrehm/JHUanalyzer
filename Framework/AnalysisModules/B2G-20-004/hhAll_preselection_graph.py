@@ -188,7 +188,7 @@ if not a.isData:
     btagLoadCode = '''
         string btagfilename;
         if (year == "16"){
-              btagfilename = "JHUanalyzer/data/OfficialSFs/DeepJet_2016LegacySF_V1_TuneCP5.csv";
+              btagfilename = "JHUanalyzer/data/OfficialSFs/DeepJet_2016LegacySF_V1.csv";
           }else if (year == "17"){
               btagfilename = "JHUanalyzer/data/OfficialSFs/DeepFlavour_94XSF_V4_B_F.csv";
           }else if (year ==  "18"){
