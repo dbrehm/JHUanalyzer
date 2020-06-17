@@ -109,9 +109,12 @@ if not a.isData:
             sublead['JMScorr'] = "(1-(std::abs(FatJet_corr_JMS_"+options.JMS+"[1] - FatJet_corr_JMS[1])/FatJet_corr_JMS[1]))"
 
     if options.JMR != 'nom':
-        lead['JMRcorr'] = "(std::abs(FatJet_corr_JMR_"+options.JMR+"[0] - FatJet_corr_JMR[0])/FatJet_corr_JMR[0])"
-        sublead['JMRcorr'] = "(std::abs(FatJet_corr_JMR_"+options.JMR+"[1] - FatJet_corr_JMR[1])/FatJet_corr_JMR[1])"
-
+        if options.JMR == 'up':
+            lead['JMRcorr'] = "(1+(std::abs(FatJet_corr_JMR_"+options.JMR+"[0] - FatJet_corr_JMR[0])/FatJet_corr_JMR[0]))"
+            sublead['JMRcorr'] = "(1+(std::abs(FatJet_corr_JMR_"+options.JMR+"[1] - FatJet_corr_JMR[1])/FatJet_corr_JMR[1]))"
+        if options.JMR == 'down':
+            lead['JMRcorr'] = "(1-(std::abs(FatJet_corr_JMR_"+options.JMR+"[0] - FatJet_corr_JMR[0])/FatJet_corr_JMR[0]))"
+            sublead['JMRcorr'] = "(1-(std::abs(FatJet_corr_JMR_"+options.JMR+"[1] - FatJet_corr_JMR[1])/FatJet_corr_JMR[1]))"
 
 
 if not a.isData:
