@@ -248,7 +248,7 @@ preselection11.Add("deltaEta","abs("+eta0+" - "+eta1+") < 1.3")
 # Cut on new column
 preselection12 = CutGroup('preselection12')
 preselection12.Add("msoftdrop_1","(110 < mh1) && (mh1 < 140)")
-preselection12.Add("cut_mreduced","mreduced > 750.")
+# preselection12.Add("cut_mreduced","mreduced > 750.")
 
 cand21String = "((!(nFatJet > 1) || !(pt0 > 300 && pt1 > 300) || !(abs("+eta0+") < 2.4 && abs("+eta1+") < 2.4) || !(abs("+eta0+" - "+eta1+") < 1.3) || !(mreduced > 750.) || !((110 < mh1) && (mh1 < 140))) == 1)"
 
@@ -282,7 +282,7 @@ preselection23.Add("topDeltaR","topDeltaR > 1.0")
 slimandskim = a.Apply([triggerGroup,slim_skim,filters])
 
 print("Doing 1+1 preselection.")
-presel11 = slimandskim.Apply([preselection11,newcolumns])
+presel11 = slimandskim.Apply([preselection11,newcolumns,preselection12])
 
 num = presel11.Cut("num","numerator==1")
 den = presel11.Cut("den","denominator==1")
