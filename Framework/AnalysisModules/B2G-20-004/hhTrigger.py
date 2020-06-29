@@ -68,57 +68,10 @@ if os.path.exists(options.config):
         xsec = 1.
         lumi = 1.
 
-##JECs for actual values.
-lead = {}
-sublead = {}
-if not a.isData:
-    if options.JES != 'nom':
-        lead['JEScorr'] = 'FatJet_corr_JES_Total'+options.JES.capitalize()+"[0]"
-        sublead['JEScorr'] = 'FatJet_corr_JES_Total'+options.JES.capitalize()+"[1]"
-    else:
-        lead['JEScorr'] = "1.0"
-        sublead['JEScorr'] = "1.0"
-    lead['JERcorr'] = 'FatJet_corr_JER_'+options.JER+"[0]"
-    sublead["JERcorr"] = 'FatJet_corr_JER_'+options.JER+"[1]"
-    lead["JMScorr"] = 'FatJet_corr_JMS_'+options.JMS+"[0]"
-    sublead["JMScorr"] = 'FatJet_corr_JMS_'+options.JMS+"[1]"
-    lead["JMRcorr"] = 'FatJet_groomed_corr_JMR_'+options.JMR+"[0]"
-    sublead["JMRcorr"] = 'FatJet_groomed_corr_JMR_'+options.JMR+"[1]"
-if not a.isData:
-    lead['pt'] = "*"+lead['JEScorr']+"*"+lead['JERcorr']
-    sublead['pt'] = "*"+sublead['JEScorr']+"*"+sublead['JERcorr']
-    lead['SDmass'] = "*"+lead['JEScorr']+"*"+lead['JERcorr']
-    sublead['SDmass'] = "*"+sublead['JEScorr']+"*"+sublead['JERcorr']
-    if 'ttbar' not in setname:
-        lead['SDmass'] += "*"+lead['JMScorr']+"*"+lead['JMRcorr']
-        sublead['SDmass'] += "*"+sublead['JMScorr']+"*"+sublead['JMRcorr']
-###Apply corrections
-# if not a.isData:
-#     mass0 = "FatJet_msoftdrop_nom[0]"+lead['SDmass']
-#     mass1 = "FatJet_msoftdrop_nom[1]"+sublead['SDmass']
-#     pt0 = "FatJet_pt_nom[0]"+lead['pt']
-#     pt1 = "FatJet_pt_nom[1]"+sublead['pt']
-# else:
-#     mass0 = "FatJet_msoftdrop_nom[0]"
-#     mass1 = "FatJet_msoftdrop_nom[1]"
-#     pt0 = "FatJet_pt_nom[0]"
-#     pt1 = "FatJet_pt_nom[1]"
-# eta0 = "FatJet_eta[0]"
-# eta1 = "FatJet_eta[1]"
-# phi0 = "FatJet_phi[0]"
-# phi1 = "FatJet_phi[1]"
-
-if not a.isData:
-    mass1 = "FatJet_msoftdrop_nom[0]"+lead['SDmass']
-    mass0 = "FatJet_msoftdrop_nom[1]"+sublead['SDmass']
-    pt1 = "FatJet_pt_nom[0]"+lead['pt']
-    pt0 = "FatJet_pt_nom[1]"+sublead['pt']
-
-else:
-    mass1 = "FatJet_msoftdrop_nom[0]"
-    mass0 = "FatJet_msoftdrop_nom[1]"
-    pt1 = "FatJet_pt_nom[0]"
-    pt0 = "FatJet_pt_nom[1]"
+mass1 = "FatJet_msoftdrop_nom[0]"
+mass0 = "FatJet_msoftdrop_nom[1]"
+pt1 = "FatJet_pt_nom[0]"
+pt0 = "FatJet_pt_nom[1]"
 
 eta0 = "FatJet_eta[1]"
 eta1 = "FatJet_eta[0]"
@@ -192,10 +145,10 @@ else:
     triggerGroup.Add("triggers",""+trigOR+")")
 
 if options.year =='16':
-    triggerGroup.Add("numerator","(triggers) && HLT_Mu50")
+    triggerGroup.Add("numerator","(triggers) && HLT_PFJet260")
 if options.year == '17'  or options.year == '18':
-    triggerGroup.Add("numerator","(triggers) && HLT_Mu50")
-triggerGroup.Add("denominator","HLT_Mu50")
+    triggerGroup.Add("numerator","(triggers) && HLT_PFJet260")
+triggerGroup.Add("denominator","HLT_PFJet260")
 
 newcolumns = VarGroup("newcolumns")
 newcolumns.Add("pt0",""+pt0+"")
@@ -237,8 +190,8 @@ filters.Add("Flag_BadPFMuonFilter","Flag_BadPFMuonFilter == 1")
 
 preselection11 = CutGroup('preselection11')
 preselection11.Add("nFatJets","nFatJet > 1")
-preselection11.Add("pt0",""+pt0+" > 200")
-preselection11.Add("pt1",""+pt1+" > 200")
+preselection11.Add("pt0",""+pt0+" > 300")
+preselection11.Add("pt1",""+pt1+" > 300")
 preselection11.Add("eta0","abs("+eta0+") < 2.4")
 preselection11.Add("eta1","abs("+eta1+") < 2.4")
 preselection11.Add("jetID","((FatJet_jetId[0] & 2) == 2) && ((FatJet_jetId[1] & 2) == 2)")
@@ -271,12 +224,12 @@ preselection22.Add("jetID","((FatJet_jetId[1] & 2) == 2)")
 
 
 preselection23 = CutGroup('preselection23')
-# preselection23.Add("mbbCut","90.0 < mbb && mbb < 140.0")
-preselection23.Add("mbbCut","105.0 < mbb && mbb < 135.0")
+preselection23.Add("mbbCut","90.0 < mbb && mbb < 140.0")
+# preselection23.Add("mbbCut","105.0 < mbb && mbb < 135.0")
 # preselection23.Add("topMass","topMass > 200.0 || topMass < 140.0")
-preselection23.Add("topMass","topMass > 200.0")
+# preselection23.Add("topMass","topMass > 200.0")
 # preselection23.Add("topMass","topMass > 220.0")
-preselection23.Add("topDeltaR","topDeltaR > 1.0")
+# preselection23.Add("topDeltaR","topDeltaR > 1.0")
 
 # Apply all groups in list order to the base RDF loaded in during analyzer() initialization
 slimandskim = a.Apply([triggerGroup,slim_skim,filters])
