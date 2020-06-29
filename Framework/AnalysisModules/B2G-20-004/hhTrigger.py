@@ -213,7 +213,7 @@ preselection21.Add("nJets21","nJet >= 2")
 
 preselection22 = CutGroup('preselection22')
 preselection22.Add("bb_pairs_check","(Hemispherized[0] != 0) && (Hemispherized[1] != 0)")
-preselection22.Add("eta","abs("+eta0+") < 2.4")
+preselection22.Add("eta","abs("+eta1+") < 2.4")
 preselection22.Add("b_eta","abs(Jet_eta[Hemispherized[0]]) < 2.0 && abs(Jet_eta[Hemispherized[1]]) < 2.0")
 preselection22.Add("pt","(pt1 > 300)")
 preselection22.Add("b_pt","Jet_pt[Hemispherized[0]] > 30 && Jet_pt[Hemispherized[1]] > 30")
