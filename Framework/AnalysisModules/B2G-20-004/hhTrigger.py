@@ -68,15 +68,15 @@ if os.path.exists(options.config):
         xsec = 1.
         lumi = 1.
 
-mass1 = "FatJet_msoftdrop_nom[0]"
-mass0 = "FatJet_msoftdrop_nom[1]"
-pt1 = "FatJet_pt_nom[0]"
-pt0 = "FatJet_pt_nom[1]"
+mass0 = "FatJet_msoftdrop_nom[0]"
+mass1 = "FatJet_msoftdrop_nom[1]"
+pt0 = "FatJet_pt_nom[0]"
+pt1 = "FatJet_pt_nom[1]"
 
-eta0 = "FatJet_eta[1]"
-eta1 = "FatJet_eta[0]"
-phi0 = "FatJet_phi[1]"
-phi1 = "FatJet_phi[0]"
+eta1 = "FatJet_eta[1]"
+eta0 = "FatJet_eta[0]"
+phi1 = "FatJet_phi[1]"
+phi0 = "FatJet_phi[0]"
 
 print("mass 0 = "+ mass0)
 print("mass 1 = "+ mass1)
@@ -213,9 +213,9 @@ preselection21.Add("nJets21","nJet >= 2")
 
 preselection22 = CutGroup('preselection22')
 preselection22.Add("bb_pairs_check","(Hemispherized[0] != 0) && (Hemispherized[1] != 0)")
-preselection22.Add("eta","abs("+eta1+") < 2.4")
+preselection22.Add("eta","abs("+eta0+") < 2.4")
 preselection22.Add("b_eta","abs(Jet_eta[Hemispherized[0]]) < 2.0 && abs(Jet_eta[Hemispherized[1]]) < 2.0")
-preselection22.Add("pt","(pt1 > 300)")
+preselection22.Add("pt","(pt0 > 300)")
 preselection22.Add("b_pt","Jet_pt[Hemispherized[0]] > 30 && Jet_pt[Hemispherized[1]] > 30")
 preselection22.Add("jetID","((FatJet_jetId[1] & 2) == 2)")
 # preselection22.Add("DeepCSV","(0.4184 < Jet_btagDeepB[Hemispherized[0]] && Jet_btagDeepB[Hemispherized[0]] < 1) && (0.4184 < Jet_btagDeepB[Hemispherized[1]] && Jet_btagDeepB[Hemispherized[1]] < 1)")
