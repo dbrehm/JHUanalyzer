@@ -76,7 +76,9 @@ if os.path.exists(options.config):
     else: 
         xsec = 1.
         lumi = 1.
-if not a.isData: norm = (xsec*lumi)/a.genEventCount
+if not a.isData: 
+    if 'QCD' in setname: norm = 1.
+    else: norm = (xsec*lumi)/a.genEventCount
 else: norm = 1.
 
 ##JECs for actual values.
