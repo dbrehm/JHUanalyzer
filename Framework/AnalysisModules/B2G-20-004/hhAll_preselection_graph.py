@@ -430,27 +430,27 @@ if not a.isData:
     else:
         topstringnom = ""
 
-    correctionColumns.Add("finalweightTight","dbSFnomtight*(dbSFnomtight)*puWeight"+topstringnom+"")
-    correctionColumns.Add("finalweightLoose","dbSFnomloose*(dbSFnomloose)*puWeight"+topstringnom+"")
-    correctionColumns.Add("finalweightTightFailFullSF","dbSFnomtight*(1-dbSFnomtight)*puWeight"+topstringnom+"")
-    correctionColumns.Add("finalweightLooseFailFullSF","dbSFnomloose*(1-dbSFnomloose)*puWeight"+topstringnom+"")
-    correctionColumns.Add("finalweightTightFailHalfSF","dbSFnomtight*puWeight"+topstringnom+"")
-    correctionColumns.Add("finalweightLooseFailHalfSF","dbSFnomloose*puWeight"+topstringnom+"")
+    # correctionColumns.Add("finalweightTight","dbSFnomtight*(dbSFnomtight)*puWeight"+topstringnom+"")
+    # correctionColumns.Add("finalweightLoose","dbSFnomloose*(dbSFnomloose)*puWeight"+topstringnom+"")
+    # correctionColumns.Add("finalweightTightFailFullSF","dbSFnomtight*(1-dbSFnomtight)*puWeight"+topstringnom+"")
+    # correctionColumns.Add("finalweightLooseFailFullSF","dbSFnomloose*(1-dbSFnomloose)*puWeight"+topstringnom+"")
+    # correctionColumns.Add("finalweightTightFailHalfSF","dbSFnomtight*puWeight"+topstringnom+"")
+    # correctionColumns.Add("finalweightLooseFailHalfSF","dbSFnomloose*puWeight"+topstringnom+"")
 
-    correctionColumns21.Add("finalweight21","dbSFnomloose*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+"")
-    correctionColumns21.Add("finalweight21FailFullSF","(1-dbSFnomloose)*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+"")
-    correctionColumns21.Add("finalweight21FailHalfSF","puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+"")
+    # correctionColumns21.Add("finalweight21","dbSFnomloose*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+"")
+    # correctionColumns21.Add("finalweight21FailFullSF","(1-dbSFnomloose)*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+"")
+    # correctionColumns21.Add("finalweight21FailHalfSF","puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+"")
 
-    # correctionColumns.Add("finalweightTight","dbSFnomtight*(dbSFnomtight)*triggerTight[0]*puWeight"+topstringnom+"")
-    # correctionColumns.Add("finalweightLoose","dbSFnomloose*(dbSFnomloose)*triggerLoose[0]*puWeight"+topstringnom+"")
-    # correctionColumns.Add("finalweightTightFailFullSF","dbSFnomtight*(1-dbSFnomtight)*triggerTight[0]*puWeight"+topstringnom+"")
-    # correctionColumns.Add("finalweightLooseFailFullSF","dbSFnomloose*(1-dbSFnomloose)*triggerLoose[0]*puWeight"+topstringnom+"")
-    # correctionColumns.Add("finalweightTightFailHalfSF","dbSFnomtight*triggerTight[0]*puWeight"+topstringnom+"")
-    # correctionColumns.Add("finalweightLooseFailHalfSF","dbSFnomloose*triggerLoose[0]*puWeight"+topstringnom+"")
+    correctionColumns.Add("finalweightTight","dbSFnomtight*(dbSFnomtight)*triggerTight[0]*puWeight"+topstringnom+"")
+    correctionColumns.Add("finalweightLoose","dbSFnomloose*(dbSFnomloose)*triggerLoose[0]*puWeight"+topstringnom+"")
+    correctionColumns.Add("finalweightTightFailFullSF","dbSFnomtight*(1-dbSFnomtight)*triggerTight[0]*puWeight"+topstringnom+"")
+    correctionColumns.Add("finalweightLooseFailFullSF","dbSFnomloose*(1-dbSFnomloose)*triggerLoose[0]*puWeight"+topstringnom+"")
+    correctionColumns.Add("finalweightTightFailHalfSF","dbSFnomtight*triggerTight[0]*puWeight"+topstringnom+"")
+    correctionColumns.Add("finalweightLooseFailHalfSF","dbSFnomloose*triggerLoose[0]*puWeight"+topstringnom+"")
 
-    # correctionColumns21.Add("finalweight21","dbSFnomloose*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+"")
-    # correctionColumns21.Add("finalweight21FailFullSF","(1-dbSFnomloose)*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+"")
-    # correctionColumns21.Add("finalweight21FailHalfSF","trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+"")
+    correctionColumns21.Add("finalweight21","dbSFnomloose*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+"")
+    correctionColumns21.Add("finalweight21FailFullSF","(1-dbSFnomloose)*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+"")
+    correctionColumns21.Add("finalweight21FailHalfSF","trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+"")
 
 
 ### Here I make the weights for the shape based uncertainties. This cannot be done inline with the Histo1D calls so it is done here.
