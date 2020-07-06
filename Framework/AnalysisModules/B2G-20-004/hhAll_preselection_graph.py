@@ -609,7 +609,8 @@ selectionColumns21.Add("Fail21",fail21String)
 #### Make cutgroups
 
 slim_skim = CutGroup('slim_skim')
-if a.isData: slim_skim.Add("triggers","triggers == 1")
+slim_skim.Add("triggers","triggers == 1")
+# if a.isData: slim_skim.Add("triggers","triggers == 1")
 slim_skim.Add("nFatJets1","nFatJet > 0")
 
 filters = CutGroup('filters')
