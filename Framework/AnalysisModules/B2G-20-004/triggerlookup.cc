@@ -25,7 +25,7 @@ namespace analyzer {
 
             if (jetTriggerWeight < 0){
                 Weight = 0;
-            }else if (0 < jetTriggerWeight && jetTriggerWeight < 1.0){
+            }else if (0 < jetTriggerWeight){
                 Weight = jetTriggerWeight;
             }
 
