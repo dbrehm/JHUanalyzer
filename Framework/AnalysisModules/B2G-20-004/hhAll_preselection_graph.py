@@ -296,19 +296,19 @@ if not a.isData:
     #### Trigger correction code
 
     triggerFile = ROOT.TFile("TriggerWeights.root","READ")
-    triggerHistTightEff = triggerFile.Get(doubleB_name+'11'+options.year+'Effplot')
-    triggerHistTight = triggerFile.Get(doubleB_name+'tight'+options.year)
+    triggerHistTightEff = triggerFile.Get(doubleB_name+'ratio11'+options.year)
+    # triggerHistTight = triggerFile.Get(doubleB_name+'tight'+options.year)
     # triggerHistLoose = triggerFile.Get(doubleB_name+'11'+options.year)
-    triggerHist21Eff = triggerFile.Get(doubleB_name+'21'+options.year+'Effplot')
-    triggerHist21 = triggerFile.Get(doubleB_name+'21'+options.year)
-    ROOT.gInterpreter.ProcessLine("auto tEff = "+doubleB_name+"11"+options.year+"Effplot"+";")
-    ROOT.gInterpreter.ProcessLine("auto tHistT = "+doubleB_name+"tight"+options.year+";")
-    correctionColumns.Add("triggerTight","analyzer::TriggerLookup(mreduced,tHistT, tEff)")
+    triggerHist21Eff = triggerFile.Get(doubleB_name+'ratio21'+options.year)
+    # triggerHist21 = triggerFile.Get(doubleB_name+'21'+options.year)
+    ROOT.gInterpreter.ProcessLine("auto tSF = "+doubleB_name+"ratio11"+options.year+";")
+    # ROOT.gInterpreter.ProcessLine("auto tHistT = "+doubleB_name+"tight"+options.year+";")
+    correctionColumns.Add("triggerTight","analyzer::TriggerLookup(mreduced,tSF)")
     # ROOT.gInterpreter.ProcessLine("auto tHistL = "+doubleB_name+"loose"+options.year+";")
-    correctionColumns.Add("triggerLoose","analyzer::TriggerLookup(mreduced,tHistT, tEff)")
-    ROOT.gInterpreter.ProcessLine("auto tEff21 = "+doubleB_name+"21"+options.year+"Effplot"+";")
-    ROOT.gInterpreter.ProcessLine("auto tHist21 = "+doubleB_name+"21"+options.year+";")
-    correctionColumns21.Add("trigger21","analyzer::TriggerLookup(mreduced21,tHist21, tEff21)")
+    correctionColumns.Add("triggerLoose","analyzer::TriggerLookup(mreduced,tSF)")
+    ROOT.gInterpreter.ProcessLine("auto tSD21 = "+doubleB_name+"21"+options.year+";")
+    # ROOT.gInterpreter.ProcessLine("auto tHist21 = "+doubleB_name+"21"+options.year+";")
+    correctionColumns21.Add("trigger21","analyzer::TriggerLookup(mreduced21,tSF)")
 
 #### B tag SF
 if "btagHbb" in options.doublebtagger:

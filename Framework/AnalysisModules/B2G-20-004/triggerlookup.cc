@@ -4,7 +4,7 @@
 using namespace ROOT::VecOps;
 
 namespace analyzer {
-    std::vector<double> TriggerLookup(float var, TH1D* TRP, TEfficiency* TEff ){
+    std::vector<double> TriggerLookup(float var, TH1D* TRP){
         double Weight = 1.0;
         double Weightup = 1.0;
         double Weightdown = 1.0;
@@ -13,13 +13,13 @@ namespace analyzer {
 
         if (var < 2000.0){
             int bin0 = TRP->FindBin(var); 
-            double jetTriggerWeight = TEff->GetEfficiency(bin0);
+            double jetTriggerWeight = TRP->GetBinContent(bin0);
             // Check that we're not in an empty bin in the fully efficient region
             if (jetTriggerWeight == 0){
-                if ((TEff->GetEfficiency(bin0-1) == 1.0) && (TEff->GetEfficiency(bin0+1) == 1.0)){
+                if ((TEff->GetBinContent(bin0-1) == 1.0) && (TEff->GetBinContent(bin0+1) == 1.0)){
                     jetTriggerWeight = 1.0;
-                }else if (((TEff->GetEfficiency(bin0-1) > 0) || (TEff->GetEfficiency(bin0+1) > 0))){
-                    jetTriggerWeight = (TEff->GetEfficiency(bin0-1)+TEff->GetEfficiency(bin0+1))/2.0;
+                }else if (((TEff->GetBinContent(bin0-1) > 0) || (TEff->GetBinContent(bin0+1) > 0))){
+                    jetTriggerWeight = (TEff->GetBinContent(bin0-1)+TEff->GetBinContent(bin0+1))/2.0;
                 }
             }
 
@@ -30,12 +30,12 @@ namespace analyzer {
             }
 
             double deltaTriggerEff = 0.05*(1.0-jetTriggerWeight);
-            double errorUp = TEff->GetEfficiencyErrorUp(bin0);
-            double errorDown = TEff->GetEfficiencyErrorLow(bin0);
+            double errorUp = TEff->GetBinError(bin0);
+            double errorDown = TEff->GetBinError(bin0);
             double one = 1.0;
             double zero = 0.0;
 
-            Weightup = std::min(one,(jetTriggerWeight + std::max(deltaTriggerEff,errorUp))) ;
+            Weightup = (jetTriggerWeight + std::max(deltaTriggerEff,errorUp));
 
             Weightdown = std::max(zero,(jetTriggerWeight - std::max(deltaTriggerEff,errorDown)));
         
