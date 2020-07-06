@@ -16,10 +16,10 @@ namespace analyzer {
             double jetTriggerWeight = TRP->GetBinContent(bin0);
             // Check that we're not in an empty bin in the fully efficient region
             if (jetTriggerWeight == 0){
-                if ((TEff->GetBinContent(bin0-1) == 1.0) && (TEff->GetBinContent(bin0+1) == 1.0)){
+                if ((TRP->GetBinContent(bin0-1) == 1.0) && (TRP->GetBinContent(bin0+1) == 1.0)){
                     jetTriggerWeight = 1.0;
-                }else if (((TEff->GetBinContent(bin0-1) > 0) || (TEff->GetBinContent(bin0+1) > 0))){
-                    jetTriggerWeight = (TEff->GetBinContent(bin0-1)+TEff->GetBinContent(bin0+1))/2.0;
+                }else if (((TRP->GetBinContent(bin0-1) > 0) || (TRP->GetBinContent(bin0+1) > 0))){
+                    jetTriggerWeight = (TRP->GetBinContent(bin0-1)+TRP->GetBinContent(bin0+1))/2.0;
                 }
             }
 
@@ -30,8 +30,8 @@ namespace analyzer {
             }
 
             double deltaTriggerEff = 0.05*(1.0-jetTriggerWeight);
-            double errorUp = TEff->GetBinError(bin0);
-            double errorDown = TEff->GetBinError(bin0);
+            double errorUp = TRP->GetBinError(bin0);
+            double errorDown = TRP->GetBinError(bin0);
             double one = 1.0;
             double zero = 0.0;
 
