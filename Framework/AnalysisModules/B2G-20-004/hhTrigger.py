@@ -255,11 +255,11 @@ hden = den.DataFrame.Histo1D(("hden","hden", 28 ,700 ,3500),"mreduced")
 hnum21 = num21.DataFrame.Histo1D(("hnum21","hnum21", 13 ,700 ,2000),"mreduced21")
 hden21 = den21.DataFrame.Histo1D(("hden21","hden21", 13 ,700 ,2000),"mreduced21")
 
-hnum2D = num.DataFrame.Histo1D(("hnum2D","hnum2D", 28 ,700 ,3500),"mreduced")
-hden2D = den.DataFrame.Histo1D(("hden2D","hden2D", 28 ,700 ,3500),"mreduced")
+hnum2D = num.DataFrame.Histo1D(("hnum2D","hnum2D",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced")
+hden2D = den.DataFrame.Histo1D(("hden2D","hden2D",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced")
 
-hnum212D = num21.DataFrame.Histo1D(("hnum212D","hnum212D", 13 ,700 ,2000),"mreduced21")
-hden212D = den21.DataFrame.Histo1D(("hden212D","hden212D", 13 ,700 ,2000),"mreduced21")
+hnum212D = num21.DataFrame.Histo1D(("hnum212D","hnum212D",18 ,45 ,225 ,13 ,700 ,2000),"mh","mreduced21")
+hden212D = den21.DataFrame.Histo1D(("hden212D","hden212D",18 ,45 ,225 ,13 ,700 ,2000),"mh","mreduced21")
 
 hnum.Write()
 hden.Write()

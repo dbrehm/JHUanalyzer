@@ -45,12 +45,31 @@ for y in ['16','17','18']:
         hnum21Q = infileQ.Get('hnum21') 
         hden21Q = infileQ.Get('hden21')   
 
-
         hnumtt = infileTT.Get('hnum') 
         hdentt = infileTT.Get('hden')
 
         hnum21tt = infileTT.Get('hnum21') 
         hden21tt = infileTT.Get('hden21')
+
+
+        hnum2D = infile.Get('hnum2D') 
+        hden2D = infile.Get('hden2D')
+
+        hnum212D = infile.Get('hnum212D') 
+        hden212D = infile.Get('hden212D')
+
+        hnumQ2D = infileQ.Get('hnum2D') 
+        hdenQ2D = infileQ.Get('hden2D')
+
+        hnum21Q2D = infileQ.Get('hnum212D') 
+        hden21Q2D = infileQ.Get('hden212D')   
+
+        hnumtt2D = infileTT.Get('hnum2D') 
+        hdentt2D = infileTT.Get('hden2D')
+
+        hnum21tt2D = infileTT.Get('hnum212D') 
+        hden21tt2D = infileTT.Get('hden212D')
+
 
         hh11 = hnum.Clone(doubleb+'tight'+y)
         hh11.Divide(hden)
@@ -70,7 +89,29 @@ for y in ['16','17','18']:
 
         hh21tt = hnum21tt.Clone(doubleb+'21'+y+'ttbar')
         hh21tt.Divide(hden21tt)
-       
+
+
+
+        hh112D = hnum2D.Clone(doubleb+'tight2D'+y)
+        hh112D.Divide(hden2D)
+
+        hh11Q2D = hnumQ2D.Clone(doubleb+'tight2D'+y+'QCD')
+        hh11Q2D.Divide(hdenQ2D)
+
+        hh11tt2D = hnumtt2D.Clone(doubleb+'tight2D'+y+'ttbar')
+        hh11tt2D.Divide(hdentt2D)
+
+
+        hh212D = hnum212D.Clone(doubleb+'212D'+y)
+        hh212D.Divide(hden212D)
+
+        hh21Q2D = hnum21Q2D.Clone(doubleb+'212D'+y+'QCD')
+        hh21Q2D.Divide(hden21Q2D)
+
+        hh21tt2D = hnum21tt2D.Clone(doubleb+'212D'+y+'ttbar')
+        hh21tt2D.Divide(hden21tt2D)
+
+
         h11D = ROOT.TEfficiency(hnum, hden)
 
         h21D = ROOT.TEfficiency(hnum21, hden21)
@@ -183,5 +224,12 @@ for y in ['16','17','18']:
         hh11tt.Write()
         h21tt.Write()
         hh21tt.Write()
+
+        hh112D.Write()
+        hh212D.Write()
+        hh11Q2D.Write()
+        hh21Q2D.Write()
+        hh11tt2D.Write()
+        hh21tt2D.Write()
 
 outfile.Close()
