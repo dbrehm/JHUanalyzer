@@ -171,8 +171,8 @@ cutsDict = {
     #'DeepDBtagTight':[0.6,1.0],
     'DeepDBtagLoose':[0.7,1.0],
     #'DeepDBtagLoose':[0.3,1.0],
-    'dak8MDZHbbtag':[0.95,1.0],
-    'dak8MDZHbbtagTight':[0.95,1.0],
+    'dak8MDZHbbtag':[0.9,1.0],
+    'dak8MDZHbbtagTight':[0.9,1.0],
     'dak8MDZHbbtagLoose':[0.8,1.0],
     'dak8MDHbbtag':[0.9,1.0],
     'dak8MDHbbtagTight':[0.9,1.0],
@@ -333,7 +333,7 @@ if "btagHbb" in options.doublebtagger:
         correctionColumns.Add("dbSFnomtight","0.89*("+pt0+"<350)+0.84*("+pt0+">350)")
         correctionColumns.Add("dbSFuptight","0.97*("+pt0+"<350)+0.89*("+pt0+">350)")
         correctionColumns.Add("dbSFdowntight","0.85*("+pt0+"<350)+0.79*("+pt0+">350)")
-elif "deepTagMD_HbbvsQCD" in options.doublebtagger:
+elif "deepTagMD_HbbvsQCD" or "deepTagMD_ZHbbvsQCD" in options.doublebtagger:
     # correctionColumns.Add("dbSFnomloose","1.1*("+pt0+"<350)+1.1*("+pt0+">350)")
     # correctionColumns.Add("dbSFuploose","1.3*("+pt0+"<350)+1.3*("+pt0+">350)")
     # correctionColumns.Add("dbSFdownloose","0.9*("+pt0+"<350)+0.9*("+pt0+">350)") 
