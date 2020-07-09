@@ -296,17 +296,17 @@ if not a.isData:
     #### Trigger correction code
 
     triggerFile = ROOT.TFile("TriggerWeights.root","READ")
-    triggerHistTightEff = triggerFile.Get(doubleB_name+'ratio11'+options.year)
+    triggerHistTightEff = triggerFile.Get("deepTagMD_HbbvsQCD"+'ratio11'+options.year)
     # triggerHistTight = triggerFile.Get(doubleB_name+'tight'+options.year)
     # triggerHistLoose = triggerFile.Get(doubleB_name+'11'+options.year)
-    triggerHist21Eff = triggerFile.Get(doubleB_name+'ratio21'+options.year)
+    triggerHist21Eff = triggerFile.Get("deepTagMD_HbbvsQCD"+'ratio21'+options.year)
     # triggerHist21 = triggerFile.Get(doubleB_name+'21'+options.year)
-    ROOT.gInterpreter.ProcessLine("auto tSF = "+doubleB_name+"ratio11"+options.year+";")
+    ROOT.gInterpreter.ProcessLine("auto tSF = "+"deepTagMD_HbbvsQCD"+"ratio11"+options.year+";")
     # ROOT.gInterpreter.ProcessLine("auto tHistT = "+doubleB_name+"tight"+options.year+";")
     correctionColumns.Add("triggerTight","analyzer::TriggerLookup(mreduced,tSF)")
     # ROOT.gInterpreter.ProcessLine("auto tHistL = "+doubleB_name+"loose"+options.year+";")
     correctionColumns.Add("triggerLoose","analyzer::TriggerLookup(mreduced,tSF)")
-    ROOT.gInterpreter.ProcessLine("auto tSD21 = "+doubleB_name+"21"+options.year+";")
+    ROOT.gInterpreter.ProcessLine("auto tSD21 = "+"deepTagMD_HbbvsQCD"+"21"+options.year+";")
     # ROOT.gInterpreter.ProcessLine("auto tHist21 = "+doubleB_name+"21"+options.year+";")
     correctionColumns21.Add("trigger21","analyzer::TriggerLookup(mreduced21,tSF)")
 
@@ -442,16 +442,26 @@ if not a.isData:
         correctionColumns21.Add("finalweight21FailFullSF","(1-dbSFnomloose)*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+"")
         correctionColumns21.Add("finalweight21FailHalfSF","puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+"")
     else:
-        correctionColumns.Add("finalweightTight","dbSFnomtight*(dbSFnomtight)*triggerTight[0]*puWeight"+topstringnom+"")
-        correctionColumns.Add("finalweightLoose","dbSFnomloose*(dbSFnomloose)*triggerLoose[0]*puWeight"+topstringnom+"")
-        correctionColumns.Add("finalweightTightFailFullSF","dbSFnomtight*(1-dbSFnomtight)*triggerTight[0]*puWeight"+topstringnom+"")
-        correctionColumns.Add("finalweightLooseFailFullSF","dbSFnomloose*(1-dbSFnomloose)*triggerLoose[0]*puWeight"+topstringnom+"")
-        correctionColumns.Add("finalweightTightFailHalfSF","dbSFnomtight*triggerTight[0]*puWeight"+topstringnom+"")
-        correctionColumns.Add("finalweightLooseFailHalfSF","dbSFnomloose*triggerLoose[0]*puWeight"+topstringnom+"")
+        correctionColumns.Add("finalweightTight","dbSFnomtight*(dbSFnomtight)*puWeight"+topstringnom+"")
+        correctionColumns.Add("finalweightLoose","dbSFnomloose*(dbSFnomloose)*puWeight"+topstringnom+"")
+        correctionColumns.Add("finalweightTightFailFullSF","dbSFnomtight*(1-dbSFnomtight)*puWeight"+topstringnom+"")
+        correctionColumns.Add("finalweightLooseFailFullSF","dbSFnomloose*(1-dbSFnomloose)*puWeight"+topstringnom+"")
+        correctionColumns.Add("finalweightTightFailHalfSF","dbSFnomtight*puWeight"+topstringnom+"")
+        correctionColumns.Add("finalweightLooseFailHalfSF","dbSFnomloose*puWeight"+topstringnom+"")
 
-        correctionColumns21.Add("finalweight21","dbSFnomloose*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+"")
-        correctionColumns21.Add("finalweight21FailFullSF","(1-dbSFnomloose)*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+"")
-        correctionColumns21.Add("finalweight21FailHalfSF","trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+"")
+        correctionColumns21.Add("finalweight21","dbSFnomloose*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+"")
+        correctionColumns21.Add("finalweight21FailFullSF","(1-dbSFnomloose)*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+"")
+        correctionColumns21.Add("finalweight21FailHalfSF","puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+"")
+        # correctionColumns.Add("finalweightTight","dbSFnomtight*(dbSFnomtight)*triggerTight[0]*puWeight"+topstringnom+"")
+        # correctionColumns.Add("finalweightLoose","dbSFnomloose*(dbSFnomloose)*triggerLoose[0]*puWeight"+topstringnom+"")
+        # correctionColumns.Add("finalweightTightFailFullSF","dbSFnomtight*(1-dbSFnomtight)*triggerTight[0]*puWeight"+topstringnom+"")
+        # correctionColumns.Add("finalweightLooseFailFullSF","dbSFnomloose*(1-dbSFnomloose)*triggerLoose[0]*puWeight"+topstringnom+"")
+        # correctionColumns.Add("finalweightTightFailHalfSF","dbSFnomtight*triggerTight[0]*puWeight"+topstringnom+"")
+        # correctionColumns.Add("finalweightLooseFailHalfSF","dbSFnomloose*triggerLoose[0]*puWeight"+topstringnom+"")
+
+        # correctionColumns21.Add("finalweight21","dbSFnomloose*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+"")
+        # correctionColumns21.Add("finalweight21FailFullSF","(1-dbSFnomloose)*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+"")
+        # correctionColumns21.Add("finalweight21FailHalfSF","trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+"")
 
 
 ### Here I make the weights for the shape based uncertainties. This cannot be done inline with the Histo1D calls so it is done here.

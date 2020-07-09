@@ -70,32 +70,6 @@ for y in ['16','17','18']:
 
         hh21tt = hnum21tt.Clone(doubleb+'21'+y+'ttbar')
         hh21tt.Divide(hden21tt)
-
-
-        ratio11 = hh11.Clone(doubleb+'ratio11'+y)
-        ratio11.SetTitle(doubleb+'ratio11'+y)
-        ratio11.Divide(hh11,hh11Q,1,1,"B")
-
-        ratio11TT = hh11.Clone(doubleb+'ratio11ttbar'+y)
-        ratio11TT.SetTitle(doubleb+'ratio11ttbar'+y)
-        ratio11TT.Divide(hh11,hh11tt,1,1,"B")
-
-        ratioQCDttbar11 = ratio11.Clone(doubleb+'ratio11QCDtoTTbar'+y)
-        ratioQCDttbar11.SetTitle(doubleb+'ratio11QCDtoTTbar'+y)
-        ratioQCDttbar11.Add(ratio11TT,-1)
-
-        ratio21 = hh21.Clone(doubleb+'ratio21'+y)
-        ratio21.SetTitle(doubleb+'ratio21'+y)
-        ratio21.Divide(hh21,hh21Q,1,1,"B")
-
-        ratio21TT = hh21.Clone(doubleb+'ratio21ttbar'+y)
-        ratio21TT.SetTitle(doubleb+'ratio21ttbar'+y)
-        ratio21TT.Divide(hh21,hh21tt,1,1,"B")
-
-        ratioQCDttbar21 = ratio21.Clone(doubleb+'ratio21QCDtoTTbar'+y)
-        ratioQCDttbar21.SetTitle(doubleb+'ratio21QCDtoTTbar'+y)
-        ratioQCDttbar21.Add(ratio21TT,-1)
-
        
         h11D = ROOT.TEfficiency(hnum, hden)
 
@@ -145,6 +119,42 @@ for y in ['16','17','18']:
         h21tt.SetName(doubleb+'21'+y+"Effplot-ttbar")
         h21tt.SetTitle(doubleb+'21'+y+"Effplot-ttbar"";m_reduced;Efficiency")
 
+
+
+
+        ratio11 = hh11.Clone(doubleb+'ratio11'+y)
+        ratio11.SetTitle(doubleb+'ratio11'+y)
+        for b in range(1,hh11.GetNbinsX()+1):
+            ratio11.SetBinContent(b,h11D.GetEfficiency(b)/h11Q.GetEfficiency(b))
+            ratio11.SetBinError(b,max([h11D.GetEfficiencyErrorUp(b),h11Q.GetEfficiencyErrorUp(b),h11D.GetEfficiencyErrorLow(b),h11Q.GetEfficiencyErrorLow(b)]))
+
+        ratio11TT = hh11.Clone(doubleb+'ratio11ttbar'+y)
+        ratio11TT.SetTitle(doubleb+'ratio11ttbar'+y)
+        for b in range(1,hh11.GetNbinsX()+1):
+            ratio11TT.SetBinContent(b,h11D.GetEfficiency(b)/h11tt.GetEfficiency(b))
+            ratio11TT.SetBinError(b,max([h11D.GetEfficiencyErrorUp(b),h11tt.GetEfficiencyErrorUp(b),h11D.GetEfficiencyErrorLow(b),h11tt.GetEfficiencyErrorLow(b)]))
+
+        ratioQCDttbar11 = ratio11TT.Clone(doubleb+'ratio11QCDtoTTbar'+y)
+        ratioQCDttbar11.SetTitle(doubleb+'ratio11QCDtoTTbar'+y)
+        ratioQCDttbar11.Add(ratio11,-1)
+        ratioQCDttbar11.Divide(ratio11,)
+
+        ratio21 = hh21.Clone(doubleb+'ratio21'+y)
+        ratio21.SetTitle(doubleb+'ratio21'+y)
+        for b in range(1,hh21.GetNbinsX()+1):
+            ratio21.SetBinContent(b,h21D.GetEfficiency(b)/h21Q.GetEfficiency(b))
+            ratio21.SetBinError(b,max([h21D.GetEfficiencyErrorUp(b),h21Q.GetEfficiencyErrorUp(b),h21D.GetEfficiencyErrorLow(b),h21Q.GetEfficiencyErrorLow(b)]))
+
+        ratio21TT = hh21.Clone(doubleb+'ratio21ttbar'+y)
+        ratio21TT.SetTitle(doubleb+'ratio21ttbar'+y)
+        for b in range(1,hh21.GetNbinsX()+1):
+            ratio21TT.SetBinContent(b,h21D.GetEfficiency(b)/h21tt.GetEfficiency(b))
+            ratio21TT.SetBinError(b,max([h21D.GetEfficiencyErrorUp(b),h21tt.GetEfficiencyErrorUp(b),h21D.GetEfficiencyErrorLow(b),h21tt.GetEfficiencyErrorLow(b)]))
+
+        ratioQCDttbar21 = ratio21TT.Clone(doubleb+'ratio21QCDtoTTbar'+y)
+        ratioQCDttbar21.SetTitle(doubleb+'ratio21QCDtoTTbar'+y)
+        ratioQCDttbar21.Add(ratio21,-1)
+        ratioQCDttbar21.Divide(ratio21)
 
 
         outfile.cd()
