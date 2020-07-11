@@ -267,6 +267,13 @@ hden.Write()
 hnum21.Write()
 hden21.Write()
 
+hnum2D.Write()
+hden2D.Write()
+
+hnum212D.Write()
+hden212D.Write()
+
+
 out_f.Close()
 
 print "Total time: "+str((time.time()-start_time)/60.) + ' min'
