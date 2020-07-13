@@ -334,33 +334,36 @@ if "btagHbb" in options.doublebtagger:
         correctionColumns.Add("dbSFuptight","0.97*("+pt0+"<350)+0.89*("+pt0+">350)")
         correctionColumns.Add("dbSFdowntight","0.85*("+pt0+"<350)+0.79*("+pt0+">350)")
 elif "deepTagMD_HbbvsQCD" or "deepTagMD_ZHbbvsQCD" in options.doublebtagger:
-    # correctionColumns.Add("dbSFnomloose","1.1*("+pt0+"<350)+1.1*("+pt0+">350)")
-    # correctionColumns.Add("dbSFuploose","1.3*("+pt0+"<350)+1.3*("+pt0+">350)")
-    # correctionColumns.Add("dbSFdownloose","0.9*("+pt0+"<350)+0.9*("+pt0+">350)") 
-    # correctionColumns.Add("dbSFnomtight","1.1*("+pt0+"<350)+1.1*("+pt0+">350)")
-    # correctionColumns.Add("dbSFuptight","1.3*("+pt0+"<350)+1.3*("+pt0+">350)")
-    # correctionColumns.Add("dbSFdowntight","0.9*("+pt0+"<350)+0.9*("+pt0+">350)")
-    if options.year == '16':
-        correctionColumns.Add("dbSFnomloose","1*(300<"+pt0+" && "+pt0+"<400)+0.97*(400<"+pt0+" && "+pt0+"<500)+0.91*(500<"+pt0+" && "+pt0+"<600)+0.95*("+pt0+">600)")
-        correctionColumns.Add("dbSFuploose","1.06*(300<"+pt0+" && "+pt0+"<400)+1*(400<"+pt0+" && "+pt0+"<500)+0.96*(500<"+pt0+" && "+pt0+"<600)+0.99*("+pt0+">600)")
-        correctionColumns.Add("dbSFdownloose","0.94*(300<"+pt0+" && "+pt0+"<400)+0.94*(400<"+pt0+" && "+pt0+"<500)+0.86*(500<"+pt0+" && "+pt0+"<600)+0.91*("+pt0+">600)")
-        correctionColumns.Add("dbSFnomtight","1*(300<"+pt0+" && "+pt0+"<400)+0.97*(400<"+pt0+" && "+pt0+"<500)+0.91*(500<"+pt0+" && "+pt0+"<600)+0.95*("+pt0+">600)")
-        correctionColumns.Add("dbSFuptight","1.06*(300<"+pt0+" && "+pt0+"<400)+1*(400<"+pt0+" && "+pt0+"<500)+0.96*(500<"+pt0+" && "+pt0+"<600)+0.99*("+pt0+">600)")
-        correctionColumns.Add("dbSFdowntight","0.94*(300<"+pt0+" && "+pt0+"<400)+0.94*(400<"+pt0+" && "+pt0+"<500)+0.86*(500<"+pt0+" && "+pt0+"<600)+0.91*("+pt0+">600)")
-    if options.year == '17':
-        correctionColumns.Add("dbSFnomloose","1.05*(300<"+pt0+" && "+pt0+"<400)+1.01*(400<"+pt0+" && "+pt0+"<500)+1.06*(500<"+pt0+" && "+pt0+"<600)+1.13*("+pt0+">600)")
-        correctionColumns.Add("dbSFuploose","1.07*(300<"+pt0+" && "+pt0+"<400)+1.04*(400<"+pt0+" && "+pt0+"<500)+1.09*(500<"+pt0+" && "+pt0+"<600)+1.18*("+pt0+">600)")
-        correctionColumns.Add("dbSFdownloose","1.03*(300<"+pt0+" && "+pt0+"<400)+0.98*(400<"+pt0+" && "+pt0+"<500)+1.03*(500<"+pt0+" && "+pt0+"<600)+1.08*("+pt0+">600)")
-        correctionColumns.Add("dbSFnomtight","1.05*(300<"+pt0+" && "+pt0+"<400)+1.01*(400<"+pt0+" && "+pt0+"<500)+1.06*(500<"+pt0+" && "+pt0+"<600)+1.13*("+pt0+">600)")
-        correctionColumns.Add("dbSFuptight","1.07*(300<"+pt0+" && "+pt0+"<400)+1.04*(400<"+pt0+" && "+pt0+"<500)+1.09*(500<"+pt0+" && "+pt0+"<600)+1.18*("+pt0+">600)")
-        correctionColumns.Add("dbSFdowntight","1.03*(300<"+pt0+" && "+pt0+"<400)+0.98*(400<"+pt0+" && "+pt0+"<500)+1.03*(500<"+pt0+" && "+pt0+"<600)+1.08*("+pt0+">600)")
-    if options.year == '18':
-        correctionColumns.Add("dbSFnomloose","1.35*(300<"+pt0+" && "+pt0+"<400)+1.22*(400<"+pt0+" && "+pt0+"<500)+1.31*(500<"+pt0+" && "+pt0+"<600)+1.30*("+pt0+">600)")
-        correctionColumns.Add("dbSFuploose","1.38*(300<"+pt0+" && "+pt0+"<400)+1.25*(400<"+pt0+" && "+pt0+"<500)+1.35*(500<"+pt0+" && "+pt0+"<600)+1.34*("+pt0+">600)")
-        correctionColumns.Add("dbSFdownloose","1.32*(300<"+pt0+" && "+pt0+"<400)+1.19*(400<"+pt0+" && "+pt0+"<500)+1.27*(500<"+pt0+" && "+pt0+"<600)+1.26*("+pt0+">600)")
-        correctionColumns.Add("dbSFnomtight","1.35*(300<"+pt0+" && "+pt0+"<400)+1.22*(400<"+pt0+" && "+pt0+"<500)+1.31*(500<"+pt0+" && "+pt0+"<600)+1.30*("+pt0+">600)")
-        correctionColumns.Add("dbSFuptight","1.38*(300<"+pt0+" && "+pt0+"<400)+1.25*(400<"+pt0+" && "+pt0+"<500)+1.35*(500<"+pt0+" && "+pt0+"<600)+1.34*("+pt0+">600)")
-        correctionColumns.Add("dbSFdowntight","1.32*(300<"+pt0+" && "+pt0+"<400)+1.19*(400<"+pt0+" && "+pt0+"<500)+1.27*(500<"+pt0+" && "+pt0+"<600)+1.26*("+pt0+">600)")
+    if "ttbar" in setname:
+        correctionColumns.Add("dbSFnomloose","1.039*(450<"+pt0+" && "+pt0+"<600)+1.035*(600<"+pt0+" && "+pt0+"<800)+1.301*(800<"+pt0+" && "+pt0+"<1200)")
+        correctionColumns.Add("dbSFuploose","1.1*(300<"+pt0+" && "+pt0+"<400)+1.14*(400<"+pt0+" && "+pt0+"<500)+1.626*(500<"+pt0+" && "+pt0+"<600)")
+        correctionColumns.Add("dbSFdownloose","0.981*(300<"+pt0+" && "+pt0+"<400)+0.937*(400<"+pt0+" && "+pt0+"<500)+1.035*(500<"+pt0+" && "+pt0+"<600)")
+
+        correctionColumns.Add("dbSFnomtight","1.039*(450<"+pt0+" && "+pt0+"<600)+1.035*(600<"+pt0+" && "+pt0+"<800)+1.301*(800<"+pt0+" && "+pt0+"<1200)")
+        correctionColumns.Add("dbSFuptight","1.1*(300<"+pt0+" && "+pt0+"<400)+1.14*(400<"+pt0+" && "+pt0+"<500)+1.626*(500<"+pt0+" && "+pt0+"<600)")
+        correctionColumns.Add("dbSFdowntight","0.981*(300<"+pt0+" && "+pt0+"<400)+0.937*(400<"+pt0+" && "+pt0+"<500)+1.035*(500<"+pt0+" && "+pt0+"<600)")
+    else:
+        if options.year == '16':
+            correctionColumns.Add("dbSFnomloose","1*(300<"+pt0+" && "+pt0+"<400)+0.97*(400<"+pt0+" && "+pt0+"<500)+0.91*(500<"+pt0+" && "+pt0+"<600)+0.95*("+pt0+">600)")
+            correctionColumns.Add("dbSFuploose","1.06*(300<"+pt0+" && "+pt0+"<400)+1*(400<"+pt0+" && "+pt0+"<500)+0.96*(500<"+pt0+" && "+pt0+"<600)+0.99*("+pt0+">600)")
+            correctionColumns.Add("dbSFdownloose","0.94*(300<"+pt0+" && "+pt0+"<400)+0.94*(400<"+pt0+" && "+pt0+"<500)+0.86*(500<"+pt0+" && "+pt0+"<600)+0.91*("+pt0+">600)")
+            correctionColumns.Add("dbSFnomtight","1*(300<"+pt0+" && "+pt0+"<400)+0.97*(400<"+pt0+" && "+pt0+"<500)+0.91*(500<"+pt0+" && "+pt0+"<600)+0.95*("+pt0+">600)")
+            correctionColumns.Add("dbSFuptight","1.06*(300<"+pt0+" && "+pt0+"<400)+1*(400<"+pt0+" && "+pt0+"<500)+0.96*(500<"+pt0+" && "+pt0+"<600)+0.99*("+pt0+">600)")
+            correctionColumns.Add("dbSFdowntight","0.94*(300<"+pt0+" && "+pt0+"<400)+0.94*(400<"+pt0+" && "+pt0+"<500)+0.86*(500<"+pt0+" && "+pt0+"<600)+0.91*("+pt0+">600)")
+        if options.year == '17':
+            correctionColumns.Add("dbSFnomloose","1.05*(300<"+pt0+" && "+pt0+"<400)+1.01*(400<"+pt0+" && "+pt0+"<500)+1.06*(500<"+pt0+" && "+pt0+"<600)+1.13*("+pt0+">600)")
+            correctionColumns.Add("dbSFuploose","1.07*(300<"+pt0+" && "+pt0+"<400)+1.04*(400<"+pt0+" && "+pt0+"<500)+1.09*(500<"+pt0+" && "+pt0+"<600)+1.18*("+pt0+">600)")
+            correctionColumns.Add("dbSFdownloose","1.03*(300<"+pt0+" && "+pt0+"<400)+0.98*(400<"+pt0+" && "+pt0+"<500)+1.03*(500<"+pt0+" && "+pt0+"<600)+1.08*("+pt0+">600)")
+            correctionColumns.Add("dbSFnomtight","1.05*(300<"+pt0+" && "+pt0+"<400)+1.01*(400<"+pt0+" && "+pt0+"<500)+1.06*(500<"+pt0+" && "+pt0+"<600)+1.13*("+pt0+">600)")
+            correctionColumns.Add("dbSFuptight","1.07*(300<"+pt0+" && "+pt0+"<400)+1.04*(400<"+pt0+" && "+pt0+"<500)+1.09*(500<"+pt0+" && "+pt0+"<600)+1.18*("+pt0+">600)")
+            correctionColumns.Add("dbSFdowntight","1.03*(300<"+pt0+" && "+pt0+"<400)+0.98*(400<"+pt0+" && "+pt0+"<500)+1.03*(500<"+pt0+" && "+pt0+"<600)+1.08*("+pt0+">600)")
+        if options.year == '18':
+            correctionColumns.Add("dbSFnomloose","1.35*(300<"+pt0+" && "+pt0+"<400)+1.22*(400<"+pt0+" && "+pt0+"<500)+1.31*(500<"+pt0+" && "+pt0+"<600)+1.30*("+pt0+">600)")
+            correctionColumns.Add("dbSFuploose","1.38*(300<"+pt0+" && "+pt0+"<400)+1.25*(400<"+pt0+" && "+pt0+"<500)+1.35*(500<"+pt0+" && "+pt0+"<600)+1.34*("+pt0+">600)")
+            correctionColumns.Add("dbSFdownloose","1.32*(300<"+pt0+" && "+pt0+"<400)+1.19*(400<"+pt0+" && "+pt0+"<500)+1.27*(500<"+pt0+" && "+pt0+"<600)+1.26*("+pt0+">600)")
+            correctionColumns.Add("dbSFnomtight","1.35*(300<"+pt0+" && "+pt0+"<400)+1.22*(400<"+pt0+" && "+pt0+"<500)+1.31*(500<"+pt0+" && "+pt0+"<600)+1.30*("+pt0+">600)")
+            correctionColumns.Add("dbSFuptight","1.38*(300<"+pt0+" && "+pt0+"<400)+1.25*(400<"+pt0+" && "+pt0+"<500)+1.35*(500<"+pt0+" && "+pt0+"<600)+1.34*("+pt0+">600)")
+            correctionColumns.Add("dbSFdowntight","1.32*(300<"+pt0+" && "+pt0+"<400)+1.19*(400<"+pt0+" && "+pt0+"<500)+1.27*(500<"+pt0+" && "+pt0+"<600)+1.26*("+pt0+">600)")
 else:
     correctionColumns.Add("dbSFnomloose","1*("+pt0+"<350)+1*("+pt0+">350)")
     correctionColumns.Add("dbSFuploose","1*("+pt0+"<350)+1*("+pt0+">350)")
@@ -448,7 +451,7 @@ if not a.isData:
         # correctionColumns.Add("finalweightLooseFailFullSF","dbSFnomloose*(1-dbSFnomloose)*puWeight"+topstringnom+"")
         # correctionColumns.Add("finalweightTightFailHalfSF","dbSFnomtight*puWeight"+topstringnom+"")
         # correctionColumns.Add("finalweightLooseFailHalfSF","dbSFnomloose*puWeight"+topstringnom+"")
-        
+
         # correctionColumns21.Add("finalweight21","dbSFnomloose*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+"")
         # correctionColumns21.Add("finalweight21FailFullSF","(1-dbSFnomloose)*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+"")
         # correctionColumns21.Add("finalweight21FailHalfSF","puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+"")
