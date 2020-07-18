@@ -46,9 +46,9 @@ namespace analyzer {
             wTPtBetadown = 1;
         }else{
             wTPt = exp(alpha-beta*genTpt);
-            wTPtAlphaup = exp(2*alpha-beta*genTpt);
+            wTPtAlphaup = exp(1.5*alpha-beta*genTpt);
             wTPtAlphadown = exp(0.5*alpha-beta*genTpt);
-            wTPtBetaup = exp(alpha-2*beta*genTpt);
+            wTPtBetaup = exp(alpha-1.5*beta*genTpt);
             wTPtBetadown = exp(alpha-0.5*beta*genTpt);
         }
 
@@ -60,9 +60,9 @@ namespace analyzer {
             wTbarPtBetadown = 1;
         }else{
             wTbarPt = exp(alpha-beta*genTBpt);
-            wTbarPtAlphaup = exp(2*alpha-beta*genTpt);
+            wTbarPtAlphaup = exp(1.5*alpha-beta*genTpt);
             wTbarPtAlphadown = exp(0.5*alpha-beta*genTpt);
-            wTbarPtBetaup = exp(alpha-2*beta*genTpt);
+            wTbarPtBetaup = exp(alpha-1.5*beta*genTpt);
             wTbarPtBetadown = exp(alpha-0.5*beta*genTpt);
         }
 
