@@ -336,12 +336,12 @@ if "btagHbb" in options.doublebtagger:
 elif "deepTagMD_HbbvsQCD" or "deepTagMD_ZHbbvsQCD" in options.doublebtagger:
     if "ttbar" in setname:
         correctionColumns.Add("dbSFnomloose","1.039*(450<"+pt0+" && "+pt0+"<600)+1.035*(600<"+pt0+" && "+pt0+"<800)+1.301*(800<"+pt0+" && "+pt0+"<1200)")
-        correctionColumns.Add("dbSFuploose","1.1*(300<"+pt0+" && "+pt0+"<400)+1.14*(400<"+pt0+" && "+pt0+"<500)+1.626*(500<"+pt0+" && "+pt0+"<600)")
-        correctionColumns.Add("dbSFdownloose","0.981*(300<"+pt0+" && "+pt0+"<400)+0.937*(400<"+pt0+" && "+pt0+"<500)+1.035*(500<"+pt0+" && "+pt0+"<600)")
+        correctionColumns.Add("dbSFuploose","1.1*(450<"+pt0+" && "+pt0+"<600)+1.14*(600<"+pt0+" && "+pt0+"<800)+1.626*(800<"+pt0+" && "+pt0+"<1200)")
+        correctionColumns.Add("dbSFdownloose","0.981*(450<"+pt0+" && "+pt0+"<600)+0.937*(600<"+pt0+" && "+pt0+"<800)+1.035*(800<"+pt0+" && "+pt0+"<1200)")
 
         correctionColumns.Add("dbSFnomtight","1.039*(450<"+pt0+" && "+pt0+"<600)+1.035*(600<"+pt0+" && "+pt0+"<800)+1.301*(800<"+pt0+" && "+pt0+"<1200)")
-        correctionColumns.Add("dbSFuptight","1.1*(300<"+pt0+" && "+pt0+"<400)+1.14*(400<"+pt0+" && "+pt0+"<500)+1.626*(500<"+pt0+" && "+pt0+"<600)")
-        correctionColumns.Add("dbSFdowntight","0.981*(300<"+pt0+" && "+pt0+"<400)+0.937*(400<"+pt0+" && "+pt0+"<500)+1.035*(500<"+pt0+" && "+pt0+"<600)")
+        correctionColumns.Add("dbSFuptight","1.1*(450<"+pt0+" && "+pt0+"<600)+1.14*(600<"+pt0+" && "+pt0+"<800)+1.626*(800<"+pt0+" && "+pt0+"<1200)")
+        correctionColumns.Add("dbSFdowntight","0.981*(450<"+pt0+" && "+pt0+"<600)+0.937*(600<"+pt0+" && "+pt0+"<800)+1.035*(800<"+pt0+" && "+pt0+"<1200)")
     else:
         if options.year == '16':
             correctionColumns.Add("dbSFnomloose","1*(300<"+pt0+" && "+pt0+"<400)+0.97*(400<"+pt0+" && "+pt0+"<500)+0.91*(500<"+pt0+" && "+pt0+"<600)+0.95*("+pt0+">600)")
