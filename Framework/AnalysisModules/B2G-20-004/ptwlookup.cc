@@ -60,10 +60,10 @@ namespace analyzer {
             wTbarPtBetadown = 1;
         }else{
             wTbarPt = exp(alpha-beta*genTBpt);
-            wTbarPtAlphaup = exp(1.5*alpha-beta*genTpt);
-            wTbarPtAlphadown = exp(0.5*alpha-beta*genTpt);
-            wTbarPtBetaup = exp(alpha-1.5*beta*genTpt);
-            wTbarPtBetadown = exp(alpha-0.5*beta*genTpt);
+            wTbarPtAlphaup = exp(1.5*alpha-beta*genTBpt);
+            wTbarPtAlphadown = exp(0.5*alpha-beta*genTBpt);
+            wTbarPtBetaup = exp(alpha-1.5*beta*genTBpt);
+            wTbarPtBetadown = exp(alpha-0.5*beta*genTBpt);
         }
 
         /// Here we are making varying shapes for up and down on Alpha and Beta
