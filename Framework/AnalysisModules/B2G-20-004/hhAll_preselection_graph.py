@@ -312,6 +312,10 @@ if not a.isData:
 
 #### B tag SF
 if "btagHbb" in options.doublebtagger:
+    if "ttbar" in setname:
+        correctionColumns.Add("ttbarNorm","0.72*(300<"+pt0+" && "+pt0+"<600)+0.65*(600<"+pt0+" && "+pt0+"<800)+0.52*(800<"+pt0+")")
+        correctionColumns.Add("ttbarNormUp","0.77*(300<"+pt0+" && "+pt0+"<600)+0.71*(600<"+pt0+" && "+pt0+"<800)+0.59*(800<"+pt0+")")
+        correctionColumns.Add("ttbarNormDown","0.67*(300<"+pt0+" && "+pt0+"<600)+0.59*(600<"+pt0+" && "+pt0+"<800)+0.45*(800<"+pt0+")")
     if options.year == '16':
         correctionColumns.Add("dbSFnomloose","1.03*("+pt0+"<350)+1.03*("+pt0+">350)")
         correctionColumns.Add("dbSFuploose","1.09*("+pt0+"<350)+1.09*("+pt0+">350)")
@@ -1198,7 +1202,7 @@ if not a.isData:
         if "deepTagMD_HbbvsQCD" or "deepTagMD_ZHbbvsQCD" in options.doublebtagger:
             hATTT21_ttbarNormUp.Add(hSFTT21_ttbarNormUp.GetPtr())
             hATTT21_ttbarNormDown.Add(hSFTT21_ttbarNormDown.GetPtr())
-            
+
 #### Now we can process the histograms
 hists = [hSRTT11,hATTT11,hSRLL11,hATLL11,hSRTT21,hATTT21,hSRCR11,hATCR11,        
         hpt0TT,hpt1TT,heta0TT,heta1TT,hdeltaEtaTT,hmredTT,hmsd1TT,htau21TT,hmsd0TT,hpt0LL,hpt1LL,heta0LL,heta1LL,hdeltaEtaLL,hmredLL,hmsd1LL,htau21LL,hmsd0LL,
