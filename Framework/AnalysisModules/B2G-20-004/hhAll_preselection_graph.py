@@ -95,12 +95,8 @@ if not a.isData:
     sublead['JMRcorr'] = "1.0"
 
     if options.JES != 'nom': 
-        if options.JES == 'up':
-            lead['JEScorr'] = "(1+(std::abs(FatJet_corr_JES_"+options.JES+"[0] - FatJet_corr_JES[0])/FatJet_corr_JES[0]))"
-            sublead['JEScorr'] = "(1+(std::abs(FatJet_corr_JES_"+options.JES+"[1] - FatJet_corr_JES[1])/FatJet_corr_JES[1]))"
-        if options.JES == 'down':
-            lead['JEScorr'] = "(1-(std::abs(FatJet_corr_JES_"+options.JES+"[0] - FatJet_corr_JES[0])/FatJet_corr_JES[0]))"
-            sublead['JEScorr'] = "(1-(std::abs(FatJet_corr_JES_"+options.JES+"[1] - FatJet_corr_JES[1])/FatJet_corr_JES[1]))"
+        lead['JEScorr'] = 'FatJet_corr_JESTotal_'+options.JES+"[0]"
+        sublead['JEScorr'] = 'FatJet_corr_JESTotal_'+options.JES+"[1]"
 
     if options.JER != 'nom':
         if options.JER == 'up':
