@@ -95,12 +95,20 @@ if not a.isData:
     sublead['JMRcorr'] = "1.0"
 
     if options.JES != 'nom': 
-        lead['JEScorr'] = 'FatJet_corr_JESTotal_'+options.JES+"[0]"
-        sublead['JEScorr'] = 'FatJet_corr_JESTotal_'+options.JES+"[1]"
+        if options.JES == 'up':
+            lead['JEScorr'] = "(1+(std::abs(FatJet_corr_JES_"+options.JES+"[0] - FatJet_corr_JES[0])/FatJet_corr_JES[0]))"
+            sublead['JEScorr'] = "(1+(std::abs(FatJet_corr_JES_"+options.JES+"[1] - FatJet_corr_JES[1])/FatJet_corr_JES[1]))"
+        if options.JES == 'down':
+            lead['JEScorr'] = "(1-(std::abs(FatJet_corr_JES_"+options.JES+"[0] - FatJet_corr_JES[0])/FatJet_corr_JES[0]))"
+            sublead['JEScorr'] = "(1-(std::abs(FatJet_corr_JES_"+options.JES+"[1] - FatJet_corr_JES[1])/FatJet_corr_JES[1]))"
 
     if options.JER != 'nom':
-        lead['JERcorr'] = 'FatJet_corr_JER_'+options.JER+"[0]"
-        sublead["JERcorr"] = 'FatJet_corr_JER_'+options.JER+"[1]"
+        if options.JER == 'up':
+            lead['JERcorr'] = "(1+(std::abs(FatJet_corr_JER_"+options.JER+"[0] - FatJet_corr_JER[0])/FatJet_corr_JER[0]))"
+            sublead['JERcorr'] = "(1+(std::abs(FatJet_corr_JER_"+options.JMS+"[1] - FatJet_corr_JER[1])/FatJet_corr_JER[1]))"
+        if options.JER == 'down':
+            lead['JERcorr'] = "(1-(std::abs(FatJet_corr_JER_"+options.JER+"[0] - FatJet_corr_JER[0])/FatJet_corr_JER[0]))"
+            sublead['JERcorr'] = "(1-(std::abs(FatJet_corr_JER_"+options.JMS+"[1] - FatJet_corr_JER[1])/FatJet_corr_JER[1]))"
 
     if options.JMS != 'nom':
         if options.JMS == 'up':
