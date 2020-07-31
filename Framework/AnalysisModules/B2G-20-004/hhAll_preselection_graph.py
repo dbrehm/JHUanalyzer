@@ -107,24 +107,24 @@ if not a.isData:
         sublead['JMScorr'] = "(1+(FatJet_corr_JMS_"+options.JMS+"[1] - FatJet_corr_JMS[1])/FatJet_corr_JMS[1])"
 
     if options.JMR != 'nom':
-        lead['JMRcorr'] = "(1+(FatJet_corr_JMR_"+options.JMR+"[0] - FatJet_corr_JMR[0])/FatJet_corr_JMR[0])"
-        sublead['JMRcorr'] = "(1+(FatJet_corr_JMR_"+options.JMR+"[1] - FatJet_corr_JMR[1])/FatJet_corr_JMR[1])"
+        lead['JMRcorr'] = "(1+(FatJet_msoftdrop_corr_JMR_"+options.JMR+"[0] - FatJet_msoftdrop_corr_JMR[0])/FatJet_msoftdrop_corr_JMR[0])"
+        sublead['JMRcorr'] = "(1+(FatJet_msoftdrop_corr_JMR_"+options.JMR+"[1] - FatJet_msoftdrop_corr_JMR[1])/FatJet_msoftdrop_corr_JMR[1])"
 
 
 if not a.isData:
     lead['pt'] = "*"+lead['JEScorr']+"*"+lead['JERcorr']
     sublead['pt'] = "*"+sublead['JEScorr']+"*"+sublead['JERcorr']
-    lead['SDmass'] = "*"+lead['JEScorr']+"*"+lead['JERcorr']+"*"+lead['JMRcorr']+"*"+sublead['JMScorr']
+    lead['SDmass'] = "*"+lead['JEScorr']+"*"+lead['JERcorr']+"*"+lead['JMRcorr']+"*"+lead['JMScorr']
     sublead['SDmass'] = "*"+sublead['JEScorr']+"*"+sublead['JERcorr']+"*"+sublead['JMRcorr']+"*"+sublead['JMScorr']
 ###Apply corrections
 if not a.isData:
-    mass0 = "FatJet_msoftdrop_raw[0]"+lead['SDmass']
-    mass1 = "FatJet_msoftdrop_raw[1]"+sublead['SDmass']
+    mass0 = "FatJet_msoftdrop_nom[0]"+lead['SDmass']
+    mass1 = "FatJet_msoftdrop_nom[1]"+sublead['SDmass']
     pt0 = "FatJet_pt_nom[0]"+lead['pt']
     pt1 = "FatJet_pt_nom[1]"+sublead['pt']
 else:
-    mass0 = "FatJet_msoftdrop_raw[0]"
-    mass1 = "FatJet_msoftdrop_raw[1]"
+    mass0 = "FatJet_msoftdrop_nom[0]"
+    mass1 = "FatJet_msoftdrop_nom[1]"
     pt0 = "FatJet_pt_nom[0]"
     pt1 = "FatJet_pt_nom[1]"
 eta0 = "FatJet_eta[0]"
@@ -304,10 +304,6 @@ if not a.isData:
 
 #### B tag SF
 if "btagHbb" in options.doublebtagger:
-    if "ttbar" in setname:
-        correctionColumns.Add("ttbarNorm","0.72*(300<"+pt0+" && "+pt0+"<600)+0.65*(600<"+pt0+" && "+pt0+"<800)+0.52*(800<"+pt0+")")
-        correctionColumns.Add("ttbarNormUp","0.77*(300<"+pt0+" && "+pt0+"<600)+0.71*(600<"+pt0+" && "+pt0+"<800)+0.59*(800<"+pt0+")")
-        correctionColumns.Add("ttbarNormDown","0.67*(300<"+pt0+" && "+pt0+"<600)+0.59*(600<"+pt0+" && "+pt0+"<800)+0.45*(800<"+pt0+")")
     if options.year == '16':
         correctionColumns.Add("dbSFnomloose","1.03*("+pt0+"<350)+1.03*("+pt0+">350)")
         correctionColumns.Add("dbSFuploose","1.09*("+pt0+"<350)+1.09*("+pt0+">350)")
@@ -331,17 +327,43 @@ if "btagHbb" in options.doublebtagger:
         correctionColumns.Add("dbSFdowntight","0.85*("+pt0+"<350)+0.79*("+pt0+">350)")
 elif "deepTagMD_HbbvsQCD" or "deepTagMD_ZHbbvsQCD" in options.doublebtagger:
     if "ttbar" in setname:
-        correctionColumns.Add("dbSFnomloose","1.039*(300<"+pt0+" && "+pt0+"<600)+1.035*(600<"+pt0+" && "+pt0+"<800)+1.301*(800<"+pt0+")")
-        correctionColumns.Add("dbSFuploose","1.1*(300<"+pt0+" && "+pt0+"<600)+1.14*(600<"+pt0+" && "+pt0+"<800)+1.626*(800<"+pt0+")")
-        correctionColumns.Add("dbSFdownloose","0.981*(300<"+pt0+" && "+pt0+"<600)+0.937*(600<"+pt0+" && "+pt0+"<800)+1.035*(800<"+pt0+")")
+        if options.year == '16':
+            correctionColumns.Add("dbSFnomloose","1.039*(300<"+pt0+" && "+pt0+"<600)+1.035*(600<"+pt0+" && "+pt0+"<800)+1.301*(800<"+pt0+")")
+            correctionColumns.Add("dbSFuploose","1.1*(300<"+pt0+" && "+pt0+"<600)+1.14*(600<"+pt0+" && "+pt0+"<800)+1.626*(800<"+pt0+")")
+            correctionColumns.Add("dbSFdownloose","0.981*(300<"+pt0+" && "+pt0+"<600)+0.937*(600<"+pt0+" && "+pt0+"<800)+1.035*(800<"+pt0+")")
 
-        correctionColumns.Add("dbSFnomtight","1.039*(300<"+pt0+" && "+pt0+"<600)+1.035*(600<"+pt0+" && "+pt0+"<800)+1.301*(800<"+pt0+")")
-        correctionColumns.Add("dbSFuptight","1.1*(300<"+pt0+" && "+pt0+"<600)+1.14*(600<"+pt0+" && "+pt0+"<800)+1.626*(800<"+pt0+")")
-        correctionColumns.Add("dbSFdowntight","0.981*(300<"+pt0+" && "+pt0+"<600)+0.937*(600<"+pt0+" && "+pt0+"<800)+1.035*(800<"+pt0+")")
+            correctionColumns.Add("dbSFnomtight","1.039*(300<"+pt0+" && "+pt0+"<600)+1.035*(600<"+pt0+" && "+pt0+"<800)+1.301*(800<"+pt0+")")
+            correctionColumns.Add("dbSFuptight","1.1*(300<"+pt0+" && "+pt0+"<600)+1.14*(600<"+pt0+" && "+pt0+"<800)+1.626*(800<"+pt0+")")
+            correctionColumns.Add("dbSFdowntight","0.981*(300<"+pt0+" && "+pt0+"<600)+0.937*(600<"+pt0+" && "+pt0+"<800)+1.035*(800<"+pt0+")")
 
-        correctionColumns.Add("ttbarNorm","0.72*(300<"+pt0+" && "+pt0+"<600)+0.65*(600<"+pt0+" && "+pt0+"<800)+0.52*(800<"+pt0+")")
-        correctionColumns.Add("ttbarNormUp","0.77*(300<"+pt0+" && "+pt0+"<600)+0.71*(600<"+pt0+" && "+pt0+"<800)+0.59*(800<"+pt0+")")
-        correctionColumns.Add("ttbarNormDown","0.67*(300<"+pt0+" && "+pt0+"<600)+0.59*(600<"+pt0+" && "+pt0+"<800)+0.45*(800<"+pt0+")")
+            correctionColumns.Add("ttbarNorm","0.72*(300<"+pt0+" && "+pt0+"<600)+0.65*(600<"+pt0+" && "+pt0+"<800)+0.52*(800<"+pt0+")")
+            correctionColumns.Add("ttbarNormUp","0.77*(300<"+pt0+" && "+pt0+"<600)+0.71*(600<"+pt0+" && "+pt0+"<800)+0.59*(800<"+pt0+")")
+            correctionColumns.Add("ttbarNormDown","0.67*(300<"+pt0+" && "+pt0+"<600)+0.59*(600<"+pt0+" && "+pt0+"<800)+0.45*(800<"+pt0+")")
+        if options.year == '17':
+            correctionColumns.Add("dbSFnomloose","0.91*(300<"+pt0+" && "+pt0+"<600)+0.93*(600<"+pt0+" && "+pt0+"<800)+1.07*(800<"+pt0+")")
+            correctionColumns.Add("dbSFuploose","0.96*(300<"+pt0+" && "+pt0+"<600)+1.04*(600<"+pt0+" && "+pt0+"<800)+1.35*(800<"+pt0+")")
+            correctionColumns.Add("dbSFdownloose","0.86*(300<"+pt0+" && "+pt0+"<600)+0.84*(600<"+pt0+" && "+pt0+"<800)+0.82*(800<"+pt0+")")
+
+            correctionColumns.Add("dbSFnomtight","0.91*(300<"+pt0+" && "+pt0+"<600)+0.93*(600<"+pt0+" && "+pt0+"<800)+1.07*(800<"+pt0+")")
+            correctionColumns.Add("dbSFuptight","0.96*(300<"+pt0+" && "+pt0+"<600)+1.04*(600<"+pt0+" && "+pt0+"<800)+1.35*(800<"+pt0+")")
+            correctionColumns.Add("dbSFdowntight","0.86*(300<"+pt0+" && "+pt0+"<600)+0.84*(600<"+pt0+" && "+pt0+"<800)+0.82*(800<"+pt0+")")
+
+            correctionColumns.Add("ttbarNorm","0.85*(300<"+pt0+" && "+pt0+"<600)+0.87*(600<"+pt0+" && "+pt0+"<800)+0.74*(800<"+pt0+")")
+            correctionColumns.Add("ttbarNormUp","0.91*(300<"+pt0+" && "+pt0+"<600)+0.95*(600<"+pt0+" && "+pt0+"<800)+0.83*(800<"+pt0+")")
+            correctionColumns.Add("ttbarNormDown","0.79*(300<"+pt0+" && "+pt0+"<600)+0.79*(600<"+pt0+" && "+pt0+"<800)+0.65*(800<"+pt0+")")
+
+        if options.year == '18':
+            correctionColumns.Add("dbSFnomloose","0.89*(300<"+pt0+" && "+pt0+"<600)+0.94*(600<"+pt0+" && "+pt0+"<800)+1.05*(800<"+pt0+")")
+            correctionColumns.Add("dbSFuploose","0.93*(300<"+pt0+" && "+pt0+"<600)+1.02*(600<"+pt0+" && "+pt0+"<800)+1.26*(800<"+pt0+")")
+            correctionColumns.Add("dbSFdownloose","0.84*(300<"+pt0+" && "+pt0+"<600)+0.86*(600<"+pt0+" && "+pt0+"<800)+0.86*(800<"+pt0+")")
+
+            correctionColumns.Add("dbSFnomtight","0.89*(300<"+pt0+" && "+pt0+"<600)+0.94*(600<"+pt0+" && "+pt0+"<800)+1.05*(800<"+pt0+")")
+            correctionColumns.Add("dbSFuptight","0.93*(300<"+pt0+" && "+pt0+"<600)+1.02*(600<"+pt0+" && "+pt0+"<800)+1.26*(800<"+pt0+")")
+            correctionColumns.Add("dbSFdowntight","0.84*(300<"+pt0+" && "+pt0+"<600)+0.86*(600<"+pt0+" && "+pt0+"<800)+0.86*(800<"+pt0+")")
+
+            correctionColumns.Add("ttbarNorm","0.83*(300<"+pt0+" && "+pt0+"<600)+0.89*(600<"+pt0+" && "+pt0+"<800)+0.86*(800<"+pt0+")")
+            correctionColumns.Add("ttbarNormUp","0.89*(300<"+pt0+" && "+pt0+"<600)+0.97*(600<"+pt0+" && "+pt0+"<800)+0.95*(800<"+pt0+")")
+            correctionColumns.Add("ttbarNormDown","0.77*(300<"+pt0+" && "+pt0+"<600)+0.81*(600<"+pt0+" && "+pt0+"<800)+0.77*(800<"+pt0+")")
     else:
         if options.year == '16':
             correctionColumns.Add("dbSFnomloose","1*(300<"+pt0+" && "+pt0+"<400)+0.97*(400<"+pt0+" && "+pt0+"<500)+0.91*(500<"+pt0+" && "+pt0+"<600)+0.95*("+pt0+">600)")
