@@ -85,24 +85,14 @@ else: norm = 1.
 lead = {}
 sublead = {}
 if not a.isData:
-
-    # lead['JEScorr'] = "1.0"
-    # sublead['JEScorr'] = "1.0"
-    # lead['JMScorr'] = "1.0"
-    # sublead['JMScorr'] = "1.0"
-    # lead['JERcorr'] = "FatJet_corr_JER[0]"
-    # sublead["JERcorr"] = "FatJet_corr_JER[1]"
-    # lead['JMRcorr'] = "1.0"
-    # sublead['JMRcorr'] = "1.0"
-
     lead['JEScorr'] = "1.0"
     sublead['JEScorr'] = "1.0"
-    lead['JMScorr'] = "1.0*(FatJet_msoftdrop_nom[0] < 110.0 || FatJet_msoftdrop_nom[0] > 140.0)+FatJet_corr_JMS[0]*(FatJet_msoftdrop_nom[0] > 110.0 && FatJet_msoftdrop_nom[0] < 140.0)"
-    sublead['JMScorr'] = "1.0*(FatJet_msoftdrop_nom[1] < 110.0 || FatJet_msoftdrop_nom[1] > 140.0)+FatJet_corr_JMS[1]*(FatJet_msoftdrop_nom[1] > 110.0 && FatJet_msoftdrop_nom[1] < 140.0)"
-    lead['JERcorr'] = "FatJet_corr_JER[0]"
-    sublead["JERcorr"] = "FatJet_corr_JER[1]"
-    lead['JMRcorr'] = "1.0*(FatJet_msoftdrop_nom[0] < 110.0 || FatJet_msoftdrop_nom[0] > 140.0)+FatJet_msoftdrop_corr_JMR[0]*(FatJet_msoftdrop_nom[0] > 110.0 && FatJet_msoftdrop_nom[0] < 140.0)"
-    sublead['JMRcorr'] = "1.0*(FatJet_msoftdrop_nom[1] < 110.0 || FatJet_msoftdrop_nom[1] > 140.0)+FatJet_msoftdrop_corr_JMR[1]*(FatJet_msoftdrop_nom[1] > 110.0 && FatJet_msoftdrop_nom[1] < 140.0)"
+    lead['JMScorr'] = "1.0"
+    sublead['JMScorr'] = "1.0"
+    lead['JERcorr'] = 'FatJet_corr_JER[0]'
+    sublead["JERcorr"] = 'FatJet_corr_JER[1]'
+    lead['JMRcorr'] = "1.0"
+    sublead['JMRcorr'] = "1.0"
 
     if options.JES != 'nom': 
         lead['JEScorr'] = 'FatJet_corr_JESTotal_'+options.JES+"[0]"
@@ -113,12 +103,12 @@ if not a.isData:
         sublead["JERcorr"] = 'FatJet_corr_JER_'+options.JER+"[1]"
 
     if options.JMS != 'nom':
-        lead['JMScorr'] = "(1+(FatJet_corr_JMS_"+options.JMS+"[0] - FatJet_corr_JMS[0])/FatJet_corr_JMS[0])*(FatJet_msoftdrop_nom[0] < 110.0 || FatJet_msoftdrop_nom[0] > 140.0) + FatJet_corr_JMS_"+options.JMS+"[0]*(FatJet_msoftdrop_nom[0] > 110.0 && FatJet_msoftdrop_nom[0] < 140.0)"
-        sublead['JMScorr'] = "(1+(FatJet_corr_JMS_"+options.JMS+"[1] - FatJet_corr_JMS[1])/FatJet_corr_JMS[1])*(FatJet_msoftdrop_nom[0] < 110.0 || FatJet_msoftdrop_nom[0] > 140.0) + FatJet_corr_JMS_"+options.JMS+"[1]*(FatJet_msoftdrop_nom[1] > 110.0 && FatJet_msoftdrop_nom[1] < 140.0)"
+        lead['JMScorr'] = "(1+(FatJet_corr_JMS_"+options.JMS+"[0] - FatJet_corr_JMS[0])/FatJet_corr_JMS[0])"
+        sublead['JMScorr'] = "(1+(FatJet_corr_JMS_"+options.JMS+"[1] - FatJet_corr_JMS[1])/FatJet_corr_JMS[1])"
 
     if options.JMR != 'nom':
-        lead['JMRcorr'] = "(1+(FatJet_msoftdrop_corr_JMR_"+options.JMR+"[0] - FatJet_msoftdrop_corr_JMR[0])/FatJet_msoftdrop_corr_JMR[0])*(FatJet_msoftdrop_nom[0] < 110.0 || FatJet_msoftdrop_nom[0] > 140.0) + FatJet_corr_JMR_"+options.JMS+"[0]*(FatJet_msoftdrop_nom[0] > 110.0 && FatJet_msoftdrop_nom[0] < 140.0)"
-        sublead['JMRcorr'] = "(1+(FatJet_msoftdrop_corr_JMR_"+options.JMR+"[1] - FatJet_msoftdrop_corr_JMR[1])/FatJet_msoftdrop_corr_JMR[1])*(FatJet_msoftdrop_nom[0] < 110.0 || FatJet_msoftdrop_nom[0] > 140.0) + FatJet_corr_JMR_"+options.JMS+"[1]*(FatJet_msoftdrop_nom[1] > 110.0 && FatJet_msoftdrop_nom[1] < 140.0)"
+        lead['JMRcorr'] = "(1+(FatJet_msoftdrop_corr_JMR_"+options.JMR+"[0] - FatJet_msoftdrop_corr_JMR[0])/FatJet_msoftdrop_corr_JMR[0])"
+        sublead['JMRcorr'] = "(1+(FatJet_msoftdrop_corr_JMR_"+options.JMR+"[1] - FatJet_msoftdrop_corr_JMR[1])/FatJet_msoftdrop_corr_JMR[1])"
 
 
 if not a.isData:
