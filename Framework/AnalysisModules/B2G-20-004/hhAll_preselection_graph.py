@@ -98,7 +98,7 @@ if not a.isData:
     lead['JEScorr'] = "1.0"
     sublead['JEScorr'] = "1.0"
     lead['JMScorr'] = "1.0*(FatJet_msoftdrop_nom[0] < 110.0 || FatJet_msoftdrop_nom[0] > 140.0)+FatJet_corr_JMS[0]*(FatJet_msoftdrop_nom[0] > 110.0 && FatJet_msoftdrop_nom[0] < 140.0)"
-    sublead['JMScorr'] = "1.0*(FatJet_msoftdrop_nom[1] < 110.0 || FatJet_msoftdrop_nom[1] > 140.0)+FatJet_msoftdrop_corr_JMS[1]*(FatJet_msoftdrop_nom[1] > 110.0 && FatJet_msoftdrop_nom[1] < 140.0)"
+    sublead['JMScorr'] = "1.0*(FatJet_msoftdrop_nom[1] < 110.0 || FatJet_msoftdrop_nom[1] > 140.0)+FatJet_corr_JMS[1]*(FatJet_msoftdrop_nom[1] > 110.0 && FatJet_msoftdrop_nom[1] < 140.0)"
     lead['JERcorr'] = "FatJet_corr_JER[0]"
     sublead["JERcorr"] = "FatJet_corr_JER[1]"
     lead['JMRcorr'] = "1.0*(FatJet_msoftdrop_nom[0] < 110.0 || FatJet_msoftdrop_nom[0] > 140.0)+FatJet_msoftdrop_corr_JMR[0]*(FatJet_msoftdrop_nom[0] > 110.0 && FatJet_msoftdrop_nom[0] < 140.0)"
