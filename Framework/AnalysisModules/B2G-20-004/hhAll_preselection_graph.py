@@ -812,6 +812,7 @@ hmred21 = kinematicDistributions.DataFrame.Histo1D(("mred21","mred21",28 ,700 ,3
 hmsd021 = kinematicDistributions.DataFrame.Histo1D(("msd021","msd021",50 ,0 ,400),"mh1")
 hmbb21 = kinematicDistributions.DataFrame.Histo1D(("mbb21","mbb21",50 ,0 ,400),"mbb")
 
+hdeepAK8 = preselected.DataFrame.Histo1D(("DeepAK8Score","DeepAK8Score",50,-1,1),"FatJet_"+doubleB_name+"[0]")
 
 if not a.isData:
     hSRTT11 = SRTT.DataFrame.Histo2D(("SRTT_11","SRTT_11",18 ,45 ,225 ,28 ,700 ,3500),'mh','mreduced',"finalweightTight")
@@ -1205,7 +1206,7 @@ if not a.isData:
 hists = [hSRTT11,hATTT11,hSRLL11,hATLL11,hSRTT21,hATTT21,hSRCR11,hATCR11,        
         hpt0TT,hpt1TT,heta0TT,heta1TT,hdeltaEtaTT,hmredTT,hmsd1TT,htau21TT,hmsd0TT,hpt0LL,hpt1LL,heta0LL,heta1LL,hdeltaEtaLL,hmredLL,hmsd1LL,htau21LL,hmsd0LL,
         hpt021,bpt021,bpt121,heta021,beta021,heta021,hdeltaEta21,hmred21,hmsd021,hmbb21,
-        deltaRCheck,trijetMassCheck,trijetMassDeltaR]
+        deltaRCheck,trijetMassCheck,trijetMassDeltaR,hdeepAK8]
         # nom_check_plot,raw_check_plot]
 
 if not a.isData:
