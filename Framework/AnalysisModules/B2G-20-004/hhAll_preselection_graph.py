@@ -813,7 +813,7 @@ hmred21 = kinematicDistributions.DataFrame.Histo1D(("mred21","mred21",28 ,700 ,3
 hmsd021 = kinematicDistributions.DataFrame.Histo1D(("msd021","msd021",50 ,0 ,400),"mh1")
 hmbb21 = kinematicDistributions.DataFrame.Histo1D(("mbb21","mbb21",50 ,0 ,400),"mbb")
 
-hdeepAK8 = preselected.DataFrame.Histo1D(("DeepAK8Score","DeepAK8Score",50 ,0 ,1),"FatJet_"+doubleB_name+"[0]")
+hdeepAK8 = preselected.DataFrame.Histo1D(("DeepAK8Score","DeepAK8Score",50 ,0 ,1),"tagger")
 
 if not a.isData:
     hSRTT11 = SRTT.DataFrame.Histo2D(("SRTT_11","SRTT_11",18 ,45 ,225 ,28 ,700 ,3500),'mh','mreduced',"finalweightTight")
