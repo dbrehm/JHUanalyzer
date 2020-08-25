@@ -77,7 +77,7 @@ if os.path.exists(options.config):
         xsec = 1.
         lumi = 1.
 if not a.isData: 
-    if 'QCD' in setname: norm = 1.
+    if 'QCD' in setname and not "btagHbb" in options.doublebtagger: norm = 1.
     else: norm = (xsec*lumi)/a.genEventCount
 else: norm = 1.
 
@@ -689,7 +689,8 @@ preselection11.Add("eta1","abs("+eta1+") < 2.4")
 preselection11.Add("jetID","((FatJet_jetId[0] & 2) == 2) && ((FatJet_jetId[1] & 2) == 2)")
 # preselection11.Add("PV","PV_npvsGood > 0")
 preselection11.Add("deltaEta","abs("+eta0+" - "+eta1+") < 1.3")
-# preselection11.Add("tau21","(FatJet_tau2[0]/FatJet_tau1[0] < 0.55) && (FatJet_tau2[1]/FatJet_tau1[1] < 0.55)")
+if "btagHbb" in options.doublebtagger:
+    preselection11.Add("tau21","(FatJet_tau2[0]/FatJet_tau1[0] < 0.55) && (FatJet_tau2[1]/FatJet_tau1[1] < 0.55)")
 # Cut on new column
 preselection12 = CutGroup('preselection12')
 preselection12.Add("msoftdrop_1","(110 < mh1) && (mh1 < 140)")
