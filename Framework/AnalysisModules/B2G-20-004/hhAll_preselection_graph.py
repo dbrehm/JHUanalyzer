@@ -1070,13 +1070,14 @@ if not a.isData:
         hATCR11_topptBetaDown = ATCR.DataFrame.Histo2D(("ATCR_11_topptBetaDown","ATCR_11_topptBetaDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_loose_BetadownFailHalfSF')
         hSFCR11_topptBetaDown = SRCR.DataFrame.Histo2D(("SFCR_11_topptBetaDown","ATCR_11_topptBetaDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_loose_BetadownFailFullSF')
 
-        hSRCR11_ttbarNormUp = SRCR.DataFrame.Histo2D(("SRCR_11_ttbarNormUp","SRCR_11_ttbarNormUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'weight_loose_NormUp')
-        hATCR11_ttbarNormUp = ATCR.DataFrame.Histo2D(("ATCR_11_ttbarNormUp","ATCR_11_ttbarNormUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'weight_loose_NormUpFailHalfSF')
-        hSFCR11_ttbarNormUp = SRCR.DataFrame.Histo2D(("SFCR_11_ttbarNormUp","ATCR_11_ttbarNormUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'weight_loose_NormUpFailFullSF')
+        if "deepTagMD_HbbvsQCD" or "deepTagMD_ZHbbvsQCD" in options.doublebtagger:
+            hSRCR11_ttbarNormUp = SRCR.DataFrame.Histo2D(("SRCR_11_ttbarNormUp","SRCR_11_ttbarNormUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'weight_loose_NormUp')
+            hATCR11_ttbarNormUp = ATCR.DataFrame.Histo2D(("ATCR_11_ttbarNormUp","ATCR_11_ttbarNormUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'weight_loose_NormUpFailHalfSF')
+            hSFCR11_ttbarNormUp = SRCR.DataFrame.Histo2D(("SFCR_11_ttbarNormUp","ATCR_11_ttbarNormUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'weight_loose_NormUpFailFullSF')
 
-        hSRCR11_ttbarNormDown = SRCR.DataFrame.Histo2D(("SRCR_11_ttbarNormDown","SRCR_11_ttbarNormDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'weight_loose_NormDown')
-        hATCR11_ttbarNormDown = ATCR.DataFrame.Histo2D(("ATCR_11_ttbarNormDown","ATCR_11_ttbarNormDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'weight_loose_NormDownFailHalfSF')
-        hSFCR11_ttbarNormDown = SRCR.DataFrame.Histo2D(("SFCR_11_ttbarNormDown","ATCR_11_ttbarNormDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'weight_loose_NormDownFailFullSF')
+            hSRCR11_ttbarNormDown = SRCR.DataFrame.Histo2D(("SRCR_11_ttbarNormDown","SRCR_11_ttbarNormDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'weight_loose_NormDown')
+            hATCR11_ttbarNormDown = ATCR.DataFrame.Histo2D(("ATCR_11_ttbarNormDown","ATCR_11_ttbarNormDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'weight_loose_NormDownFailHalfSF')
+            hSFCR11_ttbarNormDown = SRCR.DataFrame.Histo2D(("SFCR_11_ttbarNormDown","ATCR_11_ttbarNormDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'weight_loose_NormDownFailFullSF')
 
 
 ### Now 2+1 top templates
