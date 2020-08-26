@@ -383,7 +383,7 @@ if not a.isData:
         correctionColumns.Add("topptvector","analyzer::PTWLookup(nGenPart, GenPart_pdgId, GenPart_statusFlags, GenPart_pt, GenPart_eta, GenPart_phi, GenPart_mass, lead_vect, sublead_vect)")
         correctionColumns.Add("topptvectorcheck","topptvector[0]")
 
-        if "deepTagMD_HbbvsQCD" or "deepTagMD_ZHbbvsQCD" in options.doublebtagger:
+        if "deepTagMD_HbbvsQCD" in options.doublebtagger or "deepTagMD_ZHbbvsQCD" in options.doublebtagger:
             topstringnom = "*ttbarNorm*topptvector[0]"
             topstringalphaup = "*ttbarNorm*topptvector[1]"
             topstringalphadown = "*ttbarNorm*topptvector[2]"
