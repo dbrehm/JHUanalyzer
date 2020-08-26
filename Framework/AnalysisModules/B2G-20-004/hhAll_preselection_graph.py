@@ -309,7 +309,7 @@ if "btagHbb" in options.doublebtagger:
         correctionColumns.Add("dbSFnomtight","0.89*("+pt0+"<350)+0.84*("+pt0+">350)")
         correctionColumns.Add("dbSFuptight","0.97*("+pt0+"<350)+0.89*("+pt0+">350)")
         correctionColumns.Add("dbSFdowntight","0.85*("+pt0+"<350)+0.79*("+pt0+">350)")
-elif "deepTagMD_HbbvsQCD" or "deepTagMD_ZHbbvsQCD" in options.doublebtagger:
+elif "deepTagMD_HbbvsQCD" in options.doublebtagger or "deepTagMD_ZHbbvsQCD" in options.doublebtagger:
     if "ttbar" in setname:
         if options.year == '16':
             correctionColumns.Add("dbSFnomloose","1.039*(300<"+pt0+" && "+pt0+"<600)+1.035*(600<"+pt0+" && "+pt0+"<800)+1.301*(800<"+pt0+")")
@@ -447,7 +447,7 @@ if not a.isData:
 
 
         ### ttbar normaliation weights
-        if "deepTagMD_HbbvsQCD" or "deepTagMD_ZHbbvsQCD" in options.doublebtagger:
+        if "deepTagMD_HbbvsQCD" in options.doublebtagger or "deepTagMD_ZHbbvsQCD" in options.doublebtagger:
             correctionColumns11.Add("weight_tight_NormUp","ttbarNormUp*dbSFnomtight*(dbSFnomtight)*triggerTight[0]*puWeight*topptvector[0]")
             correctionColumns11.Add("weight_tight_NormDown","ttbarNormDown*dbSFnomtight*(dbSFnomtight)*triggerTight[0]*puWeight*topptvector[0]")
             correctionColumns11.Add("weight_loose_NormUp","ttbarNormUp*dbSFnomloose*(dbSFnomloose)*triggerLoose[0]*puWeight*topptvector[0]")
@@ -1034,7 +1034,7 @@ if not a.isData:
         hATLL11_topptBetaDown = ATLL.DataFrame.Histo2D(("ATLL_11_topptBetaDown","ATLL_11_topptBetaDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_loose_BetadownFailHalfSF')
         hSFLL11_topptBetaDown = SRLL.DataFrame.Histo2D(("SFLL_11_topptBetaDown","ATLL_11_topptBetaDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_loose_BetadownFailFullSF')
 
-        if "deepTagMD_HbbvsQCD" or "deepTagMD_ZHbbvsQCD" in options.doublebtagger:
+        if "deepTagMD_HbbvsQCD" in options.doublebtagger or "deepTagMD_ZHbbvsQCD" in options.doublebtagger:
             hSRTT11_ttbarNormUp = SRTT.DataFrame.Histo2D(("SRTT_11_ttbarNormUp","SRTT_11_ttbarNormUp",18 ,45 ,225 ,28 ,700 ,3500),'mh','mreduced','weight_tight_NormUp')
             hATTT11_ttbarNormUp = ATTT.DataFrame.Histo2D(("ATTT_11_ttbarNormUp","ATTT_11_ttbarNormUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'weight_tight_NormUpFailHalfSF')
             hSFTT11_ttbarNormUp = SRTT.DataFrame.Histo2D(("SFTT_11_ttbarNormUp","ATTT_11_ttbarNormUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'weight_tight_NormUpFailFullSF')
@@ -1070,7 +1070,7 @@ if not a.isData:
         hATCR11_topptBetaDown = ATCR.DataFrame.Histo2D(("ATCR_11_topptBetaDown","ATCR_11_topptBetaDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_loose_BetadownFailHalfSF')
         hSFCR11_topptBetaDown = SRCR.DataFrame.Histo2D(("SFCR_11_topptBetaDown","ATCR_11_topptBetaDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'topptweight_loose_BetadownFailFullSF')
 
-        if "deepTagMD_HbbvsQCD" or "deepTagMD_ZHbbvsQCD" in options.doublebtagger:
+        if "deepTagMD_HbbvsQCD" in options.doublebtagger or "deepTagMD_ZHbbvsQCD" in options.doublebtagger:
             hSRCR11_ttbarNormUp = SRCR.DataFrame.Histo2D(("SRCR_11_ttbarNormUp","SRCR_11_ttbarNormUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'weight_loose_NormUp')
             hATCR11_ttbarNormUp = ATCR.DataFrame.Histo2D(("ATCR_11_ttbarNormUp","ATCR_11_ttbarNormUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'weight_loose_NormUpFailHalfSF')
             hSFCR11_ttbarNormUp = SRCR.DataFrame.Histo2D(("SFCR_11_ttbarNormUp","ATCR_11_ttbarNormUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'weight_loose_NormUpFailFullSF')
@@ -1097,7 +1097,7 @@ if not a.isData:
         hATTT21_topptBetaDown = Fail.DataFrame.Histo2D(("ATTT_21_topptBetaDown","ATTT_21_topptBetaDown",18 ,45 ,225 ,13 ,700 ,2000),"mh","mreduced21",'topptweight_BetadownFailHalfSF')
         hSFTT21_topptBetaDown = Pass.DataFrame.Histo2D(("SFTT_21_topptBetaDown","ATTT_21_topptBetaDown",18 ,45 ,225 ,13 ,700 ,2000),"mh","mreduced21",'topptweight_BetadownFailFullSF')
         
-        if "deepTagMD_HbbvsQCD" or "deepTagMD_ZHbbvsQCD" in options.doublebtagger:
+        if "deepTagMD_HbbvsQCD" in options.doublebtagger or "deepTagMD_ZHbbvsQCD" in options.doublebtagger:
             hSRTT21_ttbarNormUp = Pass.DataFrame.Histo2D(("SRTT_21_ttbarNormUp","SRTT_21_ttbarNormUp",18 ,45 ,225 ,13 ,700 ,2000),'mh','mreduced21','weight_NormUp')
             hATTT21_ttbarNormUp = Fail.DataFrame.Histo2D(("ATTT_21_ttbarNormUp","ATTT_21_ttbarNormUp",18 ,45 ,225 ,13 ,700 ,2000),"mh","mreduced21",'weight_NormUpFailHalfSF')
             hSFTT21_ttbarNormUp = Pass.DataFrame.Histo2D(("SFTT_21_ttbarNormUp","SFTT_21_ttbarNormUp",18 ,45 ,225 ,13 ,700 ,2000),"mh","mreduced21",'weight_NormUpFailFullSF')
@@ -1174,7 +1174,7 @@ if not a.isData:
         hATTT11_topptBetaDown.Add(hSFTT11_topptBetaDown.GetPtr())
         hATLL11_topptBetaDown.Add(hSFLL11_topptBetaDown.GetPtr())
 
-        if "deepTagMD_HbbvsQCD" or "deepTagMD_ZHbbvsQCD" in options.doublebtagger:
+        if "deepTagMD_HbbvsQCD" in options.doublebtagger or "deepTagMD_ZHbbvsQCD" in options.doublebtagger:
             hATTT11_ttbarNormUp.Add(hSFTT11_ttbarNormUp.GetPtr())
             hATLL11_ttbarNormUp.Add(hSFLL11_ttbarNormUp.GetPtr())
             hATTT11_ttbarNormDown.Add(hSFTT11_ttbarNormDown.GetPtr())
@@ -1188,7 +1188,7 @@ if not a.isData:
         hATCR11_topptBetaUp.Add(hSFCR11_topptBetaUp.GetPtr())
         hATCR11_topptBetaDown.Add(hSFCR11_topptBetaDown.GetPtr())    
 
-        if "deepTagMD_HbbvsQCD" or "deepTagMD_ZHbbvsQCD" in options.doublebtagger:
+        if "deepTagMD_HbbvsQCD" in options.doublebtagger or "deepTagMD_ZHbbvsQCD" in options.doublebtagger:
             hATCR11_ttbarNormUp.Add(hSFCR11_ttbarNormUp.GetPtr())
             hATCR11_ttbarNormDown.Add(hSFCR11_ttbarNormDown.GetPtr())    
 
@@ -1200,7 +1200,7 @@ if not a.isData:
         hATTT21_topptBetaUp.Add(hSFTT21_topptBetaUp.GetPtr())
         hATTT21_topptBetaDown.Add(hSFTT21_topptBetaDown.GetPtr())
 
-        if "deepTagMD_HbbvsQCD" or "deepTagMD_ZHbbvsQCD" in options.doublebtagger:
+        if "deepTagMD_HbbvsQCD" in options.doublebtagger or "deepTagMD_ZHbbvsQCD" in options.doublebtagger:
             hATTT21_ttbarNormUp.Add(hSFTT21_ttbarNormUp.GetPtr())
             hATTT21_ttbarNormDown.Add(hSFTT21_ttbarNormDown.GetPtr())
 
@@ -1229,7 +1229,7 @@ if not a.isData:
             hSRTT11_topptBetaUp,hATTT11_topptBetaUp,hSRLL11_topptBetaUp,hATLL11_topptBetaUp,hSRTT11_topptBetaDown,hATTT11_topptBetaDown,hSRLL11_topptBetaDown,hATLL11_topptBetaDown,
             hSRCR11_topptBetaUp,hATCR11_topptBetaUp,hSRCR11_topptBetaDown,hATCR11_topptBetaDown,        
             hSRTT21_topptBetaUp,hATTT21_topptBetaUp,hSRTT21_topptBetaDown,hATTT21_topptBetaDown])
-        if "deepTagMD_HbbvsQCD" or "deepTagMD_ZHbbvsQCD" in options.doublebtagger:
+        if "deepTagMD_HbbvsQCD" in options.doublebtagger or "deepTagMD_ZHbbvsQCD" in options.doublebtagger:
             hists.extend([hSRTT11_ttbarNormUp,hATTT11_ttbarNormUp,hSRLL11_ttbarNormUp,hATLL11_ttbarNormUp,hSRTT11_ttbarNormDown,hATTT11_ttbarNormDown,hSRLL11_ttbarNormDown,hATLL11_ttbarNormDown,
             hSRCR11_ttbarNormUp,hATCR11_ttbarNormUp,hSRCR11_ttbarNormDown,hATCR11_ttbarNormDown,hSRTT21_ttbarNormUp,hATTT21_ttbarNormUp,hSRTT21_ttbarNormDown,hATTT21_ttbarNormDown])
 
