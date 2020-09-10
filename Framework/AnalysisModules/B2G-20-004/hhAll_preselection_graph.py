@@ -282,7 +282,7 @@ if not a.isData:
     correctionColumns.Add("triggerTight","analyzer::TriggerLookup(mreduced,tSF)")
     # ROOT.gInterpreter.ProcessLine("auto tHistL = "+doubleB_name+"loose"+options.year+";")
     correctionColumns.Add("triggerLoose","analyzer::TriggerLookup(mreduced,tSF)")
-    ROOT.gInterpreter.ProcessLine("auto tSD21 = "+"deepTagMD_HbbvsQCD"+"21"+options.year+";")
+    ROOT.gInterpreter.ProcessLine("auto tSD21 = "+"deepTagMD_HbbvsQCD"+"ratio21"+options.year+";")
     # ROOT.gInterpreter.ProcessLine("auto tHist21 = "+doubleB_name+"21"+options.year+";")
     correctionColumns21.Add("trigger21","analyzer::TriggerLookup(mreduced21,tSD21)")
 
