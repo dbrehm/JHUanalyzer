@@ -12,7 +12,7 @@ namespace analyzer {
         std::vector<double> out;
 
         if (var < 2000.0){
-            int bin0 = TEff->FindBin(var); 
+            int bin0 = TEff->GetBin(var); 
             double jetTriggerWeight = TEff->GetEfficiency(bin0);
             // Check that we're not in an empty bin in the fully efficient region
             if (jetTriggerWeight == 0){
