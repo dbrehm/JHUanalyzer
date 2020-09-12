@@ -1381,7 +1381,8 @@ if not a.isData:
             hATTT21_ttbarNormDown.Add(hSFTT21_ttbarNormDown.GetPtr())
 
 #### Now we can process the histograms
-hists = [hSRTT11,hATTT11,hSRLL11,hATLL11,hSRTT21,hATTT21,hSRCR11,hATCR11,        
+hists = [hSRTT11,hATTT11,hSRLL11,hATLL11,hSRTT21,hATTT21,hSRCR11,hATCR11,
+        hSRTT11_ttbar,hATTT11_ttbar,hSRLL11_ttbar,hATLL11_ttbar,        
         hpt0TT,hpt1TT,heta0TT,heta1TT,hdeltaEtaTT,hmredTT,hmsd1TT,htau21TT,hmsd0TT,hpt0LL,hpt1LL,heta0LL,heta1LL,hdeltaEtaLL,hmredLL,hmsd1LL,htau21LL,hmsd0LL,
         hpt021,bpt021,bpt121,heta021,beta021,heta021,hdeltaEta21,hmred21,hmsd021,hmbb21,
         deltaRCheck,trijetMassCheck,trijetMassDeltaR,hdeepAK8]
