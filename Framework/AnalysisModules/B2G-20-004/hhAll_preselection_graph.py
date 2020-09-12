@@ -1409,7 +1409,11 @@ if not a.isData:
             hSRTT11_ttbar_topptAlphaUp,hATTT11_ttbar_topptAlphaUp,hSRLL11_ttbar_topptAlphaUp,hATLL11_ttbar_topptAlphaUp,
             hSRTT11_ttbar_topptAlphaDown,hATTT11_ttbar_topptAlphaDown,hSRLL11_ttbar_topptAlphaDown,hATLL11_ttbar_topptAlphaDown,
             hSRTT11_ttbar_topptBetaUp,hATTT11_ttbar_topptBetaUp,hSRLL11_ttbar_topptBetaUp,hATLL11_ttbar_topptBetaUp,
-            hSRTT11_ttbar_topptBetaDown,hATTT11_ttbar_topptBetaDown,hSRLL11_ttbar_topptBetaDown,hATLL11_ttbar_topptBetaDown])
+            hSRTT11_ttbar_topptBetaDown,hATTT11_ttbar_topptBetaDown,hSRLL11_ttbar_topptBetaDown,hATLL11_ttbar_topptBetaDown,
+            hSRTT11_ttbar_pdfUp,hATTT11_ttbar_pdfUp,hSRLL11_ttbar_pdfUp,hATLL11_ttbar_pdfUp,hSRTT11_ttbar_pdfDown,hATTT11_ttbar_pdfDown,hSRLL11_ttbar_pdfDown,hATLL11_ttbar_pdfDown,
+            hSRTT11_ttbar_pileupUp,hATTT11_ttbar_pileupUp,hSRLL11_ttbar_pileupUp,hATLL11_ttbar_pileupUp,hSRTT11_ttbar_pileupDown,hATTT11_ttbar_pileupDown,hSRLL11_ttbar_pileupDown,hATLL11_ttbar_pileupDown,
+            hSRTT11_ttbar_triggertight_up,hATTT11_ttbar_triggertight_up,hSRLL11_ttbar_triggerloose_up,hATLL11_ttbar_triggerloose_up,hSRTT11_ttbar_triggertight_down,hATTT11_ttbar_triggertight_down,hSRLL11_ttbar_triggerloose_down,hATLL11_ttbar_triggerloose_down,
+            hSRTT11_ttbar_dbsftight_up,hATTT11_ttbar_dbsftight_up,hSRLL11_ttbar_dbsfloose_up,hATLL11_ttbar_dbsfloose_up,hSRTT11_ttbar_dbsftight_down,hATTT11_ttbar_dbsftight_down,hSRLL11_ttbar_dbsfloose_down,hATLL11_ttbar_dbsfloose_down])
         if "deepTagMD_HbbvsQCD" in options.doublebtagger or "deepTagMD_ZHbbvsQCD" in options.doublebtagger:
             hists.extend([hSRTT11_ttbarNormUp,hATTT11_ttbarNormUp,hSRLL11_ttbarNormUp,hATLL11_ttbarNormUp,hSRTT11_ttbarNormDown,hATTT11_ttbarNormDown,hSRLL11_ttbarNormDown,hATLL11_ttbarNormDown,
             hSRCR11_ttbarNormUp,hATCR11_ttbarNormUp,hSRCR11_ttbarNormDown,hATCR11_ttbarNormDown,hSRTT21_ttbarNormUp,hATTT21_ttbarNormUp,hSRTT21_ttbarNormDown,hATTT21_ttbarNormDown,
