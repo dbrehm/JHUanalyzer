@@ -860,7 +860,7 @@ else:
 
 ### Implement ttbar control region
 
-if not a.isData and 'ttbar' in setname:
+if not a.isData:
     hSRTT11_ttbar = SRTT_ttbar.DataFrame.Histo2D(("SRTT_11_ttbar","SRTT_11_ttbar",18 ,45 ,225 ,28 ,700 ,3500),'mh','mreduced',"finalweightTight")
     hSFTT11_ttbar = SRTT_ttbar.DataFrame.Histo2D(("SFTT_11_ttbar","ATTT_11_ttbar",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced","finalweightTightFailFullSF")
     hATTT11_ttbar = ATTT_ttbar.DataFrame.Histo2D(("ATTT_11_ttbar","ATTT_11_ttbar",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced","finalweightTightFailHalfSF")
@@ -1302,6 +1302,25 @@ if not a.isData:
     hATTT21_dbsf_up.Add(hSFTT21_dbsf_up.GetPtr())
     hATTT21_dbsf_down.Add(hSFTT21_dbsf_down.GetPtr())
 
+### Now TTBar Control Region templates
+
+    hATTT11_ttbar_pdfUp.Add(hSFTT11_ttbar_pdfUp.GetPtr())
+    hATLL11_ttbar_pdfUp.Add(hSFLL11_ttbar_pdfUp.GetPtr())
+    hATTT11_ttbar_pdfDown.Add(hSFTT11_ttbar_pdfDown.GetPtr())
+    hATLL11_ttbar_pdfDown.Add(hSFLL11_ttbar_pdfDown.GetPtr())
+    hATTT11_ttbar_pileupUp.Add(hSFTT11_ttbar_pileupUp.GetPtr())
+    hATLL11_ttbar_pileupUp.Add(hSFLL11_ttbar_pileupUp.GetPtr())
+    hATTT11_ttbar_pileupDown.Add(hSFTT11_ttbar_pileupDown.GetPtr())
+    hATLL11_ttbar_pileupDown.Add(hSFLL11_ttbar_pileupDown.GetPtr())
+    hATTT11_ttbar_triggertight_up.Add(hSFTT11_ttbar_triggertight_up.GetPtr())
+    hATLL11_ttbar_triggerloose_up.Add(hSFLL11_ttbar_triggerloose_up.GetPtr())
+    hATTT11_ttbar_triggertight_down.Add(hSFTT11_ttbar_triggertight_down.GetPtr())
+    hATLL11_ttbar_triggerloose_down.Add(hSFLL11_ttbar_triggerloose_down.GetPtr())
+    hATTT11_ttbar_dbsftight_up.Add(hSFTT11_ttbar_dbsftight_up.GetPtr())
+    hATLL11_ttbar_dbsfloose_up.Add(hSFLL11_ttbar_dbsfloose_up.GetPtr())
+    hATTT11_ttbar_dbsftight_down.Add(hSFTT11_ttbar_dbsftight_down.GetPtr())
+    hATLL11_ttbar_dbsfloose_down.Add(hSFLL11_ttbar_dbsfloose_down.GetPtr())
+
     if 'ttbar' in setname:
 #### 1+1 Templates
 
@@ -1334,23 +1353,6 @@ if not a.isData:
             hATCR11_ttbarNormDown.Add(hSFCR11_ttbarNormDown.GetPtr())
 
 ### Now TTBar Control Region templates
-
-        hATTT11_ttbar_pdfUp.Add(hSFTT11_ttbar_pdfUp.GetPtr())
-        hATLL11_ttbar_pdfUp.Add(hSFLL11_ttbar_pdfUp.GetPtr())
-        hATTT11_ttbar_pdfDown.Add(hSFTT11_ttbar_pdfDown.GetPtr())
-        hATLL11_ttbar_pdfDown.Add(hSFLL11_ttbar_pdfDown.GetPtr())
-        hATTT11_ttbar_pileupUp.Add(hSFTT11_ttbar_pileupUp.GetPtr())
-        hATLL11_ttbar_pileupUp.Add(hSFLL11_ttbar_pileupUp.GetPtr())
-        hATTT11_ttbar_pileupDown.Add(hSFTT11_ttbar_pileupDown.GetPtr())
-        hATLL11_ttbar_pileupDown.Add(hSFLL11_ttbar_pileupDown.GetPtr())
-        hATTT11_ttbar_triggertight_up.Add(hSFTT11_ttbar_triggertight_up.GetPtr())
-        hATLL11_ttbar_triggerloose_up.Add(hSFLL11_ttbar_triggerloose_up.GetPtr())
-        hATTT11_ttbar_triggertight_down.Add(hSFTT11_ttbar_triggertight_down.GetPtr())
-        hATLL11_ttbar_triggerloose_down.Add(hSFLL11_ttbar_triggerloose_down.GetPtr())
-        hATTT11_ttbar_dbsftight_up.Add(hSFTT11_ttbar_dbsftight_up.GetPtr())
-        hATLL11_ttbar_dbsfloose_up.Add(hSFLL11_ttbar_dbsfloose_up.GetPtr())
-        hATTT11_ttbar_dbsftight_down.Add(hSFTT11_ttbar_dbsftight_down.GetPtr())
-        hATLL11_ttbar_dbsfloose_down.Add(hSFLL11_ttbar_dbsfloose_down.GetPtr())
 
         hATTT11_ttbar_topptAlphaUp.Add(hSFTT11_ttbar_topptAlphaUp.GetPtr())
         hATLL11_ttbar_topptAlphaUp.Add(hSFLL11_ttbar_topptAlphaUp.GetPtr())
@@ -1398,7 +1400,11 @@ if not a.isData:
         hSRCR11_pdfUp,hATCR11_pdfUp,hSRCR11_pdfDown,hATCR11_pdfDown,
         hSRCR11_pileupUp,hATCR11_pileupUp,hSRCR11_pileupDown,hATCR11_pileupDown,
         hSRCR11_triggerloose_up,hATCR11_triggerloose_up,hSRCR11_triggerloose_down,hATCR11_triggerloose_down,
-        hSRCR11_dbsfloose_up,hATCR11_dbsfloose_up,hSRCR11_dbsfloose_down,hATCR11_dbsfloose_down])
+        hSRCR11_dbsfloose_up,hATCR11_dbsfloose_up,hSRCR11_dbsfloose_down,hATCR11_dbsfloose_down,
+        hSRTT11_ttbar_pdfUp,hATTT11_ttbar_pdfUp,hSRLL11_ttbar_pdfUp,hATLL11_ttbar_pdfUp,hSRTT11_ttbar_pdfDown,hATTT11_ttbar_pdfDown,hSRLL11_ttbar_pdfDown,hATLL11_ttbar_pdfDown,
+        hSRTT11_ttbar_pileupUp,hATTT11_ttbar_pileupUp,hSRLL11_ttbar_pileupUp,hATLL11_ttbar_pileupUp,hSRTT11_ttbar_pileupDown,hATTT11_ttbar_pileupDown,hSRLL11_ttbar_pileupDown,hATLL11_ttbar_pileupDown,
+        hSRTT11_ttbar_triggertight_up,hATTT11_ttbar_triggertight_up,hSRLL11_ttbar_triggerloose_up,hATLL11_ttbar_triggerloose_up,hSRTT11_ttbar_triggertight_down,hATTT11_ttbar_triggertight_down,hSRLL11_ttbar_triggerloose_down,hATLL11_ttbar_triggerloose_down,
+        hSRTT11_ttbar_dbsftight_up,hATTT11_ttbar_dbsftight_up,hSRLL11_ttbar_dbsfloose_up,hATLL11_ttbar_dbsfloose_up,hSRTT11_ttbar_dbsftight_down,hATTT11_ttbar_dbsftight_down,hSRLL11_ttbar_dbsfloose_down,hATLL11_ttbar_dbsfloose_down])
     if 'ttbar' in setname:
         hists.extend([hSRTT11_topptAlphaUp,hATTT11_topptAlphaUp,hSRLL11_topptAlphaUp,hATLL11_topptAlphaUp,hSRTT11_topptAlphaDown,hATTT11_topptAlphaDown,hSRLL11_topptAlphaDown,hATLL11_topptAlphaDown,
             hSRCR11_topptAlphaUp,hATCR11_topptAlphaUp,hSRCR11_topptAlphaDown,hATCR11_topptAlphaDown,        
@@ -1409,11 +1415,7 @@ if not a.isData:
             hSRTT11_ttbar_topptAlphaUp,hATTT11_ttbar_topptAlphaUp,hSRLL11_ttbar_topptAlphaUp,hATLL11_ttbar_topptAlphaUp,
             hSRTT11_ttbar_topptAlphaDown,hATTT11_ttbar_topptAlphaDown,hSRLL11_ttbar_topptAlphaDown,hATLL11_ttbar_topptAlphaDown,
             hSRTT11_ttbar_topptBetaUp,hATTT11_ttbar_topptBetaUp,hSRLL11_ttbar_topptBetaUp,hATLL11_ttbar_topptBetaUp,
-            hSRTT11_ttbar_topptBetaDown,hATTT11_ttbar_topptBetaDown,hSRLL11_ttbar_topptBetaDown,hATLL11_ttbar_topptBetaDown,
-            hSRTT11_ttbar_pdfUp,hATTT11_ttbar_pdfUp,hSRLL11_ttbar_pdfUp,hATLL11_ttbar_pdfUp,hSRTT11_ttbar_pdfDown,hATTT11_ttbar_pdfDown,hSRLL11_ttbar_pdfDown,hATLL11_ttbar_pdfDown,
-            hSRTT11_ttbar_pileupUp,hATTT11_ttbar_pileupUp,hSRLL11_ttbar_pileupUp,hATLL11_ttbar_pileupUp,hSRTT11_ttbar_pileupDown,hATTT11_ttbar_pileupDown,hSRLL11_ttbar_pileupDown,hATLL11_ttbar_pileupDown,
-            hSRTT11_ttbar_triggertight_up,hATTT11_ttbar_triggertight_up,hSRLL11_ttbar_triggerloose_up,hATLL11_ttbar_triggerloose_up,hSRTT11_ttbar_triggertight_down,hATTT11_ttbar_triggertight_down,hSRLL11_ttbar_triggerloose_down,hATLL11_ttbar_triggerloose_down,
-            hSRTT11_ttbar_dbsftight_up,hATTT11_ttbar_dbsftight_up,hSRLL11_ttbar_dbsfloose_up,hATLL11_ttbar_dbsfloose_up,hSRTT11_ttbar_dbsftight_down,hATTT11_ttbar_dbsftight_down,hSRLL11_ttbar_dbsfloose_down,hATLL11_ttbar_dbsfloose_down])
+            hSRTT11_ttbar_topptBetaDown,hATTT11_ttbar_topptBetaDown,hSRLL11_ttbar_topptBetaDown,hATLL11_ttbar_topptBetaDown])
         if "deepTagMD_HbbvsQCD" in options.doublebtagger or "deepTagMD_ZHbbvsQCD" in options.doublebtagger:
             hists.extend([hSRTT11_ttbarNormUp,hATTT11_ttbarNormUp,hSRLL11_ttbarNormUp,hATLL11_ttbarNormUp,hSRTT11_ttbarNormDown,hATTT11_ttbarNormDown,hSRLL11_ttbarNormDown,hATLL11_ttbarNormDown,
             hSRCR11_ttbarNormUp,hATCR11_ttbarNormUp,hSRCR11_ttbarNormDown,hATCR11_ttbarNormDown,hSRTT21_ttbarNormUp,hATTT21_ttbarNormUp,hSRTT21_ttbarNormDown,hATTT21_ttbarNormDown,
