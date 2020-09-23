@@ -103,8 +103,8 @@ if not a.isData:
         sublead["JERcorr"] = 'FatJet_corr_JER_'+options.JER+"[1]"
 
     if options.JMS != 'nom':
-        lead['JMScorr'] = "FatJet_msoftdrop_corr_JMS_"+options.JMR+"[0]"
-        sublead['JMScorr'] = "FatJet_msoftdrop_corr_JMS_"+options.JMR+"[1]"
+        lead['JMScorr'] = "FatJet_msoftdrop_corr_JMS_"+options.JMS+"[0]"
+        sublead['JMScorr'] = "FatJet_msoftdrop_corr_JMS_"+options.JMS+"[1]"
 
     if options.JMR != 'nom':
         lead['JMRcorr'] = "FatJet_msoftdrop_corr_JMR_"+options.JMR+"[0]"
