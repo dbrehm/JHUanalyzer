@@ -102,21 +102,21 @@ if not a.isData:
         lead['JERcorr'] = 'FatJet_corr_JER_'+options.JER+"[0]"
         sublead["JERcorr"] = 'FatJet_corr_JER_'+options.JER+"[1]"
 
-    if options.JMS != 'nom':
-        lead['JMScorr'] = "FatJet_msoftdrop_corr_JMS_"+options.JMS+"[0]"
-        sublead['JMScorr'] = "FatJet_msoftdrop_corr_JMS_"+options.JMS+"[1]"
-
-    if options.JMR != 'nom':
-        lead['JMRcorr'] = "FatJet_msoftdrop_corr_JMR_"+options.JMR+"[0]"
-        sublead['JMRcorr'] = "FatJet_msoftdrop_corr_JMR_"+options.JMR+"[1]"
-
     # if options.JMS != 'nom':
-    #     lead['JMScorr'] = "(1+(FatJet_corr_JMS_"+options.JMS+"[0] - FatJet_corr_JMS[0])/FatJet_corr_JMS[0])"
-    #     sublead['JMScorr'] = "(1+(FatJet_corr_JMS_"+options.JMS+"[1] - FatJet_corr_JMS[1])/FatJet_corr_JMS[1])"
+    #     lead['JMScorr'] = "FatJet_msoftdrop_corr_JMS_"+options.JMS+"[0]"
+    #     sublead['JMScorr'] = "FatJet_msoftdrop_corr_JMS_"+options.JMS+"[1]"
 
     # if options.JMR != 'nom':
-    #     lead['JMRcorr'] = "(1+(FatJet_msoftdrop_corr_JMR_"+options.JMR+"[0] - FatJet_msoftdrop_corr_JMR[0])/FatJet_msoftdrop_corr_JMR[0])"
-    #     sublead['JMRcorr'] = "(1+(FatJet_msoftdrop_corr_JMR_"+options.JMR+"[1] - FatJet_msoftdrop_corr_JMR[1])/FatJet_msoftdrop_corr_JMR[1])"
+    #     lead['JMRcorr'] = "FatJet_msoftdrop_corr_JMR_"+options.JMR+"[0]"
+    #     sublead['JMRcorr'] = "FatJet_msoftdrop_corr_JMR_"+options.JMR+"[1]"
+
+    if options.JMS != 'nom':
+        lead['JMScorr'] = "(1+(FatJet_corr_JMS_"+options.JMS+"[0] - FatJet_corr_JMS[0])/FatJet_corr_JMS[0])"
+        sublead['JMScorr'] = "(1+(FatJet_corr_JMS_"+options.JMS+"[1] - FatJet_corr_JMS[1])/FatJet_corr_JMS[1])"
+
+    if options.JMR != 'nom':
+        lead['JMRcorr'] = "(1+(FatJet_msoftdrop_corr_JMR_"+options.JMR+"[0] - FatJet_msoftdrop_corr_JMR[0])/FatJet_msoftdrop_corr_JMR[0])"
+        sublead['JMRcorr'] = "(1+(FatJet_msoftdrop_corr_JMR_"+options.JMR+"[1] - FatJet_msoftdrop_corr_JMR[1])/FatJet_msoftdrop_corr_JMR[1])"
 
 if not a.isData:
     lead['pt'] = "*"+lead['JEScorr']+"*"+lead['JERcorr']
