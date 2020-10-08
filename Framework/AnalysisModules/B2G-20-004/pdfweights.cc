@@ -1,8 +1,9 @@
 #include <cmath>
+#include <string>
 using namespace ROOT::VecOps;
 
 namespace analyzer {
-    std::vector<float> PDFweight(RVec<Float_t> pdfbranch) {
+    std::vector<float> PDFweight(RVec<Float_t> pdfbranch, string year) {
         // [up,down]
         std::vector<float> v;
         int size = pdfbranch.size();
@@ -26,23 +27,38 @@ namespace analyzer {
 
         int npdfs = pdfs.size();
 
-        // Get the average of the weights
-        float sum = 0.0;
-        for (size_t i=0; i<npdfs; ++i) {
-            sum += pdfs[i];
-        }
-        float average = sum / npdfs;
-
-        // Calculate the variance from the average
         float weight = 0.0;
-        for (size_t i=0; i<npdfs; ++i) {
-            currentpdf = pdfs[i];
-            float old_weight = weight;
-            weight = old_weight + pow((currentpdf-average),2);
+
+        if(year.compare("16") != 0){
+            // Computes sqrt of sum of differences squared
+            float sumsquares = 0;
+            for(size_t i=0; i < npdfs; ++i){
+                sumsquares += pow((pdfs[i]-pdfs[0]),2);
+            }
+            weight = sqrt(sumsquares);
+
+        }else{
+            // Get the average of the weights
+            float sum = 0.0;
+            for (size_t i=0; i<npdfs; ++i) {
+                sum += pdfs[i];
+            }
+            float average = sum / npdfs;
+
+            // Calculate the variance from the average
+
+            for (size_t i=0; i<npdfs; ++i) {
+                currentpdf = pdfs[i];
+                float old_weight = weight;
+                weight = old_weight + pow((currentpdf-average),2);
+            }
+
         }
 
         v.push_back(std::min(13.0,1.0+sqrt(weight/npdfs)));
         v.push_back(std::max(-13.0,1.0-sqrt(weight/npdfs)));
+
+
         return v;
     }
 }
