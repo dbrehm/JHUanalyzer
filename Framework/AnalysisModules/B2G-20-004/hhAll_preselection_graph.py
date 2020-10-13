@@ -521,7 +521,7 @@ if not a.isData:
 
 if not a.isData:
 
-    correctionColumns.Add("Pdfweight",'analyzer::PDFweight(LHEPdfWeight,'+str(options.year)+')')
+    correctionColumns.Add("Pdfweight",'analyzer::PDFweight(LHEPdfWeight,'+options.year+')')
     correctionColumns11.Add("Pdfweight_tight_up",'dbSFnomtight*(dbSFnomtight)*Pdfweight[0]*triggerTight[0]*puWeight'+topstringnom+'')
     correctionColumns11.Add("Pdfweight_tight_down",'dbSFnomtight*(dbSFnomtight)*Pdfweight[1]*triggerTight[0]*puWeight'+topstringnom+'')
     correctionColumns11.Add("Pdfweight_loose_up",'dbSFnomloose*(dbSFnomloose)*Pdfweight[0]*triggerLoose[0]*puWeight'+topstringnom+'')
