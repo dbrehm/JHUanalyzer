@@ -5,7 +5,10 @@ using namespace ROOT::VecOps;
 namespace analyzer {
     std::vector<float> PDFweight(RVec<Float_t> pdfbranch, string setYear) {
         // [up,down]
-        string year = { 1, setYear[0] };
+        string year;
+        year = setYear;
+
+        
         std::vector<float> v;
         int size = pdfbranch.size();
 
