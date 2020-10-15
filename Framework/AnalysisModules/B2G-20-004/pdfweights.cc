@@ -29,8 +29,8 @@ namespace analyzer {
         int npdfs = pdfs.size();
 
         float weight = 0.0;
-
-        if(year->compare("16") != 0){
+        
+        if(wcscmp ("16",year) != 0){
             // Computes sqrt of sum of differences squared
             float sumsquares = 0;
             for(size_t i=0; i < npdfs; ++i){
