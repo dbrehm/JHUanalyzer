@@ -520,7 +520,7 @@ if not a.isData:
 ### Here I make the weights for the shape based uncertainties. This cannot be done inline with the Histo1D calls so it is done here.
 
 if not a.isData:
-    ROOT.gInterpreter.ProcessLine("auto inputYear = "+options.year+";")
+    ROOT.gInterpreter.ProcessLine("auto inputYear = "+options.year+".c_str();")
 
     correctionColumns.Add("Pdfweight","analyzer::PDFweight(LHEPdfWeight, inputYear)")
     correctionColumns11.Add("Pdfweight_tight_up",'dbSFnomtight*(dbSFnomtight)*Pdfweight[0]*triggerTight[0]*puWeight'+topstringnom+'')
