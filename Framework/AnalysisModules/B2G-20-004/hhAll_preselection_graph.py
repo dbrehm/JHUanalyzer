@@ -176,29 +176,29 @@ doubleB_short = doubleB_abreviations[doubleB_name]
 
 if not a.isData:
 ### The following loads the btag calibration code in c++ so that it is available to RDF
-    ROOT.gInterpreter.Declare('string year = string(TPython::Eval("options.year"));')
-    btagLoadCode = '''
-        string btagfilename;
-        if (year == "16"){
-              btagfilename = "JHUanalyzer/data/OfficialSFs/DeepJet_2016LegacySF_V1.csv";
-          }else if (year == "17"){
-              btagfilename = "JHUanalyzer/data/OfficialSFs/DeepFlavour_94XSF_V4_B_F.csv";
-          }else if (year ==  "18"){
-              btagfilename = "JHUanalyzer/data/OfficialSFs/DeepJet_102XSF_V2.csv";
-          }
-        BTagCalibration calib("DeepJet", btagfilename);
+    # ROOT.gInterpreter.Declare('string year = string(TPython::Eval("options.year"));')
+    # btagLoadCode = '''
+    #     string btagfilename;
+    #     if (year == "16"){
+    #           btagfilename = "JHUanalyzer/data/OfficialSFs/DeepJet_2016LegacySF_V1.csv";
+    #       }else if (year == "17"){
+    #           btagfilename = "JHUanalyzer/data/OfficialSFs/DeepFlavour_94XSF_V4_B_F.csv";
+    #       }else if (year ==  "18"){
+    #           btagfilename = "JHUanalyzer/data/OfficialSFs/DeepJet_102XSF_V2.csv";
+    #       }
+    #     BTagCalibration calib("DeepJet", btagfilename);
 
-        BTagCalibrationReader reader(BTagEntry::OP_MEDIUM,  // operating point
-                                 "central",             // central sys type
-                                 {"up", "down"});      // other sys types
+    #     BTagCalibrationReader reader(BTagEntry::OP_MEDIUM,  // operating point
+    #                              "central",             // central sys type
+    #                              {"up", "down"});      // other sys types
 
-        reader.load(calib,                // calibration instance
-                BTagEntry::FLAV_B,    // btag flavour
-                "incl");
-    '''
+    #     reader.load(calib,                // calibration instance
+    #             BTagEntry::FLAV_B,    // btag flavour
+    #             "incl");
+    # '''
 
-    ROOT.gInterpreter.ProcessLine(btagLoadCode)
-    print ("Btag files load time: "+str((time.time()-start_time)/60.) + ' min')
+    # ROOT.gInterpreter.ProcessLine(btagLoadCode)
+    # print ("Btag files load time: "+str((time.time()-start_time)/60.) + ' min')
 
 ## Sets custom functions for use by RDF
 
@@ -274,7 +274,7 @@ correctionColumns21 = VarGroup("correctionColumns21")
     ### Btagging correction code
 
 if not a.isData:
-    correctionColumns21.Add("btagscalefactor","analyzer::BtagSF(reader,b_lead_vect,b_sublead_vect)")
+    # correctionColumns21.Add("btagscalefactor","analyzer::BtagSF(reader,b_lead_vect,b_sublead_vect)")
 
     #### Trigger correction code
 
