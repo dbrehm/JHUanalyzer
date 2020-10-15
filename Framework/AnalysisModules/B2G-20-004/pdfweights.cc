@@ -3,7 +3,7 @@
 using namespace ROOT::VecOps;
 
 namespace analyzer {
-    std::vector<float> PDFweight(RVec<Float_t> pdfbranch, string* year) {
+    std::vector<float> PDFweight(RVec<Float_t> pdfbranch, string year) {
         // [up,down]
         
         std::vector<float> v;
@@ -30,7 +30,7 @@ namespace analyzer {
 
         float weight = 0.0;
 
-        if(year->compare("16") != 0){
+        if(year.compare("16") != 0){
             // Computes sqrt of sum of differences squared
             float sumsquares = 0;
             for(size_t i=0; i < npdfs; ++i){
