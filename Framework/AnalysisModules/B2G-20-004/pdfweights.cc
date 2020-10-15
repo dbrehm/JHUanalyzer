@@ -30,7 +30,7 @@ namespace analyzer {
 
         float weight = 0.0;
 
-        if(year.compare("16") != 0){
+        if(std::string("16") == year){
             // Computes sqrt of sum of differences squared
             float sumsquares = 0;
             for(size_t i=0; i < npdfs; ++i){
