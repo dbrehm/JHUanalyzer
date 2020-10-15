@@ -29,9 +29,8 @@ namespace analyzer {
         int npdfs = pdfs.size();
 
         float weight = 0.0;
-        wstring compare = "16";
 
-        if(wcscmp (compare,year) != 0){
+        if(std::wstring("16") == year){
             // Computes sqrt of sum of differences squared
             float sumsquares = 0;
             for(size_t i=0; i < npdfs; ++i){
