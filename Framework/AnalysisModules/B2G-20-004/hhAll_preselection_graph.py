@@ -174,7 +174,7 @@ doubleB_name = options.doublebtagger
 doubleB_title = doubleB_titles[doubleB_name]
 doubleB_short = doubleB_abreviations[doubleB_name]
 
-if not a.isData:
+# if not a.isData:
 ### The following loads the btag calibration code in c++ so that it is available to RDF
     # ROOT.gInterpreter.Declare('string year = string(TPython::Eval("options.year"));')
     # btagLoadCode = '''
@@ -521,7 +521,7 @@ if not a.isData:
 
 if not a.isData:
 
-    correctionColumns.Add("Pdfweight","analyzer::PDFweight(LHEPdfWeight, "+options.year+")")
+    correctionColumns.Add("Pdfweight", 'analyzer::PDFweight(LHEPdfWeight, "'+options.year+'")')
     correctionColumns11.Add("Pdfweight_tight_up",'dbSFnomtight*(dbSFnomtight)*Pdfweight[0]*triggerTight[0]*puWeight'+topstringnom+'')
     correctionColumns11.Add("Pdfweight_tight_down",'dbSFnomtight*(dbSFnomtight)*Pdfweight[1]*triggerTight[0]*puWeight'+topstringnom+'')
     correctionColumns11.Add("Pdfweight_loose_up",'dbSFnomloose*(dbSFnomloose)*Pdfweight[0]*triggerLoose[0]*puWeight'+topstringnom+'')
