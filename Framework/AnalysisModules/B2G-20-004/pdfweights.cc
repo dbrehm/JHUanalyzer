@@ -3,7 +3,7 @@
 using namespace ROOT::VecOps;
 
 namespace analyzer {
-    std::vector<float> PDFweight(RVec<Float_t> pdfbranch, string* year) {
+    std::vector<float> PDFweight(RVec<Float_t> pdfbranch, wstring* year) {
         // [up,down]
         
         std::vector<float> v;
