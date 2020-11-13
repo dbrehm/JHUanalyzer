@@ -676,6 +676,11 @@ slim_skim = CutGroup('slim_skim')
 slim_skim.Add("triggers","triggers == 1")
 # if a.isData: slim_skim.Add("triggers","triggers == 1")
 slim_skim.Add("nFatJets1","nFatJet > 0")
+##### The following are added to deal with issues brought up in OR 
+if a.isData and options.year == "17":
+    slim_skim.Add("LuiSection2017","(run != 305366) && (luminosityBlock != 935)")
+if a.isData and options.year == "18":
+    slim_skim.Add("HEM15_16_2018dataCut","(run < 319077) && !(-2.5 < "+eta0+" < -1.3) && !(-2.5 < "+eta1+" < -1.3)")
 
 filters = CutGroup('filters')
 filters.Add("Flag_goodVertices","Flag_goodVertices == 1")
@@ -684,6 +689,7 @@ filters.Add("Flag_HBHENoiseFilter","Flag_HBHENoiseFilter == 1")
 filters.Add("Flag_HBHENoiseIsoFilter","Flag_HBHENoiseIsoFilter == 1")
 filters.Add("Flag_EcalDeadCellTriggerPrimitiveFilter","Flag_EcalDeadCellTriggerPrimitiveFilter == 1")
 filters.Add("Flag_BadPFMuonFilter","Flag_BadPFMuonFilter == 1")
+
 
 #### 1+1 cut groups
 
