@@ -59,7 +59,7 @@ print("Start analyzer....")
 a = analyzer(options.input)
 
 # Example of how to calculate MC normalization for luminosity
-if '_loc.txt' in options.input: setname = options.input.split('/')[-1].split('_loc.txt')[0]
+if '_v7.txt' in options.input: setname = options.input.split('/')[-1].split('_')[0]
 elif '.root' in options.input: setname = options.input.split('/')[-1].split('_hh'+options.year+'.root')[0]
 else: setname = ''
 print("Setname="+setname)
@@ -1153,7 +1153,7 @@ if not a.isData:
         hSRTT21_prefireUp = Pass.DataFrame.Histo2D(("SRTT_21_prefireUp","SRTT_21_prefireUp",18 ,45 ,225 ,13 ,700 ,2000),'mh','mreduced21','prefireweight_up')
         hATTT21_prefireUp = Fail.DataFrame.Histo2D(("ATTT_21_prefireUp","ATTT_21_prefireUp",18 ,45 ,225 ,13 ,700 ,2000),"mh","mreduced21",'prefireweight_upFailHalfSF')
         hSFTT21_prefireUp = Pass.DataFrame.Histo2D(("SFTT_21_prefireUp","SFTT_21_prefireUp",18 ,45 ,225 ,13 ,700 ,2000),"mh","mreduced21",'prefireweight_upFailFullSF')
-        
+
         hSRTT21_prefireDown = Pass.DataFrame.Histo2D(("SRTT_21_prefireDown","SRTT_21_prefireDown",18 ,45 ,225 ,13 ,700 ,2000),'mh','mreduced21','prefireweight_down')
         hATTT21_prefireDown = Fail.DataFrame.Histo2D(("ATTT_21_prefireDown","ATTT_21_prefireDown",18 ,45 ,225 ,13 ,700 ,2000),"mh","mreduced21",'prefireweight_downFailHalfSF')
         hSFTT21_prefireDown = Pass.DataFrame.Histo2D(("SFTT_21_prefireDown","ATTT_21_prefireDown",18 ,45 ,225 ,13 ,700 ,2000),"mh","mreduced21",'prefireweight_downFailFullSF')
