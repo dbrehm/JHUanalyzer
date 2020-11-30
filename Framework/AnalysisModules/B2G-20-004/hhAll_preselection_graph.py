@@ -386,6 +386,16 @@ else:
     correctionColumns.Add("dbSFdowntight","1*("+pt0+"<350)+1*("+pt0+">350)")
 
 if not a.isData:
+
+    prefireStringnom = ""
+    prefireStringUp = ""
+    prefireStringDown = ""
+
+    if options.year != '18':
+        prefireStringnom = "*PrefireWeight"
+        prefireStringUp = "*PrefireWeight_Up"
+        prefireStringDown = "*PrefireWeight_Down"
+
     if 'ttbar' in setname:
         correctionColumns.Add("topptvector","analyzer::PTWLookup(nGenPart, GenPart_pdgId, GenPart_statusFlags, GenPart_pt, GenPart_eta, GenPart_phi, GenPart_mass, lead_vect, sublead_vect)")
         correctionColumns.Add("topptvectorcheck","topptvector[0]")
@@ -404,95 +414,96 @@ if not a.isData:
             topstringbetadown = "*topptvector[4]"
 
 
-        correctionColumns11.Add("topptweight_tight_Alphaup","dbSFnomtight*(dbSFnomtight)*triggerTight[0]*puWeight"+topstringalphaup+"")
-        correctionColumns11.Add("topptweight_tight_Alphadown","dbSFnomtight*(dbSFnomtight)*triggerTight[0]*puWeight"+topstringalphadown+"")
-        correctionColumns11.Add("topptweight_loose_Alphaup","dbSFnomloose*(dbSFnomloose)*triggerLoose[0]*puWeight"+topstringalphaup+"")
-        correctionColumns11.Add("topptweight_loose_Alphadown","dbSFnomloose*(dbSFnomloose)*triggerLoose[0]*puWeight"+topstringalphadown+"")
+        correctionColumns11.Add("topptweight_tight_Alphaup","dbSFnomtight*(dbSFnomtight)*triggerTight[0]*puWeight"+topstringalphaup+prefireStringnom+"")
+        correctionColumns11.Add("topptweight_tight_Alphadown","dbSFnomtight*(dbSFnomtight)*triggerTight[0]*puWeight"+topstringalphadown+prefireStringnom+"")
+        correctionColumns11.Add("topptweight_loose_Alphaup","dbSFnomloose*(dbSFnomloose)*triggerLoose[0]*puWeight"+topstringalphaup+prefireStringnom+"")
+        correctionColumns11.Add("topptweight_loose_Alphadown","dbSFnomloose*(dbSFnomloose)*triggerLoose[0]*puWeight"+topstringalphadown+prefireStringnom+"")
 
-        correctionColumns11.Add("topptweight_tight_AlphaupFailFullSF","dbSFnomtight*(1-dbSFnomtight)*triggerTight[0]*puWeight"+topstringalphaup+"")
-        correctionColumns11.Add("topptweight_tight_AlphadownFailFullSF","dbSFnomtight*(1-dbSFnomtight)*triggerTight[0]*puWeight"+topstringalphadown+"")
-        correctionColumns11.Add("topptweight_loose_AlphaupFailFullSF","dbSFnomloose*(1-dbSFnomloose)*triggerLoose[0]*puWeight"+topstringalphaup+"")
-        correctionColumns11.Add("topptweight_loose_AlphadownFailFullSF","dbSFnomloose*(1-dbSFnomloose)*triggerLoose[0]*puWeight"+topstringalphadown+"")
+        correctionColumns11.Add("topptweight_tight_AlphaupFailFullSF","dbSFnomtight*(1-dbSFnomtight)*triggerTight[0]*puWeight"+topstringalphaup+prefireStringnom+"")
+        correctionColumns11.Add("topptweight_tight_AlphadownFailFullSF","dbSFnomtight*(1-dbSFnomtight)*triggerTight[0]*puWeight"+topstringalphadown+prefireStringnom+"")
+        correctionColumns11.Add("topptweight_loose_AlphaupFailFullSF","dbSFnomloose*(1-dbSFnomloose)*triggerLoose[0]*puWeight"+topstringalphaup+prefireStringnom+"")
+        correctionColumns11.Add("topptweight_loose_AlphadownFailFullSF","dbSFnomloose*(1-dbSFnomloose)*triggerLoose[0]*puWeight"+topstringalphadown+prefireStringnom+"")
 
-        correctionColumns11.Add("topptweight_tight_AlphaupFailHalfSF","(dbSFnomtight)*triggerTight[0]*puWeight"+topstringalphaup+"")
-        correctionColumns11.Add("topptweight_tight_AlphadownFailHalfSF","(dbSFnomtight)*triggerTight[0]*puWeight"+topstringalphadown+"")
-        correctionColumns11.Add("topptweight_loose_AlphaupFailHalfSF","(dbSFnomloose)*triggerLoose[0]*puWeight"+topstringalphaup+"")
-        correctionColumns11.Add("topptweight_loose_AlphadownFailHalfSF","(dbSFnomloose)*triggerLoose[0]*puWeight"+topstringalphadown+"")
+        correctionColumns11.Add("topptweight_tight_AlphaupFailHalfSF","(dbSFnomtight)*triggerTight[0]*puWeight"+topstringalphaup+prefireStringnom+"")
+        correctionColumns11.Add("topptweight_tight_AlphadownFailHalfSF","(dbSFnomtight)*triggerTight[0]*puWeight"+topstringalphadown+prefireStringnom+"")
+        correctionColumns11.Add("topptweight_loose_AlphaupFailHalfSF","(dbSFnomloose)*triggerLoose[0]*puWeight"+topstringalphaup+prefireStringnom+"")
+        correctionColumns11.Add("topptweight_loose_AlphadownFailHalfSF","(dbSFnomloose)*triggerLoose[0]*puWeight"+topstringalphadown+prefireStringnom+"")
 
-        correctionColumns11.Add("topptweight_tight_Betaup","dbSFnomtight*(dbSFnomtight)*triggerTight[0]*puWeight"+topstringbetaup+"")
-        correctionColumns11.Add("topptweight_tight_Betadown","dbSFnomtight*(dbSFnomtight)*triggerTight[0]*puWeight"+topstringbetadown+"")
-        correctionColumns11.Add("topptweight_loose_Betaup","dbSFnomloose*(dbSFnomloose)*triggerLoose[0]*puWeight"+topstringbetaup+"")
-        correctionColumns11.Add("topptweight_loose_Betadown","dbSFnomloose*(dbSFnomloose)*triggerLoose[0]*puWeight"+topstringbetadown+"")
+        correctionColumns11.Add("topptweight_tight_Betaup","dbSFnomtight*(dbSFnomtight)*triggerTight[0]*puWeight"+topstringbetaup+prefireStringnom+"")
+        correctionColumns11.Add("topptweight_tight_Betadown","dbSFnomtight*(dbSFnomtight)*triggerTight[0]*puWeight"+topstringbetadown+prefireStringnom+"")
+        correctionColumns11.Add("topptweight_loose_Betaup","dbSFnomloose*(dbSFnomloose)*triggerLoose[0]*puWeight"+topstringbetaup+prefireStringnom+"")
+        correctionColumns11.Add("topptweight_loose_Betadown","dbSFnomloose*(dbSFnomloose)*triggerLoose[0]*puWeight"+topstringbetadown+prefireStringnom+"")
 
-        correctionColumns11.Add("topptweight_tight_BetaupFailFullSF","dbSFnomtight*(1-dbSFnomtight)*triggerTight[0]*puWeight"+topstringbetaup+"")
-        correctionColumns11.Add("topptweight_tight_BetadownFailFullSF","dbSFnomtight*(1-dbSFnomtight)*triggerTight[0]*puWeight"+topstringbetadown+"")
-        correctionColumns11.Add("topptweight_loose_BetaupFailFullSF","dbSFnomloose*(1-dbSFnomloose)*triggerLoose[0]*puWeight"+topstringbetaup+"")
-        correctionColumns11.Add("topptweight_loose_BetadownFailFullSF","dbSFnomloose*(1-dbSFnomloose)*triggerLoose[0]*puWeight"+topstringbetadown+"")
+        correctionColumns11.Add("topptweight_tight_BetaupFailFullSF","dbSFnomtight*(1-dbSFnomtight)*triggerTight[0]*puWeight"+topstringbetaup+prefireStringnom+"")
+        correctionColumns11.Add("topptweight_tight_BetadownFailFullSF","dbSFnomtight*(1-dbSFnomtight)*triggerTight[0]*puWeight"+topstringbetadown+prefireStringnom+"")
+        correctionColumns11.Add("topptweight_loose_BetaupFailFullSF","dbSFnomloose*(1-dbSFnomloose)*triggerLoose[0]*puWeight"+topstringbetaup+prefireStringnom+"")
+        correctionColumns11.Add("topptweight_loose_BetadownFailFullSF","dbSFnomloose*(1-dbSFnomloose)*triggerLoose[0]*puWeight"+topstringbetadown+prefireStringnom+"")
 
-        correctionColumns11.Add("topptweight_tight_BetaupFailHalfSF","(dbSFnomtight)*triggerTight[0]*puWeight"+topstringbetaup+"")
-        correctionColumns11.Add("topptweight_tight_BetadownFailHalfSF","(dbSFnomtight)*triggerTight[0]*puWeight"+topstringbetadown+"")
-        correctionColumns11.Add("topptweight_loose_BetaupFailHalfSF","(dbSFnomloose)*triggerLoose[0]*puWeight"+topstringbetaup+"")
-        correctionColumns11.Add("topptweight_loose_BetadownFailHalfSF","(dbSFnomloose)*triggerLoose[0]*puWeight"+topstringbetadown+"")
+        correctionColumns11.Add("topptweight_tight_BetaupFailHalfSF","(dbSFnomtight)*triggerTight[0]*puWeight"+topstringbetaup+prefireStringnom+"")
+        correctionColumns11.Add("topptweight_tight_BetadownFailHalfSF","(dbSFnomtight)*triggerTight[0]*puWeight"+topstringbetadown+prefireStringnom+"")
+        correctionColumns11.Add("topptweight_loose_BetaupFailHalfSF","(dbSFnomloose)*triggerLoose[0]*puWeight"+topstringbetaup+prefireStringnom+"")
+        correctionColumns11.Add("topptweight_loose_BetadownFailHalfSF","(dbSFnomloose)*triggerLoose[0]*puWeight"+topstringbetadown+prefireStringnom+"")
 
-        correctionColumns21.Add("topptweight_Alphaup","dbSFnomloose*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringalphaup+"")
-        correctionColumns21.Add("topptweight_Alphadown","dbSFnomloose*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringalphadown+"")
+        correctionColumns21.Add("topptweight_Alphaup","dbSFnomloose*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringalphaup+prefireStringnom+"")
+        correctionColumns21.Add("topptweight_Alphadown","dbSFnomloose*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringalphadown+prefireStringnom+"")
 
-        correctionColumns21.Add("topptweight_AlphaupFailFullSF","(1-dbSFnomloose)*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringalphaup+"")
-        correctionColumns21.Add("topptweight_AlphadownFailFullSF","(1-dbSFnomloose)*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringalphadown+"")
+        correctionColumns21.Add("topptweight_AlphaupFailFullSF","(1-dbSFnomloose)*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringalphaup+prefireStringnom+"")
+        correctionColumns21.Add("topptweight_AlphadownFailFullSF","(1-dbSFnomloose)*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringalphadown+prefireStringnom+"")
 
-        correctionColumns21.Add("topptweight_AlphaupFailHalfSF","trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringalphaup+"")
-        correctionColumns21.Add("topptweight_AlphadownFailHalfSF","trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringalphadown+"")
+        correctionColumns21.Add("topptweight_AlphaupFailHalfSF","trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringalphaup+prefireStringnom+"")
+        correctionColumns21.Add("topptweight_AlphadownFailHalfSF","trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringalphadown+prefireStringnom+"")
 
-        correctionColumns21.Add("topptweight_Betaup","dbSFnomloose*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringbetaup+"")
-        correctionColumns21.Add("topptweight_Betadown","dbSFnomloose*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringbetadown+"")
+        correctionColumns21.Add("topptweight_Betaup","dbSFnomloose*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringbetaup+prefireStringnom+"")
+        correctionColumns21.Add("topptweight_Betadown","dbSFnomloose*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringbetadown+prefireStringnom+"")
 
-        correctionColumns21.Add("topptweight_BetaupFailFullSF","(1-dbSFnomloose)*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringbetaup+"")
-        correctionColumns21.Add("topptweight_BetadownFailFullSF","(1-dbSFnomloose)*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringbetadown+"")
+        correctionColumns21.Add("topptweight_BetaupFailFullSF","(1-dbSFnomloose)*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringbetaup+prefireStringnom+"")
+        correctionColumns21.Add("topptweight_BetadownFailFullSF","(1-dbSFnomloose)*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringbetadown+prefireStringnom+"")
 
-        correctionColumns21.Add("topptweight_BetaupFailHalfSF","trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringbetaup+"")
-        correctionColumns21.Add("topptweight_BetadownFailHalfSF","trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringbetadown+"")
+        correctionColumns21.Add("topptweight_BetaupFailHalfSF","trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringbetaup+prefireStringnom+"")
+        correctionColumns21.Add("topptweight_BetadownFailHalfSF","trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringbetadown+prefireStringnom+"")
 
 
         ### ttbar normaliation weights
         if "deepTagMD_HbbvsQCD" in options.doublebtagger or "deepTagMD_ZHbbvsQCD" in options.doublebtagger:
-            correctionColumns11.Add("weight_tight_NormUp","ttbarNormUp*dbSFnomtight*(dbSFnomtight)*triggerTight[0]*puWeight*topptvector[0]")
-            correctionColumns11.Add("weight_tight_NormDown","ttbarNormDown*dbSFnomtight*(dbSFnomtight)*triggerTight[0]*puWeight*topptvector[0]")
-            correctionColumns11.Add("weight_loose_NormUp","ttbarNormUp*dbSFnomloose*(dbSFnomloose)*triggerLoose[0]*puWeight*topptvector[0]")
-            correctionColumns11.Add("weight_loose_NormDown","ttbarNormDown*dbSFnomloose*(dbSFnomloose)*triggerLoose[0]*puWeight*topptvector[0]")
+            correctionColumns11.Add("weight_tight_NormUp","ttbarNormUp*dbSFnomtight*(dbSFnomtight)*triggerTight[0]*puWeight*topptvector[0]"+prefireStringnom+"")
+            correctionColumns11.Add("weight_tight_NormDown","ttbarNormDown*dbSFnomtight*(dbSFnomtight)*triggerTight[0]*puWeight*topptvector[0]"+prefireStringnom+"")
+            correctionColumns11.Add("weight_loose_NormUp","ttbarNormUp*dbSFnomloose*(dbSFnomloose)*triggerLoose[0]*puWeight*topptvector[0]"+prefireStringnom+"")
+            correctionColumns11.Add("weight_loose_NormDown","ttbarNormDown*dbSFnomloose*(dbSFnomloose)*triggerLoose[0]*puWeight*topptvector[0]"+prefireStringnom+"")
 
-            correctionColumns11.Add("weight_tight_NormUpFailFullSF","ttbarNormUp*dbSFnomtight*(1-dbSFnomtight)*triggerTight[0]*puWeight*topptvector[0]")
-            correctionColumns11.Add("weight_tight_NormDownFailFullSF","ttbarNormDown*dbSFnomtight*(1-dbSFnomtight)*triggerTight[0]*puWeight*topptvector[0]")
-            correctionColumns11.Add("weight_loose_NormUpFailFullSF","ttbarNormUp*dbSFnomloose*(1-dbSFnomloose)*triggerLoose[0]*puWeight*topptvector[0]")
-            correctionColumns11.Add("weight_loose_NormDownFailFullSF","ttbarNormDown*dbSFnomloose*(1-dbSFnomloose)*triggerLoose[0]*puWeight*topptvector[0]")
+            correctionColumns11.Add("weight_tight_NormUpFailFullSF","ttbarNormUp*dbSFnomtight*(1-dbSFnomtight)*triggerTight[0]*puWeight*topptvector[0]"+prefireStringnom+"")
+            correctionColumns11.Add("weight_tight_NormDownFailFullSF","ttbarNormDown*dbSFnomtight*(1-dbSFnomtight)*triggerTight[0]*puWeight*topptvector[0]"+prefireStringnom+"")
+            correctionColumns11.Add("weight_loose_NormUpFailFullSF","ttbarNormUp*dbSFnomloose*(1-dbSFnomloose)*triggerLoose[0]*puWeight*topptvector[0]"+prefireStringnom+"")
+            correctionColumns11.Add("weight_loose_NormDownFailFullSF","ttbarNormDown*dbSFnomloose*(1-dbSFnomloose)*triggerLoose[0]*puWeight*topptvector[0]"+prefireStringnom+"")
 
-            correctionColumns11.Add("weight_tight_NormUpFailHalfSF","ttbarNormUp*(dbSFnomtight)*triggerTight[0]*puWeight*topptvector[0]")
-            correctionColumns11.Add("weight_tight_NormDownFailHalfSF","ttbarNormDown*(dbSFnomtight)*triggerTight[0]*puWeight*topptvector[0]")
-            correctionColumns11.Add("weight_loose_NormUpFailHalfSF","ttbarNormUp*(dbSFnomloose)*triggerLoose[0]*puWeight*topptvector[0]")
-            correctionColumns11.Add("weight_loose_NormDownFailHalfSF","ttbarNormDown*(dbSFnomloose)*triggerLoose[0]*puWeight*topptvector[0]")
+            correctionColumns11.Add("weight_tight_NormUpFailHalfSF","ttbarNormUp*(dbSFnomtight)*triggerTight[0]*puWeight*topptvector[0]"+prefireStringnom+"")
+            correctionColumns11.Add("weight_tight_NormDownFailHalfSF","ttbarNormDown*(dbSFnomtight)*triggerTight[0]*puWeight*topptvector[0]"+prefireStringnom+"")
+            correctionColumns11.Add("weight_loose_NormUpFailHalfSF","ttbarNormUp*(dbSFnomloose)*triggerLoose[0]*puWeight*topptvector[0]"+prefireStringnom+"")
+            correctionColumns11.Add("weight_loose_NormDownFailHalfSF","ttbarNormDown*(dbSFnomloose)*triggerLoose[0]*puWeight*topptvector[0]"+prefireStringnom+"")
 
-            correctionColumns21.Add("weight_NormUp","ttbarNormUp*dbSFnomloose*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]*topptvector[0]")
-            correctionColumns21.Add("weight_NormDown","ttbarNormDown*dbSFnomloose*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]*topptvector[0]")
+            correctionColumns21.Add("weight_NormUp","ttbarNormUp*dbSFnomloose*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]*topptvector[0]"+prefireStringnom+"")
+            correctionColumns21.Add("weight_NormDown","ttbarNormDown*dbSFnomloose*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]*topptvector[0]"+prefireStringnom+"")
 
-            correctionColumns21.Add("weight_NormUpFailFullSF","ttbarNormUp*(1-dbSFnomloose)*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]*topptvector[0]")
-            correctionColumns21.Add("weight_NormDownFailFullSF","ttbarNormDown*(1-dbSFnomloose)*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]*topptvector[0]")
+            correctionColumns21.Add("weight_NormUpFailFullSF","ttbarNormUp*(1-dbSFnomloose)*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]*topptvector[0]"+prefireStringnom+"")
+            correctionColumns21.Add("weight_NormDownFailFullSF","ttbarNormDown*(1-dbSFnomloose)*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]*topptvector[0]"+prefireStringnom+"")
 
-            correctionColumns21.Add("weight_NormUpFailHalfSF","ttbarNormUp*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]*topptvector[0]")
-            correctionColumns21.Add("weight_NormDownFailHalfSF","ttbarNormDown*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]*topptvector[0]")
+            correctionColumns21.Add("weight_NormUpFailHalfSF","ttbarNormUp*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]*topptvector[0]"+prefireStringnom+"")
+            correctionColumns21.Add("weight_NormDownFailHalfSF","ttbarNormDown*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]*topptvector[0]"+prefireStringnom+"")
 
     else:
         topstringnom = ""
 
     if 'QCD' in setname:
-        correctionColumns.Add("finalweightTight","dbSFnomtight*(dbSFnomtight)*puWeight"+topstringnom+"")
-        correctionColumns.Add("finalweightLoose","dbSFnomloose*(dbSFnomloose)*puWeight"+topstringnom+"")
-        correctionColumns.Add("finalweightTightFailFullSF","dbSFnomtight*(1-dbSFnomtight)*puWeight"+topstringnom+"")
-        correctionColumns.Add("finalweightLooseFailFullSF","dbSFnomloose*(1-dbSFnomloose)*puWeight"+topstringnom+"")
-        correctionColumns.Add("finalweightTightFailHalfSF","dbSFnomtight*puWeight"+topstringnom+"")
-        correctionColumns.Add("finalweightLooseFailHalfSF","dbSFnomloose*puWeight"+topstringnom+"")
 
-        correctionColumns21.Add("finalweight21","dbSFnomloose*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+"")
-        correctionColumns21.Add("finalweight21FailFullSF","(1-dbSFnomloose)*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+"")
-        correctionColumns21.Add("finalweight21FailHalfSF","puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+"")
+        correctionColumns.Add("finalweightTight","dbSFnomtight*(dbSFnomtight)*puWeight"+topstringnom+prefireStringnom+"")
+        correctionColumns.Add("finalweightLoose","dbSFnomloose*(dbSFnomloose)*puWeight"+topstringnom+prefireStringnom+"")
+        correctionColumns.Add("finalweightTightFailFullSF","dbSFnomtight*(1-dbSFnomtight)*puWeight"+topstringnom+prefireStringnom+"")
+        correctionColumns.Add("finalweightLooseFailFullSF","dbSFnomloose*(1-dbSFnomloose)*puWeight"+topstringnom+prefireStringnom+"")
+        correctionColumns.Add("finalweightTightFailHalfSF","dbSFnomtight*puWeight"+topstringnom+prefireStringnom+"")
+        correctionColumns.Add("finalweightLooseFailHalfSF","dbSFnomloose*puWeight"+topstringnom+prefireStringnom+"")
+
+        correctionColumns21.Add("finalweight21","dbSFnomloose*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+prefireStringnom+"")
+        correctionColumns21.Add("finalweight21FailFullSF","(1-dbSFnomloose)*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+prefireStringnom+"")
+        correctionColumns21.Add("finalweight21FailHalfSF","puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+prefireStringnom+"")
     else:
         # correctionColumns.Add("finalweightTight","dbSFnomtight*(dbSFnomtight)*puWeight"+topstringnom+"")
         # correctionColumns.Add("finalweightLoose","dbSFnomloose*(dbSFnomloose)*puWeight"+topstringnom+"")
@@ -505,129 +516,156 @@ if not a.isData:
         # correctionColumns21.Add("finalweight21FailFullSF","(1-dbSFnomloose)*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+"")
         # correctionColumns21.Add("finalweight21FailHalfSF","puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+"")
 
-        correctionColumns.Add("finalweightTight","dbSFnomtight*(dbSFnomtight)*triggerTight[0]*puWeight"+topstringnom+"")
-        correctionColumns.Add("finalweightLoose","dbSFnomloose*(dbSFnomloose)*triggerLoose[0]*puWeight"+topstringnom+"")
-        correctionColumns.Add("finalweightTightFailFullSF","dbSFnomtight*(1-dbSFnomtight)*triggerTight[0]*puWeight"+topstringnom+"")
-        correctionColumns.Add("finalweightLooseFailFullSF","dbSFnomloose*(1-dbSFnomloose)*triggerLoose[0]*puWeight"+topstringnom+"")
-        correctionColumns.Add("finalweightTightFailHalfSF","dbSFnomtight*triggerTight[0]*puWeight"+topstringnom+"")
-        correctionColumns.Add("finalweightLooseFailHalfSF","dbSFnomloose*triggerLoose[0]*puWeight"+topstringnom+"")
+        correctionColumns.Add("finalweightTight","dbSFnomtight*(dbSFnomtight)*triggerTight[0]*puWeight"+topstringnom+prefireStringnom+"")
+        correctionColumns.Add("finalweightLoose","dbSFnomloose*(dbSFnomloose)*triggerLoose[0]*puWeight"+topstringnom+prefireStringnom+"")
+        correctionColumns.Add("finalweightTightFailFullSF","dbSFnomtight*(1-dbSFnomtight)*triggerTight[0]*puWeight"+topstringnom+prefireStringnom+"")
+        correctionColumns.Add("finalweightLooseFailFullSF","dbSFnomloose*(1-dbSFnomloose)*triggerLoose[0]*puWeight"+topstringnom+prefireStringnom+"")
+        correctionColumns.Add("finalweightTightFailHalfSF","dbSFnomtight*triggerTight[0]*puWeight"+topstringnom+prefireStringnom+"")
+        correctionColumns.Add("finalweightLooseFailHalfSF","dbSFnomloose*triggerLoose[0]*puWeight"+topstringnom+prefireStringnom+"")
 
-        correctionColumns21.Add("finalweight21","dbSFnomloose*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+"")
-        correctionColumns21.Add("finalweight21FailFullSF","(1-dbSFnomloose)*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+"")
-        correctionColumns21.Add("finalweight21FailHalfSF","trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+"")
+        correctionColumns21.Add("finalweight21","dbSFnomloose*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+prefireStringnom+"")
+        correctionColumns21.Add("finalweight21FailFullSF","(1-dbSFnomloose)*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+prefireStringnom+"")
+        correctionColumns21.Add("finalweight21FailHalfSF","trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+prefireStringnom+"")
 
 
 ### Here I make the weights for the shape based uncertainties. This cannot be done inline with the Histo1D calls so it is done here.
 
 if not a.isData:
 
+    if options.year != '18':
+        correctionColumns11.Add("prefireweight_tight_up",'dbSFnomtight*(dbSFnomtight)*puWeight*triggerTight[0]'+topstringnom+prefireStringUp+'')
+        correctionColumns11.Add("prefireweight_tight_down",'dbSFnomtight*(dbSFnomtight)*puWeight*triggerTight[0]'+topstringnom+prefireStringDown+'')
+        correctionColumns11.Add("prefireweight_loose_up",'dbSFnomloose*(dbSFnomloose)*puWeight*triggerLoose[0]'+topstringnom+prefireStringUp+'')
+        correctionColumns11.Add("prefireweight_loose_down",'dbSFnomloose*(dbSFnomloose)*puWeight*triggerLoose[0]'+topstringnom+prefireStringDown+'')
+
+        correctionColumns11.Add("prefireweight_tight_upFailFullSF",'dbSFnomtight*(1-dbSFnomtight)*puWeight*triggerTight[0]'+topstringnom+prefireStringUp+'')
+        correctionColumns11.Add("prefireweight_tight_downFailFullSF",'dbSFnomtight*(1-dbSFnomtight)*puWeight*triggerTight[0]'+topstringnom+prefireStringDown+'')
+        correctionColumns11.Add("prefireweight_loose_upFailFullSF",'dbSFnomloose*(1-dbSFnomloose)*puWeight*triggerLoose[0]'+topstringnom+prefireStringUp+'')
+        correctionColumns11.Add("prefireweight_loose_downFailFullSF",'dbSFnomloose*(1-dbSFnomloose)*puWeight*triggerLoose[0]'+topstringnom+prefireStringDown+'')
+
+        correctionColumns11.Add("prefireweight_tight_upFailHalfSF",'(dbSFnomtight)*puWeight*triggerTight[0]'+topstringnom+prefireStringUp+'')
+        correctionColumns11.Add("prefireweight_tight_downFailHalfSF",'(dbSFnomtight)*puWeight*triggerTight[0]'+topstringnom+prefireStringDown+'')
+        correctionColumns11.Add("prefireweight_loose_upFailHalfSF",'(dbSFnomloose)*puWeight*triggerLoose[0]'+topstringnom+prefireStringUp+'')
+        correctionColumns11.Add("prefireweight_loose_downFailHalfSF",'(dbSFnomloose)*puWeight*triggerLoose[0]'+topstringnom+prefireStringDown+'')
+
     correctionColumns.Add("Pdfweight", 'analyzer::PDFweight(LHEPdfWeight, "'+options.year+'")')
-    correctionColumns11.Add("Pdfweight_tight_up",'dbSFnomtight*(dbSFnomtight)*Pdfweight[0]*triggerTight[0]*puWeight'+topstringnom+'')
-    correctionColumns11.Add("Pdfweight_tight_down",'dbSFnomtight*(dbSFnomtight)*Pdfweight[1]*triggerTight[0]*puWeight'+topstringnom+'')
-    correctionColumns11.Add("Pdfweight_loose_up",'dbSFnomloose*(dbSFnomloose)*Pdfweight[0]*triggerLoose[0]*puWeight'+topstringnom+'')
-    correctionColumns11.Add("Pdfweight_loose_down",'dbSFnomloose*(dbSFnomloose)*Pdfweight[1]*triggerLoose[0]*puWeight'+topstringnom+'')
+    correctionColumns11.Add("Pdfweight_tight_up",'dbSFnomtight*(dbSFnomtight)*Pdfweight[0]*triggerTight[0]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("Pdfweight_tight_down",'dbSFnomtight*(dbSFnomtight)*Pdfweight[1]*triggerTight[0]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("Pdfweight_loose_up",'dbSFnomloose*(dbSFnomloose)*Pdfweight[0]*triggerLoose[0]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("Pdfweight_loose_down",'dbSFnomloose*(dbSFnomloose)*Pdfweight[1]*triggerLoose[0]*puWeight'+topstringnom+prefireStringnom+'')
 
-    correctionColumns11.Add("Pdfweight_tight_upFailFullSF",'dbSFnomtight*(1-dbSFnomtight)*Pdfweight[0]*triggerTight[0]*puWeight'+topstringnom+'')
-    correctionColumns11.Add("Pdfweight_tight_downFailFullSF",'dbSFnomtight*(1-dbSFnomtight)*Pdfweight[1]*triggerTight[0]*puWeight'+topstringnom+'')
-    correctionColumns11.Add("Pdfweight_loose_upFailFullSF",'dbSFnomloose*(1-dbSFnomloose)*Pdfweight[0]*triggerLoose[0]*puWeight'+topstringnom+'')
-    correctionColumns11.Add("Pdfweight_loose_downFailFullSF",'dbSFnomloose*(1-dbSFnomloose)*Pdfweight[1]*triggerLoose[0]*puWeight'+topstringnom+'')
+    correctionColumns11.Add("Pdfweight_tight_upFailFullSF",'dbSFnomtight*(1-dbSFnomtight)*Pdfweight[0]*triggerTight[0]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("Pdfweight_tight_downFailFullSF",'dbSFnomtight*(1-dbSFnomtight)*Pdfweight[1]*triggerTight[0]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("Pdfweight_loose_upFailFullSF",'dbSFnomloose*(1-dbSFnomloose)*Pdfweight[0]*triggerLoose[0]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("Pdfweight_loose_downFailFullSF",'dbSFnomloose*(1-dbSFnomloose)*Pdfweight[1]*triggerLoose[0]*puWeight'+topstringnom+prefireStringnom+'')
 
-    correctionColumns11.Add("Pdfweight_tight_upFailHalfSF",'(dbSFnomtight)*Pdfweight[0]*triggerTight[0]*puWeight'+topstringnom+'')
-    correctionColumns11.Add("Pdfweight_tight_downFailHalfSF",'(dbSFnomtight)*Pdfweight[1]*triggerTight[0]*puWeight'+topstringnom+'')
-    correctionColumns11.Add("Pdfweight_loose_upFailHalfSF",'(dbSFnomloose)*Pdfweight[0]*triggerLoose[0]*puWeight'+topstringnom+'')
-    correctionColumns11.Add("Pdfweight_loose_downFailHalfSF",'(dbSFnomloose)*Pdfweight[1]*triggerLoose[0]*puWeight'+topstringnom+'')
+    correctionColumns11.Add("Pdfweight_tight_upFailHalfSF",'(dbSFnomtight)*Pdfweight[0]*triggerTight[0]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("Pdfweight_tight_downFailHalfSF",'(dbSFnomtight)*Pdfweight[1]*triggerTight[0]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("Pdfweight_loose_upFailHalfSF",'(dbSFnomloose)*Pdfweight[0]*triggerLoose[0]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("Pdfweight_loose_downFailHalfSF",'(dbSFnomloose)*Pdfweight[1]*triggerLoose[0]*puWeight'+topstringnom+prefireStringnom+'')
 
-    correctionColumns11.Add("pileupweight_tight_up",'dbSFnomtight*(dbSFnomtight)*puWeightUp*triggerTight[0]'+topstringnom+'')
-    correctionColumns11.Add("pileupweight_tight_down",'dbSFnomtight*(dbSFnomtight)*puWeightDown*triggerTight[0]'+topstringnom+'')
-    correctionColumns11.Add("pileupweight_loose_up",'dbSFnomloose*(dbSFnomloose)*puWeightUp*triggerLoose[0]'+topstringnom+'')
-    correctionColumns11.Add("pileupweight_loose_down",'dbSFnomloose*(dbSFnomloose)*puWeightDown*triggerLoose[0]'+topstringnom+'')
+    correctionColumns11.Add("pileupweight_tight_up",'dbSFnomtight*(dbSFnomtight)*puWeightUp*triggerTight[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("pileupweight_tight_down",'dbSFnomtight*(dbSFnomtight)*puWeightDown*triggerTight[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("pileupweight_loose_up",'dbSFnomloose*(dbSFnomloose)*puWeightUp*triggerLoose[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("pileupweight_loose_down",'dbSFnomloose*(dbSFnomloose)*puWeightDown*triggerLoose[0]'+topstringnom+prefireStringnom+'')
 
-    correctionColumns11.Add("pileupweight_tight_upFailFullSF",'dbSFnomtight*(1-dbSFnomtight)*puWeightUp*triggerTight[0]'+topstringnom+'')
-    correctionColumns11.Add("pileupweight_tight_downFailFullSF",'dbSFnomtight*(1-dbSFnomtight)*puWeightDown*triggerTight[0]'+topstringnom+'')
-    correctionColumns11.Add("pileupweight_loose_upFailFullSF",'dbSFnomloose*(1-dbSFnomloose)*puWeightUp*triggerLoose[0]'+topstringnom+'')
-    correctionColumns11.Add("pileupweight_loose_downFailFullSF",'dbSFnomloose*(1-dbSFnomloose)*puWeightDown*triggerLoose[0]'+topstringnom+'')
+    correctionColumns11.Add("pileupweight_tight_upFailFullSF",'dbSFnomtight*(1-dbSFnomtight)*puWeightUp*triggerTight[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("pileupweight_tight_downFailFullSF",'dbSFnomtight*(1-dbSFnomtight)*puWeightDown*triggerTight[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("pileupweight_loose_upFailFullSF",'dbSFnomloose*(1-dbSFnomloose)*puWeightUp*triggerLoose[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("pileupweight_loose_downFailFullSF",'dbSFnomloose*(1-dbSFnomloose)*puWeightDown*triggerLoose[0]'+topstringnom+prefireStringnom+'')
 
-    correctionColumns11.Add("pileupweight_tight_upFailHalfSF",'(dbSFnomtight)*puWeightUp*triggerTight[0]'+topstringnom+'')
-    correctionColumns11.Add("pileupweight_tight_downFailHalfSF",'(dbSFnomtight)*puWeightDown*triggerTight[0]'+topstringnom+'')
-    correctionColumns11.Add("pileupweight_loose_upFailHalfSF",'(dbSFnomloose)*puWeightUp*triggerLoose[0]'+topstringnom+'')
-    correctionColumns11.Add("pileupweight_loose_downFailHalfSF",'(dbSFnomloose)*puWeightDown*triggerLoose[0]'+topstringnom+'')
+    correctionColumns11.Add("pileupweight_tight_upFailHalfSF",'(dbSFnomtight)*puWeightUp*triggerTight[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("pileupweight_tight_downFailHalfSF",'(dbSFnomtight)*puWeightDown*triggerTight[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("pileupweight_loose_upFailHalfSF",'(dbSFnomloose)*puWeightUp*triggerLoose[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("pileupweight_loose_downFailHalfSF",'(dbSFnomloose)*puWeightDown*triggerLoose[0]'+topstringnom+prefireStringnom+'')
 
-    correctionColumns11.Add("triggertight_up",'dbSFnomtight*(dbSFnomtight)*triggerTight[1]*puWeight'+topstringnom+'')
-    correctionColumns11.Add("triggertight_down",'dbSFnomtight*(dbSFnomtight)*triggerTight[2]*puWeight'+topstringnom+'')
-    correctionColumns11.Add("triggerloose_up",'dbSFnomloose*(dbSFnomloose)*triggerLoose[1]*puWeight'+topstringnom+'')
-    correctionColumns11.Add("triggerloose_down",'dbSFnomloose*(dbSFnomloose)*triggerLoose[2]*puWeight'+topstringnom+'')
+    correctionColumns11.Add("triggertight_up",'dbSFnomtight*(dbSFnomtight)*triggerTight[1]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("triggertight_down",'dbSFnomtight*(dbSFnomtight)*triggerTight[2]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("triggerloose_up",'dbSFnomloose*(dbSFnomloose)*triggerLoose[1]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("triggerloose_down",'dbSFnomloose*(dbSFnomloose)*triggerLoose[2]*puWeight'+topstringnom+prefireStringnom+'')
 
-    correctionColumns11.Add("triggertight_upFailFullSF",'dbSFnomtight*(1-dbSFnomtight)*triggerTight[1]*puWeight'+topstringnom+'')
-    correctionColumns11.Add("triggertight_downFailFullSF",'dbSFnomtight*(1-dbSFnomtight)*triggerTight[2]*puWeight'+topstringnom+'')
-    correctionColumns11.Add("triggerloose_upFailFullSF",'dbSFnomloose*(1-dbSFnomloose)*triggerLoose[1]*puWeight'+topstringnom+'')
-    correctionColumns11.Add("triggerloose_downFailFullSF",'dbSFnomloose*(1-dbSFnomloose)*triggerLoose[2]*puWeight'+topstringnom+'')
+    correctionColumns11.Add("triggertight_upFailFullSF",'dbSFnomtight*(1-dbSFnomtight)*triggerTight[1]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("triggertight_downFailFullSF",'dbSFnomtight*(1-dbSFnomtight)*triggerTight[2]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("triggerloose_upFailFullSF",'dbSFnomloose*(1-dbSFnomloose)*triggerLoose[1]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("triggerloose_downFailFullSF",'dbSFnomloose*(1-dbSFnomloose)*triggerLoose[2]*puWeight'+topstringnom+prefireStringnom+'')
 
-    correctionColumns11.Add("triggertight_upFailHalfSF",'(dbSFnomtight)*triggerTight[1]*puWeight'+topstringnom+'')
-    correctionColumns11.Add("triggertight_downFailHalfSF",'(dbSFnomtight)*triggerTight[2]*puWeight'+topstringnom+'')
-    correctionColumns11.Add("triggerloose_upFailHalfSF",'(dbSFnomloose)*triggerLoose[1]*puWeight'+topstringnom+'')
-    correctionColumns11.Add("triggerloose_downFailHalfSF",'(dbSFnomloose)*triggerLoose[2]*puWeight'+topstringnom+'')
+    correctionColumns11.Add("triggertight_upFailHalfSF",'(dbSFnomtight)*triggerTight[1]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("triggertight_downFailHalfSF",'(dbSFnomtight)*triggerTight[2]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("triggerloose_upFailHalfSF",'(dbSFnomloose)*triggerLoose[1]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("triggerloose_downFailHalfSF",'(dbSFnomloose)*triggerLoose[2]*puWeight'+topstringnom+prefireStringnom+'')
 
-    correctionColumns11.Add("dbsftight_up",'dbSFuptight*(dbSFuptight)*triggerTight[0]*puWeight'+topstringnom+'')
-    correctionColumns11.Add("dbsftight_down",'dbSFdowntight*(dbSFdowntight)*triggerTight[0]*puWeight'+topstringnom+'')
+    correctionColumns11.Add("dbsftight_up",'dbSFuptight*(dbSFuptight)*triggerTight[0]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("dbsftight_down",'dbSFdowntight*(dbSFdowntight)*triggerTight[0]*puWeight'+topstringnom+prefireStringnom+'')
     correctionColumns11.Add("dbsfloose_up",'dbSFuploose*(dbSFuploose)*triggerLoose[0]*puWeight'+topstringnom+'')
-    correctionColumns11.Add("dbsfloose_down",'dbSFdownloose*(dbSFdownloose)*triggerLoose[0]*puWeight'+topstringnom+'')
+    correctionColumns11.Add("dbsfloose_down",'dbSFdownloose*(dbSFdownloose)*triggerLoose[0]*puWeight'+topstringnom+prefireStringnom+'')
 
-    correctionColumns11.Add("dbsftight_upFailFullSF",'dbSFuptight*(1-dbSFuptight)*triggerTight[0]*puWeight'+topstringnom+'')
-    correctionColumns11.Add("dbsftight_downFailFullSF",'dbSFdowntight*(1-dbSFdowntight)*triggerTight[0]*puWeight'+topstringnom+'')
-    correctionColumns11.Add("dbsfloose_upFailFullSF",'dbSFuploose*(1-dbSFuploose)*triggerLoose[0]*puWeight'+topstringnom+'')
-    correctionColumns11.Add("dbsfloose_downFailFullSF",'dbSFdownloose*(1-dbSFdownloose)*triggerLoose[0]*puWeight'+topstringnom+'')
+    correctionColumns11.Add("dbsftight_upFailFullSF",'dbSFuptight*(1-dbSFuptight)*triggerTight[0]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("dbsftight_downFailFullSF",'dbSFdowntight*(1-dbSFdowntight)*triggerTight[0]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("dbsfloose_upFailFullSF",'dbSFuploose*(1-dbSFuploose)*triggerLoose[0]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("dbsfloose_downFailFullSF",'dbSFdownloose*(1-dbSFdownloose)*triggerLoose[0]*puWeight'+topstringnom+prefireStringnom+'')
 
-    correctionColumns11.Add("dbsftight_upFailHalfSF",'(dbSFuptight)*triggerTight[0]*puWeight'+topstringnom+'')
-    correctionColumns11.Add("dbsftight_downFailHalfSF",'(dbSFdowntight)*triggerTight[0]*puWeight'+topstringnom+'')
-    correctionColumns11.Add("dbsfloose_upFailHalfSF",'(dbSFuploose)*triggerLoose[0]*puWeight'+topstringnom+'')
-    correctionColumns11.Add("dbsfloose_downFailHalfSF",'(dbSFdownloose)*triggerLoose[0]*puWeight'+topstringnom+'')
+    correctionColumns11.Add("dbsftight_upFailHalfSF",'(dbSFuptight)*triggerTight[0]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("dbsftight_downFailHalfSF",'(dbSFdowntight)*triggerTight[0]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("dbsfloose_upFailHalfSF",'(dbSFuploose)*triggerLoose[0]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("dbsfloose_downFailHalfSF",'(dbSFdownloose)*triggerLoose[0]*puWeight'+topstringnom+prefireStringnom+'')
 
 #### Now do 2+1 weights
 
-    correctionColumns21.Add("pileupweight_up",'dbSFnomloose*puWeightUp*trigger21[0]*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+'')
-    correctionColumns21.Add("pileupweight_down",'dbSFnomloose*puWeightDown*trigger21[0]*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+'')
+    if options.year != '18':
+        correctionColumns21.Add("prefireweight_up",'dbSFnomloose*puWeight*trigger21[0]*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringUp+'')
+        correctionColumns21.Add("prefireweight_down",'dbSFnomloose*puWeight*trigger21[0]*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringDown+'')
 
-    correctionColumns21.Add("pileupweight_upFailFullSF",'(1-dbSFnomloose)*puWeightUp*trigger21[0]*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+'')
-    correctionColumns21.Add("pileupweight_downFailFullSF",'(1-dbSFnomloose)*puWeightDown*trigger21[0]*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+'')
+        correctionColumns21.Add("prefireweight_upFailFullSF",'(1-dbSFnomloose)*puWeight*trigger21[0]*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringUp+'')
+        correctionColumns21.Add("prefireweight_downFailFullSF",'(1-dbSFnomloose)*puWeight*trigger21[0]*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringUp+'')
 
-    correctionColumns21.Add("pileupweight_upFailHalfSF",'puWeightUp*trigger21[0]*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+'')
-    correctionColumns21.Add("pileupweight_downFailHalfSF",'puWeightDown*trigger21[0]*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+'')
+        correctionColumns21.Add("prefireweight_upFailHalfSF",'puWeight*trigger21[0]*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringUp+'')
+        correctionColumns21.Add("prefireweight_downFailHalfSF",'puWeight*trigger21[0]*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringDown+'')
 
-    correctionColumns21.Add("Pdfweight_up",'dbSFnomloose*Pdfweight[0]*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+'')
-    correctionColumns21.Add("Pdfweight_down",'dbSFnomloose*Pdfweight[1]*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+'')
 
-    correctionColumns21.Add("Pdfweight_upFailFullSF",'(1-dbSFnomloose)*Pdfweight[0]*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+'')
-    correctionColumns21.Add("Pdfweight_downFailFullSF",'(1-dbSFnomloose)*Pdfweight[1]*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+'')
+    correctionColumns21.Add("pileupweight_up",'dbSFnomloose*puWeightUp*trigger21[0]*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns21.Add("pileupweight_down",'dbSFnomloose*puWeightDown*trigger21[0]*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
 
-    correctionColumns21.Add("Pdfweight_upFailHalfSF",'Pdfweight[0]*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+'')
-    correctionColumns21.Add("Pdfweight_downFailHalfSF",'Pdfweight[1]*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+'')
+    correctionColumns21.Add("pileupweight_upFailFullSF",'(1-dbSFnomloose)*puWeightUp*trigger21[0]*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns21.Add("pileupweight_downFailFullSF",'(1-dbSFnomloose)*puWeightDown*trigger21[0]*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
 
-    correctionColumns21.Add("btagsfweight_up",'dbSFnomloose*puWeight*trigger21[0]*btagscalefactor[1]*btagscalefactor[1]'+topstringnom+'')
-    correctionColumns21.Add("btagsfweight_down",'dbSFnomloose*puWeight*trigger21[0]*btagscalefactor[2]*btagscalefactor[2]'+topstringnom+'')
+    correctionColumns21.Add("pileupweight_upFailHalfSF",'puWeightUp*trigger21[0]*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns21.Add("pileupweight_downFailHalfSF",'puWeightDown*trigger21[0]*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
 
-    correctionColumns21.Add("btagsfweight_upFailFullSF",'(1-dbSFnomloose)*puWeight*trigger21[0]*btagscalefactor[1]*btagscalefactor[1]'+topstringnom+'')
-    correctionColumns21.Add("btagsfweight_downFailFullSF",'(1-dbSFnomloose)*puWeight*trigger21[0]*btagscalefactor[2]*btagscalefactor[2]'+topstringnom+'')
+    correctionColumns21.Add("Pdfweight_up",'dbSFnomloose*Pdfweight[0]*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns21.Add("Pdfweight_down",'dbSFnomloose*Pdfweight[1]*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
 
-    correctionColumns21.Add("btagsfweight_upFailHalfSF",'puWeight*trigger21[0]*btagscalefactor[1]*btagscalefactor[1]'+topstringnom+'')
-    correctionColumns21.Add("btagsfweight_downFailHalfSF",'puWeight*trigger21[0]*btagscalefactor[2]*btagscalefactor[2]'+topstringnom+'')
+    correctionColumns21.Add("Pdfweight_upFailFullSF",'(1-dbSFnomloose)*Pdfweight[0]*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns21.Add("Pdfweight_downFailFullSF",'(1-dbSFnomloose)*Pdfweight[1]*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
 
-    correctionColumns21.Add("trigger_up",'dbSFnomloose*trigger21[1]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+'')
-    correctionColumns21.Add("trigger_down",'dbSFnomloose*trigger21[2]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+'')
+    correctionColumns21.Add("Pdfweight_upFailHalfSF",'Pdfweight[0]*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns21.Add("Pdfweight_downFailHalfSF",'Pdfweight[1]*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
 
-    correctionColumns21.Add("trigger_upFailFullSF",'(1-dbSFnomloose)*trigger21[1]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+'')
-    correctionColumns21.Add("trigger_downFailFullSF",'(1-dbSFnomloose)*trigger21[2]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+'')
+    correctionColumns21.Add("btagsfweight_up",'dbSFnomloose*puWeight*trigger21[0]*btagscalefactor[1]*btagscalefactor[1]'+topstringnom+prefireStringnom+'')
+    correctionColumns21.Add("btagsfweight_down",'dbSFnomloose*puWeight*trigger21[0]*btagscalefactor[2]*btagscalefactor[2]'+topstringnom+prefireStringnom+'')
 
-    correctionColumns21.Add("trigger_upFailHalfSF",'trigger21[1]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+'')
-    correctionColumns21.Add("trigger_downFailHalfSF",'trigger21[2]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+'')
+    correctionColumns21.Add("btagsfweight_upFailFullSF",'(1-dbSFnomloose)*puWeight*trigger21[0]*btagscalefactor[1]*btagscalefactor[1]'+topstringnom+prefireStringnom+'')
+    correctionColumns21.Add("btagsfweight_downFailFullSF",'(1-dbSFnomloose)*puWeight*trigger21[0]*btagscalefactor[2]*btagscalefactor[2]'+topstringnom+prefireStringnom+'')
 
-    correctionColumns21.Add("dbsfup",'dbSFuploose*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+'')
-    correctionColumns21.Add("dbsfdown",'dbSFdownloose*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+'')
+    correctionColumns21.Add("btagsfweight_upFailHalfSF",'puWeight*trigger21[0]*btagscalefactor[1]*btagscalefactor[1]'+topstringnom+prefireStringnom+'')
+    correctionColumns21.Add("btagsfweight_downFailHalfSF",'puWeight*trigger21[0]*btagscalefactor[2]*btagscalefactor[2]'+topstringnom+prefireStringnom+'')
 
-    correctionColumns21.Add("dbsfupFailFullSF",'(1-dbSFuploose)*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+'')
-    correctionColumns21.Add("dbsfdownFailFullSF",'(1-dbSFdownloose)*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+'')
+    correctionColumns21.Add("trigger_up",'dbSFnomloose*trigger21[1]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns21.Add("trigger_down",'dbSFnomloose*trigger21[2]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
 
-    correctionColumns21.Add("dbsfupFailHalfSF",'trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+'')
-    correctionColumns21.Add("dbsfdownFailHalfSF",'trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+'')
+    correctionColumns21.Add("trigger_upFailFullSF",'(1-dbSFnomloose)*trigger21[1]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns21.Add("trigger_downFailFullSF",'(1-dbSFnomloose)*trigger21[2]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
+
+    correctionColumns21.Add("trigger_upFailHalfSF",'trigger21[1]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns21.Add("trigger_downFailHalfSF",'trigger21[2]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
+
+    correctionColumns21.Add("dbsfup",'dbSFuploose*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns21.Add("dbsfdown",'dbSFdownloose*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
+
+    correctionColumns21.Add("dbsfupFailFullSF",'(1-dbSFuploose)*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns21.Add("dbsfdownFailFullSF",'(1-dbSFdownloose)*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
+
+    correctionColumns21.Add("dbsfupFailHalfSF",'trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns21.Add("dbsfdownFailHalfSF",'trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
 
 
 #### 1+1 algorithm
@@ -899,6 +937,24 @@ else:
 if not a.isData:
 
 ##### 1+1 templates
+
+    if options.year != '18':
+        hSRTT11_prefireUp = SRTT.DataFrame.Histo2D(("SRTT_11_prefireUp","SRTT_11_prefireUp",18 ,45 ,225 ,28 ,700 ,3500),'mh','mreduced','prefireweight_tight_up')
+        hATTT11_prefireUp = ATTT.DataFrame.Histo2D(("ATTT_11_prefireUp","ATTT_11_prefireUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'prefireweight_tight_upFailHalfSF')
+        hSFTT11_prefireUp = SRTT.DataFrame.Histo2D(("SFTT_11_prefireUp","ATTT_11_prefireUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'prefireweight_tight_upFailFullSF')
+
+        hSRLL11_prefireUp = SRLL.DataFrame.Histo2D(("SRLL_11_prefireUp","SRLL_11_prefireUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'prefireweight_loose_up')
+        hATLL11_prefireUp = ATLL.DataFrame.Histo2D(("ATLL_11_prefireUp","ATLL_11_prefireUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'prefireweight_loose_upFailHalfSF')
+        hSFLL11_prefireUp = SRLL.DataFrame.Histo2D(("SFLL_11_prefireUp","ATLL_11_prefireUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'prefireweight_loose_upFailFullSF')
+
+        hSRTT11_prefireDown = SRTT.DataFrame.Histo2D(("SRTT_11_prefireDown","SRTT_11_prefireDown",18 ,45 ,225 ,28 ,700 ,3500),'mh','mreduced','prefireweight_tight_down')
+        hATTT11_prefireDown = ATTT.DataFrame.Histo2D(("ATTT_11_prefireDown","ATTT_11_prefireDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'prefireweight_tight_downFailHalfSF')
+        hSFTT11_prefireDown = SRTT.DataFrame.Histo2D(("SFTT_11_prefireDown","ATTT_11_prefireDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'prefireweight_tight_downFailFullSF')
+
+        hSRLL11_prefireDown = SRLL.DataFrame.Histo2D(("SRLL_11_prefireDown","SRLL_11_prefireDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'prefireweight_loose_down')
+        hATLL11_prefireDown = ATLL.DataFrame.Histo2D(("ATLL_11_prefireDown","ATLL_11_prefireDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'prefireweight_loose_downFailHalfSF')
+        hSFLL11_prefireDown = SRLL.DataFrame.Histo2D(("SFLL_11_prefireDown","ATLL_11_prefireDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'prefireweight_loose_downFailFullSF')
+
     hSRTT11_pdfUp = SRTT.DataFrame.Histo2D(("SRTT_11_pdfUp","SRTT_11_pdfUp",18 ,45 ,225 ,28 ,700 ,3500),'mh','mreduced','Pdfweight_tight_up')
     hATTT11_pdfUp = ATTT.DataFrame.Histo2D(("ATTT_11_pdfUp","ATTT_11_pdfUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'Pdfweight_tight_upFailHalfSF')
     hSFTT11_pdfUp = SRTT.DataFrame.Histo2D(("SFTT_11_pdfUp","ATTT_11_pdfUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'Pdfweight_tight_upFailFullSF')
@@ -965,6 +1021,16 @@ if not a.isData:
 
 ##### Control Region templates
 
+    if options.year != '18':
+        hSRCR11_prefireUp = SRCR.DataFrame.Histo2D(("SRCR_11_prefireUp","SRCR_11_prefireUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'prefireweight_loose_up')
+        hATCR11_prefireUp = ATCR.DataFrame.Histo2D(("ATCR_11_prefireUp","ATCR_11_prefireUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'prefireweight_loose_upFailHalfSF')
+        hSFCR11_prefireUp = SRCR.DataFrame.Histo2D(("SFCR_11_prefireUp","ATCR_11_prefireUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'prefireweight_loose_upFailFullSF')
+
+        hSRCR11_prefireDown = SRCR.DataFrame.Histo2D(("SRCR_11_prefireDown","SRCR_11_prefireDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'prefireweight_loose_down')
+        hATCR11_prefireDown = ATCR.DataFrame.Histo2D(("ATCR_11_prefireDown","ATCR_11_prefireDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'prefireweight_loose_downFailHalfSF')
+        hSFCR11_prefireDown = SRCR.DataFrame.Histo2D(("SFCR_11_prefireDown","ATCR_11_prefireDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'prefireweight_loose_downFailFullSF')
+
+
     hSRCR11_pdfUp = SRCR.DataFrame.Histo2D(("SRCR_11_pdfUp","SRCR_11_pdfUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'Pdfweight_loose_up')
     hATCR11_pdfUp = ATCR.DataFrame.Histo2D(("ATCR_11_pdfUp","ATCR_11_pdfUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'Pdfweight_loose_upFailHalfSF')
     hSFCR11_pdfUp = SRCR.DataFrame.Histo2D(("SFCR_11_pdfUp","ATCR_11_pdfUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'Pdfweight_loose_upFailFullSF')
@@ -998,6 +1064,24 @@ if not a.isData:
     hSFCR11_dbsfloose_down = SRCR.DataFrame.Histo2D(("SFCR_11_dbsf_down","ATCR_11_dbsfDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'dbsfloose_downFailFullSF')
 
 ##### Control Region templates
+    
+    if options.year != '18':
+        hSRTT11_ttbar_prefireUp = SRTT_ttbar.DataFrame.Histo2D(("SRTT_11_ttbar_prefireUp","SRTT_11_ttbar_prefireUp",18 ,45 ,225 ,28 ,700 ,3500),'mh','mreduced','prefireweight_tight_up')
+        hATTT11_ttbar_prefireUp = ATTT_ttbar.DataFrame.Histo2D(("ATTT_11_ttbar_prefireUp","ATTT_11_ttbar_prefireUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'prefireweight_tight_upFailHalfSF')
+        hSFTT11_ttbar_prefireUp = SRTT_ttbar.DataFrame.Histo2D(("SFTT_11_ttbar_prefireUp","ATTT_11_ttbar_prefireUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'prefireweight_tight_upFailFullSF')
+
+        hSRLL11_ttbar_prefireUp = SRLL_ttbar.DataFrame.Histo2D(("SRLL_11_ttbar_prefireUp","SRLL_11_ttbar_prefireUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'prefireweight_loose_up')
+        hATLL11_ttbar_prefireUp = ATLL_ttbar.DataFrame.Histo2D(("ATLL_11_ttbar_prefireUp","ATLL_11_ttbar_prefireUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'prefireweight_loose_upFailHalfSF')
+        hSFLL11_ttbar_prefireUp = SRLL_ttbar.DataFrame.Histo2D(("SFLL_11_ttbar_prefireUp","ATLL_11_ttbar_prefireUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'prefireweight_loose_upFailFullSF')
+
+        hSRTT11_ttbar_prefireDown = SRTT_ttbar.DataFrame.Histo2D(("SRTT_11_ttbar_prefireDown","SRTT_11_ttbar_prefireDown",18 ,45 ,225 ,28 ,700 ,3500),'mh','mreduced','prefireweight_tight_down')
+        hATTT11_ttbar_prefireDown = ATTT_ttbar.DataFrame.Histo2D(("ATTT_11_ttbar_prefireDown","ATTT_11_ttbar_prefireDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'prefireweight_tight_downFailHalfSF')
+        hSFTT11_ttbar_prefireDown = SRTT_ttbar.DataFrame.Histo2D(("SFTT_11_ttbar_prefireDown","ATTT_11_ttbar_prefireDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'prefireweight_tight_downFailFullSF')
+
+        hSRLL11_ttbar_prefireDown = SRLL_ttbar.DataFrame.Histo2D(("SRLL_11_ttbar_prefireDown","SRLL_11_ttbar_prefireDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'prefireweight_loose_down')
+        hATLL11_ttbar_prefireDown = ATLL_ttbar.DataFrame.Histo2D(("ATLL_11_ttbar_prefireDown","ATLL_11_ttbar_prefireDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'prefireweight_loose_downFailHalfSF')
+        hSFLL11_ttbar_prefireDown = SRLL_ttbar.DataFrame.Histo2D(("SFLL_11_ttbar_prefireDown","ATLL_11_ttbar_prefireDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'prefireweight_loose_downFailFullSF')
+
     hSRTT11_ttbar_pdfUp = SRTT_ttbar.DataFrame.Histo2D(("SRTT_11_ttbar_pdfUp","SRTT_11_ttbar_pdfUp",18 ,45 ,225 ,28 ,700 ,3500),'mh','mreduced','Pdfweight_tight_up')
     hATTT11_ttbar_pdfUp = ATTT_ttbar.DataFrame.Histo2D(("ATTT_11_ttbar_pdfUp","ATTT_11_ttbar_pdfUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'Pdfweight_tight_upFailHalfSF')
     hSFTT11_ttbar_pdfUp = SRTT_ttbar.DataFrame.Histo2D(("SFTT_11_ttbar_pdfUp","ATTT_11_ttbar_pdfUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'Pdfweight_tight_upFailFullSF')
@@ -1063,6 +1147,11 @@ if not a.isData:
     hSFLL11_ttbar_dbsfloose_down = SRLL_ttbar.DataFrame.Histo2D(("SFLL_11_ttbar_dbsf_down","ATLL_11_ttbar_dbsfDown",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'dbsfloose_downFailFullSF')
 
 ##### Now for 2+1 template histo calls.
+
+    if options.year != '18':
+        hSRTT21_prefireDown = Pass.DataFrame.Histo2D(("SRTT_21_prefireDown","SRTT_21_prefireDown",18 ,45 ,225 ,13 ,700 ,2000),'mh','mreduced21','prefireweight_down')
+        hATTT21_prefireDown = Fail.DataFrame.Histo2D(("ATTT_21_prefireDown","ATTT_21_prefireDown",18 ,45 ,225 ,13 ,700 ,2000),"mh","mreduced21",'prefireweight_downFailHalfSF')
+        hSFTT21_prefireDown = Pass.DataFrame.Histo2D(("SFTT_21_prefireDown","ATTT_21_prefireDown",18 ,45 ,225 ,13 ,700 ,2000),"mh","mreduced21",'prefireweight_downFailFullSF')
 
     hSRTT21_pdfUp = Pass.DataFrame.Histo2D(("SRTT_21_pdfUp","SRTT_21_pdfUp",18 ,45 ,225 ,13 ,700 ,2000),'mh','mreduced21','Pdfweight_up')
     hATTT21_pdfUp = Fail.DataFrame.Histo2D(("ATTT_21_pdfUp","ATTT_21_pdfUp",18 ,45 ,225 ,13 ,700 ,2000),"mh","mreduced21",'Pdfweight_upFailHalfSF')
@@ -1291,6 +1380,12 @@ if not a.isData:
     hATTT11_dbsftight_down.Add(hSFTT11_dbsftight_down.GetPtr())
     hATLL11_dbsfloose_down.Add(hSFLL11_dbsfloose_down.GetPtr())
 
+    if options.year != '18':
+        hATTT11_prefireUp.Add(hSFTT11_prefireUp.GetPtr())
+        hATLL11_prefireUp.Add(hSFLL11_prefireUp.GetPtr())
+        hATTT11_prefireDown.Add(hSFTT11_prefireDown.GetPtr())
+        hATLL11_prefireDown.Add(hSFLL11_prefireDown.GetPtr())
+
 ##### Control Region templates
 
     hATCR11_pdfUp.Add(hSFCR11_pdfUp.GetPtr())
@@ -1301,6 +1396,10 @@ if not a.isData:
     hATCR11_triggerloose_down.Add(hSFCR11_triggerloose_down.GetPtr())
     hATCR11_dbsfloose_up.Add(hSFCR11_dbsfloose_up.GetPtr())
     hATCR11_dbsfloose_down.Add(hSFCR11_dbsfloose_down.GetPtr())
+
+    if options.year != '18':
+        hATCR11_prefireUp.Add(hSFCR11_prefireUp.GetPtr())
+        hATCR11_prefireDown.Add(hSFCR11_prefireDown.GetPtr())
 
 
 ##### Now for 2+1 template histo calls.
@@ -1314,6 +1413,10 @@ if not a.isData:
     hATTT21_btagsfDown.Add(hSFTT21_btagsfDown.GetPtr())
     hATTT21_dbsf_up.Add(hSFTT21_dbsf_up.GetPtr())
     hATTT21_dbsf_down.Add(hSFTT21_dbsf_down.GetPtr())
+
+    if options.year != '18':
+        hATTT21_prefireUp.Add(hSFTT21_prefireUp.GetPtr())
+        hATTT21_prefireDown.Add(hSFTT21_prefireDown.GetPtr())
 
 ### Now TTBar Control Region templates
 
@@ -1333,6 +1436,12 @@ if not a.isData:
     hATLL11_ttbar_dbsfloose_up.Add(hSFLL11_ttbar_dbsfloose_up.GetPtr())
     hATTT11_ttbar_dbsftight_down.Add(hSFTT11_ttbar_dbsftight_down.GetPtr())
     hATLL11_ttbar_dbsfloose_down.Add(hSFLL11_ttbar_dbsfloose_down.GetPtr())
+
+    if options.year != '18':
+        hATTT11_ttbar_prefireUp.Add(hSFTT11_ttbar_prefireUp.GetPtr())
+        hATLL11_ttbar_prefireUp.Add(hSFLL11_ttbar_prefireUp.GetPtr())
+        hATTT11_ttbar_prefireDown.Add(hSFTT11_ttbar_prefireDown.GetPtr())
+        hATLL11_ttbar_prefireDown.Add(hSFLL11_ttbar_prefireDown.GetPtr())
 
     if 'ttbar' in setname:
 #### 1+1 Templates
@@ -1418,6 +1527,11 @@ if not a.isData:
         hSRTT11_ttbar_pileupUp,hATTT11_ttbar_pileupUp,hSRLL11_ttbar_pileupUp,hATLL11_ttbar_pileupUp,hSRTT11_ttbar_pileupDown,hATTT11_ttbar_pileupDown,hSRLL11_ttbar_pileupDown,hATLL11_ttbar_pileupDown,
         hSRTT11_ttbar_triggertight_up,hATTT11_ttbar_triggertight_up,hSRLL11_ttbar_triggerloose_up,hATLL11_ttbar_triggerloose_up,hSRTT11_ttbar_triggertight_down,hATTT11_ttbar_triggertight_down,hSRLL11_ttbar_triggerloose_down,hATLL11_ttbar_triggerloose_down,
         hSRTT11_ttbar_dbsftight_up,hATTT11_ttbar_dbsftight_up,hSRLL11_ttbar_dbsfloose_up,hATLL11_ttbar_dbsfloose_up,hSRTT11_ttbar_dbsftight_down,hATTT11_ttbar_dbsftight_down,hSRLL11_ttbar_dbsfloose_down,hATLL11_ttbar_dbsfloose_down])
+    if options.year != '18':
+        hists.extend([hSRTT11_pileupUp,hATTT11_pileupUp,hSRLL11_pileupUp,hATLL11_pileupUp,hSRTT11_pileupDown,hATTT11_pileupDown,hSRLL11_pileupDown,hATLL11_pileupDown,
+            hSRCR11_pileupUp,hATCR11_pileupUp,hSRCR11_pileupDown,hATCR11_pileupDown,
+            hSRTT21_pileupUp,hATTT21_pileupUp,hSRTT21_pileupDown,hATTT21_pileupDown,
+            hSRTT11_ttbar_pileupUp,hATTT11_ttbar_pileupUp,hSRLL11_ttbar_pileupUp,hATLL11_ttbar_pileupUp,hSRTT11_ttbar_pileupDown,hATTT11_ttbar_pileupDown,hSRLL11_ttbar_pileupDown,hATLL11_ttbar_pileupDown])
     if 'ttbar' in setname:
         hists.extend([hSRTT11_topptAlphaUp,hATTT11_topptAlphaUp,hSRLL11_topptAlphaUp,hATLL11_topptAlphaUp,hSRTT11_topptAlphaDown,hATTT11_topptAlphaDown,hSRLL11_topptAlphaDown,hATLL11_topptAlphaDown,
             hSRCR11_topptAlphaUp,hATCR11_topptAlphaUp,hSRCR11_topptAlphaDown,hATCR11_topptAlphaDown,        
@@ -1434,6 +1548,7 @@ if not a.isData:
             hSRCR11_ttbarNormUp,hATCR11_ttbarNormUp,hSRCR11_ttbarNormDown,hATCR11_ttbarNormDown,hSRTT21_ttbarNormUp,hATTT21_ttbarNormUp,hSRTT21_ttbarNormDown,hATTT21_ttbarNormDown,
             hSRTT11_ttbar_ttbarNormUp,hATTT11_ttbar_ttbarNormUp,hSRLL11_ttbar_ttbarNormUp,hATLL11_ttbar_ttbarNormUp,
             hSRTT11_ttbar_ttbarNormDown,hATTT11_ttbar_ttbarNormDown,hSRLL11_ttbar_ttbarNormDown,hATLL11_ttbar_ttbarNormDown])
+
 
 norm_hist = ROOT.TH1F('norm','norm',1,0,1)
 norm_hist.SetBinContent(1,norm)
