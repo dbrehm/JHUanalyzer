@@ -1149,6 +1149,11 @@ if not a.isData:
 ##### Now for 2+1 template histo calls.
 
     if options.year != '18':
+
+        hSRTT21_prefireUp = Pass.DataFrame.Histo2D(("SRTT_21_prefireUp","SRTT_21_prefireUp",18 ,45 ,225 ,13 ,700 ,2000),'mh','mreduced21','prefireweight_up')
+        hATTT21_prefireUp = Fail.DataFrame.Histo2D(("ATTT_21_prefireUp","ATTT_21_prefireUp",18 ,45 ,225 ,13 ,700 ,2000),"mh","mreduced21",'prefireweight_upFailHalfSF')
+        hSFTT21_prefireUp = Pass.DataFrame.Histo2D(("SFTT_21_prefireUp","SFTT_21_prefireUp",18 ,45 ,225 ,13 ,700 ,2000),"mh","mreduced21",'prefireweight_upFailFullSF')
+        
         hSRTT21_prefireDown = Pass.DataFrame.Histo2D(("SRTT_21_prefireDown","SRTT_21_prefireDown",18 ,45 ,225 ,13 ,700 ,2000),'mh','mreduced21','prefireweight_down')
         hATTT21_prefireDown = Fail.DataFrame.Histo2D(("ATTT_21_prefireDown","ATTT_21_prefireDown",18 ,45 ,225 ,13 ,700 ,2000),"mh","mreduced21",'prefireweight_downFailHalfSF')
         hSFTT21_prefireDown = Pass.DataFrame.Histo2D(("SFTT_21_prefireDown","ATTT_21_prefireDown",18 ,45 ,225 ,13 ,700 ,2000),"mh","mreduced21",'prefireweight_downFailFullSF')
