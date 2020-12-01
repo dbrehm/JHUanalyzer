@@ -391,7 +391,7 @@ if not a.isData:
     prefireStringUp = ""
     prefireStringDown = ""
 
-    if options.year != '18':
+    if options.year == '17' or options.year == '16':
         prefireStringnom = "*PrefireWeight"
         prefireStringUp = "*PrefireWeight_Up"
         prefireStringDown = "*PrefireWeight_Down"
@@ -532,7 +532,7 @@ if not a.isData:
 
 if not a.isData:
 
-    if options.year != '18':
+    if options.year == '17' or options.year == '16':
         correctionColumns11.Add("prefireweight_tight_up",'dbSFnomtight*(dbSFnomtight)*puWeight*triggerTight[0]'+topstringnom+prefireStringUp+'')
         correctionColumns11.Add("prefireweight_tight_down",'dbSFnomtight*(dbSFnomtight)*puWeight*triggerTight[0]'+topstringnom+prefireStringDown+'')
         correctionColumns11.Add("prefireweight_loose_up",'dbSFnomloose*(dbSFnomloose)*puWeight*triggerLoose[0]'+topstringnom+prefireStringUp+'')
@@ -596,7 +596,7 @@ if not a.isData:
 
     correctionColumns11.Add("dbsftight_up",'dbSFuptight*(dbSFuptight)*triggerTight[0]*puWeight'+topstringnom+prefireStringnom+'')
     correctionColumns11.Add("dbsftight_down",'dbSFdowntight*(dbSFdowntight)*triggerTight[0]*puWeight'+topstringnom+prefireStringnom+'')
-    correctionColumns11.Add("dbsfloose_up",'dbSFuploose*(dbSFuploose)*triggerLoose[0]*puWeight'+topstringnom+'')
+    correctionColumns11.Add("dbsfloose_up",'dbSFuploose*(dbSFuploose)*triggerLoose[0]*puWeight'+topstringnom+prefireStringnom+'')
     correctionColumns11.Add("dbsfloose_down",'dbSFdownloose*(dbSFdownloose)*triggerLoose[0]*puWeight'+topstringnom+prefireStringnom+'')
 
     correctionColumns11.Add("dbsftight_upFailFullSF",'dbSFuptight*(1-dbSFuptight)*triggerTight[0]*puWeight'+topstringnom+prefireStringnom+'')
@@ -611,7 +611,7 @@ if not a.isData:
 
 #### Now do 2+1 weights
 
-    if options.year != '18':
+    if options.year == '17' or options.year == '16':
         correctionColumns21.Add("prefireweight_up",'dbSFnomloose*puWeight*trigger21[0]*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringUp+'')
         correctionColumns21.Add("prefireweight_down",'dbSFnomloose*puWeight*trigger21[0]*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringDown+'')
 
@@ -938,7 +938,7 @@ if not a.isData:
 
 ##### 1+1 templates
 
-    if options.year != '18':
+    if options.year == '17' or options.year == '16':
         hSRTT11_prefireUp = SRTT.DataFrame.Histo2D(("SRTT_11_prefireUp","SRTT_11_prefireUp",18 ,45 ,225 ,28 ,700 ,3500),'mh','mreduced','prefireweight_tight_up')
         hATTT11_prefireUp = ATTT.DataFrame.Histo2D(("ATTT_11_prefireUp","ATTT_11_prefireUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'prefireweight_tight_upFailHalfSF')
         hSFTT11_prefireUp = SRTT.DataFrame.Histo2D(("SFTT_11_prefireUp","ATTT_11_prefireUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'prefireweight_tight_upFailFullSF')
@@ -1021,7 +1021,7 @@ if not a.isData:
 
 ##### Control Region templates
 
-    if options.year != '18':
+    if options.year == '17' or options.year == '16':
         hSRCR11_prefireUp = SRCR.DataFrame.Histo2D(("SRCR_11_prefireUp","SRCR_11_prefireUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'prefireweight_loose_up')
         hATCR11_prefireUp = ATCR.DataFrame.Histo2D(("ATCR_11_prefireUp","ATCR_11_prefireUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'prefireweight_loose_upFailHalfSF')
         hSFCR11_prefireUp = SRCR.DataFrame.Histo2D(("SFCR_11_prefireUp","ATCR_11_prefireUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'prefireweight_loose_upFailFullSF')
@@ -1065,7 +1065,7 @@ if not a.isData:
 
 ##### Control Region templates
     
-    if options.year != '18':
+    if options.year == '17' or options.year == '16':
         hSRTT11_ttbar_prefireUp = SRTT_ttbar.DataFrame.Histo2D(("SRTT_11_ttbar_prefireUp","SRTT_11_ttbar_prefireUp",18 ,45 ,225 ,28 ,700 ,3500),'mh','mreduced','prefireweight_tight_up')
         hATTT11_ttbar_prefireUp = ATTT_ttbar.DataFrame.Histo2D(("ATTT_11_ttbar_prefireUp","ATTT_11_ttbar_prefireUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'prefireweight_tight_upFailHalfSF')
         hSFTT11_ttbar_prefireUp = SRTT_ttbar.DataFrame.Histo2D(("SFTT_11_ttbar_prefireUp","ATTT_11_ttbar_prefireUp",18 ,45 ,225 ,28 ,700 ,3500),"mh","mreduced",'prefireweight_tight_upFailFullSF')
@@ -1148,7 +1148,7 @@ if not a.isData:
 
 ##### Now for 2+1 template histo calls.
 
-    if options.year != '18':
+    if options.year == '17' or options.year == '16':
 
         hSRTT21_prefireUp = Pass.DataFrame.Histo2D(("SRTT_21_prefireUp","SRTT_21_prefireUp",18 ,45 ,225 ,13 ,700 ,2000),'mh','mreduced21','prefireweight_up')
         hATTT21_prefireUp = Fail.DataFrame.Histo2D(("ATTT_21_prefireUp","ATTT_21_prefireUp",18 ,45 ,225 ,13 ,700 ,2000),"mh","mreduced21",'prefireweight_upFailHalfSF')
@@ -1385,7 +1385,7 @@ if not a.isData:
     hATTT11_dbsftight_down.Add(hSFTT11_dbsftight_down.GetPtr())
     hATLL11_dbsfloose_down.Add(hSFLL11_dbsfloose_down.GetPtr())
 
-    if options.year != '18':
+    if options.year == '17' or options.year == '16':
         hATTT11_prefireUp.Add(hSFTT11_prefireUp.GetPtr())
         hATLL11_prefireUp.Add(hSFLL11_prefireUp.GetPtr())
         hATTT11_prefireDown.Add(hSFTT11_prefireDown.GetPtr())
@@ -1402,7 +1402,7 @@ if not a.isData:
     hATCR11_dbsfloose_up.Add(hSFCR11_dbsfloose_up.GetPtr())
     hATCR11_dbsfloose_down.Add(hSFCR11_dbsfloose_down.GetPtr())
 
-    if options.year != '18':
+    if options.year == '17' or options.year == '16':
         hATCR11_prefireUp.Add(hSFCR11_prefireUp.GetPtr())
         hATCR11_prefireDown.Add(hSFCR11_prefireDown.GetPtr())
 
@@ -1419,7 +1419,7 @@ if not a.isData:
     hATTT21_dbsf_up.Add(hSFTT21_dbsf_up.GetPtr())
     hATTT21_dbsf_down.Add(hSFTT21_dbsf_down.GetPtr())
 
-    if options.year != '18':
+    if options.year == '17' or options.year == '16':
         hATTT21_prefireUp.Add(hSFTT21_prefireUp.GetPtr())
         hATTT21_prefireDown.Add(hSFTT21_prefireDown.GetPtr())
 
@@ -1442,7 +1442,7 @@ if not a.isData:
     hATTT11_ttbar_dbsftight_down.Add(hSFTT11_ttbar_dbsftight_down.GetPtr())
     hATLL11_ttbar_dbsfloose_down.Add(hSFLL11_ttbar_dbsfloose_down.GetPtr())
 
-    if options.year != '18':
+    if options.year == '17' or options.year == '16':
         hATTT11_ttbar_prefireUp.Add(hSFTT11_ttbar_prefireUp.GetPtr())
         hATLL11_ttbar_prefireUp.Add(hSFLL11_ttbar_prefireUp.GetPtr())
         hATTT11_ttbar_prefireDown.Add(hSFTT11_ttbar_prefireDown.GetPtr())
@@ -1532,7 +1532,7 @@ if not a.isData:
         hSRTT11_ttbar_pileupUp,hATTT11_ttbar_pileupUp,hSRLL11_ttbar_pileupUp,hATLL11_ttbar_pileupUp,hSRTT11_ttbar_pileupDown,hATTT11_ttbar_pileupDown,hSRLL11_ttbar_pileupDown,hATLL11_ttbar_pileupDown,
         hSRTT11_ttbar_triggertight_up,hATTT11_ttbar_triggertight_up,hSRLL11_ttbar_triggerloose_up,hATLL11_ttbar_triggerloose_up,hSRTT11_ttbar_triggertight_down,hATTT11_ttbar_triggertight_down,hSRLL11_ttbar_triggerloose_down,hATLL11_ttbar_triggerloose_down,
         hSRTT11_ttbar_dbsftight_up,hATTT11_ttbar_dbsftight_up,hSRLL11_ttbar_dbsfloose_up,hATLL11_ttbar_dbsfloose_up,hSRTT11_ttbar_dbsftight_down,hATTT11_ttbar_dbsftight_down,hSRLL11_ttbar_dbsfloose_down,hATLL11_ttbar_dbsfloose_down])
-    if options.year != '18':
+    if options.year == '17' or options.year == '16':
         hists.extend([hSRTT11_pileupUp,hATTT11_pileupUp,hSRLL11_pileupUp,hATLL11_pileupUp,hSRTT11_pileupDown,hATTT11_pileupDown,hSRLL11_pileupDown,hATLL11_pileupDown,
             hSRCR11_pileupUp,hATCR11_pileupUp,hSRCR11_pileupDown,hATCR11_pileupDown,
             hSRTT21_pileupUp,hATTT21_pileupUp,hSRTT21_pileupDown,hATTT21_pileupDown,
