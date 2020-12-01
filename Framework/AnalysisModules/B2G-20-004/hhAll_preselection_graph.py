@@ -1533,10 +1533,10 @@ if not a.isData:
         hSRTT11_ttbar_triggertight_up,hATTT11_ttbar_triggertight_up,hSRLL11_ttbar_triggerloose_up,hATLL11_ttbar_triggerloose_up,hSRTT11_ttbar_triggertight_down,hATTT11_ttbar_triggertight_down,hSRLL11_ttbar_triggerloose_down,hATLL11_ttbar_triggerloose_down,
         hSRTT11_ttbar_dbsftight_up,hATTT11_ttbar_dbsftight_up,hSRLL11_ttbar_dbsfloose_up,hATLL11_ttbar_dbsfloose_up,hSRTT11_ttbar_dbsftight_down,hATTT11_ttbar_dbsftight_down,hSRLL11_ttbar_dbsfloose_down,hATLL11_ttbar_dbsfloose_down])
     if options.year == '17' or options.year == '16':
-        hists.extend([hSRTT11_pileupUp,hATTT11_pileupUp,hSRLL11_pileupUp,hATLL11_pileupUp,hSRTT11_pileupDown,hATTT11_pileupDown,hSRLL11_pileupDown,hATLL11_pileupDown,
-            hSRCR11_pileupUp,hATCR11_pileupUp,hSRCR11_pileupDown,hATCR11_pileupDown,
-            hSRTT21_pileupUp,hATTT21_pileupUp,hSRTT21_pileupDown,hATTT21_pileupDown,
-            hSRTT11_ttbar_pileupUp,hATTT11_ttbar_pileupUp,hSRLL11_ttbar_pileupUp,hATLL11_ttbar_pileupUp,hSRTT11_ttbar_pileupDown,hATTT11_ttbar_pileupDown,hSRLL11_ttbar_pileupDown,hATLL11_ttbar_pileupDown])
+        hists.extend([hSRTT11_prefireUp,hATTT11_prefireUp,hSRLL11_prefireUp,hATLL11_prefireUp,hSRTT11_prefireDown,hATTT11_prefireDown,hSRLL11_prefireDown,hATLL11_prefireDown,
+            hSRCR11_prefireUp,hATCR11_prefireUp,hSRCR11_prefireDown,hATCR11_prefireDown,
+            hSRTT21_prefireUp,hATTT21_prefireUp,hSRTT21_prefireDown,hATTT21_prefireDown,
+            hSRTT11_ttbar_prefireUp,hATTT11_ttbar_prefireUp,hSRLL11_ttbar_prefireUp,hATLL11_ttbar_prefireUp,hSRTT11_ttbar_prefireDown,hATTT11_ttbar_prefireDown,hSRLL11_ttbar_prefireDown,hATLL11_ttbar_prefireDown])
     if 'ttbar' in setname:
         hists.extend([hSRTT11_topptAlphaUp,hATTT11_topptAlphaUp,hSRLL11_topptAlphaUp,hATLL11_topptAlphaUp,hSRTT11_topptAlphaDown,hATTT11_topptAlphaDown,hSRLL11_topptAlphaDown,hATLL11_topptAlphaDown,
             hSRCR11_topptAlphaUp,hATCR11_topptAlphaUp,hSRCR11_topptAlphaDown,hATCR11_topptAlphaDown,        
