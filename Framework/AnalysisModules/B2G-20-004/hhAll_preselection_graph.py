@@ -737,7 +737,7 @@ if a.isData and options.year == "18":
     if "D" in setname or "C" in setname:
         slim_skim.Add("HEM15_16_2018dataCut","(!(-2.5 < "+eta0+" && "+eta0+" < -1.3) && !(-2.5 < "+eta1+" && "+eta1+" < -1.3)")
     if "B" in setname:
-        slim_skim.Add("HEM15_16_2018dataCut","((run < 319077) && (!(-2.5 < "+eta0+" && "+eta0+" < -1.3) && !(-2.5 < "+eta1+" && "+eta1+" < -1.3))")
+        slim_skim.Add("HEM15_16_2018dataCut","((run < 319077) && (!(-2.5 < "+eta0+" && "+eta0+" < -1.3) && !(-2.5 < "+eta1+" && "+eta1+" < -1.3)))")
 
 filters = CutGroup('filters')
 filters.Add("Flag_goodVertices","Flag_goodVertices == 1")
