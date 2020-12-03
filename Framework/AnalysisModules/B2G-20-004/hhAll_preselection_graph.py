@@ -293,6 +293,22 @@ if not a.isData:
     # ROOT.gInterpreter.ProcessLine("auto tHist21 = "+doubleB_name+"21"+options.year+";")
     correctionColumns21.Add("trigger21","analyzer::TriggerLookup(mreduced21,tSD21)")
 
+    #### Trigger Correction Code for 2D Triggers
+    # triggerFile = ROOT.TFile("TriggerWeights.root","READ")
+    # triggerHistTightEff = triggerFile.Get("deepTagMD_HbbvsQCD"+'ratio112D'+options.year)
+    # # triggerHistTight = triggerFile.Get(doubleB_name+'tight'+options.year)
+    # # triggerHistLoose = triggerFile.Get(doubleB_name+'11'+options.year)
+    # triggerHist21Eff = triggerFile.Get("deepTagMD_HbbvsQCD"+'ratio212D'+options.year)
+    # # triggerHist21 = triggerFile.Get(doubleB_name+'21'+options.year)
+    # ROOT.gInterpreter.ProcessLine("auto tSF = "+"deepTagMD_HbbvsQCD"+"ratio112D"+options.year+";")
+    # # ROOT.gInterpreter.ProcessLine("auto tHistT = "+doubleB_name+"tight"+options.year+";")
+    # correctionColumns.Add("triggerTight","analyzer::TriggerLookup(mh,mreduced,tSF)")
+    # # ROOT.gInterpreter.ProcessLine("auto tHistL = "+doubleB_name+"loose"+options.year+";")
+    # correctionColumns.Add("triggerLoose","analyzer::TriggerLookup(mh,mreduced,tSF)")
+    # ROOT.gInterpreter.ProcessLine("auto tSD21 = "+"deepTagMD_HbbvsQCD"+"ratio212D"+options.year+";")
+    # # ROOT.gInterpreter.ProcessLine("auto tHist21 = "+doubleB_name+"21"+options.year+";")
+    # correctionColumns21.Add("trigger21","analyzer::TriggerLookup(mh,mreduced21,tSD21)")
+
 #### B tag SF
 if "btagHbb" in options.doublebtagger:
     if options.year == '16':
@@ -716,9 +732,12 @@ slim_skim.Add("triggers","triggers == 1")
 slim_skim.Add("nFatJets1","nFatJet > 0")
 ##### The following are added to deal with issues brought up in OR 
 if a.isData and options.year == "17":
-    slim_skim.Add("LuiSection2017","(run != 305366) && (luminosityBlock != 935)")
+    slim_skim.Add("LumiSection2017","(run != 305366) && (luminosityBlock != 935)")
 if a.isData and options.year == "18":
-    slim_skim.Add("HEM15_16_2018dataCut","(run < 319077) && !(-2.5 < "+eta0+" < -1.3) && !(-2.5 < "+eta1+" < -1.3)")
+    if "D" in setname or "C" in setname:
+        slim_skim.Add("HEM15_16_2018dataCut","(!(-2.5 < "+eta0+" && "+eta0+" < -1.3) && !(-2.5 < "+eta1+" && "+eta1+" < -1.3)")
+    if "B" in setname:
+        slim_skim.Add("HEM15_16_2018dataCut","((run < 319077) && (!(-2.5 < "+eta0+" && "+eta0+" < -1.3) && !(-2.5 < "+eta1+" && "+eta1+" < -1.3))")
 
 filters = CutGroup('filters')
 filters.Add("Flag_goodVertices","Flag_goodVertices == 1")
