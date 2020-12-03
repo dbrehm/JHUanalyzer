@@ -215,11 +215,12 @@ customc.Import("JHUanalyzer/Framework/AnalysisModules/B2G-20-004/ptwlookup.cc","
 customc.Import("JHUanalyzer/Framework/AnalysisModules/B2G-20-004/topCut.cc","topCut")
 customc.Import("JHUanalyzer/Framework/AnalysisModules/B2G-20-004/LumiFilter.h","LumiFilter")
 
-LumiFilterLoadCode = ''' 
-                    int y = std::stoi(year);
-                    LumiFilter myLumiFilter(y); '''
+if options.year != "16":
+    LumiFilterLoadCode = ''' 
+                        int y = std::stoi(year);
+                        LumiFilter myLumiFilter(y); '''
 
-ROOT.gInterpreter.ProcessLine(LumiFilterLoadCode)
+    ROOT.gInterpreter.ProcessLine(LumiFilterLoadCode)
 
 
 colnames = a.BaseDataFrame.GetColumnNames()
