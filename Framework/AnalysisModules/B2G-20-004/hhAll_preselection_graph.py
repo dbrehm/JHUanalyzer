@@ -212,6 +212,14 @@ customc.Import("JHUanalyzer/Framework/AnalysisModules/B2G-20-004/triggerlookup.c
 customc.Import("JHUanalyzer/Framework/AnalysisModules/B2G-20-004/btagsf.cc","btagsf")
 customc.Import("JHUanalyzer/Framework/AnalysisModules/B2G-20-004/ptwlookup.cc","ptwlookup")
 customc.Import("JHUanalyzer/Framework/AnalysisModules/B2G-20-004/topCut.cc","topCut")
+customc.Import("JHUanalyzer/Framework/AnalysisModules/B2G-20-004/LumiFilter.h","LumiFilter")
+
+LumiFilterLoadCode = ''' 
+                    int y = std::stoi(year);
+                    LumiFilter myLumiFilter(y); '''
+
+ROOT.gInterpreter.ProcessLine(LumiFilterLoadCode)
+
 
 colnames = a.BaseDataFrame.GetColumnNames()
 # Start an initial group of cuts
@@ -733,7 +741,9 @@ slim_skim.Add("nFatJets1","nFatJet > 0")
 ##### The following are added to deal with issues brought up in OR 
 if a.isData and options.year == "17":
     slim_skim.Add("LumiSection2017","(run != 305366) && (luminosityBlock != 935)")
+    slim_skim.Add("lumiFilter", "myLumiFilter.eval(run, luminosityBlock)")
 if a.isData and options.year == "18":
+    slim_skim.Add("lumiFilter", "myLumiFilter.eval(run, luminosityBlock)")
     if "D" in setname or "C" in setname:
         slim_skim.Add("HEM15_16_2018dataCut","(!(-2.5 < "+eta0+" && "+eta0+" < -1.3) && !(-2.5 < "+eta1+" && "+eta1+" < -1.3))")
     if "B" in setname:
