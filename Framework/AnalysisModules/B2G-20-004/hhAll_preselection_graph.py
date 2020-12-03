@@ -174,9 +174,10 @@ doubleB_name = options.doublebtagger
 doubleB_title = doubleB_titles[doubleB_name]
 doubleB_short = doubleB_abreviations[doubleB_name]
 
+ROOT.gInterpreter.Declare('string year = string(TPython::Eval("options.year"));')
 if not a.isData:
 ## The following loads the btag calibration code in c++ so that it is available to RDF
-    ROOT.gInterpreter.Declare('string year = string(TPython::Eval("options.year"));')
+    
     btagLoadCode = '''
         string btagfilename;
         if (year == "16"){
