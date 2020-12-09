@@ -4,7 +4,7 @@
 using namespace ROOT::VecOps;
 
 namespace analyzer {
-    std::vector<double> TriggerLookup(float varx, float vary, TH1D* TRP){
+    std::vector<double> TriggerLookup(float varx, float vary, TH2D* TRP){
         double Weight = 1.0;
         double Weightup = 1.0;
         double Weightdown = 1.0;
