@@ -124,6 +124,17 @@ for y in ['16','17','18']:
 
         h21tt = ROOT.TEfficiency(hnum21tt, hden21tt)
 
+
+
+        h11D2D = ROOT.TEfficiency(hnum2D, hden2D)
+
+        h21D2D = ROOT.TEfficiency(hnum212D, hden212D)
+
+        h11Q2D = ROOT.TEfficiency(hnumQ2D, hdenQ2D)
+
+        h21Q2D = ROOT.TEfficiency(hnum21Q2D, hden21Q2D)
+
+
         # h11 = ROOT.TEfficiency(hh11, hh11Q)
 
         # h21 = ROOT.TEfficiency(hh21, hh21Q)
@@ -198,6 +209,25 @@ for y in ['16','17','18']:
         ratioQCDttbar21.Divide(ratio21)
 
 
+        #### Now make for 2D trigger corrections.
+
+        ratio112D = hh112D.Clone(doubleb+'ratio112D'+y)
+        ratio112D.SetTitle(doubleb+'ratio112D'+y)
+        for xb in range(1,hh112D.GetNbinsX()+1):
+            for yb in range(1,hh112D.GetNbinsY()+1):
+                b = hh112D.GetBin(xb,yb)
+                ratio112D.SetBinContent(b,h11D2D.GetEfficiency(b)/h11Q2D.GetEfficiency(b))
+                ratio112D.SetBinError(b,max([h11D2D.GetEfficiencyErrorUp(b),h11Q2D.GetEfficiencyErrorUp(b),h11D2D.GetEfficiencyErrorLow(b),h11Q2D.GetEfficiencyErrorLow(b)]))
+        
+        ratio212D = hh212D.Clone(doubleb+'ratio212D'+y)
+        ratio212D.SetTitle(doubleb+'ratio212D'+y)
+        for xb in range(1,hh212D.GetNbinsX()+1):
+            for yb in range(1,hh212D.GetNbinsX()+1):
+                b = hh212D.GetBin(xb,yb)
+                ratio212D.SetBinContent(b,h21D2D.GetEfficiency(b)/h21Q2D.GetEfficiency(b))
+                ratio212D.SetBinError(b,max([h21D2D.GetEfficiencyErrorUp(b),h21Q2D.GetEfficiencyErrorUp(b),h21D2D.GetEfficiencyErrorLow(b),h21Q2D.GetEfficiencyErrorLow(b)]))
+
+
         outfile.cd()
         # h11.Write()
         # h21.Write()
@@ -231,5 +261,8 @@ for y in ['16','17','18']:
         hh21Q2D.Write()
         hh11tt2D.Write()
         hh21tt2D.Write()
+
+        ratio112D.Write()
+        ratio212D.Write()
 
 outfile.Close()
