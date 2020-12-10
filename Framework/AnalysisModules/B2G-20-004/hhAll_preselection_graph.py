@@ -821,6 +821,7 @@ plotsColumn.Add("eta1","sublead_vect.Eta()")
 plotsColumn.Add("deltaEta","abs(eta0 - eta1)")
 plotsColumn.Add("FJtau21","FatJet_tau2[0]/FatJet_tau1[0]")
 plotsColumn.Add("tagger","FatJet_"+doubleB_name+"[0]")
+plotsColumn.Add("deltaEta21","abs(lead_vect.Eta() - (b_lead_vect+b_sublead_vect).Eta())")
 
 
 kinematicCuts = CutGroup("kinematicCuts")
@@ -914,7 +915,7 @@ bpt121 = kinematicDistributions21.DataFrame.Histo1D(("bpt121","bpt121",50 ,150 ,
 heta021 = kinematicDistributions21.DataFrame.Histo1D(("eta021","eta021",50 ,-3.5 ,3.5),"eta1")
 beta021 = kinematicDistributions21.DataFrame.Histo1D(("beta021","beta021",50 ,-3.5 ,3.5),"beta0")
 heta021 = kinematicDistributions21.DataFrame.Histo1D(("beta121","beta121",50 ,-3.5 ,3.5),"beta1")
-hdeltaEta21 = kinematicDistributions21.DataFrame.Histo1D(("deltaEta21","deltaEta21",50 ,0 ,3.5),"deltaEta")
+hdeltaEta21 = kinematicDistributions21.DataFrame.Histo1D(("deltaEta21","deltaEta21",50 ,0 ,3.5),"deltaEta21")
 hmred21 = kinematicDistributions21.DataFrame.Histo1D(("mred21","mred21",28 ,700 ,3500),"mreduced21")
 hmsd021 = kinematicDistributions21.DataFrame.Histo1D(("msd021","msd021",50 ,0 ,400),"mh1")
 hmbb21 = kinematicDistributions21.DataFrame.Histo1D(("mbb21","mbb21",50 ,0 ,400),"mbb")
