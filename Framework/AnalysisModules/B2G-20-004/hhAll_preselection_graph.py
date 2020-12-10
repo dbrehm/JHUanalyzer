@@ -77,9 +77,9 @@ if os.path.exists(options.config):
         xsec = 1.
         lumi = 1.
 if not a.isData: 
-    # norm = (xsec*lumi)/a.genEventCount
-    if 'QCD' in setname and not "btagHbb" in options.doublebtagger: norm = 1.
-    else: norm = (xsec*lumi)/a.genEventCount
+    norm = (xsec*lumi)/a.genEventCount
+    # if 'QCD' in setname and not "btagHbb" in options.doublebtagger: norm = 1.
+    # else: norm = (xsec*lumi)/a.genEventCount
 else: norm = 1.
 
 ##JECs for actual values.
@@ -210,7 +210,7 @@ SetCFunc(commonc.invariantMass)
 SetCFunc(commonc.invariantMassThree)
 customc.Import("JHUanalyzer/Framework/AnalysisModules/B2G-20-004/pdfweights.cc","pdfweights")
 customc.Import("JHUanalyzer/Framework/AnalysisModules/B2G-20-004/hemispherize.cc","hemispherize")
-customc.Import("JHUanalyzer/Framework/AnalysisModules/B2G-20-004/triggerlookup-2D.cc","triggerlookup")
+customc.Import("JHUanalyzer/Framework/AnalysisModules/B2G-20-004/triggerlookup.cc","triggerlookup")
 customc.Import("JHUanalyzer/Framework/AnalysisModules/B2G-20-004/btagsf.cc","btagsf")
 customc.Import("JHUanalyzer/Framework/AnalysisModules/B2G-20-004/ptwlookup.cc","ptwlookup")
 customc.Import("JHUanalyzer/Framework/AnalysisModules/B2G-20-004/topCut.cc","topCut")
