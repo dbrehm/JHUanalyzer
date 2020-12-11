@@ -77,9 +77,9 @@ if os.path.exists(options.config):
         xsec = 1.
         lumi = 1.
 if not a.isData: 
-    norm = (xsec*lumi)/a.genEventCount
-    # if 'QCD' in setname and not "btagHbb" in options.doublebtagger: norm = 1.
-    # else: norm = (xsec*lumi)/a.genEventCount
+    # norm = (xsec*lumi)/a.genEventCount
+    if 'QCD' in setname and not "btagHbb" in options.doublebtagger: norm = 1.
+    else: norm = (xsec*lumi)/a.genEventCount
 else: norm = 1.
 
 ##JECs for actual values.
@@ -836,14 +836,14 @@ kinematicCuts21.Add("eta","abs(lead_vect.Eta()) < 2.4")
 kinematicCuts21.Add("pt","(pt0 > 300)")
 kinematicCuts21.Add("b_pt","b_lead_vect.Pt() > 30 && b_sublead_vect.Pt() > 30")
 kinematicCuts21.Add("b_eta","abs(Jet_eta[Hemispherized[0]]) < 2.4 && abs(Jet_eta[Hemispherized[1]]) < 2.4")
-# if options.year == '16': 
-#     kinematicCuts21.Add("DeepJet","(0.3093 < Jet_btagDeepFlavB[Hemispherized[0]] && Jet_btagDeepFlavB[Hemispherized[0]] < 1) && (0.3093 < Jet_btagDeepFlavB[Hemispherized[1]] && Jet_btagDeepFlavB[Hemispherized[1]] < 1)")
-# if options.year == '17': 
-#     kinematicCuts21.Add("DeepJet","(0.3033  < Jet_btagDeepFlavB[Hemispherized[0]] && Jet_btagDeepFlavB[Hemispherized[0]] < 1) && (0.3033  < Jet_btagDeepFlavB[Hemispherized[1]] && Jet_btagDeepFlavB[Hemispherized[1]] < 1)")
-# if options.year == '18': 
-#     kinematicCuts21.Add("DeepJet","(0.2770 < Jet_btagDeepFlavB[Hemispherized[0]] && Jet_btagDeepFlavB[Hemispherized[0]] < 1) && (0.2770 < Jet_btagDeepFlavB[Hemispherized[1]] && Jet_btagDeepFlavB[Hemispherized[1]] < 1)")
+if options.year == '16': 
+    kinematicCuts21.Add("DeepJet","(0.3093 < Jet_btagDeepFlavB[Hemispherized[0]] && Jet_btagDeepFlavB[Hemispherized[0]] < 1) && (0.3093 < Jet_btagDeepFlavB[Hemispherized[1]] && Jet_btagDeepFlavB[Hemispherized[1]] < 1)")
+if options.year == '17': 
+    kinematicCuts21.Add("DeepJet","(0.3033  < Jet_btagDeepFlavB[Hemispherized[0]] && Jet_btagDeepFlavB[Hemispherized[0]] < 1) && (0.3033  < Jet_btagDeepFlavB[Hemispherized[1]] && Jet_btagDeepFlavB[Hemispherized[1]] < 1)")
+if options.year == '18': 
+    kinematicCuts21.Add("DeepJet","(0.2770 < Jet_btagDeepFlavB[Hemispherized[0]] && Jet_btagDeepFlavB[Hemispherized[0]] < 1) && (0.2770 < Jet_btagDeepFlavB[Hemispherized[1]] && Jet_btagDeepFlavB[Hemispherized[1]] < 1)")
 kinematicCuts21.Add("candidate21","("+cand21String+") || ("+run21String+")")
-# kinematicCuts21.Add("cut_mreduced21","mreduced21 > 750.")
+kinematicCuts21.Add("cut_mreduced21","mreduced21 > 750.")
 
 # Apply all groups in list order to the base RDF loaded in during analyzer() initialization
 slimandskim = a.Apply([triggerGroup,slim_skim,filters])
@@ -909,10 +909,10 @@ hmsd0LL = kinematicDistributions.DataFrame.Histo1D(("msd0LL","msd0LL",50 ,0 ,400
 hmsd1LL = kinematicDistributions.DataFrame.Histo1D(("msd1LL","msd1LL",50 ,0 ,400),"mh1")
 htau21LL = kinematicDistributions.DataFrame.Histo1D(("tau21LL","tau21LL",50 ,0 ,1),"FJtau21")
 
-hpt021 = kinematicDistributions21.DataFrame.Histo1D(("pt121","pt121",50 ,150 ,1500),"pt1")
+hpt021 = kinematicDistributions21.DataFrame.Histo1D(("pt021","pt021",50 ,150 ,1500),"pt0")
 bpt021 = kinematicDistributions21.DataFrame.Histo1D(("bpt021","bpt021",50 ,150 ,1500),"bpt0")
 bpt121 = kinematicDistributions21.DataFrame.Histo1D(("bpt121","bpt121",50 ,150 ,1500),"bpt1")
-heta021 = kinematicDistributions21.DataFrame.Histo1D(("eta021","eta021",50 ,-3.5 ,3.5),"eta1")
+heta021 = kinematicDistributions21.DataFrame.Histo1D(("eta021","eta021",50 ,-3.5 ,3.5),"eta0")
 beta021 = kinematicDistributions21.DataFrame.Histo1D(("beta021","beta021",50 ,-3.5 ,3.5),"beta0")
 heta021 = kinematicDistributions21.DataFrame.Histo1D(("beta121","beta121",50 ,-3.5 ,3.5),"beta1")
 hdeltaEta21 = kinematicDistributions21.DataFrame.Histo1D(("deltaEta21","deltaEta21",50 ,0 ,3.5),"deltaEta21")
@@ -1611,6 +1611,12 @@ SRTT_cuts.Add("SRTT","SRTT==1")
 SRTT_cutflow = CutflowHist('cutflow11',SRTT) # SRTT.DataFrame already has the cuts and numbers, SRTT_cuts is just to name the histogram bins (but that means they must match up!)
 # SRTT_cutflow.Scale(lumi/a.genEventCount)
 SRTT_cutflow.Write()
+
+SRLL_cuts = slim_skim+filters+preselection11+preselection12
+SRLL_cuts.Add("SRLL","SRLL==1")
+SRLL_cutflow = CutflowHist('cutflow11LL',SRLL) # SRTT.DataFrame already has the cuts and numbers, SRLL_cuts is just to name the histogram bins (but that means they must match up!)
+# SRTT_cutflow.Scale(lumi/a.genEventCount)
+SRLL_cutflow.Write()
 
 Pass21_cuts = slim_skim+filters+preselection21+preselection22+preselection23
 Pass21_cuts.Add("Pass21","Pass21==1")
