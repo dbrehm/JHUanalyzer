@@ -49,6 +49,14 @@ parser.add_option('-b', '--JMR', metavar='F', type='string', action='store',
                 default   =   'nom',
                 dest      =   'JMR',
                 help      =   'nom, up, or down')
+parser.add_option('-s', '--SJES', metavar='F', type='string', action='store',
+                default   =   'nom',
+                dest      =   'SJES',
+                help      =   'nom, up, or down')
+parser.add_option('-t', '--SJER', metavar='F', type='string', action='store',
+                default   =   'nom',
+                dest      =   'SJER',
+                help      =   'nom, up, or down')
 
 (options, args) = parser.parse_args()
 
@@ -85,6 +93,8 @@ else: norm = 1.
 ##JECs for actual values.
 lead = {}
 sublead = {}
+bpt = "Jet_pt_nom"
+bmass = "Jet_mass_nom"
 if not a.isData:
     lead['JEScorr'] = "1.0"
     sublead['JEScorr'] = "1.0"
@@ -102,6 +112,14 @@ if not a.isData:
     if options.JER != 'nom':
         lead['JERcorr'] = 'FatJet_corr_JER_'+options.JER+"[0]"
         sublead["JERcorr"] = 'FatJet_corr_JER_'+options.JER+"[1]"
+
+    if options.SJES != 'nom': 
+        bpt = "Jet_pt_jesTotal"+options.SJES.capitalize()
+        bmass = "Jet_mass_jesTotal"+options.SJES.capitalize()
+
+    if options.SJER != 'nom':
+        bpt = "Jet_pt_jer"+options.SJER.capitalize()
+        bmass = "Jet_mass_jer"+options.SJER.capitalize()
 
     # if options.JMS != 'nom':
     #     lead['JMScorr'] = "FatJet_msoftdrop_corr_JMS_"+options.JMS+"[0]"
@@ -124,17 +142,21 @@ if not a.isData:
     sublead['pt'] = "*"+sublead['JEScorr']+"*"+sublead['JERcorr']
     lead['SDmass'] = "*"+lead['JEScorr']+"*"+lead['JERcorr']+"*"+lead['JMRcorr']+"*"+lead['JMScorr']
     sublead['SDmass'] = "*"+sublead['JEScorr']+"*"+sublead['JERcorr']+"*"+sublead['JMRcorr']+"*"+sublead['JMScorr']
+
+    
 ###Apply corrections
 if not a.isData:
     mass0 = "FatJet_msoftdrop_nom[0]"+lead['SDmass']
     mass1 = "FatJet_msoftdrop_nom[1]"+sublead['SDmass']
     pt0 = "FatJet_pt_nom[0]"+lead['pt']
     pt1 = "FatJet_pt_nom[1]"+sublead['pt']
+
 else:
     mass0 = "FatJet_msoftdrop_nom[0]"
     mass1 = "FatJet_msoftdrop_nom[1]"
     pt0 = "FatJet_pt_nom[0]"
     pt1 = "FatJet_pt_nom[1]"
+
 eta0 = "FatJet_eta[0]"
 eta1 = "FatJet_eta[1]"
 phi0 = "FatJet_phi[0]"
@@ -145,6 +167,9 @@ print("mass 0 = "+ mass0)
 print("mass 1 = "+ mass1)
 print("pt 0 = "+ pt0)
 print("pt 1 = "+ pt1)
+
+print("bpt = "+ bpt)
+print("bmass = "+ bmass)
 
 cutsDict = {
     'doubleBtag':[0.8,1.0],
@@ -210,7 +235,7 @@ SetCFunc(commonc.invariantMass)
 SetCFunc(commonc.invariantMassThree)
 customc.Import("JHUanalyzer/Framework/AnalysisModules/B2G-20-004/pdfweights.cc","pdfweights")
 customc.Import("JHUanalyzer/Framework/AnalysisModules/B2G-20-004/hemispherize.cc","hemispherize")
-customc.Import("JHUanalyzer/Framework/AnalysisModules/B2G-20-004/triggerlookup.cc","triggerlookup")
+customc.Import("JHUanalyzer/Framework/AnalysisModules/B2G-20-004/triggerlookup-2D.cc","triggerlookup")
 customc.Import("JHUanalyzer/Framework/AnalysisModules/B2G-20-004/btagsf.cc","btagsf")
 customc.Import("JHUanalyzer/Framework/AnalysisModules/B2G-20-004/ptwlookup.cc","ptwlookup")
 customc.Import("JHUanalyzer/Framework/AnalysisModules/B2G-20-004/topCut.cc","topCut")
@@ -263,8 +288,8 @@ bbColumn = VarGroup("bbColumn")
 bbColumn.Add("Hemispherized","analyzer::Hemispherize(FatJet_pt_nom,FatJet_eta,FatJet_phi,FatJet_msoftdrop_nom,nFatJet,Jet_pt,Jet_eta,Jet_phi,Jet_mass,nJet,Jet_btagDeepB)")
 
 mbbColumn = VarGroup("mbbColumn")
-mbbColumn.Add("b_lead_vect","analyzer::TLvector(Jet_pt[Hemispherized[0]],Jet_eta[Hemispherized[0]],Jet_phi[Hemispherized[0]],Jet_mass[Hemispherized[0]])")
-mbbColumn.Add("b_sublead_vect","analyzer::TLvector(Jet_pt[Hemispherized[1]],Jet_eta[Hemispherized[1]],Jet_phi[Hemispherized[1]],Jet_mass[Hemispherized[1]])")
+mbbColumn.Add("b_lead_vect","analyzer::TLvector("+bpt+"[Hemispherized[0]],Jet_eta[Hemispherized[0]],Jet_phi[Hemispherized[0]],"+bmass+"[Hemispherized[0]])")
+mbbColumn.Add("b_sublead_vect","analyzer::TLvector("+bpt+"[Hemispherized[1]],Jet_eta[Hemispherized[1]],Jet_phi[Hemispherized[1]],"+bmass+"[Hemispherized[1]])")
 mbbColumn.Add("mbb","analyzer::invariantMass(b_lead_vect,b_sublead_vect)")
 mbbColumn.Add("topMassVec","analyzer::topCut(Hemispherized[0],Hemispherized[1],Jet_pt,Jet_eta,Jet_phi,Jet_mass,nJet)")
 mbbColumn.Add("topMass","topMassVec[0]")
@@ -290,35 +315,35 @@ if not a.isData:
     #### Trigger correction code
 
     triggerFile = ROOT.TFile("TriggerWeights.root","READ")
-    triggerHistTightEff = triggerFile.Get("deepTagMD_HbbvsQCD"+'ratio11'+options.year)
-    # triggerHistTight = triggerFile.Get(doubleB_name+'tight'+options.year)
-    # triggerHistLoose = triggerFile.Get(doubleB_name+'11'+options.year)
-    triggerHist21Eff = triggerFile.Get("deepTagMD_HbbvsQCD"+'ratio21'+options.year)
-    # triggerHist21 = triggerFile.Get(doubleB_name+'21'+options.year)
-    ROOT.gInterpreter.ProcessLine("auto tSF = "+"deepTagMD_HbbvsQCD"+"ratio11"+options.year+";")
-    # ROOT.gInterpreter.ProcessLine("auto tHistT = "+doubleB_name+"tight"+options.year+";")
-    correctionColumns.Add("triggerTight","analyzer::TriggerLookup(mreduced,tSF)")
-    # ROOT.gInterpreter.ProcessLine("auto tHistL = "+doubleB_name+"loose"+options.year+";")
-    correctionColumns.Add("triggerLoose","analyzer::TriggerLookup(mreduced,tSF)")
-    ROOT.gInterpreter.ProcessLine("auto tSD21 = "+"deepTagMD_HbbvsQCD"+"ratio21"+options.year+";")
-    # ROOT.gInterpreter.ProcessLine("auto tHist21 = "+doubleB_name+"21"+options.year+";")
-    correctionColumns21.Add("trigger21","analyzer::TriggerLookup(mreduced21,tSD21)")
-
-    ### Trigger Correction Code for 2D Triggers
-    # triggerFile = ROOT.TFile("TriggerWeights.root","READ")
-    # triggerHistTightEff = triggerFile.Get("deepTagMD_HbbvsQCD"+'ratio112D'+options.year)
+    # triggerHistTightEff = triggerFile.Get("deepTagMD_HbbvsQCD"+'ratio11'+options.year)
     # # triggerHistTight = triggerFile.Get(doubleB_name+'tight'+options.year)
     # # triggerHistLoose = triggerFile.Get(doubleB_name+'11'+options.year)
-    # triggerHist21Eff = triggerFile.Get("deepTagMD_HbbvsQCD"+'ratio212D'+options.year)
+    # triggerHist21Eff = triggerFile.Get("deepTagMD_HbbvsQCD"+'ratio21'+options.year)
     # # triggerHist21 = triggerFile.Get(doubleB_name+'21'+options.year)
-    # ROOT.gInterpreter.ProcessLine("auto tSF = "+"deepTagMD_HbbvsQCD"+"ratio112D"+options.year+";")
+    # ROOT.gInterpreter.ProcessLine("auto tSF = "+"deepTagMD_HbbvsQCD"+"ratio11"+options.year+";")
     # # ROOT.gInterpreter.ProcessLine("auto tHistT = "+doubleB_name+"tight"+options.year+";")
-    # correctionColumns.Add("triggerTight","analyzer::TriggerLookup(mh,mreduced,tSF)")
+    # correctionColumns.Add("triggerTight","analyzer::TriggerLookup(mreduced,tSF)")
     # # ROOT.gInterpreter.ProcessLine("auto tHistL = "+doubleB_name+"loose"+options.year+";")
-    # correctionColumns.Add("triggerLoose","analyzer::TriggerLookup(mh,mreduced,tSF)")
-    # ROOT.gInterpreter.ProcessLine("auto tSD21 = "+"deepTagMD_HbbvsQCD"+"ratio212D"+options.year+";")
+    # correctionColumns.Add("triggerLoose","analyzer::TriggerLookup(mreduced,tSF)")
+    # ROOT.gInterpreter.ProcessLine("auto tSD21 = "+"deepTagMD_HbbvsQCD"+"ratio21"+options.year+";")
     # # ROOT.gInterpreter.ProcessLine("auto tHist21 = "+doubleB_name+"21"+options.year+";")
-    # correctionColumns21.Add("trigger21","analyzer::TriggerLookup(mh,mreduced21,tSD21)")
+    # correctionColumns21.Add("trigger21","analyzer::TriggerLookup(mreduced21,tSD21)")
+
+    ### Trigger Correction Code for 2D Triggers
+    triggerFile = ROOT.TFile("TriggerWeights.root","READ")
+    triggerHistTightEff = triggerFile.Get("deepTagMD_HbbvsQCD"+'ratio112D'+options.year)
+    # triggerHistTight = triggerFile.Get(doubleB_name+'tight'+options.year)
+    # triggerHistLoose = triggerFile.Get(doubleB_name+'11'+options.year)
+    triggerHist21Eff = triggerFile.Get("deepTagMD_HbbvsQCD"+'ratio212D'+options.year)
+    # triggerHist21 = triggerFile.Get(doubleB_name+'21'+options.year)
+    ROOT.gInterpreter.ProcessLine("auto tSF = "+"deepTagMD_HbbvsQCD"+"ratio112D"+options.year+";")
+    # ROOT.gInterpreter.ProcessLine("auto tHistT = "+doubleB_name+"tight"+options.year+";")
+    correctionColumns.Add("triggerTight","analyzer::TriggerLookup(mh,mreduced,tSF)")
+    # ROOT.gInterpreter.ProcessLine("auto tHistL = "+doubleB_name+"loose"+options.year+";")
+    correctionColumns.Add("triggerLoose","analyzer::TriggerLookup(mh,mreduced,tSF)")
+    ROOT.gInterpreter.ProcessLine("auto tSD21 = "+"deepTagMD_HbbvsQCD"+"ratio212D"+options.year+";")
+    # ROOT.gInterpreter.ProcessLine("auto tHist21 = "+doubleB_name+"21"+options.year+";")
+    correctionColumns21.Add("trigger21","analyzer::TriggerLookup(mh,mreduced21,tSD21)")
 
 #### B tag SF
 if "btagHbb" in options.doublebtagger:
@@ -921,6 +946,7 @@ hmsd021 = kinematicDistributions21.DataFrame.Histo1D(("msd021","msd021",50 ,0 ,4
 hmbb21 = kinematicDistributions21.DataFrame.Histo1D(("mbb21","mbb21",50 ,0 ,400),"mbb")
 
 hdeepAK8 = preselected.DataFrame.Histo1D(("DeepAK8Score","DeepAK8Score",50 ,0 ,1),"tagger")
+hdeepAK821 = preselected21.DataFrame.Histo1D(("DeepAK8Score21","DeepAK8Score21",50 ,0 ,1),"tagger")
 
 if not a.isData:
     hSRTT11 = SRTT.DataFrame.Histo2D(("SRTT_11","SRTT_11",18 ,45 ,225 ,28 ,700 ,3500),'mh','mreduced',"finalweightTight")
@@ -1560,7 +1586,7 @@ hists = [hSRTT11,hATTT11,hSRLL11,hATLL11,hSRTT21,hATTT21,hSRCR11,hATCR11,
         hSRTT11_ttbar,hATTT11_ttbar,hSRLL11_ttbar,hATLL11_ttbar,        
         hpt0TT,hpt1TT,heta0TT,heta1TT,hdeltaEtaTT,hmredTT,hmsd1TT,htau21TT,hmsd0TT,hpt0LL,hpt1LL,heta0LL,heta1LL,hdeltaEtaLL,hmredLL,hmsd1LL,htau21LL,hmsd0LL,
         hpt021,bpt021,bpt121,heta021,beta021,heta021,hdeltaEta21,hmred21,hmsd021,hmbb21,
-        deltaRCheck,trijetMassCheck,trijetMassDeltaR,hdeepAK8]
+        deltaRCheck,trijetMassCheck,trijetMassDeltaR,hdeepAK8,hdeepAK821]
         # nom_check_plot,raw_check_plot]
 
 if not a.isData:
@@ -1570,7 +1596,7 @@ if not a.isData:
         hSRTT11_dbsftight_up,hATTT11_dbsftight_up,hSRLL11_dbsfloose_up,hATLL11_dbsfloose_up,hSRTT11_dbsftight_down,hATTT11_dbsftight_down,hSRLL11_dbsfloose_down,hATLL11_dbsfloose_down,
         hSRTT21_pdfUp,hATTT21_pdfUp,hSRTT21_pdfDown,hATTT21_pdfDown,hSRTT21_pileupUp,hATTT21_pileupUp,hSRTT21_pileupDown,hATTT21_pileupDown,hSRTT21_dbsf_up,hATTT21_dbsf_up,hSRTT21_dbsf_down,hATTT21_dbsf_down,
         hSRTT21_trigger_up,hATTT21_trigger_up,hSRTT21_trigger_down,hATTT21_trigger_down,hSRTT21_btagsfUp,hATTT21_btagsfUp,hSRTT21_btagsfDown,hATTT21_btagsfDown,
-        hSRCR11_pdfUp,hATCR11_pdfUp,hSRCR11_pdfDown,hATCR11_pdfDown,
+        hSRCR11_pdfUp,hATCR11_pdfUp,hSRCR11_pdftrijetDeltaRhist,trijetMasshistDown,hATCR11_pdfDown,
         hSRCR11_pileupUp,hATCR11_pileupUp,hSRCR11_pileupDown,hATCR11_pileupDown,
         hSRCR11_triggerloose_up,hATCR11_triggerloose_up,hSRCR11_triggerloose_down,hATCR11_triggerloose_down,
         hSRCR11_dbsfloose_up,hATCR11_dbsfloose_up,hSRCR11_dbsfloose_down,hATCR11_dbsfloose_down,
@@ -1624,13 +1650,15 @@ Pass21_cutflow = CutflowHist('cutflow21',Pass)
 # Pass21_cutflow.Scale(lumi/a.genEventCount)
 Pass21_cutflow.Write()
 
-# if not a.isData:
-#     nminus1_21_node = Nminus1(nminus1_21,Pass21_cuts)
+if not a.isData:
+    nminus1_21_node = Nminus1(nminus1_21,Pass21_cuts)
 
-#     trijetDeltaRhist = nminus1_21_node["topDeltaR"].DataFrame.Histo1D(("trijetDeltaR","trijetDeltaR",50 ,0 ,5),"topDeltaR","finalweightTight")
-#     trijetMasshist = nminus1_21_node["topMass"].DataFrame.Histo1D(("trijetMass","trijetMass",50 ,100 ,1000),"topMass","finalweightTight")
+    deltaEta21hist = nminus1_21_node["deltaEta21"].DataFrame.Histo1D(("deltaEta21","deltaEta21",50 ,0 ,5),"deltaEta21","finalweight21")
 
-#     hists.extend([trijetDeltaRhist,trijetMasshist])
+    # trijetDeltaRhist = nminus1_21_node["topDeltaR"].DataFrame.Histo1D(("trijetDeltaR","trijetDeltaR",50 ,0 ,5),"topDeltaR","finalweight21")
+    # trijetMasshist = nminus1_21_node["topMass"].DataFrame.Histo1D(("trijetMass","trijetMass",50 ,100 ,1000),"topMass","finalweight21")
+
+    hists.extend([deltaEta21hist])
 
 for h in hists: 
     h.Scale(norm)
