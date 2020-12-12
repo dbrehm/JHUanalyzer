@@ -1596,7 +1596,7 @@ if not a.isData:
         hSRTT11_dbsftight_up,hATTT11_dbsftight_up,hSRLL11_dbsfloose_up,hATLL11_dbsfloose_up,hSRTT11_dbsftight_down,hATTT11_dbsftight_down,hSRLL11_dbsfloose_down,hATLL11_dbsfloose_down,
         hSRTT21_pdfUp,hATTT21_pdfUp,hSRTT21_pdfDown,hATTT21_pdfDown,hSRTT21_pileupUp,hATTT21_pileupUp,hSRTT21_pileupDown,hATTT21_pileupDown,hSRTT21_dbsf_up,hATTT21_dbsf_up,hSRTT21_dbsf_down,hATTT21_dbsf_down,
         hSRTT21_trigger_up,hATTT21_trigger_up,hSRTT21_trigger_down,hATTT21_trigger_down,hSRTT21_btagsfUp,hATTT21_btagsfUp,hSRTT21_btagsfDown,hATTT21_btagsfDown,
-        hSRCR11_pdfUp,hATCR11_pdfUp,hSRCR11_pdftrijetDeltaRhist,trijetMasshistDown,hATCR11_pdfDown,
+        hSRCR11_pdfUp,hATCR11_pdfUp,hSRCR11_pdfDown,hATCR11_pdfDown,
         hSRCR11_pileupUp,hATCR11_pileupUp,hSRCR11_pileupDown,hATCR11_pileupDown,
         hSRCR11_triggerloose_up,hATCR11_triggerloose_up,hSRCR11_triggerloose_down,hATCR11_triggerloose_down,
         hSRCR11_dbsfloose_up,hATCR11_dbsfloose_up,hSRCR11_dbsfloose_down,hATCR11_dbsfloose_down,
