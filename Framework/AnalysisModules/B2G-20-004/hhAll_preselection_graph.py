@@ -285,7 +285,7 @@ newcolumns.Add("mhh","analyzer::invariantMass(lead_vect,sublead_vect)")
 newcolumns.Add("mreduced","mhh - (mh-125.0) - (mh1-125.0)")
 
 bbColumn = VarGroup("bbColumn")
-bbColumn.Add("Hemispherized","analyzer::Hemispherize(FatJet_pt_nom,FatJet_eta,FatJet_phi,FatJet_msoftdrop_nom,nFatJet,"+bpt+",Jet_eta,Jet_phi,"+bmass+",nJet,Jet_btagDeepB)")
+bbColumn.Add("Hemispherized","analyzer::Hemispherize(FatJet_pt_nom,FatJet_eta,FatJet_phi,FatJet_msoftdrop_nom,nFatJet,"+bpt+",Jet_eta,Jet_phi,"+bmass+",nJet,Jet_btagDeepFlavB)")
 
 mbbColumn = VarGroup("mbbColumn")
 mbbColumn.Add("b_lead_vect","analyzer::TLvector("+bpt+"[Hemispherized[0]],Jet_eta[Hemispherized[0]],Jet_phi[Hemispherized[0]],"+bmass+"[Hemispherized[0]])")
