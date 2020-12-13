@@ -285,13 +285,13 @@ newcolumns.Add("mhh","analyzer::invariantMass(lead_vect,sublead_vect)")
 newcolumns.Add("mreduced","mhh - (mh-125.0) - (mh1-125.0)")
 
 bbColumn = VarGroup("bbColumn")
-bbColumn.Add("Hemispherized","analyzer::Hemispherize(FatJet_pt_nom,FatJet_eta,FatJet_phi,FatJet_msoftdrop_nom,nFatJet,Jet_pt,Jet_eta,Jet_phi,Jet_mass,nJet,Jet_btagDeepB)")
+bbColumn.Add("Hemispherized","analyzer::Hemispherize(FatJet_pt_nom,FatJet_eta,FatJet_phi,FatJet_msoftdrop_nom,nFatJet,"+bpt+",Jet_eta,Jet_phi,"+bmass+",nJet,Jet_btagDeepB)")
 
 mbbColumn = VarGroup("mbbColumn")
 mbbColumn.Add("b_lead_vect","analyzer::TLvector("+bpt+"[Hemispherized[0]],Jet_eta[Hemispherized[0]],Jet_phi[Hemispherized[0]],"+bmass+"[Hemispherized[0]])")
 mbbColumn.Add("b_sublead_vect","analyzer::TLvector("+bpt+"[Hemispherized[1]],Jet_eta[Hemispherized[1]],Jet_phi[Hemispherized[1]],"+bmass+"[Hemispherized[1]])")
 mbbColumn.Add("mbb","analyzer::invariantMass(b_lead_vect,b_sublead_vect)")
-mbbColumn.Add("topMassVec","analyzer::topCut(Hemispherized[0],Hemispherized[1],Jet_pt,Jet_eta,Jet_phi,Jet_mass,nJet)")
+mbbColumn.Add("topMassVec","analyzer::topCut(Hemispherized[0],Hemispherized[1],"+bpt+",Jet_eta,Jet_phi,"+bmass+",nJet)")
 mbbColumn.Add("topMass","topMassVec[0]")
 mbbColumn.Add("topDeltaR","topMassVec[1]")
 mbbColumn.Add("bpt0","b_lead_vect.Pt()")
@@ -861,12 +861,12 @@ kinematicCuts21.Add("eta","abs(lead_vect.Eta()) < 2.4")
 kinematicCuts21.Add("pt","(pt0 > 300)")
 kinematicCuts21.Add("b_pt","b_lead_vect.Pt() > 30 && b_sublead_vect.Pt() > 30")
 kinematicCuts21.Add("b_eta","abs(Jet_eta[Hemispherized[0]]) < 2.4 && abs(Jet_eta[Hemispherized[1]]) < 2.4")
-# if options.year == '16': 
-#     kinematicCuts21.Add("DeepJet","(0.3093 < Jet_btagDeepFlavB[Hemispherized[0]] && Jet_btagDeepFlavB[Hemispherized[0]] < 1) && (0.3093 < Jet_btagDeepFlavB[Hemispherized[1]] && Jet_btagDeepFlavB[Hemispherized[1]] < 1)")
-# if options.year == '17': 
-#     kinematicCuts21.Add("DeepJet","(0.3033  < Jet_btagDeepFlavB[Hemispherized[0]] && Jet_btagDeepFlavB[Hemispherized[0]] < 1) && (0.3033  < Jet_btagDeepFlavB[Hemispherized[1]] && Jet_btagDeepFlavB[Hemispherized[1]] < 1)")
-# if options.year == '18': 
-#     kinematicCuts21.Add("DeepJet","(0.2770 < Jet_btagDeepFlavB[Hemispherized[0]] && Jet_btagDeepFlavB[Hemispherized[0]] < 1) && (0.2770 < Jet_btagDeepFlavB[Hemispherized[1]] && Jet_btagDeepFlavB[Hemispherized[1]] < 1)")
+if options.year == '16': 
+    kinematicCuts21.Add("DeepJet","(0.3093 < Jet_btagDeepFlavB[Hemispherized[0]] && Jet_btagDeepFlavB[Hemispherized[0]] < 1) && (0.3093 < Jet_btagDeepFlavB[Hemispherized[1]] && Jet_btagDeepFlavB[Hemispherized[1]] < 1)")
+if options.year == '17': 
+    kinematicCuts21.Add("DeepJet","(0.3033  < Jet_btagDeepFlavB[Hemispherized[0]] && Jet_btagDeepFlavB[Hemispherized[0]] < 1) && (0.3033  < Jet_btagDeepFlavB[Hemispherized[1]] && Jet_btagDeepFlavB[Hemispherized[1]] < 1)")
+if options.year == '18': 
+    kinematicCuts21.Add("DeepJet","(0.2770 < Jet_btagDeepFlavB[Hemispherized[0]] && Jet_btagDeepFlavB[Hemispherized[0]] < 1) && (0.2770 < Jet_btagDeepFlavB[Hemispherized[1]] && Jet_btagDeepFlavB[Hemispherized[1]] < 1)")
 kinematicCuts21.Add("candidate21","("+cand21String+") || ("+run21String+")")
 kinematicCuts21.Add("cut_mreduced21","mreduced21 > 750.")
 
@@ -1653,7 +1653,7 @@ Pass21_cutflow.Write()
 if not a.isData:
     nminus1_21_node = Nminus1(nminus1_21,Pass21_cuts)
 
-    deltaEta21hist = nminus1_21_node["deltaEta21"].DataFrame.Histo1D(("deltaEta21","deltaEta21",50 ,0 ,5),"deltaEta21","finalweight21")
+    deltaEta21hist = nminus1_21_node["deltaEta21"].DataFrame.Histo1D(("deltaEta21N1","deltaEta21N1",50 ,0 ,5),"deltaEta21","finalweight21")
 
     # trijetDeltaRhist = nminus1_21_node["topDeltaR"].DataFrame.Histo1D(("trijetDeltaR","trijetDeltaR",50 ,0 ,5),"topDeltaR","finalweight21")
     # trijetMasshist = nminus1_21_node["topMass"].DataFrame.Histo1D(("trijetMass","trijetMass",50 ,100 ,1000),"topMass","finalweight21")
