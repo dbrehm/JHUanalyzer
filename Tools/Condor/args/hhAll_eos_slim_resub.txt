@@ -1,47 +1,27 @@
--i NanoAODv7_lists/RadNar-1000_16_v7.txt -o HHpreselection16_RadNar-1000_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD
--i NanoAODv7_lists/RadNar-1500_16_v7.txt -o HHpreselection16_RadNar-1500_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD
--i NanoAODv7_lists/RadNar-2000_16_v7.txt -o HHpreselection16_RadNar-2000_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD
--i NanoAODv7_lists/RadNar-2500_16_v7.txt -o HHpreselection16_RadNar-2500_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD
--i NanoAODv7_lists/RadNar-3000_16_v7.txt -o HHpreselection16_RadNar-3000_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD
--i NanoAODv7_lists/GravNar-1000_16_v7.txt -o HHpreselection16_GravNar-1000_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD
--i NanoAODv7_lists/GravNar-1500_16_v7.txt -o HHpreselection16_GravNar-1500_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD
--i NanoAODv7_lists/GravNar-2000_16_v7.txt -o HHpreselection16_GravNar-2000_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD
--i NanoAODv7_lists/GravNar-2500_16_v7.txt -o HHpreselection16_GravNar-2500_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD
--i NanoAODv7_lists/GravNar-3000_16_v7.txt -o HHpreselection16_GravNar-3000_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD
--i NanoAODv7_lists/RadNar-1000_17_v7.txt -o HHpreselection17_RadNar-1000_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD
--i NanoAODv7_lists/RadNar-1500_17_v7.txt -o HHpreselection17_RadNar-1500_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD
--i NanoAODv7_lists/RadNar-2000_17_v7.txt -o HHpreselection17_RadNar-2000_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD
--i NanoAODv7_lists/RadNar-2500_17_v7.txt -o HHpreselection17_RadNar-2500_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD
--i NanoAODv7_lists/RadNar-3000_17_v7.txt -o HHpreselection17_RadNar-3000_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD
--i NanoAODv7_lists/GravNar-1000_17_v7.txt -o HHpreselection17_GravNar-1000_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD
--i NanoAODv7_lists/GravNar-1500_17_v7.txt -o HHpreselection17_GravNar-1500_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD
--i NanoAODv7_lists/GravNar-2000_17_v7.txt -o HHpreselection17_GravNar-2000_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD
--i NanoAODv7_lists/GravNar-2500_17_v7.txt -o HHpreselection17_GravNar-2500_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD
--i NanoAODv7_lists/GravNar-3000_17_v7.txt -o HHpreselection17_GravNar-3000_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD
--i NanoAODv7_lists/GravNar-1000_18_v7.txt -o HHpreselection18_GravNar-1000_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD
--i NanoAODv7_lists/GravNar-1500_18_v7.txt -o HHpreselection18_GravNar-1500_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD
--i NanoAODv7_lists/GravNar-2000_18_v7.txt -o HHpreselection18_GravNar-2000_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD
--i NanoAODv7_lists/GravNar-2500_18_v7.txt -o HHpreselection18_GravNar-2500_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD
--i NanoAODv7_lists/GravNar-3000_18_v7.txt -o HHpreselection18_GravNar-3000_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD
--i NanoAODv7_lists/RadNar-1000_18_v7.txt -o HHpreselection18_RadNar-1000_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD
--i NanoAODv7_lists/RadNar-1500_18_v7.txt -o HHpreselection18_RadNar-1500_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD
--i NanoAODv7_lists/RadNar-2000_18_v7.txt -o HHpreselection18_RadNar-2000_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD
--i NanoAODv7_lists/RadNar-2500_18_v7.txt -o HHpreselection18_RadNar-2500_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD
--i NanoAODv7_lists/RadNar-3000_18_v7.txt -o HHpreselection18_RadNar-3000_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD
--i NanoAODv7_lists/QCDHT1000_16_v7.txt -o HHpreselection16_QCDHT1000_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD
--i NanoAODv7_lists/QCDHT1500_16_v7.txt -o HHpreselection16_QCDHT1500_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD
--i NanoAODv7_lists/QCDHT2000_16_v7.txt -o HHpreselection16_QCDHT2000_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD
--i NanoAODv7_lists/QCDHT700_16_v7.txt -o HHpreselection16_QCDHT700_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD
--i NanoAODv7_lists/QCDHT700_17_v7.txt -o HHpreselection17_QCDHT700_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD
--i NanoAODv7_lists/QCDHT1000_17_v7.txt -o HHpreselection17_QCDHT1000_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD
--i NanoAODv7_lists/QCDHT1500_17_v7.txt -o HHpreselection17_QCDHT1500_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD
--i NanoAODv7_lists/QCDHT2000_17_v7.txt -o HHpreselection17_QCDHT2000_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD
--i NanoAODv7_lists/QCDHT1000_18_v7.txt -o HHpreselection18_QCDHT1000_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD
--i NanoAODv7_lists/QCDHT1500_18_v7.txt -o HHpreselection18_QCDHT1500_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD
--i NanoAODv7_lists/QCDHT2000_18_v7.txt -o HHpreselection18_QCDHT2000_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD
--i NanoAODv7_lists/QCDHT700_18_v7.txt -o HHpreselection18_QCDHT700_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD
--i NanoAODv7_lists/ttbar_16_v7.txt -o HHpreselection16_ttbar_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD
--i NanoAODv7_lists/ttbar-semilep_17_v7.txt -o HHpreselection17_ttbar-semilep_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD
--i NanoAODv7_lists/ttbar_17_v7.txt -o HHpreselection17_ttbar_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD
--i NanoAODv7_lists/ttbar-semilep_18_v7.txt -o HHpreselection18_ttbar-semilep_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD
--i NanoAODv7_lists/ttbar_18_v7.txt -o HHpreselection18_ttbar_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD
+-i root://cmseos.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfilesv7/RadNar-1500_hh17.root -o HHpreselection16_RadNar-1500_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD
+-i root://cmseos.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfilesv7/RadNar-1500_hh17.root -o HHpreselection16_RadNar-1500_JES_up_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD -J up
+-i root://cmseos.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfilesv7/RadNar-1500_hh17.root -o HHpreselection16_RadNar-1500_JES_down_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD -J down
+-i root://cmseos.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfilesv7/RadNar-1500_hh17.root -o HHpreselection16_RadNar-1500_JER_up_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD -R up
+-i root://cmseos.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfilesv7/RadNar-1500_hh17.root -o HHpreselection16_RadNar-1500_JER_down_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD -R down
+-i root://cmseos.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfilesv7/RadNar-1500_hh17.root -o HHpreselection16_RadNar-1500_JMS_up_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD -a up
+-i root://cmseos.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfilesv7/RadNar-1500_hh17.root -o HHpreselection16_RadNar-1500_JMS_down_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD -a down
+-i root://cmseos.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfilesv7/RadNar-1500_hh17.root -o HHpreselection16_RadNar-1500_JMR_up_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD -b up
+-i root://cmseos.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfilesv7/RadNar-1500_hh17.root -o HHpreselection16_RadNar-1500_JMR_down_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD -b down
+-i root://cmseos.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfilesv7/GravNar-1500_hh17.root -o HHpreselection16_GravNar-1500_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD
+-i root://cmseos.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfilesv7/GravNar-1500_hh17.root -o HHpreselection16_GravNar-1500_JES_up_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD -J up
+-i root://cmseos.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfilesv7/GravNar-1500_hh17.root -o HHpreselection16_GravNar-1500_JES_down_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD -J down
+-i root://cmseos.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfilesv7/GravNar-1500_hh17.root -o HHpreselection16_GravNar-1500_JER_up_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD -R up
+-i root://cmseos.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfilesv7/GravNar-1500_hh17.root -o HHpreselection16_GravNar-1500_JER_down_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD -R down
+-i root://cmseos.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfilesv7/GravNar-1500_hh17.root -o HHpreselection16_GravNar-1500_JMS_up_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD -a up
+-i root://cmseos.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfilesv7/GravNar-1500_hh17.root -o HHpreselection16_GravNar-1500_JMS_down_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD -a down
+-i root://cmseos.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfilesv7/GravNar-1500_hh17.root -o HHpreselection16_GravNar-1500_JMR_up_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD -b up
+-i root://cmseos.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfilesv7/GravNar-1500_hh17.root -o HHpreselection16_GravNar-1500_JMR_down_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD -b down
+-i root://cmseos.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfilesv7/GravNar-2500_hh17.root -o HHpreselection16_GravNar-2500_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD
+-i root://cmseos.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfilesv7/GravNar-2500_hh17.root -o HHpreselection16_GravNar-2500_JES_up_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD -J up
+-i root://cmseos.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfilesv7/GravNar-2500_hh17.root -o HHpreselection16_GravNar-2500_JES_down_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD -J down
+-i root://cmseos.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfilesv7/GravNar-2500_hh17.root -o HHpreselection16_GravNar-2500_JER_up_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD -R up
+-i root://cmseos.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfilesv7/GravNar-2500_hh17.root -o HHpreselection16_GravNar-2500_JER_down_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD -R down
+-i root://cmseos.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfilesv7/GravNar-2500_hh17.root -o HHpreselection16_GravNar-2500_JMS_up_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD -a up
+-i root://cmseos.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfilesv7/GravNar-2500_hh17.root -o HHpreselection16_GravNar-2500_JMS_down_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD -a down
+-i root://cmseos.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfilesv7/GravNar-2500_hh17.root -o HHpreselection16_GravNar-2500_JMR_up_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD -b up
+-i root://cmseos.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfilesv7/GravNar-2500_hh17.root -o HHpreselection16_GravNar-2500_JMR_down_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD -b down

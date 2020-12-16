@@ -1,0 +1,2 @@
+-i NanoAODv7_lists/QCDHT700_17_v7.txt -o HHpreselection17_QCDHT700_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD
+-i NanoAODv7_lists/QCDHT1500_18_v7.txt -o HHpreselection18_QCDHT1500_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD
