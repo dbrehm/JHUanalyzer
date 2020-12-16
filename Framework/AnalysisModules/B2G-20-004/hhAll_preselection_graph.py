@@ -68,7 +68,7 @@ a = analyzer(options.input)
 
 # Example of how to calculate MC normalization for luminosity
 if '_v7.txt' in options.input: setname = options.input.split('/')[-1].split('_')[0]
-elif '.root' in options.input: setname = options.input.split('/')[-1].split('_hh'+options.year+'.root')[0]
+elif '.root' in options.input: setname = options.input.split('/')[-1].split('_')[0]
 else: setname = ''
 print("Setname="+setname)
 if os.path.exists(options.config):
@@ -741,10 +741,10 @@ invertedCRFail ="(!("+DoubleB_lead_loose+") && !("+DoubleB_sublead_loose+") && !
 pass21String = "FatJet_"+doubleB_name+"[0] > "+str(cutsDict[doubleB_short+'tag'][0])+" && "+"FatJet_"+doubleB_name+"[0] < "+str(cutsDict[doubleB_short+'tag'][1])+""
 fail21String = "FatJet_"+doubleB_name+"[0] < "+str(cutsDict[doubleB_short+'tag'][0])+""
 
-run21String = "((!("+srttString+") && (!("+atttString+")) && (!("+srllString+")) && (!("+atllString+"))) == 1)"
+run21String = "( ( (!("+srttString+")) && (!("+atttString+")) && (!("+srllString+")) && (!("+atllString+")) ) == 1)"
 # run21String = "((!("+srttString+") && (!("+atttString+")) && (!("+srllString+"))) == 1)"
 
-cand21String = "((!(nFatJet > 1) || !(pt0 > 300 && pt1 > 300) || !(abs("+eta0+") < 2.4 && abs("+eta1+") < 2.4) || !(abs("+eta0+" - "+eta1+") < 1.3) || !(mreduced > 750.) || !((110 < mh1) && (mh1 < 140))) == 1)"
+cand21String = "((!(nFatJet > 1) || !(pt0 > 300 && pt1 > 300) || !(abs("+eta0+") < 2.4 && abs("+eta1+") < 2.4) || !(abs("+eta0+" - "+eta1+") < 0.7) || !(mreduced > 750.) || !((110 < mh1) && (mh1 < 140))) == 1)"
 # cand21String = "((!(nFatJet > 1) || !(pt0 > 300 && pt1 > 300) || !(abs("+eta0+") < 2.4 && abs("+eta1+") < 2.4) || !(abs("+eta0+" - "+eta1+") < 1.3) || !(mreduced > 750.)) == 1)"
 
 ### Make selection columns
@@ -829,7 +829,7 @@ if options.year == '17':
 if options.year == '18': 
     preselection22.Add("DeepJet","(0.2770 < Jet_btagDeepFlavB[Hemispherized[0]] && Jet_btagDeepFlavB[Hemispherized[0]] < 1) && (0.2770 < Jet_btagDeepFlavB[Hemispherized[1]] && Jet_btagDeepFlavB[Hemispherized[1]] < 1)")
 # preselection22.Add("DeepCSV","(0.6324 < Jet_btagDeepB[Hemispherized[0]] && Jet_btagDeepB[Hemispherized[0]] < 1) && (0.6324 < Jet_btagDeepB[Hemispherized[1]] && Jet_btagDeepB[Hemispherized[1]] < 1)")
-preselection22.Add("deltaEta21","abs(lead_vect.Eta() - (b_lead_vect+b_sublead_vect).Eta()) < 1.3")
+# preselection22.Add("deltaEta21","abs(lead_vect.Eta() - (b_lead_vect+b_sublead_vect).Eta()) < 1.3")
 preselection22.Add("mbbCut","90.0 < mbb && mbb < 140.0")
 preselection22.Add("cut_mreduced21","mreduced21 > 750.")
 # preselection22.Add("mbbCut","105.0 < mbb && mbb < 135.0")
@@ -837,7 +837,7 @@ preselection22.Add("cut_mreduced21","mreduced21 > 750.")
 
 preselection23 = CutGroup('preselection23')
 # preselection23.Add("topMass","topMass > 200.0")
-# preselection23.Add("topMass","topMass > 220.0")
+preselection23.Add("topMass","topMass > 220.0")
 # preselection23.Add("topDeltaR","topDeltaR > 1.0")
 
 plotsColumn = VarGroup("plotsColumn")
@@ -846,6 +846,7 @@ plotsColumn.Add("eta1","sublead_vect.Eta()")
 plotsColumn.Add("deltaEta","abs(eta0 - eta1)")
 plotsColumn.Add("FJtau21","FatJet_tau2[0]/FatJet_tau1[0]")
 plotsColumn.Add("tagger","FatJet_"+doubleB_name+"[0]")
+plotsColumn.Add("tagger_sub","FatJet_"+doubleB_name+"[1]")
 plotsColumn.Add("deltaEta21","abs(lead_vect.Eta() - (b_lead_vect+b_sublead_vect).Eta())")
 
 
@@ -869,19 +870,21 @@ kinematicCuts21.Add("b_eta","abs(Jet_eta[Hemispherized[0]]) < 2.4 && abs(Jet_eta
 #     kinematicCuts21.Add("DeepJet","(0.2770 < Jet_btagDeepFlavB[Hemispherized[0]] && Jet_btagDeepFlavB[Hemispherized[0]] < 1) && (0.2770 < Jet_btagDeepFlavB[Hemispherized[1]] && Jet_btagDeepFlavB[Hemispherized[1]] < 1)")
 kinematicCuts21.Add("candidate21","("+cand21String+") || ("+run21String+")")
 kinematicCuts21.Add("cut_mreduced21","mreduced21 > 750.")
+# kinematicCuts21.Add("topMass","topMass > 220.0")
+# kinematicCuts21.Add("topDeltaR","topDeltaR > 1.0")
 
 # Apply all groups in list order to the base RDF loaded in during analyzer() initialization
 slimandskim = a.Apply([triggerGroup,slim_skim,filters])
 setup = slimandskim.Apply([newcolumns,bbColumn,mbbColumn,mred21Column,selectionColumns,correctionColumns,correctionColumns11,selectionColumns21,correctionColumns21,plotsColumn])
 if not a.isData:
-#     nminus1_11 = a.Apply([triggerGroup,newcolumns,selectionColumns,correctionColumns,correctionColumns11,plotsColumn])
+    # nminus1_11 = a.Apply([triggerGroup,newcolumns,bbColumn,mbbColumn,selectionColumns,correctionColumns,correctionColumns11,plotsColumn])
     nminus1_21 = a.Apply([triggerGroup,newcolumns,bbColumn,mbbColumn,mred21Column,selectionColumns21,correctionColumns,correctionColumns21,plotsColumn])
 kinematicDistributions = setup.Apply([kinematicCuts])
 kinematicDistributions21 = setup.Apply([kinematicCuts21])
 preselected = setup.Apply([preselection11,preselection12])
 preselected_ttbar = setup.Apply([preselection11,preselectionTTbar])
-cutTest21 = setup.Apply([preselection21,preselection22]).Cut("Pass21","Pass21==1")
-preselected21 = setup.Apply([preselection21,preselection22,preselection23])
+cutTest21 = setup.Apply([preselection21,preselection22,preselection23]).Cut("Pass21","Pass21==1")
+preselected21 = setup.Apply([preselection21,preselection22])
 
 # Since four analysis regions are covered with relatively complicated cuts to define them, a manual forking is simplest though a Discriminate function does exist for when you need to keep pass and fail of a selection
 SRTT = preselected.Cut("SRTT","SRTT==1")
@@ -945,7 +948,14 @@ hmred21 = kinematicDistributions21.DataFrame.Histo1D(("mred21","mred21",28 ,700 
 hmsd021 = kinematicDistributions21.DataFrame.Histo1D(("msd021","msd021",50 ,0 ,400),"mh1")
 hmbb21 = kinematicDistributions21.DataFrame.Histo1D(("mbb21","mbb21",50 ,0 ,400),"mbb")
 
-hdeepAK8 = preselected.DataFrame.Histo1D(("DeepAK8Score","DeepAK8Score",50 ,0 ,1),"tagger")
+if "Nar" in setname:
+    mgen = float(setname.split('-')[1])
+    hdeepAK8 = preselected.DataFrame.Filter("(mh > 140.0) && (mh < 210.0)").Filter("(mreduced > "+str(mgen-200.0)+") && (mreduced < "+str(mgen+200.0)+")").Histo1D(("DeepAK8Score","DeepAK8Score",50 ,0 ,1),"tagger")
+    hdeepAK8_sub = preselected.DataFrame.Filter("(mh > 140.0) && (mh < 210.0)").Filter("(mreduced > "+str(mgen-200.0)+") && (mreduced < "+str(mgen+200.0)+")").Histo1D(("DeepAK8ScoreSub","DeepAK8ScoreSub",50 ,0 ,1),"tagger_sub")
+else:
+    hdeepAK8 = preselected.DataFrame.Histo1D(("DeepAK8Score","DeepAK8Score",50 ,0 ,1),"tagger")
+    hdeepAK8_sub = preselected.DataFrame.Histo1D(("DeepAK8ScoreSub","DeepAK8ScoreSub",50 ,0 ,1),"tagger_sub")
+
 hdeepAK821 = preselected21.DataFrame.Histo1D(("DeepAK8Score21","DeepAK8Score21",50 ,0 ,1),"tagger")
 
 if not a.isData:
@@ -1586,7 +1596,7 @@ hists = [hSRTT11,hATTT11,hSRLL11,hATLL11,hSRTT21,hATTT21,hSRCR11,hATCR11,
         hSRTT11_ttbar,hATTT11_ttbar,hSRLL11_ttbar,hATLL11_ttbar,        
         hpt0TT,hpt1TT,heta0TT,heta1TT,hdeltaEtaTT,hmredTT,hmsd1TT,htau21TT,hmsd0TT,hpt0LL,hpt1LL,heta0LL,heta1LL,hdeltaEtaLL,hmredLL,hmsd1LL,htau21LL,hmsd0LL,
         hpt021,bpt021,bpt121,heta021,beta021,heta021,hdeltaEta21,hmred21,hmsd021,hmbb21,
-        deltaRCheck,trijetMassCheck,trijetMassDeltaR,hdeepAK8,hdeepAK821]
+        deltaRCheck,trijetMassCheck,trijetMassDeltaR,hdeepAK8,hdeepAK8_sub,hdeepAK821]
         # nom_check_plot,raw_check_plot]
 
 if not a.isData:
@@ -1651,9 +1661,17 @@ Pass21_cutflow = CutflowHist('cutflow21',Pass)
 Pass21_cutflow.Write()
 
 if not a.isData:
-    nminus1_21_node = Nminus1(nminus1_21,Pass21_cuts)
+    # nminus1_TT_node = Nminus1(nminus1_11,SRTT_cuts)
+    # deltaEtaTThist = nminus1_TT_node["deltaEta"].DataFrame.Histo1D(("deltaEtaTTN1","deltaEtaTTN1",50 ,0 ,5),"deltaEta","finalweightTight")
+    # hists.extend([deltaEtaTThist])
 
-    deltaEta21hist = nminus1_21_node["deltaEta21"].DataFrame.Histo1D(("deltaEta21N1","deltaEta21N1",50 ,0 ,5),"deltaEta21","finalweight21")
+    # nminus1_LL_node = Nminus1(nminus1_11,SRTT_cuts)
+    # deltaEtaLLhist = nminus1_LL_node["deltaEta"].DataFrame.Histo1D(("deltaEtaLLN1","deltaEtaLLN1",50 ,0 ,5),"deltaEta","finalweightLoose")
+    # hists.extend([deltaEtaLLhist])
+
+    # nminus1_21_node = Nminus1(nminus1_21,Pass21_cuts)
+
+    # deltaEta21hist = nminus1_21_node["deltaEta21"].DataFrame.Histo1D(("deltaEta21N1","deltaEta21N1",50 ,0 ,5),"deltaEta21","finalweight21")
 
     # trijetDeltaRhist = nminus1_21_node["topDeltaR"].DataFrame.Histo1D(("trijetDeltaR","trijetDeltaR",50 ,0 ,5),"topDeltaR","finalweight21")
     # trijetMasshist = nminus1_21_node["topMass"].DataFrame.Histo1D(("trijetMass","trijetMass",50 ,100 ,1000),"topMass","finalweight21")
