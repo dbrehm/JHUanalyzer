@@ -26,13 +26,11 @@
 -i root://cmsxrootd.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfilesv6/dataF_hh17.root -o HHtrigger17_dataF_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD
 -i root://cmsxrootd.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfilesv6/dataA_hh18.root -o HHtrigger18_dataA_btagHbb.root -c hh18_config.json -y 18 -d btagHbb
 -i root://cmsxrootd.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfilesv6/dataB_hh18.root -o HHtrigger18_dataB_btagHbb.root -c hh18_config.json -y 18 -d btagHbb
--i root://cmsxrootd.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfilesv6/dataC1_hh18.root -o HHtrigger18_dataC1_btagHbb.root -c hh18_config.json -y 18 -d btagHbb
--i root://cmsxrootd.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfilesv6/dataC2_hh18.root -o HHtrigger18_dataC2_btagHbb.root -c hh18_config.json -y 18 -d btagHbb
+-i root://cmsxrootd.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfilesv6/dataC_hh18.root -o HHtrigger18_dataC_btagHbb.root -c hh18_config.json -y 18 -d btagHbb
 -i root://cmsxrootd.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfilesv6/dataD_hh18.root -o HHtrigger18_dataD_btagHbb.root -c hh18_config.json -y 18 -d btagHbb
 -i root://cmsxrootd.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfilesv6/dataA_hh18.root -o HHtrigger18_dataA_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD
 -i root://cmsxrootd.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfilesv6/dataB_hh18.root -o HHtrigger18_dataB_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD
--i root://cmsxrootd.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfilesv6/dataC1_hh18.root -o HHtrigger18_dataC1_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD
--i root://cmsxrootd.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfilesv6/dataC2_hh18.root -o HHtrigger18_dataC2_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD
+-i root://cmsxrootd.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfilesv6/dataC_hh18.root -o HHtrigger18_dataC_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD
 -i root://cmsxrootd.fnal.gov//store/user/dbrehm/data18andTTbarSignalMC/rootfilesv6/dataD_hh18.root -o HHtrigger18_dataD_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD
 -i NanoAOD_lists_private/QCDHT1000_loc.txt -o HHtrigger16_QCDHT1000_btagHbb.root -c hh16_config.json -y 16 -d btagHbb
 -i NanoAOD_lists_private/QCDHT1500_loc.txt -o HHtrigger16_QCDHT1500_btagHbb.root -c hh16_config.json -y 16 -d btagHbb

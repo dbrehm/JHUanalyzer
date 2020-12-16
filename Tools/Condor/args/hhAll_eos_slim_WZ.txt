@@ -1,0 +1,126 @@
+-i NanoAODv7_lists/Wjets_16_v7.txt -o HHpreselection16_Wjets_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD
+-i NanoAODv7_lists/Wjets_16_v7.txt -o HHpreselection16_Wjets_JES_up_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD -J up
+-i NanoAODv7_lists/Wjets_16_v7.txt -o HHpreselection16_Wjets_JES_down_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD -J down
+-i NanoAODv7_lists/Wjets_16_v7.txt -o HHpreselection16_Wjets_JER_up_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD -R up
+-i NanoAODv7_lists/Wjets_16_v7.txt -o HHpreselection16_Wjets_JER_down_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD -R down
+-i NanoAODv7_lists/Wjets_16_v7.txt -o HHpreselection16_Wjets_JMS_up_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD -a up
+-i NanoAODv7_lists/Wjets_16_v7.txt -o HHpreselection16_Wjets_JMS_down_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD -a down
+-i NanoAODv7_lists/Wjets_16_v7.txt -o HHpreselection16_Wjets_JMR_up_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD -b up
+-i NanoAODv7_lists/Wjets_16_v7.txt -o HHpreselection16_Wjets_JMR_down_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD -b down
+-i NanoAODv7_lists/Zjets_16_v7.txt -o HHpreselection16_Zjets_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD
+-i NanoAODv7_lists/Zjets_16_v7.txt -o HHpreselection16_Zjets_JES_up_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD -J up
+-i NanoAODv7_lists/Zjets_16_v7.txt -o HHpreselection16_Zjets_JES_down_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD -J down
+-i NanoAODv7_lists/Zjets_16_v7.txt -o HHpreselection16_Zjets_JER_up_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD -R up
+-i NanoAODv7_lists/Zjets_16_v7.txt -o HHpreselection16_Zjets_JER_down_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD -R down
+-i NanoAODv7_lists/Zjets_16_v7.txt -o HHpreselection16_Zjets_JMS_up_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD -a up
+-i NanoAODv7_lists/Zjets_16_v7.txt -o HHpreselection16_Zjets_JMS_down_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD -a down
+-i NanoAODv7_lists/Zjets_16_v7.txt -o HHpreselection16_Zjets_JMR_up_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD -b up
+-i NanoAODv7_lists/Zjets_16_v7.txt -o HHpreselection16_Zjets_JMR_down_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD -b down
+-i NanoAODv7_lists/WjetsHT400_17_v7.txt -o HHpreselection17_WjetsHT400_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD
+-i NanoAODv7_lists/WjetsHT400_17_v7.txt -o HHpreselection17_WjetsHT400_JES_up_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD -J up
+-i NanoAODv7_lists/WjetsHT400_17_v7.txt -o HHpreselection17_WjetsHT400_JES_down_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD -J down
+-i NanoAODv7_lists/WjetsHT400_17_v7.txt -o HHpreselection17_WjetsHT400_JER_up_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD -R up
+-i NanoAODv7_lists/WjetsHT400_17_v7.txt -o HHpreselection17_WjetsHT400_JER_down_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD -R down
+-i NanoAODv7_lists/WjetsHT400_17_v7.txt -o HHpreselection17_WjetsHT400_JMS_up_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD -a up
+-i NanoAODv7_lists/WjetsHT400_17_v7.txt -o HHpreselection17_WjetsHT400_JMS_down_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD -a down
+-i NanoAODv7_lists/WjetsHT400_17_v7.txt -o HHpreselection17_WjetsHT400_JMR_up_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD -b up
+-i NanoAODv7_lists/WjetsHT400_17_v7.txt -o HHpreselection17_WjetsHT400_JMR_down_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD -b down
+-i NanoAODv7_lists/WjetsHT600_17_v7.txt -o HHpreselection17_WjetsHT600_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD
+-i NanoAODv7_lists/WjetsHT600_17_v7.txt -o HHpreselection17_WjetsHT600_JES_up_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD -J up
+-i NanoAODv7_lists/WjetsHT600_17_v7.txt -o HHpreselection17_WjetsHT600_JES_down_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD -J down
+-i NanoAODv7_lists/WjetsHT600_17_v7.txt -o HHpreselection17_WjetsHT600_JER_up_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD -R up
+-i NanoAODv7_lists/WjetsHT600_17_v7.txt -o HHpreselection17_WjetsHT600_JER_down_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD -R down
+-i NanoAODv7_lists/WjetsHT600_17_v7.txt -o HHpreselection17_WjetsHT600_JMS_up_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD -a up
+-i NanoAODv7_lists/WjetsHT600_17_v7.txt -o HHpreselection17_WjetsHT600_JMS_down_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD -a down
+-i NanoAODv7_lists/WjetsHT600_17_v7.txt -o HHpreselection17_WjetsHT600_JMR_up_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD -b up
+-i NanoAODv7_lists/WjetsHT600_17_v7.txt -o HHpreselection17_WjetsHT600_JMR_down_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD -b down
+-i NanoAODv7_lists/WjetsHT800_17_v7.txt -o HHpreselection17_WjetsHT800_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD
+-i NanoAODv7_lists/WjetsHT800_17_v7.txt -o HHpreselection17_WjetsHT800_JES_up_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD -J up
+-i NanoAODv7_lists/WjetsHT800_17_v7.txt -o HHpreselection17_WjetsHT800_JES_down_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD -J down
+-i NanoAODv7_lists/WjetsHT800_17_v7.txt -o HHpreselection17_WjetsHT800_JER_up_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD -R up
+-i NanoAODv7_lists/WjetsHT800_17_v7.txt -o HHpreselection17_WjetsHT800_JER_down_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD -R down
+-i NanoAODv7_lists/WjetsHT800_17_v7.txt -o HHpreselection17_WjetsHT800_JMS_up_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD -a up
+-i NanoAODv7_lists/WjetsHT800_17_v7.txt -o HHpreselection17_WjetsHT800_JMS_down_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD -a down
+-i NanoAODv7_lists/WjetsHT800_17_v7.txt -o HHpreselection17_WjetsHT800_JMR_up_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD -b up
+-i NanoAODv7_lists/WjetsHT800_17_v7.txt -o HHpreselection17_WjetsHT800_JMR_down_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD -b down
+-i NanoAODv7_lists/ZjetsHT400_17_v7.txt -o HHpreselection17_ZjetsHT400_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD
+-i NanoAODv7_lists/ZjetsHT400_17_v7.txt -o HHpreselection17_ZjetsHT400_JES_up_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD -J up
+-i NanoAODv7_lists/ZjetsHT400_17_v7.txt -o HHpreselection17_ZjetsHT400_JES_down_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD -J down
+-i NanoAODv7_lists/ZjetsHT400_17_v7.txt -o HHpreselection17_ZjetsHT400_JER_up_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD -R up
+-i NanoAODv7_lists/ZjetsHT400_17_v7.txt -o HHpreselection17_ZjetsHT400_JER_down_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD -R down
+-i NanoAODv7_lists/ZjetsHT400_17_v7.txt -o HHpreselection17_ZjetsHT400_JMS_up_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD -a up
+-i NanoAODv7_lists/ZjetsHT400_17_v7.txt -o HHpreselection17_ZjetsHT400_JMS_down_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD -a down
+-i NanoAODv7_lists/ZjetsHT400_17_v7.txt -o HHpreselection17_ZjetsHT400_JMR_up_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD -b up
+-i NanoAODv7_lists/ZjetsHT400_17_v7.txt -o HHpreselection17_ZjetsHT400_JMR_down_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD -b down
+-i NanoAODv7_lists/ZjetsHT600_17_v7.txt -o HHpreselection17_ZjetsHT600_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD
+-i NanoAODv7_lists/ZjetsHT600_17_v7.txt -o HHpreselection17_ZjetsHT600_JES_up_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD -J up
+-i NanoAODv7_lists/ZjetsHT600_17_v7.txt -o HHpreselection17_ZjetsHT600_JES_down_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD -J down
+-i NanoAODv7_lists/ZjetsHT600_17_v7.txt -o HHpreselection17_ZjetsHT600_JER_up_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD -R up
+-i NanoAODv7_lists/ZjetsHT600_17_v7.txt -o HHpreselection17_ZjetsHT600_JER_down_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD -R down
+-i NanoAODv7_lists/ZjetsHT600_17_v7.txt -o HHpreselection17_ZjetsHT600_JMS_up_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD -a up
+-i NanoAODv7_lists/ZjetsHT600_17_v7.txt -o HHpreselection17_ZjetsHT600_JMS_down_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD -a down
+-i NanoAODv7_lists/ZjetsHT600_17_v7.txt -o HHpreselection17_ZjetsHT600_JMR_up_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD -b up
+-i NanoAODv7_lists/ZjetsHT600_17_v7.txt -o HHpreselection17_ZjetsHT600_JMR_down_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD -b down
+-i NanoAODv7_lists/ZjetsHT800_17_v7.txt -o HHpreselection17_ZjetsHT800_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD
+-i NanoAODv7_lists/ZjetsHT800_17_v7.txt -o HHpreselection17_ZjetsHT800_JES_up_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD -J up
+-i NanoAODv7_lists/ZjetsHT800_17_v7.txt -o HHpreselection17_ZjetsHT800_JES_down_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD -J down
+-i NanoAODv7_lists/ZjetsHT800_17_v7.txt -o HHpreselection17_ZjetsHT800_JER_up_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD -R up
+-i NanoAODv7_lists/ZjetsHT800_17_v7.txt -o HHpreselection17_ZjetsHT800_JER_down_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD -R down
+-i NanoAODv7_lists/ZjetsHT800_17_v7.txt -o HHpreselection17_ZjetsHT800_JMS_up_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD -a up
+-i NanoAODv7_lists/ZjetsHT800_17_v7.txt -o HHpreselection17_ZjetsHT800_JMS_down_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD -a down
+-i NanoAODv7_lists/ZjetsHT800_17_v7.txt -o HHpreselection17_ZjetsHT800_JMR_up_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD -b up
+-i NanoAODv7_lists/ZjetsHT800_17_v7.txt -o HHpreselection17_ZjetsHT800_JMR_down_deepTagMD_HbbvsQCD.root -c hh17_config.json -y 17 -d deepTagMD_HbbvsQCD -b down
+-i NanoAODv7_lists/WjetsHT400_18_v7.txt -o HHpreselection18_WjetsHT400_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD
+-i NanoAODv7_lists/WjetsHT400_18_v7.txt -o HHpreselection18_WjetsHT400_JES_up_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD -J up
+-i NanoAODv7_lists/WjetsHT400_18_v7.txt -o HHpreselection18_WjetsHT400_JES_down_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD -J down
+-i NanoAODv7_lists/WjetsHT400_18_v7.txt -o HHpreselection18_WjetsHT400_JER_up_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD -R up
+-i NanoAODv7_lists/WjetsHT400_18_v7.txt -o HHpreselection18_WjetsHT400_JER_down_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD -R down
+-i NanoAODv7_lists/WjetsHT400_18_v7.txt -o HHpreselection18_WjetsHT400_JMS_up_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD -a up
+-i NanoAODv7_lists/WjetsHT400_18_v7.txt -o HHpreselection18_WjetsHT400_JMS_down_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD -a down
+-i NanoAODv7_lists/WjetsHT400_18_v7.txt -o HHpreselection18_WjetsHT400_JMR_up_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD -b up
+-i NanoAODv7_lists/WjetsHT400_18_v7.txt -o HHpreselection18_WjetsHT400_JMR_down_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD -b down
+-i NanoAODv7_lists/WjetsHT600_18_v7.txt -o HHpreselection18_WjetsHT600_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD
+-i NanoAODv7_lists/WjetsHT600_18_v7.txt -o HHpreselection18_WjetsHT600_JES_up_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD -J up
+-i NanoAODv7_lists/WjetsHT600_18_v7.txt -o HHpreselection18_WjetsHT600_JES_down_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD -J down
+-i NanoAODv7_lists/WjetsHT600_18_v7.txt -o HHpreselection18_WjetsHT600_JER_up_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD -R up
+-i NanoAODv7_lists/WjetsHT600_18_v7.txt -o HHpreselection18_WjetsHT600_JER_down_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD -R down
+-i NanoAODv7_lists/WjetsHT600_18_v7.txt -o HHpreselection18_WjetsHT600_JMS_up_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD -a up
+-i NanoAODv7_lists/WjetsHT600_18_v7.txt -o HHpreselection18_WjetsHT600_JMS_down_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD -a down
+-i NanoAODv7_lists/WjetsHT600_18_v7.txt -o HHpreselection18_WjetsHT600_JMR_up_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD -b up
+-i NanoAODv7_lists/WjetsHT600_18_v7.txt -o HHpreselection18_WjetsHT600_JMR_down_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD -b down
+-i NanoAODv7_lists/WjetsHT800_18_v7.txt -o HHpreselection18_WjetsHT800_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD
+-i NanoAODv7_lists/WjetsHT800_18_v7.txt -o HHpreselection18_WjetsHT800_JES_up_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD -J up
+-i NanoAODv7_lists/WjetsHT800_18_v7.txt -o HHpreselection18_WjetsHT800_JES_down_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD -J down
+-i NanoAODv7_lists/WjetsHT800_18_v7.txt -o HHpreselection18_WjetsHT800_JER_up_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD -R up
+-i NanoAODv7_lists/WjetsHT800_18_v7.txt -o HHpreselection18_WjetsHT800_JER_down_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD -R down
+-i NanoAODv7_lists/WjetsHT800_18_v7.txt -o HHpreselection18_WjetsHT800_JMS_up_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD -a up
+-i NanoAODv7_lists/WjetsHT800_18_v7.txt -o HHpreselection18_WjetsHT800_JMS_down_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD -a down
+-i NanoAODv7_lists/WjetsHT800_18_v7.txt -o HHpreselection18_WjetsHT800_JMR_up_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD -b up
+-i NanoAODv7_lists/WjetsHT800_18_v7.txt -o HHpreselection18_WjetsHT800_JMR_down_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD -b down
+-i NanoAODv7_lists/ZjetsHT400_18_v7.txt -o HHpreselection18_ZjetsHT400_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD
+-i NanoAODv7_lists/ZjetsHT400_18_v7.txt -o HHpreselection18_ZjetsHT400_JES_up_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD -J up
+-i NanoAODv7_lists/ZjetsHT400_18_v7.txt -o HHpreselection18_ZjetsHT400_JES_down_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD -J down
+-i NanoAODv7_lists/ZjetsHT400_18_v7.txt -o HHpreselection18_ZjetsHT400_JER_up_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD -R up
+-i NanoAODv7_lists/ZjetsHT400_18_v7.txt -o HHpreselection18_ZjetsHT400_JER_down_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD -R down
+-i NanoAODv7_lists/ZjetsHT400_18_v7.txt -o HHpreselection18_ZjetsHT400_JMS_up_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD -a up
+-i NanoAODv7_lists/ZjetsHT400_18_v7.txt -o HHpreselection18_ZjetsHT400_JMS_down_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD -a down
+-i NanoAODv7_lists/ZjetsHT400_18_v7.txt -o HHpreselection18_ZjetsHT400_JMR_up_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD -b up
+-i NanoAODv7_lists/ZjetsHT400_18_v7.txt -o HHpreselection18_ZjetsHT400_JMR_down_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD -b down
+-i NanoAODv7_lists/ZjetsHT600_18_v7.txt -o HHpreselection18_ZjetsHT600_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD
+-i NanoAODv7_lists/ZjetsHT600_18_v7.txt -o HHpreselection18_ZjetsHT600_JES_up_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD -J up
+-i NanoAODv7_lists/ZjetsHT600_18_v7.txt -o HHpreselection18_ZjetsHT600_JES_down_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD -J down
+-i NanoAODv7_lists/ZjetsHT600_18_v7.txt -o HHpreselection18_ZjetsHT600_JER_up_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD -R up
+-i NanoAODv7_lists/ZjetsHT600_18_v7.txt -o HHpreselection18_ZjetsHT600_JER_down_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD -R down
+-i NanoAODv7_lists/ZjetsHT600_18_v7.txt -o HHpreselection18_ZjetsHT600_JMS_up_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD -a up
+-i NanoAODv7_lists/ZjetsHT600_18_v7.txt -o HHpreselection18_ZjetsHT600_JMS_down_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD -a down
+-i NanoAODv7_lists/ZjetsHT600_18_v7.txt -o HHpreselection18_ZjetsHT600_JMR_up_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD -b up
+-i NanoAODv7_lists/ZjetsHT600_18_v7.txt -o HHpreselection18_ZjetsHT600_JMR_down_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD -b down
+-i NanoAODv7_lists/ZjetsHT800_18_v7.txt -o HHpreselection18_ZjetsHT800_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD
+-i NanoAODv7_lists/ZjetsHT800_18_v7.txt -o HHpreselection18_ZjetsHT800_JES_up_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD -J up
+-i NanoAODv7_lists/ZjetsHT800_18_v7.txt -o HHpreselection18_ZjetsHT800_JES_down_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD -J down
+-i NanoAODv7_lists/ZjetsHT800_18_v7.txt -o HHpreselection18_ZjetsHT800_JER_up_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD -R up
+-i NanoAODv7_lists/ZjetsHT800_18_v7.txt -o HHpreselection18_ZjetsHT800_JER_down_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD -R down
+-i NanoAODv7_lists/ZjetsHT800_18_v7.txt -o HHpreselection18_ZjetsHT800_JMS_up_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD -a up
+-i NanoAODv7_lists/ZjetsHT800_18_v7.txt -o HHpreselection18_ZjetsHT800_JMS_down_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD -a down
+-i NanoAODv7_lists/ZjetsHT800_18_v7.txt -o HHpreselection18_ZjetsHT800_JMR_up_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD -b up
+-i NanoAODv7_lists/ZjetsHT800_18_v7.txt -o HHpreselection18_ZjetsHT800_JMR_down_deepTagMD_HbbvsQCD.root -c hh18_config.json -y 18 -d deepTagMD_HbbvsQCD -b down

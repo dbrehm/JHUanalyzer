@@ -1,0 +1,8 @@
+-i NanoAOD_lists_private/QCDHT1000_loc.txt -o HHpreselection16_QCDHT1000_btagHbb.root -c hh16_config.json -y 16 -d btagHbb
+-i NanoAOD_lists_private/QCDHT1500_loc.txt -o HHpreselection16_QCDHT1500_btagHbb.root -c hh16_config.json -y 16 -d btagHbb
+-i NanoAOD_lists_private/QCDHT2000_loc.txt -o HHpreselection16_QCDHT2000_btagHbb.root -c hh16_config.json -y 16 -d btagHbb
+-i NanoAOD_lists_private/QCDHT700_loc.txt -o HHpreselection16_QCDHT700_btagHbb.root -c hh16_config.json -y 16 -d btagHbb
+-i NanoAOD_lists_private/QCDHT1000_loc.txt -o HHpreselection16_QCDHT1000_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD
+-i NanoAOD_lists_private/QCDHT1500_loc.txt -o HHpreselection16_QCDHT1500_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD
+-i NanoAOD_lists_private/QCDHT2000_loc.txt -o HHpreselection16_QCDHT2000_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD
+-i NanoAOD_lists_private/QCDHT700_loc.txt -o HHpreselection16_QCDHT700_deepTagMD_HbbvsQCD.root -c hh16_config.json -y 16 -d deepTagMD_HbbvsQCD
