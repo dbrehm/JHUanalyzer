@@ -773,9 +773,9 @@ if a.isData and options.year == "17":
 if a.isData and options.year == "18":
     slim_skim.Add("lumiFilter", "myLumiFilter.eval(run, luminosityBlock)")
     if "D" in setname or "C" in setname:
-        slim_skim.Add("HEM15_16_2018dataCut","(!(-2.5 < "+eta0+" && "+eta0+" < -1.3) && !(-2.5 < "+eta1+" && "+eta1+" < -1.3))")
+        slim_skim.Add("HEM15_16_2018dataCut","(!(-2.5 < "+eta0+" && "+eta0+" < -1.3) && !(-2.5 < "+eta1+" && "+eta1+" < -1.3)  && (-1.57 < "+phi0+" && "+phi0+" < -0.87) && (-1.57 < "+phi0+" && "+phi0+" < -0.87) )")
     if "B" in setname:
-        slim_skim.Add("HEM15_16_2018dataCut","((run < 319077) && (!(-2.5 < "+eta0+" && "+eta0+" < -1.3) && !(-2.5 < "+eta1+" && "+eta1+" < -1.3)))")
+        slim_skim.Add("HEM15_16_2018dataCut","((run < 319077) && (!(-2.5 < "+eta0+" && "+eta0+" < -1.3) && !(-2.5 < "+eta1+" && "+eta1+" < -1.3) && (-1.57 < "+phi0+" && "+phi0+" < -0.87) && (-1.57 < "+phi0+" && "+phi0+" < -0.87) ))")
 
 filters = CutGroup('filters')
 filters.Add("Flag_goodVertices","Flag_goodVertices == 1")
