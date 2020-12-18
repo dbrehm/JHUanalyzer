@@ -20,6 +20,8 @@ namespace analyzer {
                     jetTriggerWeight = 1.0;
                 }else if (((TRP->GetBinContent(bin0-1) > 0) || (TRP->GetBinContent(bin0+1) > 0))){
                     jetTriggerWeight = (TRP->GetBinContent(bin0-1)+TRP->GetBinContent(bin0+1))/2.0;
+                }else if(if vary > 1200){}
+                    jetTriggerWeight = 1.0;
                 }
             }
 
