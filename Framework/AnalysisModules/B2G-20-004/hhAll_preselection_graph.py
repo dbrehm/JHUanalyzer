@@ -235,7 +235,7 @@ SetCFunc(commonc.invariantMass)
 SetCFunc(commonc.invariantMassThree)
 customc.Import("JHUanalyzer/Framework/AnalysisModules/B2G-20-004/pdfweights.cc","pdfweights")
 customc.Import("JHUanalyzer/Framework/AnalysisModules/B2G-20-004/hemispherize.cc","hemispherize")
-customc.Import("JHUanalyzer/Framework/AnalysisModules/B2G-20-004/triggerlookup-2D.cc","triggerlookup")
+customc.Import("JHUanalyzer/Framework/AnalysisModules/B2G-20-004/triggerlookup.cc","triggerlookup")
 customc.Import("JHUanalyzer/Framework/AnalysisModules/B2G-20-004/btagsf.cc","btagsf")
 customc.Import("JHUanalyzer/Framework/AnalysisModules/B2G-20-004/ptwlookup.cc","ptwlookup")
 customc.Import("JHUanalyzer/Framework/AnalysisModules/B2G-20-004/topCut.cc","topCut")
@@ -315,35 +315,35 @@ if not a.isData:
     #### Trigger correction code
 
     triggerFile = ROOT.TFile("TriggerWeights.root","READ")
-    # triggerHistTightEff = triggerFile.Get("deepTagMD_HbbvsQCD"+'ratio11'+options.year)
-    # # triggerHistTight = triggerFile.Get(doubleB_name+'tight'+options.year)
-    # # triggerHistLoose = triggerFile.Get(doubleB_name+'11'+options.year)
-    # triggerHist21Eff = triggerFile.Get("deepTagMD_HbbvsQCD"+'ratio21'+options.year)
-    # # triggerHist21 = triggerFile.Get(doubleB_name+'21'+options.year)
-    # ROOT.gInterpreter.ProcessLine("auto tSF = "+"deepTagMD_HbbvsQCD"+"ratio11"+options.year+";")
-    # # ROOT.gInterpreter.ProcessLine("auto tHistT = "+doubleB_name+"tight"+options.year+";")
-    # correctionColumns.Add("triggerTight","analyzer::TriggerLookup(mreduced,tSF)")
-    # # ROOT.gInterpreter.ProcessLine("auto tHistL = "+doubleB_name+"loose"+options.year+";")
-    # correctionColumns.Add("triggerLoose","analyzer::TriggerLookup(mreduced,tSF)")
-    # ROOT.gInterpreter.ProcessLine("auto tSD21 = "+"deepTagMD_HbbvsQCD"+"ratio21"+options.year+";")
-    # # ROOT.gInterpreter.ProcessLine("auto tHist21 = "+doubleB_name+"21"+options.year+";")
-    # correctionColumns21.Add("trigger21","analyzer::TriggerLookup(mreduced21,tSD21)")
-
-    ### Trigger Correction Code for 2D Triggers
-    triggerFile = ROOT.TFile("TriggerWeights.root","READ")
-    triggerHistTightEff = triggerFile.Get("deepTagMD_HbbvsQCD"+'ratio112D'+options.year)
+    triggerHistTightEff = triggerFile.Get("deepTagMD_HbbvsQCD"+'ratio11'+options.year)
     # triggerHistTight = triggerFile.Get(doubleB_name+'tight'+options.year)
     # triggerHistLoose = triggerFile.Get(doubleB_name+'11'+options.year)
-    triggerHist21Eff = triggerFile.Get("deepTagMD_HbbvsQCD"+'ratio212D'+options.year)
+    triggerHist21Eff = triggerFile.Get("deepTagMD_HbbvsQCD"+'ratio21'+options.year)
     # triggerHist21 = triggerFile.Get(doubleB_name+'21'+options.year)
-    ROOT.gInterpreter.ProcessLine("auto tSF = "+"deepTagMD_HbbvsQCD"+"ratio112D"+options.year+";")
+    ROOT.gInterpreter.ProcessLine("auto tSF = "+"deepTagMD_HbbvsQCD"+"ratio11"+options.year+";")
     # ROOT.gInterpreter.ProcessLine("auto tHistT = "+doubleB_name+"tight"+options.year+";")
-    correctionColumns.Add("triggerTight","analyzer::TriggerLookup(mh,mreduced,tSF)")
+    correctionColumns.Add("triggerTight","analyzer::TriggerLookup(mreduced,tSF)")
     # ROOT.gInterpreter.ProcessLine("auto tHistL = "+doubleB_name+"loose"+options.year+";")
-    correctionColumns.Add("triggerLoose","analyzer::TriggerLookup(mh,mreduced,tSF)")
-    ROOT.gInterpreter.ProcessLine("auto tSD21 = "+"deepTagMD_HbbvsQCD"+"ratio212D"+options.year+";")
+    correctionColumns.Add("triggerLoose","analyzer::TriggerLookup(mreduced,tSF)")
+    ROOT.gInterpreter.ProcessLine("auto tSD21 = "+"deepTagMD_HbbvsQCD"+"ratio21"+options.year+";")
     # ROOT.gInterpreter.ProcessLine("auto tHist21 = "+doubleB_name+"21"+options.year+";")
-    correctionColumns21.Add("trigger21","analyzer::TriggerLookup(mh,mreduced21,tSD21)")
+    correctionColumns21.Add("trigger21","analyzer::TriggerLookup(mreduced21,tSD21)")
+
+    ### Trigger Correction Code for 2D Triggers
+    # triggerFile = ROOT.TFile("TriggerWeights.root","READ")
+    # triggerHistTightEff = triggerFile.Get("deepTagMD_HbbvsQCD"+'ratio112D'+options.year)
+    # # triggerHistTight = triggerFile.Get(doubleB_name+'tight'+options.year)
+    # # triggerHistLoose = triggerFile.Get(doubleB_name+'11'+options.year)
+    # triggerHist21Eff = triggerFile.Get("deepTagMD_HbbvsQCD"+'ratio212D'+options.year)
+    # # triggerHist21 = triggerFile.Get(doubleB_name+'21'+options.year)
+    # ROOT.gInterpreter.ProcessLine("auto tSF = "+"deepTagMD_HbbvsQCD"+"ratio112D"+options.year+";")
+    # # ROOT.gInterpreter.ProcessLine("auto tHistT = "+doubleB_name+"tight"+options.year+";")
+    # correctionColumns.Add("triggerTight","analyzer::TriggerLookup(mh,mreduced,tSF)")
+    # # ROOT.gInterpreter.ProcessLine("auto tHistL = "+doubleB_name+"loose"+options.year+";")
+    # correctionColumns.Add("triggerLoose","analyzer::TriggerLookup(mh,mreduced,tSF)")
+    # ROOT.gInterpreter.ProcessLine("auto tSD21 = "+"deepTagMD_HbbvsQCD"+"ratio212D"+options.year+";")
+    # # ROOT.gInterpreter.ProcessLine("auto tHist21 = "+doubleB_name+"21"+options.year+";")
+    # correctionColumns21.Add("trigger21","analyzer::TriggerLookup(mh,mreduced21,tSD21)")
 
 #### B tag SF
 if "btagHbb" in options.doublebtagger:
@@ -744,7 +744,7 @@ fail21String = "FatJet_"+doubleB_name+"[0] < "+str(cutsDict[doubleB_short+'tag']
 run21String = "( ( (!("+srttString+")) && (!("+atttString+")) && (!("+srllString+")) && (!("+atllString+")) ) == 1)"
 # run21String = "((!("+srttString+") && (!("+atttString+")) && (!("+srllString+"))) == 1)"
 
-cand21String = "((!(nFatJet > 1) || !(pt0 > 300 && pt1 > 300) || !(abs("+eta0+") < 2.4 && abs("+eta1+") < 2.4) || !(abs("+eta0+" - "+eta1+") < 0.7) || !(mreduced > 750.) || !((110 < mh1) && (mh1 < 140))) == 1)"
+cand21String = "((!(nFatJet > 1) || !(pt0 > 300 && pt1 > 300) || !(abs("+eta0+") < 2.4 && abs("+eta1+") < 2.4) || !(abs("+eta0+" - "+eta1+") < 1.3) || !(mreduced > 750.) || !((110 < mh1) && (mh1 < 140))) == 1)"
 # cand21String = "((!(nFatJet > 1) || !(pt0 > 300 && pt1 > 300) || !(abs("+eta0+") < 2.4 && abs("+eta1+") < 2.4) || !(abs("+eta0+" - "+eta1+") < 1.3) || !(mreduced > 750.)) == 1)"
 
 ### Make selection columns
@@ -837,7 +837,7 @@ preselection22.Add("cut_mreduced21","mreduced21 > 750.")
 
 preselection23 = CutGroup('preselection23')
 # preselection23.Add("topMass","topMass > 200.0")
-preselection23.Add("topMass","topMass > 220.0")
+# preselection23.Add("topMass","topMass > 220.0")
 # preselection23.Add("topDeltaR","topDeltaR > 1.0")
 
 plotsColumn = VarGroup("plotsColumn")
@@ -883,7 +883,7 @@ kinematicDistributions = setup.Apply([kinematicCuts])
 kinematicDistributions21 = setup.Apply([kinematicCuts21])
 preselected = setup.Apply([preselection11,preselection12])
 preselected_ttbar = setup.Apply([preselection11,preselectionTTbar])
-cutTest21 = setup.Apply([preselection21,preselection22,preselection23]).Cut("Pass21","Pass21==1")
+cutTest21 = setup.Apply([preselection21,preselection22]).Cut("Pass21","Pass21==1")
 preselected21 = setup.Apply([preselection21,preselection22])
 
 # Since four analysis regions are covered with relatively complicated cuts to define them, a manual forking is simplest though a Discriminate function does exist for when you need to keep pass and fail of a selection
