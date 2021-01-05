@@ -11,39 +11,46 @@ namespace analyzer {
 
         std::vector<double> out;
 
-        if (vary < 4000.0){
-            int bin0 = TRP->FindBin(varx,vary); 
-            double jetTriggerWeight = TRP->GetBinContent(bin0);
-            // Check that we're not in an empty bin in the fully efficient region
-            if (jetTriggerWeight == 0){
-                if ((TRP->GetBinContent(bin0-1) == 1.0) && (TRP->GetBinContent(bin0+1) == 1.0)){
-                    jetTriggerWeight = 1.0;
-                }else if (((TRP->GetBinContent(bin0-1) > 0) || (TRP->GetBinContent(bin0+1) > 0))){
-                    jetTriggerWeight = (TRP->GetBinContent(bin0-1)+TRP->GetBinContent(bin0+1))/2.0;
-                }else if(if vary > 1200){}
-                    jetTriggerWeight = 1.0;
-                }
-            }
+        int bin0 = TRP->GetBin(varx,vary);
+        double error = TRP->GetBinError(bin0);
+        // double errorDown = TRP->GetBinError(bin0);
+        double jetTriggerWeight = TRP->GetBinContent(bin0);
 
-            if (jetTriggerWeight < 0){
-                Weight = 0;
-            }else if (0 < jetTriggerWeight){
+        // cout << "NOT fully efficient" << endl;
+        // Check that we're not in an empty bin in the fully efficient region
+        if (jetTriggerWeight == 0.0){
+            if ((TRP->GetBinContent(bin0-1) == 1.0) && (TRP->GetBinContent(bin0+1) == 1.0)){
+                jetTriggerWeight = 1.0;
+                Weight = 1.0;
+            }else if (((TRP->GetBinContent(bin0-1) > 0) || (TRP->GetBinContent(bin0+1) > 0))){
+                cout << "NOT fully efficient and jetTriggerWeight = 0. " << endl;
+                jetTriggerWeight = (TRP->GetBinContent(bin0-1)+TRP->GetBinContent(bin0+1))/2.0;
+                Weight = (TRP->GetBinContent(bin0-1)+TRP->GetBinContent(bin0+1))/2.0;
+            }else if (vary > 1200){
+                cout << "Trigger weight forced to 1. " << endl;
+                jetTriggerWeight = 1.0;
+                Weight = 1.0;
+            }else{
+                cout << "Weight still 0. " << endl;
                 Weight = jetTriggerWeight;
             }
+        }else if (jetTriggerWeight < 0.0){
+            Weight = 0.0;
+        }else if (0.0 <= jetTriggerWeight){
+            Weight = jetTriggerWeight;
+        }
 
-            double deltaTriggerEff = 0.05*(1.0-jetTriggerWeight);
-            double errorUp = TRP->GetBinError(bin0);
-            double errorDown = TRP->GetBinError(bin0);
-            double one = 1.0;
-            double zero = 0.0;
+        double deltaTriggerEff = 0.05*(1.0-jetTriggerWeight);
 
-            Weightup = (jetTriggerWeight + std::max(deltaTriggerEff,errorUp));
+        double one = 1.0;
+        double zero = 0.0;
 
-            Weightdown = std::max(zero,(jetTriggerWeight - std::max(deltaTriggerEff,errorDown)));
+        double correction = std::max(deltaTriggerEff,error);
         
-
-        }    
-        //cout << "Trigger eff is : " << Weight << " error up is: " << Weightup << " error down is: "<< Weightdown << endl;
+        Weightup = (jetTriggerWeight + correction);
+        Weightdown = abs(jetTriggerWeight - correction);
+        
+        cout << "Nominal is : " << Weight << " error up is: " << Weightup << " error down is: "<< Weightdown << " m_h is: " << varx << " m_red is: " << vary << " " << endl;
         out.push_back(Weight);
         out.push_back(Weightup);
         out.push_back(Weightdown);
