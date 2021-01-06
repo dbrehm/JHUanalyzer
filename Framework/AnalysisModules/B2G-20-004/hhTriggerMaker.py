@@ -31,7 +31,7 @@ for y in ['16','17','18']:
 
         infile = ROOT.TFile.Open('HHtrigger'+y+'_data_'+doubleb+'.root')
         infileQ = ROOT.TFile.Open('HHtrigger'+y+'_QCD_'+doubleb+'.root')
-        infileTT = ROOT.TFile.Open('HHtrigger'+y+'_ttbar_'+doubleb+'.root')
+        # infileTT = ROOT.TFile.Open('HHtrigger'+y+'_ttbar_'+doubleb+'.root')
 
         hnum = infile.Get('hnum') 
         hden = infile.Get('hden')
@@ -45,30 +45,38 @@ for y in ['16','17','18']:
         hnum21Q = infileQ.Get('hnum21') 
         hden21Q = infileQ.Get('hden21')   
 
-        hnumtt = infileTT.Get('hnum') 
-        hdentt = infileTT.Get('hden')
+        # hnumtt = infileTT.Get('hnum') 
+        # hdentt = infileTT.Get('hden')
 
-        hnum21tt = infileTT.Get('hnum21') 
-        hden21tt = infileTT.Get('hden21')
+        # hnum21tt = infileTT.Get('hnum21') 
+        # hden21tt = infileTT.Get('hden21')
 
 
         hnum2D = infile.Get('hnum2D') 
+        hnum2D.Sumw2()
         hden2D = infile.Get('hden2D')
+        hden2D.Sumw2()
 
         hnum212D = infile.Get('hnum212D') 
+        hnum212D.Sumw2()
         hden212D = infile.Get('hden212D')
+        hden212D.Sumw2() 
 
         hnumQ2D = infileQ.Get('hnum2D') 
+        hnumQ2D.Sumw2()
         hdenQ2D = infileQ.Get('hden2D')
+        hdenQ2D.Sumw2()
 
         hnum21Q2D = infileQ.Get('hnum212D') 
+        hnum21Q2D.Sumw2()
         hden21Q2D = infileQ.Get('hden212D')   
+        hden21Q2D.Sumw2()
 
-        hnumtt2D = infileTT.Get('hnum2D') 
-        hdentt2D = infileTT.Get('hden2D')
+        # hnumtt2D = infileTT.Get('hnum2D') 
+        # hdentt2D = infileTT.Get('hden2D')
 
-        hnum21tt2D = infileTT.Get('hnum212D') 
-        hden21tt2D = infileTT.Get('hden212D')
+        # hnum21tt2D = infileTT.Get('hnum212D') 
+        # hden21tt2D = infileTT.Get('hden212D')
 
 
         hh11 = hnum.Clone(doubleb+'tight'+y)
@@ -77,8 +85,8 @@ for y in ['16','17','18']:
         hh11Q = hnumQ.Clone(doubleb+'tight'+y+'QCD')
         hh11Q.Divide(hdenQ)
 
-        hh11tt = hnumtt.Clone(doubleb+'tight'+y+'ttbar')
-        hh11tt.Divide(hdentt)
+        # hh11tt = hnumtt.Clone(doubleb+'tight'+y+'ttbar')
+        # hh11tt.Divide(hdentt)
 
 
         hh21 = hnum21.Clone(doubleb+'21'+y)
@@ -87,8 +95,8 @@ for y in ['16','17','18']:
         hh21Q = hnum21Q.Clone(doubleb+'21'+y+'QCD')
         hh21Q.Divide(hden21Q)
 
-        hh21tt = hnum21tt.Clone(doubleb+'21'+y+'ttbar')
-        hh21tt.Divide(hden21tt)
+        # hh21tt = hnum21tt.Clone(doubleb+'21'+y+'ttbar')
+        # hh21tt.Divide(hden21tt)
 
 
 
@@ -98,8 +106,8 @@ for y in ['16','17','18']:
         hh11Q2D = hnumQ2D.Clone(doubleb+'tight2D'+y+'QCD')
         hh11Q2D.Divide(hdenQ2D)
 
-        hh11tt2D = hnumtt2D.Clone(doubleb+'tight2D'+y+'ttbar')
-        hh11tt2D.Divide(hdentt2D)
+        # hh11tt2D = hnumtt2D.Clone(doubleb+'tight2D'+y+'ttbar')
+        # hh11tt2D.Divide(hdentt2D)
 
 
         hh212D = hnum212D.Clone(doubleb+'212D'+y)
@@ -108,8 +116,8 @@ for y in ['16','17','18']:
         hh21Q2D = hnum21Q2D.Clone(doubleb+'212D'+y+'QCD')
         hh21Q2D.Divide(hden21Q2D)
 
-        hh21tt2D = hnum21tt2D.Clone(doubleb+'212D'+y+'ttbar')
-        hh21tt2D.Divide(hden21tt2D)
+        # hh21tt2D = hnum21tt2D.Clone(doubleb+'212D'+y+'ttbar')
+        # hh21tt2D.Divide(hden21tt2D)
 
 
         h11D = ROOT.TEfficiency(hnum, hden)
@@ -120,9 +128,9 @@ for y in ['16','17','18']:
 
         h21Q = ROOT.TEfficiency(hnum21Q, hden21Q)
 
-        h11tt = ROOT.TEfficiency(hnumtt, hdentt)
+        # h11tt = ROOT.TEfficiency(hnumtt, hdentt)
 
-        h21tt = ROOT.TEfficiency(hnum21tt, hden21tt)
+        # h21tt = ROOT.TEfficiency(hnum21tt, hden21tt)
 
 
 
@@ -148,28 +156,50 @@ for y in ['16','17','18']:
         # h21.SetTitle(doubleb+'21'+y+"Effplot"";m_reduced;Efficiency")
 
         h11D.SetStatisticOption(ROOT.TEfficiency.kFCP)
-        h11D.SetName(doubleb+"11"+y+"Effplot-Data")
+        h11D.SetName(doubleb+"11"+y+"Effplot_Data")
         h11D.SetTitle(doubleb+"11"+y+"Effplot-Data"";m_reduced;Efficiency")
 
         h21D.SetStatisticOption(ROOT.TEfficiency.kFCP)
-        h21D.SetName(doubleb+'21'+y+"Effplot-Data")
+        h21D.SetName(doubleb+'21'+y+"Effplot_Data")
         h21D.SetTitle(doubleb+'21'+y+"Effplot-Data"";m_reduced;Efficiency")
 
         h11Q.SetStatisticOption(ROOT.TEfficiency.kFCP)
-        h11Q.SetName(doubleb+"11"+y+"Effplot-QCD")
+        h11Q.SetName(doubleb+"11"+y+"Effplot_QCD")
         h11Q.SetTitle(doubleb+"11"+y+"Effplot-QCD"";m_reduced;Efficiency")
 
         h21Q.SetStatisticOption(ROOT.TEfficiency.kFCP)
-        h21Q.SetName(doubleb+'21'+y+"Effplot-QCD")
+        h21Q.SetName(doubleb+'21'+y+"Effplot_QCD")
         h21Q.SetTitle(doubleb+'21'+y+"Effplot-QCD"";m_reduced;Efficiency")
 
-        h11tt.SetStatisticOption(ROOT.TEfficiency.kFCP)
-        h11tt.SetName(doubleb+"11"+y+"Effplot-ttbar")
-        h11tt.SetTitle(doubleb+"11"+y+"Effplot-ttbar"";m_reduced;Efficiency")
+        # h11tt.SetStatisticOption(ROOT.TEfficiency.kFCP)
+        # h11tt.SetName(doubleb+"11"+y+"Effplot-ttbar")
+        # h11tt.SetTitle(doubleb+"11"+y+"Effplot-ttbar"";m_reduced;Efficiency")
 
-        h21tt.SetStatisticOption(ROOT.TEfficiency.kFCP)
-        h21tt.SetName(doubleb+'21'+y+"Effplot-ttbar")
-        h21tt.SetTitle(doubleb+'21'+y+"Effplot-ttbar"";m_reduced;Efficiency")
+        # h21tt.SetStatisticOption(ROOT.TEfficiency.kFCP)
+        # h21tt.SetName(doubleb+'21'+y+"Effplot-ttbar")
+        # h21tt.SetTitle(doubleb+'21'+y+"Effplot-ttbar"";m_reduced;Efficiency")
+
+        #### 2D TEfficiencies
+
+        h11D2D.SetStatisticOption(ROOT.TEfficiency.kFCP)
+        h11D2D.SetConfidenceLevel(0.68)
+        h11D2D.SetName(doubleb+"11"+y+"Effplot_Data_2D")
+        h11D2D.SetTitle(doubleb+"11"+y+"Effplot-Data-2D;m_h;m_reduced;Efficiency")
+
+        h21D2D.SetStatisticOption(ROOT.TEfficiency.kFCP)
+        h21D2D.SetConfidenceLevel(0.68)
+        h21D2D.SetName(doubleb+'21'+y+"Effplot_Data_2D")
+        h21D2D.SetTitle(doubleb+'21'+y+"Effplot-Data-2D;m_h;m_reduced;Efficiency")
+
+        h11Q2D.SetStatisticOption(ROOT.TEfficiency.kFCP)
+        h11Q2D.SetConfidenceLevel(0.68)
+        h11Q2D.SetName(doubleb+"11"+y+"Effplot_QCD_2D")
+        h11Q2D.SetTitle(doubleb+"11"+y+"Effplot-QCD-2D;m_h;m_reduced;Efficiency")
+
+        h21Q2D.SetStatisticOption(ROOT.TEfficiency.kFCP)
+        h21Q2D.SetConfidenceLevel(0.68)
+        h21Q2D.SetName(doubleb+'21'+y+"Effplot_QCD_2D")
+        h21Q2D.SetTitle(doubleb+'21'+y+"Effplot-QCD-2D;m_h;m_reduced;Efficiency")
 
 
 
@@ -180,16 +210,16 @@ for y in ['16','17','18']:
             ratio11.SetBinContent(b,h11D.GetEfficiency(b)/h11Q.GetEfficiency(b))
             ratio11.SetBinError(b,max([h11D.GetEfficiencyErrorUp(b),h11Q.GetEfficiencyErrorUp(b),h11D.GetEfficiencyErrorLow(b),h11Q.GetEfficiencyErrorLow(b)]))
 
-        ratio11TT = hh11.Clone(doubleb+'ratio11ttbar'+y)
-        ratio11TT.SetTitle(doubleb+'ratio11ttbar'+y)
-        for b in range(1,hh11.GetNbinsX()+1):
-            ratio11TT.SetBinContent(b,h11D.GetEfficiency(b)/h11tt.GetEfficiency(b))
-            ratio11TT.SetBinError(b,max([h11D.GetEfficiencyErrorUp(b),h11tt.GetEfficiencyErrorUp(b),h11D.GetEfficiencyErrorLow(b),h11tt.GetEfficiencyErrorLow(b)]))
+        # ratio11TT = hh11.Clone(doubleb+'ratio11ttbar'+y)
+        # ratio11TT.SetTitle(doubleb+'ratio11ttbar'+y)
+        # for b in range(1,hh11.GetNbinsX()+1):
+        #     ratio11TT.SetBinContent(b,h11D.GetEfficiency(b)/h11tt.GetEfficiency(b))
+        #     ratio11TT.SetBinError(b,max([h11D.GetEfficiencyErrorUp(b),h11tt.GetEfficiencyErrorUp(b),h11D.GetEfficiencyErrorLow(b),h11tt.GetEfficiencyErrorLow(b)]))
 
-        ratioQCDttbar11 = ratio11TT.Clone(doubleb+'ratio11QCDtoTTbar'+y)
-        ratioQCDttbar11.SetTitle(doubleb+'ratio11QCDtoTTbar'+y)
-        ratioQCDttbar11.Add(ratio11,-1)
-        ratioQCDttbar11.Divide(ratio11,)
+        # ratioQCDttbar11 = ratio11TT.Clone(doubleb+'ratio11QCDtoTTbar'+y)
+        # ratioQCDttbar11.SetTitle(doubleb+'ratio11QCDtoTTbar'+y)
+        # ratioQCDttbar11.Add(ratio11,-1)
+        # ratioQCDttbar11.Divide(ratio11,)
 
         ratio21 = hh21.Clone(doubleb+'ratio21'+y)
         ratio21.SetTitle(doubleb+'ratio21'+y)
@@ -197,16 +227,16 @@ for y in ['16','17','18']:
             ratio21.SetBinContent(b,h21D.GetEfficiency(b)/h21Q.GetEfficiency(b))
             ratio21.SetBinError(b,max([h21D.GetEfficiencyErrorUp(b),h21Q.GetEfficiencyErrorUp(b),h21D.GetEfficiencyErrorLow(b),h21Q.GetEfficiencyErrorLow(b)]))
 
-        ratio21TT = hh21.Clone(doubleb+'ratio21ttbar'+y)
-        ratio21TT.SetTitle(doubleb+'ratio21ttbar'+y)
-        for b in range(1,hh21.GetNbinsX()+1):
-            ratio21TT.SetBinContent(b,h21D.GetEfficiency(b)/h21tt.GetEfficiency(b))
-            ratio21TT.SetBinError(b,max([h21D.GetEfficiencyErrorUp(b),h21tt.GetEfficiencyErrorUp(b),h21D.GetEfficiencyErrorLow(b),h21tt.GetEfficiencyErrorLow(b)]))
+        # ratio21TT = hh21.Clone(doubleb+'ratio21ttbar'+y)
+        # ratio21TT.SetTitle(doubleb+'ratio21ttbar'+y)
+        # for b in range(1,hh21.GetNbinsX()+1):
+        #     ratio21TT.SetBinContent(b,h21D.GetEfficiency(b)/h21tt.GetEfficiency(b))
+        #     ratio21TT.SetBinError(b,max([h21D.GetEfficiencyErrorUp(b),h21tt.GetEfficiencyErrorUp(b),h21D.GetEfficiencyErrorLow(b),h21tt.GetEfficiencyErrorLow(b)]))
 
-        ratioQCDttbar21 = ratio21TT.Clone(doubleb+'ratio21QCDtoTTbar'+y)
-        ratioQCDttbar21.SetTitle(doubleb+'ratio21QCDtoTTbar'+y)
-        ratioQCDttbar21.Add(ratio21,-1)
-        ratioQCDttbar21.Divide(ratio21)
+        # ratioQCDttbar21 = ratio21TT.Clone(doubleb+'ratio21QCDtoTTbar'+y)
+        # ratioQCDttbar21.SetTitle(doubleb+'ratio21QCDtoTTbar'+y)
+        # ratioQCDttbar21.Add(ratio21,-1)
+        # ratioQCDttbar21.Divide(ratio21)
 
 
         #### Now make for 2D trigger corrections.
@@ -234,11 +264,11 @@ for y in ['16','17','18']:
         ratio11.Write()
         ratio21.Write()
 
-        ratio11TT.Write()
-        ratio21TT.Write()
+        # ratio11TT.Write()
+        # ratio21TT.Write()
 
-        ratioQCDttbar11.Write()
-        ratioQCDttbar21.Write()
+        # ratioQCDttbar11.Write()
+        # ratioQCDttbar21.Write()
 
         h11D.Write()
         hh11.Write()
@@ -250,17 +280,22 @@ for y in ['16','17','18']:
         h21Q.Write()
         hh21Q.Write()
 
-        h11tt.Write()
-        hh11tt.Write()
-        h21tt.Write()
-        hh21tt.Write()
+        # h11tt.Write()
+        # hh11tt.Write()
+        # h21tt.Write()
+        # hh21tt.Write()
 
         hh112D.Write()
         hh212D.Write()
         hh11Q2D.Write()
         hh21Q2D.Write()
-        hh11tt2D.Write()
-        hh21tt2D.Write()
+        # hh11tt2D.Write()
+        # hh21tt2D.Write()
+
+        h11D2D.Write()
+        h21D2D.Write()
+        h11Q2D.Write()
+        h21Q2D.Write()
 
         ratio112D.Write()
         ratio212D.Write()
