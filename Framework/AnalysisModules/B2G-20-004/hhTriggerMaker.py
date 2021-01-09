@@ -1,5 +1,44 @@
 import ROOT
-import subprocess
+import subprocess, math
+
+def DivEff(eff1,eff2,year,reg):
+    h_for_binning = eff1.GetTotalHistogram()
+    x_nbins = h_for_binning.GetNbinsX()
+    x_low   = h_for_binning.GetXaxis().GetXmin()
+    x_high  = h_for_binning.GetXaxis().GetXmax()
+    y_nbins = h_for_binning.GetNbinsY()
+    y_low   = h_for_binning.GetYaxis().GetXmin()
+    y_high  = h_for_binning.GetYaxis().GetXmax()
+
+    h = ROOT.TH2F('DivEff'+reg+year,'',x_nbins,x_low,x_high,y_nbins,y_low,y_high)
+    h.SetTitle(reg+" 20"+year+" 2D Efficiency Nominal Ratio Data/QCD;m_h;m_reduced;SF")
+    hup = h.Clone('DivEffUp'+reg+year)
+    hup.SetTitle(reg+" 20"+year+" 2D Efficiency Up Ratio Data/QCD;m_h;m_reduced;SF")
+    hdown = h.Clone('DivEffDown'+reg+year)
+    hdown.SetTitle(reg+" 20"+year+" 2D Efficiency Down Ratio Data/QCD;m_h;m_reduced;SF")
+
+    for ix in range(1,x_nbins+1):
+        for iy in range(1,y_nbins+1):
+            ibin = eff1.GetGlobalBin(ix,iy)
+            # print ('%s %.2f %.2f'%(ibin,eff1.GetEfficiency(ibin),eff2.GetEfficiency(ibin)))
+            if eff2.GetEfficiency(ibin) == 0 or eff1.GetEfficiency(ibin) == 0:
+                div = 0
+                div_err_up = 0
+                div_err_down = 0
+            else:
+                div = eff1.GetEfficiency(ibin)/eff2.GetEfficiency(ibin)
+                div_err_up = div*math.sqrt(eff1.GetEfficiencyErrorUp(ibin)/eff1.GetEfficiency(ibin)+eff2.GetEfficiencyErrorUp(ibin)/eff2.GetEfficiency(ibin))
+                div_err_down = div*math.sqrt(eff1.GetEfficiencyErrorLow(ibin)/eff1.GetEfficiency(ibin)+eff2.GetEfficiencyErrorLow(ibin)/eff2.GetEfficiency(ibin))
+
+            h.SetBinContent(ibin,div)
+            hup.SetBinContent(ibin,div+div_err_up)
+            hdown.SetBinContent(ibin,div-div_err_down)
+
+    h.SetMaximum(1.05)
+    hup.SetMaximum(1.05)
+    hdown.SetMaximum(1.05)
+
+    return h,hup,hdown
 
 outfile = ROOT.TFile.Open('TriggerWeights.root','RECREATE')
 qcds = ['QCDHT700','QCDHT1000','QCDHT1500','QCDHT2000']
@@ -29,275 +68,61 @@ for y in ['16','17','18']:
         print 'Executing: ' + hadd_string_qcd
         subprocess.call([hadd_string_qcd],shell=True)
 
-        infile = ROOT.TFile.Open('HHtrigger'+y+'_data_'+doubleb+'.root')
-        infileQ = ROOT.TFile.Open('HHtrigger'+y+'_QCD_'+doubleb+'.root')
+        fdata = ROOT.TFile.Open('HHtrigger'+y+'_data_'+doubleb+'.root')
+        fqcd = ROOT.TFile.Open('HHtrigger'+y+'_QCD_'+doubleb+'.root')
         # infileTT = ROOT.TFile.Open('HHtrigger'+y+'_ttbar_'+doubleb+'.root')
 
-        hnum = infile.Get('hnum') 
-        hden = infile.Get('hden')
+        hdata_num = fdata.Get('hnum2D')
+        hdata_den = fdata.Get('hden2D')
+        hqcd_num = fqcd.Get('hnum2D')
+        hqcd_den = fqcd.Get('hden2D')
 
-        hnum21 = infile.Get('hnum21') 
-        hden21 = infile.Get('hden21')
+        hdata_num21 = fdata.Get('hnum212D')
+        hdata_den21 = fdata.Get('hden212D')
+        hqcd_num21 = fqcd.Get('hnum212D')
+        hqcd_den21 = fqcd.Get('hden212D')
 
-        hnumQ = infileQ.Get('hnum') 
-        hdenQ = infileQ.Get('hden')
+        eff_data = ROOT.TEfficiency(hdata_num,hdata_den)
+        eff_qcd = ROOT.TEfficiency(hqcd_num,hqcd_den)
+                
+        eff_data.SetStatisticOption(ROOT.TEfficiency.kFCP)
+        eff_qcd.SetStatisticOption(ROOT.TEfficiency.kFCP)
 
-        hnum21Q = infileQ.Get('hnum21') 
-        hden21Q = infileQ.Get('hden21')   
+        eff_data21 = ROOT.TEfficiency(hdata_num21,hdata_den21)
+        eff_qcd21 = ROOT.TEfficiency(hqcd_num21,hqcd_den21)
 
-        # hnumtt = infileTT.Get('hnum') 
-        # hdentt = infileTT.Get('hden')
+        eff_data21.SetStatisticOption(ROOT.TEfficiency.kFCP)
+        eff_qcd21.SetStatisticOption(ROOT.TEfficiency.kFCP)
 
-        # hnum21tt = infileTT.Get('hnum21') 
-        # hden21tt = infileTT.Get('hden21')
+        h,hup,hdown = DivEff(eff_data,eff_qcd,y,'FullyMerged')
+        h21,hup21,hdown21 = DivEff(eff_data21,eff_qcd21,y,'SemiResolved')
 
+        eff_data.SetName(doubleb+"11"+y+"Effplot_Data_2D")
+        eff_data.SetTitle(doubleb+"11"+y+"Efficiency-Data-2D;m_h;m_reduced;Efficiency")
 
-        hnum2D = infile.Get('hnum2D') 
-        hnum2D.Sumw2()
-        hden2D = infile.Get('hden2D')
-        hden2D.Sumw2()
+        eff_data21.SetName(doubleb+'21'+y+"Effplot_Data_2D")
+        eff_data21.SetTitle(doubleb+'21'+y+"Effplot-Data-2D;m_h;m_reduced;Efficiency")
 
-        hnum212D = infile.Get('hnum212D') 
-        hnum212D.Sumw2()
-        hden212D = infile.Get('hden212D')
-        hden212D.Sumw2() 
+        eff_qcd.SetName(doubleb+"11"+y+"Effplot_QCD_2D")
+        eff_qcd.SetTitle(doubleb+"11"+y+"Efficiency-QCD-2D;m_h;m_reduced;Efficiency")
 
-        hnumQ2D = infileQ.Get('hnum2D') 
-        hnumQ2D.Sumw2()
-        hdenQ2D = infileQ.Get('hden2D')
-        hdenQ2D.Sumw2()
-
-        hnum21Q2D = infileQ.Get('hnum212D') 
-        hnum21Q2D.Sumw2()
-        hden21Q2D = infileQ.Get('hden212D')   
-        hden21Q2D.Sumw2()
-
-        # hnumtt2D = infileTT.Get('hnum2D') 
-        # hdentt2D = infileTT.Get('hden2D')
-
-        # hnum21tt2D = infileTT.Get('hnum212D') 
-        # hden21tt2D = infileTT.Get('hden212D')
-
-
-        hh11 = hnum.Clone(doubleb+'tight'+y)
-        hh11.Divide(hden)
-
-        hh11Q = hnumQ.Clone(doubleb+'tight'+y+'QCD')
-        hh11Q.Divide(hdenQ)
-
-        # hh11tt = hnumtt.Clone(doubleb+'tight'+y+'ttbar')
-        # hh11tt.Divide(hdentt)
-
-
-        hh21 = hnum21.Clone(doubleb+'21'+y)
-        hh21.Divide(hden21)
-
-        hh21Q = hnum21Q.Clone(doubleb+'21'+y+'QCD')
-        hh21Q.Divide(hden21Q)
-
-        # hh21tt = hnum21tt.Clone(doubleb+'21'+y+'ttbar')
-        # hh21tt.Divide(hden21tt)
-
-
-
-        hh112D = hnum2D.Clone(doubleb+'tight2D'+y)
-        hh112D.Divide(hden2D)
-
-        hh11Q2D = hnumQ2D.Clone(doubleb+'tight2D'+y+'QCD')
-        hh11Q2D.Divide(hdenQ2D)
-
-        # hh11tt2D = hnumtt2D.Clone(doubleb+'tight2D'+y+'ttbar')
-        # hh11tt2D.Divide(hdentt2D)
-
-
-        hh212D = hnum212D.Clone(doubleb+'212D'+y)
-        hh212D.Divide(hden212D)
-
-        hh21Q2D = hnum21Q2D.Clone(doubleb+'212D'+y+'QCD')
-        hh21Q2D.Divide(hden21Q2D)
-
-        # hh21tt2D = hnum21tt2D.Clone(doubleb+'212D'+y+'ttbar')
-        # hh21tt2D.Divide(hden21tt2D)
-
-
-        h11D = ROOT.TEfficiency(hnum, hden)
-
-        h21D = ROOT.TEfficiency(hnum21, hden21)
-
-        h11Q = ROOT.TEfficiency(hnumQ, hdenQ)
-
-        h21Q = ROOT.TEfficiency(hnum21Q, hden21Q)
-
-        # h11tt = ROOT.TEfficiency(hnumtt, hdentt)
-
-        # h21tt = ROOT.TEfficiency(hnum21tt, hden21tt)
-
-
-
-        h11D2D = ROOT.TEfficiency(hnum2D, hden2D)
-
-        h21D2D = ROOT.TEfficiency(hnum212D, hden212D)
-
-        h11Q2D = ROOT.TEfficiency(hnumQ2D, hdenQ2D)
-
-        h21Q2D = ROOT.TEfficiency(hnum21Q2D, hden21Q2D)
-
-
-        # h11 = ROOT.TEfficiency(hh11, hh11Q)
-
-        # h21 = ROOT.TEfficiency(hh21, hh21Q)
-
-        # h11.SetStatisticOption(ROOT.TEfficiency.kFCP)
-        # h11.SetName(doubleb+"11"+y+"Effplot")
-        # h11.SetTitle(doubleb+"11"+y+"Effplot"";m_reduced;Efficiency")
-
-        # h21.SetStatisticOption(ROOT.TEfficiency.kFCP)
-        # h21.SetName(doubleb+'21'+y+"Effplot")
-        # h21.SetTitle(doubleb+'21'+y+"Effplot"";m_reduced;Efficiency")
-
-        h11D.SetStatisticOption(ROOT.TEfficiency.kFCP)
-        h11D.SetName(doubleb+"11"+y+"Effplot_Data")
-        h11D.SetTitle(doubleb+"11"+y+"Effplot-Data"";m_reduced;Efficiency")
-
-        h21D.SetStatisticOption(ROOT.TEfficiency.kFCP)
-        h21D.SetName(doubleb+'21'+y+"Effplot_Data")
-        h21D.SetTitle(doubleb+'21'+y+"Effplot-Data"";m_reduced;Efficiency")
-
-        h11Q.SetStatisticOption(ROOT.TEfficiency.kFCP)
-        h11Q.SetName(doubleb+"11"+y+"Effplot_QCD")
-        h11Q.SetTitle(doubleb+"11"+y+"Effplot-QCD"";m_reduced;Efficiency")
-
-        h21Q.SetStatisticOption(ROOT.TEfficiency.kFCP)
-        h21Q.SetName(doubleb+'21'+y+"Effplot_QCD")
-        h21Q.SetTitle(doubleb+'21'+y+"Effplot-QCD"";m_reduced;Efficiency")
-
-        # h11tt.SetStatisticOption(ROOT.TEfficiency.kFCP)
-        # h11tt.SetName(doubleb+"11"+y+"Effplot-ttbar")
-        # h11tt.SetTitle(doubleb+"11"+y+"Effplot-ttbar"";m_reduced;Efficiency")
-
-        # h21tt.SetStatisticOption(ROOT.TEfficiency.kFCP)
-        # h21tt.SetName(doubleb+'21'+y+"Effplot-ttbar")
-        # h21tt.SetTitle(doubleb+'21'+y+"Effplot-ttbar"";m_reduced;Efficiency")
-
-        #### 2D TEfficiencies
-
-        h11D2D.SetStatisticOption(ROOT.TEfficiency.kFCP)
-        h11D2D.SetConfidenceLevel(0.68)
-        h11D2D.SetName(doubleb+"11"+y+"Effplot_Data_2D")
-        h11D2D.SetTitle(doubleb+"11"+y+"Effplot-Data-2D;m_h;m_reduced;Efficiency")
-
-        h21D2D.SetStatisticOption(ROOT.TEfficiency.kFCP)
-        h21D2D.SetConfidenceLevel(0.68)
-        h21D2D.SetName(doubleb+'21'+y+"Effplot_Data_2D")
-        h21D2D.SetTitle(doubleb+'21'+y+"Effplot-Data-2D;m_h;m_reduced;Efficiency")
-
-        h11Q2D.SetStatisticOption(ROOT.TEfficiency.kFCP)
-        h11Q2D.SetConfidenceLevel(0.68)
-        h11Q2D.SetName(doubleb+"11"+y+"Effplot_QCD_2D")
-        h11Q2D.SetTitle(doubleb+"11"+y+"Effplot-QCD-2D;m_h;m_reduced;Efficiency")
-
-        h21Q2D.SetStatisticOption(ROOT.TEfficiency.kFCP)
-        h21Q2D.SetConfidenceLevel(0.68)
-        h21Q2D.SetName(doubleb+'21'+y+"Effplot_QCD_2D")
-        h21Q2D.SetTitle(doubleb+'21'+y+"Effplot-QCD-2D;m_h;m_reduced;Efficiency")
-
-
-
-
-        ratio11 = hh11.Clone(doubleb+'ratio11'+y)
-        ratio11.SetTitle(doubleb+'ratio11'+y)
-        for b in range(1,hh11.GetNbinsX()+1):
-            ratio11.SetBinContent(b,h11D.GetEfficiency(b)/h11Q.GetEfficiency(b))
-            ratio11.SetBinError(b,max([h11D.GetEfficiencyErrorUp(b),h11Q.GetEfficiencyErrorUp(b),h11D.GetEfficiencyErrorLow(b),h11Q.GetEfficiencyErrorLow(b)]))
-
-        # ratio11TT = hh11.Clone(doubleb+'ratio11ttbar'+y)
-        # ratio11TT.SetTitle(doubleb+'ratio11ttbar'+y)
-        # for b in range(1,hh11.GetNbinsX()+1):
-        #     ratio11TT.SetBinContent(b,h11D.GetEfficiency(b)/h11tt.GetEfficiency(b))
-        #     ratio11TT.SetBinError(b,max([h11D.GetEfficiencyErrorUp(b),h11tt.GetEfficiencyErrorUp(b),h11D.GetEfficiencyErrorLow(b),h11tt.GetEfficiencyErrorLow(b)]))
-
-        # ratioQCDttbar11 = ratio11TT.Clone(doubleb+'ratio11QCDtoTTbar'+y)
-        # ratioQCDttbar11.SetTitle(doubleb+'ratio11QCDtoTTbar'+y)
-        # ratioQCDttbar11.Add(ratio11,-1)
-        # ratioQCDttbar11.Divide(ratio11,)
-
-        ratio21 = hh21.Clone(doubleb+'ratio21'+y)
-        ratio21.SetTitle(doubleb+'ratio21'+y)
-        for b in range(1,hh21.GetNbinsX()+1):
-            ratio21.SetBinContent(b,h21D.GetEfficiency(b)/h21Q.GetEfficiency(b))
-            ratio21.SetBinError(b,max([h21D.GetEfficiencyErrorUp(b),h21Q.GetEfficiencyErrorUp(b),h21D.GetEfficiencyErrorLow(b),h21Q.GetEfficiencyErrorLow(b)]))
-
-        # ratio21TT = hh21.Clone(doubleb+'ratio21ttbar'+y)
-        # ratio21TT.SetTitle(doubleb+'ratio21ttbar'+y)
-        # for b in range(1,hh21.GetNbinsX()+1):
-        #     ratio21TT.SetBinContent(b,h21D.GetEfficiency(b)/h21tt.GetEfficiency(b))
-        #     ratio21TT.SetBinError(b,max([h21D.GetEfficiencyErrorUp(b),h21tt.GetEfficiencyErrorUp(b),h21D.GetEfficiencyErrorLow(b),h21tt.GetEfficiencyErrorLow(b)]))
-
-        # ratioQCDttbar21 = ratio21TT.Clone(doubleb+'ratio21QCDtoTTbar'+y)
-        # ratioQCDttbar21.SetTitle(doubleb+'ratio21QCDtoTTbar'+y)
-        # ratioQCDttbar21.Add(ratio21,-1)
-        # ratioQCDttbar21.Divide(ratio21)
-
-
-        #### Now make for 2D trigger corrections.
-
-        ratio112D = hh112D.Clone(doubleb+'ratio112D'+y)
-        ratio112D.SetTitle(doubleb+'ratio112D'+y)
-        for xb in range(1,hh112D.GetNbinsX()+1):
-            for yb in range(1,hh112D.GetNbinsY()+1):
-                b = hh112D.GetBin(xb,yb)
-                ratio112D.SetBinContent(b,h11D2D.GetEfficiency(b)/h11Q2D.GetEfficiency(b))
-                ratio112D.SetBinError(b,max([h11D2D.GetEfficiencyErrorUp(b),h11Q2D.GetEfficiencyErrorUp(b),h11D2D.GetEfficiencyErrorLow(b),h11Q2D.GetEfficiencyErrorLow(b)]))
-        
-        ratio212D = hh212D.Clone(doubleb+'ratio212D'+y)
-        ratio212D.SetTitle(doubleb+'ratio212D'+y)
-        for xb in range(1,hh212D.GetNbinsX()+1):
-            for yb in range(1,hh212D.GetNbinsX()+1):
-                b = hh212D.GetBin(xb,yb)
-                ratio212D.SetBinContent(b,h21D2D.GetEfficiency(b)/h21Q2D.GetEfficiency(b))
-                ratio212D.SetBinError(b,max([h21D2D.GetEfficiencyErrorUp(b),h21Q2D.GetEfficiencyErrorUp(b),h21D2D.GetEfficiencyErrorLow(b),h21Q2D.GetEfficiencyErrorLow(b)]))
-
+        eff_qcd21.SetName(doubleb+'21'+y+"Effplot_QCD_2D")
+        eff_qcd21.SetTitle(doubleb+'21'+y+"Efficiency-QCD-2D;m_h;m_reduced;Efficiency")
 
         outfile.cd()
-        # h11.Write()
-        # h21.Write()
-        ratio11.Write()
-        ratio21.Write()
 
-        # ratio11TT.Write()
-        # ratio21TT.Write()
+        h.Write()
+        hup.Write()
+        hdown.Write()
 
-        # ratioQCDttbar11.Write()
-        # ratioQCDttbar21.Write()
+        h21.Write()
+        hup21.Write()
+        hdown21.Write()
 
-        h11D.Write()
-        hh11.Write()
-        h21D.Write()
-        hh21.Write()
+        eff_data.Write()
+        eff_qcd.Write()
 
-        h11Q.Write()
-        hh11Q.Write()
-        h21Q.Write()
-        hh21Q.Write()
-
-        # h11tt.Write()
-        # hh11tt.Write()
-        # h21tt.Write()
-        # hh21tt.Write()
-
-        hh112D.Write()
-        hh212D.Write()
-        hh11Q2D.Write()
-        hh21Q2D.Write()
-        # hh11tt2D.Write()
-        # hh21tt2D.Write()
-
-        h11D2D.Write()
-        h21D2D.Write()
-        h11Q2D.Write()
-        h21Q2D.Write()
-
-        ratio112D.Write()
-        ratio212D.Write()
+        eff_data21.Write()
+        eff_qcd21.Write()
 
 outfile.Close()
