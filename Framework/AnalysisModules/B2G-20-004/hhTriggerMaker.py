@@ -70,12 +70,14 @@ for y in ['16','17','18']:
 
         fdata = ROOT.TFile.Open('HHtrigger'+y+'_data_'+doubleb+'.root')
         fqcd = ROOT.TFile.Open('HHtrigger'+y+'_QCD_'+doubleb+'.root')
-        # infileTT = ROOT.TFile.Open('HHtrigger'+y+'_ttbar_'+doubleb+'.root')
+        infileTT = ROOT.TFile.Open('HHtrigger'+y+'_ttbar_'+doubleb+'.root')
 
         hdata_num = fdata.Get('hnum2D')
         hdata_den = fdata.Get('hden2D')
         hqcd_num = fqcd.Get('hnum2D')
         hqcd_den = fqcd.Get('hden2D')
+        httbar_num = fqcd.Get('hnum2D')
+        httbar_den = fqcd.Get('hden2D')
 
         hdata_num21 = fdata.Get('hnum212D')
         hdata_den21 = fdata.Get('hden212D')
@@ -84,9 +86,12 @@ for y in ['16','17','18']:
 
         eff_data = ROOT.TEfficiency(hdata_num,hdata_den)
         eff_qcd = ROOT.TEfficiency(hqcd_num,hqcd_den)
+        eff_ttbar = ROOT.TEfficiency(httbar_num,httbar_den)
                 
         eff_data.SetStatisticOption(ROOT.TEfficiency.kFCP)
         eff_qcd.SetStatisticOption(ROOT.TEfficiency.kFCP)
+        eff_ttbar.SetStatisticOption(ROOT.TEfficiency.kFCP)
+
 
         eff_data21 = ROOT.TEfficiency(hdata_num21,hdata_den21)
         eff_qcd21 = ROOT.TEfficiency(hqcd_num21,hqcd_den21)
@@ -109,6 +114,9 @@ for y in ['16','17','18']:
         eff_qcd21.SetName(doubleb+'21'+y+"Effplot_QCD_2D")
         eff_qcd21.SetTitle(doubleb+'21'+y+"Efficiency-QCD-2D;m_h;m_reduced;Efficiency")
 
+        eff_ttbar.SetName(doubleb+"11"+y+"Effplot_ttbar_2D")
+        eff_ttbar.SetTitle(doubleb+"11"+y+"Efficiency-ttbar-2D;m_h;m_reduced;Efficiency")
+
         outfile.cd()
 
         h.Write()
@@ -121,8 +129,26 @@ for y in ['16','17','18']:
 
         eff_data.Write()
         eff_qcd.Write()
+        eff_ttbar.Write()
 
         eff_data21.Write()
         eff_qcd21.Write()
+
+        c = ROOT.TCanvas('c','c',1200,700)
+        c.Divide(3,2)
+        c.cd(1)
+        eff_data.Draw('lego')
+        c.cd(2)
+        eff_qcd.Draw('lego')
+        # c.cd(3)
+        # eff_ttbar.Draw('lego')
+        c.cd(4)
+        h.Draw('colz')
+        c.cd(5)
+        hup.Draw('colz')
+        c.cd(6)
+        hdown.Draw('colz')
+
+        c.SaveAs('20'+y+'triggerMaps.png')
 
 outfile.Close()
