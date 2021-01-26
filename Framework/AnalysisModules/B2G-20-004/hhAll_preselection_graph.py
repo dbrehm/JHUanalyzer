@@ -885,6 +885,7 @@ kinematicCuts21.Add("cut_mreduced21","mreduced21 > 750.")
 # kinematicCuts21.Add("topDeltaR","topDeltaR > 1.0")
 
 # Apply all groups in list order to the base RDF loaded in during analyzer() initialization
+
 slimandskim = a.Apply([triggerGroup,slim_skim,filters])
 setup = slimandskim.Apply([newcolumns,bbColumn,mbbColumn,mred21Column,selectionColumns,correctionColumns,correctionColumns11,selectionColumns21,correctionColumns21,plotsColumn])
 if not a.isData:
@@ -975,8 +976,8 @@ sigEffpt0TT = preselected.DataFrame.Histo1D(("sigEffpt0TT","sigEffpt0TT",50 ,150
 sigEffpt0LLHbb = SRLL.DataFrame.Histo1D(("sigEffpt0LLHbb","sigEffpt0LLHbb",50 ,150 ,1500),"pt0")
 sigEffpt0TTHbb = SRTT.DataFrame.Histo1D(("sigEffpt0TTHbb","sigEffpt0TTHbb",50 ,150 ,1500),"pt0")
 
-sigEffpt0LLGen = a.DataFrame.Histo1D(("sigEffpt0LLGen","sigEffpt0LLGen",50 ,150 ,1500),pt0)
-sigEffpt0TTGen = a.DataFrame.Histo1D(("sigEffpt0TTGen","sigEffpt0TTGen",50 ,150 ,1500),pt0)
+sigEffpt0LLGen = a.BaseNode.DataFrame.Define("temp",pt0).Histo1D(("sigEffpt0LLGen","sigEffpt0LLGen",50 ,150 ,1500),"temp")
+sigEffpt0TTGen = a.BaseNode.DataFrame.Define("temp",pt0).Histo1D(("sigEffpt0TTGen","sigEffpt0TTGen",50 ,150 ,1500),"temp")
 
 if not a.isData:
     hSRTT11 = SRTT.DataFrame.Histo2D(("SRTT_11","SRTT_11",18 ,45 ,225 ,28 ,700 ,3500),'mh','mreduced',"finalweightTight")
