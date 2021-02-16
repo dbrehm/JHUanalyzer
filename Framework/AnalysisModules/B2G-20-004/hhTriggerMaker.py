@@ -27,8 +27,8 @@ def DivEff(eff1,eff2,year,reg):
                 div_err_down = 0
             else:
                 div = eff1.GetEfficiency(ibin)/eff2.GetEfficiency(ibin)
-                div_err_up = div*math.sqrt(eff1.GetEfficiencyErrorUp(ibin)/eff1.GetEfficiency(ibin)+eff2.GetEfficiencyErrorUp(ibin)/eff2.GetEfficiency(ibin))
-                div_err_down = div*math.sqrt(eff1.GetEfficiencyErrorLow(ibin)/eff1.GetEfficiency(ibin)+eff2.GetEfficiencyErrorLow(ibin)/eff2.GetEfficiency(ibin))
+                div_err_up = div*math.sqrt(pow(eff1.GetEfficiencyErrorUp(ibin)/eff1.GetEfficiency(ibin),2)+pow(eff2.GetEfficiencyErrorUp(ibin)/eff2.GetEfficiency(ibin),2))
+                div_err_down = div*math.sqrt(pow(eff1.GetEfficiencyErrorLow(ibin)/eff1.GetEfficiency(ibin),2)+pow(eff2.GetEfficiencyErrorLow(ibin)/eff2.GetEfficiency(ibin),2))
 
             h.SetBinContent(ibin,div)
             hup.SetBinContent(ibin,div+div_err_up)

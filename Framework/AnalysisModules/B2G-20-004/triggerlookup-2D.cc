@@ -16,10 +16,10 @@ namespace analyzer {
         if (vary < 1500){
             int bin0 = TRPnom->FindBin(varx,vary);
             Weight = TRPnom->GetBinContent(bin0);
-            double deltaTriggerEff = 0.1*(1.0-Weight);
+            // double deltaTriggerEff = 0.1*(1.0-Weight);
             Weightup = TRPup->GetBinContent(bin0);
-            // Weightdown = TRPdown->GetBinContent(bin0);
-            Weightdown = std::min(TRPdown->GetBinContent(bin0),deltaTriggerEff);
+            Weightdown = TRPdown->GetBinContent(bin0);
+            // Weightdown = std::min(TRPdown->GetBinContent(bin0),deltaTriggerEff);
         }
         
         // cout << "Nominal is : " << Weight << " error up is: " << Weightup << " error down is: "<< Weightdown << " m_h is: " << varx << " m_red is: " << vary << " " << endl;
