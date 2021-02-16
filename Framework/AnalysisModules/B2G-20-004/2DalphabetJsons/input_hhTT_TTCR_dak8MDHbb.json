@@ -5,19 +5,19 @@
     },
 
     "OPTIONS": {
-        "name":"HHLL",
+        "name":"HHTT_tt",
         "tag":"dataHH",
         "plotUncerts":true,
-        "blindedFit":true,
+        "blindedFit":false,
         "blindedPlots":true,
         "fitGuesses":false,
         "prerun":false,
         "plotPrefitSigInFitB":true,
         "year":1,
         "rpfRatio":{
-            "FILE": "path/smooth_QCD_LL_11.root",
-            "HISTPASS": "out_pass_7_4_LL_11_Run2",
-            "HISTFAIL": "out_fail_7_4_LL_11_Run2",
+            "FILE": "path/smooth_QCD_tt_TT.root",
+            "HISTPASS": "out_pass_7_4_tt_TT_Run2",
+            "HISTFAIL": "out_fail_7_4_tt_TT_Run2",
             "SMOOTH":false,
             "SYSTEMATICS":["KDEbandwidth"],
             "SCALE": 1.0
@@ -28,17 +28,17 @@
         "HELP": "FILE is both the file path relative to the running directory. SYSTEMATICS is a list with all applicable systematic uncertainties listed with names that match those defined in SYSTEMATC. CODE can be 0 (signal), 1 (data), 2 (unchanged MC), 3 (MC to be renormalized)",
         "data_obs": {
             "FILE": "path/HHpreselection_data_deepTagMD_HbbvsQCD.root",
-            "HISTPASS": "SRLL_11",
-            "HISTFAIL": "ATLL_11",
+            "HISTPASS": "SRTT_11_ttbar",
+            "HISTFAIL": "ATTT_11_ttbar",
             "SYSTEMATICS":[],
             "CODE": 1
         },
         "18_ttbar_smoothed_1_2": {
             "TITLE":"t#bar{t}",
             "FILE":"path/HHpreselection18_ttbar_smoothed_1_2_deepTagMD_HbbvsQCD.root",
-            "HISTPASS":"SRLL_11",
-            "HISTFAIL":"ATLL_11",
-            "SYSTEMATICS":["lumi18","ttbar_xsec","TptAlpha","TptBeta","Trig18","Pileup18","dbSF18ttbar","ttbar_norm_18","jes18","jms18","jer18","jmr18"],
+            "HISTPASS":"SRTT_11_ttbar",
+            "HISTFAIL":"ATTT_11_ttbar",
+            "SYSTEMATICS":["lumi18","ttbar_xsec","TptAlpha","TptBeta","pdf18","Trig18","Pileup18","dbSF18ttbar","ttbar_norm_18","jes18","jms18","jer18","jmr18"],
             "COLOR": 2,
             "CODE": 2,
             "SCALE": 1.0
@@ -46,17 +46,17 @@
         "18_ttbar-semilep_smoothed_1_2": {
             "TITLE":"t#bar{t}-semilep",
             "FILE":"path/HHpreselection18_ttbar-semilep_smoothed_1_2_deepTagMD_HbbvsQCD.root",
-            "HISTPASS":"SRLL_11",
-            "HISTFAIL":"ATLL_11",
-            "SYSTEMATICS":["lumi18","ttbar_xsec","TptAlpha","TptBeta","Trig18","Pileup18","dbSF18ttbar","ttbar_norm_18","jes18","jms18","jer18","jmr18"],
+            "HISTPASS":"SRTT_11_ttbar",
+            "HISTFAIL":"ATTT_11_ttbar",
+            "SYSTEMATICS":["lumi18","ttbar_xsec","TptAlpha","TptBeta","pdf18","Trig18","Pileup18","dbSF18ttbar","ttbar_norm_18","jes18","jms18","jer18","jmr18"],
             "COLOR": 2,
             "CODE": 2,
             "SCALE": 1.0
         },
         "18_RadNar-1500": {
             "FILE": "path/HHpreselection18_RadNar-1500_deepTagMD_HbbvsQCD.root",
-            "HISTPASS": "SRLL_11",
-            "HISTFAIL": "ATLL_11",
+            "HISTPASS": "SRTT_11_ttbar",
+            "HISTFAIL": "ATTT_11_ttbar",
             "SYSTEMATICS":["lumi18","pdf18","Pileup18","Trig18","dbSF18","jes18","jms18","jer18","jmr18"],
             "CODE": 0,
             "SCALE": 1.0
@@ -64,9 +64,9 @@
         "17_ttbar_smoothed_1_2": {
             "TITLE":"t#bar{t}",
             "FILE":"path/HHpreselection17_ttbar_smoothed_1_2_deepTagMD_HbbvsQCD.root",
-            "HISTPASS":"SRLL_11",
-            "HISTFAIL":"ATLL_11",
-            "SYSTEMATICS":["lumi17","ttbar_xsec","TptAlpha","TptBeta","Trig17","Pileup17","dbSF17ttbar","ttbar_norm_17","jes17","jms17","jer17","jmr17","Prefire17"],
+            "HISTPASS":"SRTT_11_ttbar",
+            "HISTFAIL":"ATTT_11_ttbar",
+            "SYSTEMATICS":["lumi17","ttbar_xsec","TptAlpha","TptBeta","pdf17","Trig17","Pileup17","dbSF17ttbar","ttbar_norm_17","jes17","jms17","jer17","jmr17","Prefire17"],
             "COLOR": 2,
             "CODE": 2,
             "SCALE": 1.0
@@ -74,17 +74,17 @@
         "17_ttbar-semilep_smoothed_1_2": {
             "TITLE":"t#bar{t}-semilep",
             "FILE":"path/HHpreselection17_ttbar-semilep_smoothed_1_2_deepTagMD_HbbvsQCD.root",
-            "HISTPASS":"SRLL_11",
-            "HISTFAIL":"ATLL_11",
-            "SYSTEMATICS":["lumi17","ttbar_xsec","TptAlpha","TptBeta","Trig17","Pileup17","dbSF17ttbar","ttbar_norm_17","jes17","jms17","jer17","jmr17","Prefire17"],
+            "HISTPASS":"SRTT_11_ttbar",
+            "HISTFAIL":"ATTT_11_ttbar",
+            "SYSTEMATICS":["lumi17","ttbar_xsec","TptAlpha","TptBeta","pdf17","Trig17","Pileup17","dbSF17ttbar","ttbar_norm_17","jes17","jms17","jer17","jmr17","Prefire17"],
             "COLOR": 2,
             "CODE": 2,
             "SCALE": 1.0
         },
         "17_RadNar-1500": {
             "FILE": "path/HHpreselection17_RadNar-1500_deepTagMD_HbbvsQCD.root",
-            "HISTPASS": "SRLL_11",
-            "HISTFAIL": "ATLL_11",
+            "HISTPASS": "SRTT_11_ttbar",
+            "HISTFAIL": "ATTT_11_ttbar",
             "SYSTEMATICS":["lumi17","pdf17","Pileup17","Trig17","dbSF17","jes17","jms17","jer17","jmr17","Prefire17"],
             "CODE": 0,
             "SCALE": 1.0
@@ -92,17 +92,17 @@
         "16_ttbar_smoothed_1_2": {
             "TITLE":"t#bar{t}",
             "FILE":"path/HHpreselection16_ttbar_smoothed_1_2_deepTagMD_HbbvsQCD.root",
-            "HISTPASS":"SRLL_11",
-            "HISTFAIL":"ATLL_11",
-            "SYSTEMATICS":["lumi16","ttbar_xsec","TptAlpha","TptBeta","Pileup16","Trig16","dbSF16ttbar","ttbar_norm_16","jes16","jms16","jer16","jmr16","Prefire16"],
+            "HISTPASS":"SRTT_11_ttbar",
+            "HISTFAIL":"ATTT_11_ttbar",
+            "SYSTEMATICS":["lumi16","ttbar_xsec","TptAlpha","TptBeta","Pileup16","Trig16","pdf16","dbSF16ttbar","ttbar_norm_16","jes16","jms16","jer16","jmr16","Prefire16"],
             "COLOR": 2,
             "CODE": 2,
             "SCALE": 1.0
         },
         "16_RadNar-1500": {
             "FILE": "path/HHpreselection16_RadNar-1500_deepTagMD_HbbvsQCD.root",
-            "HISTPASS": "SRLL_11",
-            "HISTFAIL": "ATLL_11",
+            "HISTPASS": "SRTT_11_ttbar",
+            "HISTFAIL": "ATTT_11_ttbar",
             "SYSTEMATICS":["lumi16","Pileup16","pdf16","Trig16","dbSF16","jes16","jms16","jer16","jmr16","Prefire16"],
             "CODE": 0,
             "SCALE": 1.0
@@ -121,50 +121,50 @@
         },
         "TptAlpha": {
             "CODE": 2,
-            "HISTPASS_UP": "SRLL_11_topptAlphaUp",
-            "HISTFAIL_UP": "ATLL_11_topptAlphaUp",
-            "HISTPASS_DOWN": "SRLL_11_topptAlphaDown",
-            "HISTFAIL_DOWN": "ATLL_11_topptAlphaDown",
+            "HISTPASS_UP": "SRTT_11_ttbar_topptAlphaUp",
+            "HISTFAIL_UP": "ATTT_11_ttbar_topptAlphaUp",
+            "HISTPASS_DOWN": "SRTT_11_ttbar_topptAlphaDown",
+            "HISTFAIL_DOWN": "ATTT_11_ttbar_topptAlphaDown",
             "SCALE": 1.0
         },
         "TptBeta": {
             "CODE": 2,
-            "HISTPASS_UP": "SRLL_11_topptBetaUp",
-            "HISTFAIL_UP": "ATLL_11_topptBetaUp",
-            "HISTPASS_DOWN": "SRLL_11_topptBetaDown",
-            "HISTFAIL_DOWN": "ATLL_11_topptBetaDown",
+            "HISTPASS_UP": "SRTT_11_ttbar_topptBetaUp",
+            "HISTFAIL_UP": "ATTT_11_ttbar_topptBetaUp",
+            "HISTPASS_DOWN": "SRTT_11_ttbar_topptBetaDown",
+            "HISTFAIL_DOWN": "ATTT_11_ttbar_topptBetaDown",
             "SCALE": 1.0
         },
         "ttbar_norm_18": {
             "CODE": 2,
-            "HISTPASS_UP": "SRLL_11_ttbarNormUp",
-            "HISTFAIL_UP": "ATLL_11_ttbarNormUp",
-            "HISTPASS_DOWN": "SRLL_11_ttbarNormDown",
-            "HISTFAIL_DOWN": "ATLL_11_ttbarNormDown",
+            "HISTPASS_UP": "SRTT_11_ttbar_ttbarNormUp",
+            "HISTFAIL_UP": "ATTT_11_ttbar_ttbarNormUp",
+            "HISTPASS_DOWN": "SRTT_11_ttbar_ttbarNormDown",
+            "HISTFAIL_DOWN": "ATTT_11_ttbarNormDown",
             "SCALE": 1.0
         },
         "ttbar_norm_17": {
             "CODE": 2,
-            "HISTPASS_UP": "SRLL_11_ttbarNormUp",
-            "HISTFAIL_UP": "ATLL_11_ttbarNormUp",
-            "HISTPASS_DOWN": "SRLL_11_ttbarNormDown",
-            "HISTFAIL_DOWN": "ATLL_11_ttbarNormDown",
+            "HISTPASS_UP": "SRTT_11_ttbar_ttbarNormUp",
+            "HISTFAIL_UP": "ATTT_11_ttbar_ttbarNormUp",
+            "HISTPASS_DOWN": "SRTT_11_ttbar_ttbarNormDown",
+            "HISTFAIL_DOWN": "ATTT_11_ttbar_ttbarNormDown",
             "SCALE": 1.0
         },
         "ttbar_norm_16": {
             "CODE": 2,
-            "HISTPASS_UP": "SRLL_11_ttbarNormUp",
-            "HISTFAIL_UP": "ATLL_11_ttbarNormUp",
-            "HISTPASS_DOWN": "SRLL_11_ttbarNormDown",
-            "HISTFAIL_DOWN": "ATLL_11_ttbarNormDown",
+            "HISTPASS_UP": "SRTT_11_ttbar_ttbarNormUp",
+            "HISTFAIL_UP": "ATTT_11_ttbar_ttbarNormUp",
+            "HISTPASS_DOWN": "SRTT_11_ttbar_ttbarNormDown",
+            "HISTFAIL_DOWN": "ATTT_11_ttbar_ttbarNormDown",
             "SCALE": 1.0
         },
         "Tpt": {
             "CODE": 2,
-            "HISTPASS_UP": "SRLL_11_topptUp",
-            "HISTFAIL_UP": "ATLL_11_topptUp",
-            "HISTPASS_DOWN": "SRLL_11_topptDown",
-            "HISTFAIL_DOWN": "ATLL_11_topptDown",
+            "HISTPASS_UP": "SRTT_11_ttbar_topptUp",
+            "HISTFAIL_UP": "ATTT_11_ttbar_topptUp",
+            "HISTPASS_DOWN": "SRTT_11_ttbar_topptDown",
+            "HISTFAIL_DOWN": "ATTT_11_ttbar_topptDown",
             "SCALE": 1.0
         },
         "T21": {
@@ -173,17 +173,17 @@
         },
         "KDEbandwidth":{
             "CODE": 2,
-            "HISTPASS_UP":"out_pass_8_4_LL_11_Run2",
-            "HISTFAIL_UP":"out_pass_8_4_LL_11_Run2",
-            "HISTPASS_DOWN":"out_pass_6_4_LL_11_Run2",
-            "HISTFAIL_DOWN":"out_pass_6_4_LL_11_Run2"
+            "HISTPASS_UP":"out_pass_8_4_tt_TT_Run2",
+            "HISTFAIL_UP":"out_pass_8_4_tt_TT_Run2",
+            "HISTPASS_DOWN":"out_pass_6_4_tt_TT_Run2",
+            "HISTFAIL_DOWN":"out_pass_6_4_tt_TT_Run2"
         },
         "pdf18": {
             "CODE": 2,
-            "HISTPASS_UP": "SRLL_11_pdfUp",
-            "HISTFAIL_UP": "ATLL_11_pdfUp",
-            "HISTPASS_DOWN": "SRLL_11_pdfDown",
-            "HISTFAIL_DOWN": "ATLL_11_pdfDown",
+            "HISTPASS_UP": "SRTT_11_ttbar_pdfUp",
+            "HISTFAIL_UP": "ATTT_11_ttbar_pdfUp",
+            "HISTPASS_DOWN": "SRTT_11_ttbar_pdfDown",
+            "HISTFAIL_DOWN": "ATTT_11_ttbar_pdfDown",
             "SCALE": 1.0
         },
         "htag": {
@@ -192,74 +192,74 @@
         },
         "btagSF18":{
             "CODE": 2,
-            "HISTPASS_UP": "SRLL_11_btagsfUp",
-            "HISTFAIL_UP": "ATLL_11_btagsfUp",
-            "HISTPASS_DOWN": "SRLL_11_btagsfDown",
-            "HISTFAIL_DOWN": "ATLL_11_btagsfDown",
+            "HISTPASS_UP": "SRTT_11_ttbar_btagsfUp",
+            "HISTFAIL_UP": "ATTT_11_ttbar_btagsfUp",
+            "HISTPASS_DOWN": "SRTT_11_ttbar_btagsfDown",
+            "HISTFAIL_DOWN": "ATTT_11_ttbar_btagsfDown",
             "SCALE": 1.0
         },
         "Trig18": {
             "CODE": 2,
-            "HISTPASS_UP": "SRLL_11_trigger_up",
-            "HISTFAIL_UP": "ATLL_11_trigger_up",
-            "HISTPASS_DOWN": "SRLL_11_trigger_down",
-            "HISTFAIL_DOWN": "ATLL_11_trigger_down",
+            "HISTPASS_UP": "SRTT_11_ttbar_trigger_up",
+            "HISTFAIL_UP": "ATTT_11_ttbar_trigger_up",
+            "HISTPASS_DOWN": "SRTT_11_ttbar_trigger_down",
+            "HISTFAIL_DOWN": "ATTT_11_ttbar_trigger_down",
             "SCALE": 1.0
         },
         "Pileup18": {
             "CODE": 2,
-            "HISTPASS_UP": "SRLL_11_pileupUp",
-            "HISTFAIL_UP": "ATLL_11_pileupUp",
-            "HISTPASS_DOWN": "SRLL_11_pileupDown",
-            "HISTFAIL_DOWN": "ATLL_11_pileupDown",
+            "HISTPASS_UP": "SRTT_11_ttbar_pileupUp",
+            "HISTFAIL_UP": "ATTT_11_ttbar_pileupUp",
+            "HISTPASS_DOWN": "SRTT_11_ttbar_pileupDown",
+            "HISTFAIL_DOWN": "ATTT_11_ttbar_pileupDown",
             "SCALE": 1.0
         },
         "jer18": {
             "CODE": 3,
             "FILE_UP_*": "path/HHpreselection*_JER_up_deepTagMD_HbbvsQCD.root",
             "FILE_DOWN_*": "path/HHpreselection*_JER_down_deepTagMD_HbbvsQCD.root",
-            "HISTPASS": "SRLL_11",
-            "HISTFAIL": "ATLL_11",
+            "HISTPASS": "SRTT_11_ttbar",
+            "HISTFAIL": "ATTT_11_ttbar",
             "SCALE": 1.0
         },
         "jes18": {
             "CODE": 3,
             "FILE_UP_*": "path/HHpreselection*_JES_up_deepTagMD_HbbvsQCD.root",
             "FILE_DOWN_*": "path/HHpreselection*_JES_down_deepTagMD_HbbvsQCD.root",
-            "HISTPASS": "SRLL_11",
-            "HISTFAIL": "ATLL_11",
+            "HISTPASS": "SRTT_11_ttbar",
+            "HISTFAIL": "ATTT_11_ttbar",
             "SCALE": 1.0
         },
         "jmr18": {
             "CODE": 3,
             "FILE_UP_*": "path/HHpreselection*_JMR_up_deepTagMD_HbbvsQCD.root",
             "FILE_DOWN_*": "path/HHpreselection*_JMR_down_deepTagMD_HbbvsQCD.root",
-            "HISTPASS": "SRLL_11",
-            "HISTFAIL": "ATLL_11",
+            "HISTPASS": "SRTT_11_ttbar",
+            "HISTFAIL": "ATTT_11_ttbar",
             "SCALE": 1.0
         },
         "jms18": {
             "CODE": 3,
             "FILE_UP_*": "path/HHpreselection*_JMS_up_deepTagMD_HbbvsQCD.root",
             "FILE_DOWN_*": "path/HHpreselection*_JMS_down_deepTagMD_HbbvsQCD.root",
-            "HISTPASS": "SRLL_11",
-            "HISTFAIL": "ATLL_11",
+            "HISTPASS": "SRTT_11_ttbar",
+            "HISTFAIL": "ATTT_11_ttbar",
             "SCALE": 1.0
         },
         "dbSF18": {
             "CODE": 2,
-            "HISTPASS_UP": "SRLL_11_dbsf_up",
-            "HISTFAIL_UP": "ATLL_11_dbsf_up",
-            "HISTPASS_DOWN": "SRLL_11_dbsf_down",
-            "HISTFAIL_DOWN": "ATLL_11_dbsf_down",
+            "HISTPASS_UP": "SRTT_11_ttbar_dbsf_up",
+            "HISTFAIL_UP": "ATTT_11_ttbar_dbsf_up",
+            "HISTPASS_DOWN": "SRTT_11_ttbar_dbsf_down",
+            "HISTFAIL_DOWN": "ATTT_11_ttbar_dbsf_down",
             "SCALE": 1.0
         },
         "dbSF18ttbar": {
             "CODE": 2,
-            "HISTPASS_UP": "SRLL_11_dbsf_up",
-            "HISTFAIL_UP": "ATLL_11_dbsf_up",
-            "HISTPASS_DOWN": "SRLL_11_dbsf_down",
-            "HISTFAIL_DOWN": "ATLL_11_dbsf_down",
+            "HISTPASS_UP": "SRTT_11_ttbar_dbsf_up",
+            "HISTFAIL_UP": "ATTT_11_ttbar_dbsf_up",
+            "HISTPASS_DOWN": "SRTT_11_ttbar_dbsf_down",
+            "HISTFAIL_DOWN": "ATTT_11_ttbar_dbsf_down",
             "SCALE": 1.0
         },
         "lumi17": {
@@ -268,90 +268,90 @@
         },
         "pdf17": {
             "CODE": 2,
-            "HISTPASS_UP": "SRLL_11_pdfUp",
-            "HISTFAIL_UP": "ATLL_11_pdfUp",
-            "HISTPASS_DOWN": "SRLL_11_pdfDown",
-            "HISTFAIL_DOWN": "ATLL_11_pdfDown",
+            "HISTPASS_UP": "SRTT_11_ttbar_pdfUp",
+            "HISTFAIL_UP": "ATTT_11_ttbar_pdfUp",
+            "HISTPASS_DOWN": "SRTT_11_ttbar_pdfDown",
+            "HISTFAIL_DOWN": "ATTT_11_ttbar_pdfDown",
             "SCALE": 1.0
         },
         "btagSF17":{
             "CODE": 2,
-            "HISTPASS_UP": "SRLL_11_btagsfUp",
-            "HISTFAIL_UP": "ATLL_11_btagsfUp",
-            "HISTPASS_DOWN": "SRLL_11_btagsfDown",
-            "HISTFAIL_DOWN": "ATLL_11_btagsfDown",
+            "HISTPASS_UP": "SRTT_11_ttbar_btagsfUp",
+            "HISTFAIL_UP": "ATTT_11_ttbar_btagsfUp",
+            "HISTPASS_DOWN": "SRTT_11_ttbar_btagsfDown",
+            "HISTFAIL_DOWN": "ATTT_11_ttbar_btagsfDown",
             "SCALE": 1.0
         },
         "Trig17": {
             "CODE": 2,
-            "HISTPASS_UP": "SRLL_11_trigger_up",
-            "HISTFAIL_UP": "ATLL_11_trigger_up",
-            "HISTPASS_DOWN": "SRLL_11_trigger_down",
-            "HISTFAIL_DOWN": "ATLL_11_trigger_down",
+            "HISTPASS_UP": "SRTT_11_ttbar_trigger_up",
+            "HISTFAIL_UP": "ATTT_11_ttbar_trigger_up",
+            "HISTPASS_DOWN": "SRTT_11_ttbar_trigger_down",
+            "HISTFAIL_DOWN": "ATTT_11_ttbar_trigger_down",
             "SCALE": 1.0
         },
         "Pileup17": {
             "CODE": 2,
-            "HISTPASS_UP": "SRLL_11_pileupUp",
-            "HISTFAIL_UP": "ATLL_11_pileupUp",
-            "HISTPASS_DOWN": "SRLL_11_pileupDown",
-            "HISTFAIL_DOWN": "ATLL_11_pileupDown",
+            "HISTPASS_UP": "SRTT_11_ttbar_pileupUp",
+            "HISTFAIL_UP": "ATTT_11_ttbar_pileupUp",
+            "HISTPASS_DOWN": "SRTT_11_ttbar_pileupDown",
+            "HISTFAIL_DOWN": "ATTT_11_ttbar_pileupDown",
             "SCALE": 1.0
         },
         "Prefire17": {
             "CODE": 2,
-            "HISTPASS_UP": "SRLL_11_prefireUp",
-            "HISTFAIL_UP": "ATLL_11_prefireUp",
-            "HISTPASS_DOWN": "SRLL_11_prefireDown",
-            "HISTFAIL_DOWN": "ATLL_11_prefireDown",
+            "HISTPASS_UP": "SRTT_11_ttbar_prefireUp",
+            "HISTFAIL_UP": "ATTT_11_ttbar_prefireUp",
+            "HISTPASS_DOWN": "SRTT_11_ttbar_prefireDown",
+            "HISTFAIL_DOWN": "ATTT_11_ttbar_prefireDown",
             "SCALE": 1.0
         },
         "jer17": {
             "CODE": 3,
             "FILE_UP_*": "path/HHpreselection*_JER_up_deepTagMD_HbbvsQCD.root",
             "FILE_DOWN_*": "path/HHpreselection*_JER_down_deepTagMD_HbbvsQCD.root",
-            "HISTPASS": "SRLL_11",
-            "HISTFAIL": "ATLL_11",
+            "HISTPASS": "SRTT_11_ttbar",
+            "HISTFAIL": "ATTT_11_ttbar",
             "SCALE": 1.0
         },
         "jes17": {
             "CODE": 3,
             "FILE_UP_*": "path/HHpreselection*_JES_up_deepTagMD_HbbvsQCD.root",
             "FILE_DOWN_*": "path/HHpreselection*_JES_down_deepTagMD_HbbvsQCD.root",
-            "HISTPASS": "SRLL_11",
-            "HISTFAIL": "ATLL_11",
+            "HISTPASS": "SRTT_11_ttbar",
+            "HISTFAIL": "ATTT_11_ttbar",
             "SCALE": 1.0
         },
         "jmr17": {
             "CODE": 3,
             "FILE_UP_*": "path/HHpreselection*_JMR_up_deepTagMD_HbbvsQCD.root",
             "FILE_DOWN_*": "path/HHpreselection*_JMR_down_deepTagMD_HbbvsQCD.root",
-            "HISTPASS": "SRLL_11",
-            "HISTFAIL": "ATLL_11",
+            "HISTPASS": "SRTT_11_ttbar",
+            "HISTFAIL": "ATTT_11_ttbar",
             "SCALE": 1.0
         },
         "jms17": {
             "CODE": 3,
             "FILE_UP_*": "path/HHpreselection*_JMS_up_deepTagMD_HbbvsQCD.root",
             "FILE_DOWN_*": "path/HHpreselection*_JMS_down_deepTagMD_HbbvsQCD.root",
-            "HISTPASS": "SRLL_11",
-            "HISTFAIL": "ATLL_11",
+            "HISTPASS": "SRTT_11_ttbar",
+            "HISTFAIL": "ATTT_11_ttbar",
             "SCALE": 1.0
         },
         "dbSF17": {
             "CODE": 2,
-            "HISTPASS_UP": "SRLL_11_dbsf_up",
-            "HISTFAIL_UP": "ATLL_11_dbsf_up",
-            "HISTPASS_DOWN": "SRLL_11_dbsf_down",
-            "HISTFAIL_DOWN": "ATLL_11_dbsf_down",
+            "HISTPASS_UP": "SRTT_11_ttbar_dbsf_up",
+            "HISTFAIL_UP": "ATTT_11_ttbar_dbsf_up",
+            "HISTPASS_DOWN": "SRTT_11_ttbar_dbsf_down",
+            "HISTFAIL_DOWN": "ATTT_11_ttbar_dbsf_down",
             "SCALE": 1.0
         },
         "dbSF17ttbar": {
             "CODE": 2,
-            "HISTPASS_UP": "SRLL_11_dbsf_up",
-            "HISTFAIL_UP": "ATLL_11_dbsf_up",
-            "HISTPASS_DOWN": "SRLL_11_dbsf_down",
-            "HISTFAIL_DOWN": "ATLL_11_dbsf_down",
+            "HISTPASS_UP": "SRTT_11_ttbar_dbsf_up",
+            "HISTFAIL_UP": "ATTT_11_ttbar_dbsf_up",
+            "HISTPASS_DOWN": "SRTT_11_ttbar_dbsf_down",
+            "HISTFAIL_DOWN": "ATTT_11_ttbar_dbsf_down",
             "SCALE": 1.0
         },
         "lumi16": {
@@ -360,90 +360,90 @@
         },
         "pdf16": {
             "CODE": 2,
-            "HISTPASS_UP": "SRLL_11_pdfUp",
-            "HISTFAIL_UP": "ATLL_11_pdfUp",
-            "HISTPASS_DOWN": "SRLL_11_pdfDown",
-            "HISTFAIL_DOWN": "ATLL_11_pdfDown",
+            "HISTPASS_UP": "SRTT_11_ttbar_pdfUp",
+            "HISTFAIL_UP": "ATTT_11_ttbar_pdfUp",
+            "HISTPASS_DOWN": "SRTT_11_ttbar_pdfDown",
+            "HISTFAIL_DOWN": "ATTT_11_ttbar_pdfDown",
             "SCALE": 1.0
         },
         "btagSF16":{
             "CODE": 2,
-            "HISTPASS_UP": "SRLL_11_btagsfUp",
-            "HISTFAIL_UP": "ATLL_11_btagsfUp",
-            "HISTPASS_DOWN": "SRLL_11_btagsfDown",
-            "HISTFAIL_DOWN": "ATLL_11_btagsfDown",
+            "HISTPASS_UP": "SRTT_11_ttbar_btagsfUp",
+            "HISTFAIL_UP": "ATTT_11_ttbar_btagsfUp",
+            "HISTPASS_DOWN": "SRTT_11_ttbar_btagsfDown",
+            "HISTFAIL_DOWN": "ATTT_11_ttbar_btagsfDown",
             "SCALE": 1.0
         },
         "Trig16": {
             "CODE": 2,
-            "HISTPASS_UP": "SRLL_11_trigger_up",
-            "HISTFAIL_UP": "ATLL_11_trigger_up",
-            "HISTPASS_DOWN": "SRLL_11_trigger_down",
-            "HISTFAIL_DOWN": "ATLL_11_trigger_down",
+            "HISTPASS_UP": "SRTT_11_ttbar_trigger_up",
+            "HISTFAIL_UP": "ATTT_11_ttbar_trigger_up",
+            "HISTPASS_DOWN": "SRTT_11_ttbar_trigger_down",
+            "HISTFAIL_DOWN": "ATTT_11_ttbar_trigger_down",
             "SCALE": 1.0
         },
         "Pileup16": {
             "CODE": 2,
-            "HISTPASS_UP": "SRLL_11_pileupUp",
-            "HISTFAIL_UP": "ATLL_11_pileupUp",
-            "HISTPASS_DOWN": "SRLL_11_pileupDown",
-            "HISTFAIL_DOWN": "ATLL_11_pileupDown",
+            "HISTPASS_UP": "SRTT_11_ttbar_pileupUp",
+            "HISTFAIL_UP": "ATTT_11_ttbar_pileupUp",
+            "HISTPASS_DOWN": "SRTT_11_ttbar_pileupDown",
+            "HISTFAIL_DOWN": "ATTT_11_ttbar_pileupDown",
             "SCALE": 1.0
         },
         "Prefire16": {
             "CODE": 2,
-            "HISTPASS_UP": "SRLL_11_prefireUp",
-            "HISTFAIL_UP": "ATLL_11_prefireUp",
-            "HISTPASS_DOWN": "SRLL_11_prefireDown",
-            "HISTFAIL_DOWN": "ATLL_11_prefireDown",
+            "HISTPASS_UP": "SRTT_11_ttbar_prefireUp",
+            "HISTFAIL_UP": "ATTT_11_ttbar_prefireUp",
+            "HISTPASS_DOWN": "SRTT_11_ttbar_prefireDown",
+            "HISTFAIL_DOWN": "ATTT_11_ttbar_prefireDown",
             "SCALE": 1.0
         },
         "jer16": {
             "CODE": 3,
             "FILE_UP_*": "path/HHpreselection*_JER_up_deepTagMD_HbbvsQCD.root",
             "FILE_DOWN_*": "path/HHpreselection*_JER_down_deepTagMD_HbbvsQCD.root",
-            "HISTPASS": "SRLL_11",
-            "HISTFAIL": "ATLL_11",
+            "HISTPASS": "SRTT_11_ttbar",
+            "HISTFAIL": "ATTT_11_ttbar",
             "SCALE": 1.0
         },
         "jes16": {
             "CODE": 3,
             "FILE_UP_*": "path/HHpreselection*_JES_up_deepTagMD_HbbvsQCD.root",
             "FILE_DOWN_*": "path/HHpreselection*_JES_down_deepTagMD_HbbvsQCD.root",
-            "HISTPASS": "SRLL_11",
-            "HISTFAIL": "ATLL_11",
+            "HISTPASS": "SRTT_11_ttbar",
+            "HISTFAIL": "ATTT_11_ttbar",
             "SCALE": 1.0
         },
         "jmr16": {
             "CODE": 3,
             "FILE_UP_*": "path/HHpreselection*_JMR_up_deepTagMD_HbbvsQCD.root",
             "FILE_DOWN_*": "path/HHpreselection*_JMR_down_deepTagMD_HbbvsQCD.root",
-            "HISTPASS": "SRLL_11",
-            "HISTFAIL": "ATLL_11",
+            "HISTPASS": "SRTT_11_ttbar",
+            "HISTFAIL": "ATTT_11_ttbar",
             "SCALE": 1.0
         },
         "jms16": {
             "CODE": 3,
             "FILE_UP_*": "path/HHpreselection*_JMS_up_deepTagMD_HbbvsQCD.root",
             "FILE_DOWN_*": "path/HHpreselection*_JMS_down_deepTagMD_HbbvsQCD.root",
-            "HISTPASS": "SRLL_11",
-            "HISTFAIL": "ATLL_11",
+            "HISTPASS": "SRTT_11_ttbar",
+            "HISTFAIL": "ATTT_11_ttbar",
             "SCALE": 1.0
         },
         "dbSF16": {
             "CODE": 2,
-            "HISTPASS_UP": "SRLL_11_dbsf_up",
-            "HISTFAIL_UP": "ATLL_11_dbsf_up",
-            "HISTPASS_DOWN": "SRLL_11_dbsf_down",
-            "HISTFAIL_DOWN": "ATLL_11_dbsf_down",
+            "HISTPASS_UP": "SRTT_11_ttbar_dbsf_up",
+            "HISTFAIL_UP": "ATTT_11_ttbar_dbsf_up",
+            "HISTPASS_DOWN": "SRTT_11_ttbar_dbsf_down",
+            "HISTFAIL_DOWN": "ATTT_11_ttbar_dbsf_down",
             "SCALE": 1.0
         },
         "dbSF16ttbar": {
             "CODE": 2,
-            "HISTPASS_UP": "SRLL_11_dbsf_up",
-            "HISTFAIL_UP": "ATLL_11_dbsf_up",
-            "HISTPASS_DOWN": "SRLL_11_dbsf_down",
-            "HISTFAIL_DOWN": "ATLL_11_dbsf_down",
+            "HISTPASS_UP": "SRTT_11_ttbar_dbsf_up",
+            "HISTFAIL_UP": "ATTT_11_ttbar_dbsf_up",
+            "HISTPASS_DOWN": "SRTT_11_ttbar_dbsf_down",
+            "HISTFAIL_DOWN": "ATTT_11_ttbar_dbsf_down",
             "SCALE": 1.0
         }
     },
