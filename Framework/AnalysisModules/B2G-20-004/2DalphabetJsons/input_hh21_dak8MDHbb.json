@@ -1,7 +1,7 @@
 {
     "GLOBAL": {
         "HELP": "The 'global' item can be used to set global variables inside of this json configuration file. This is the only place where you can customize the keys of dictionaries. For example, you could store 'dir': 'path/to/my/files/' and then later use 'dir' instead of writing the same file path multiple times",
-        "path": "/uscms/home/dbrehm/nobackup/CMSSW_11_0_0/src/rootfilesORStartv6QCDSFTTbarSFTTbarNormUpdatedJMRFix2COMBINEDNanoToolsFixFakeDown"
+        "path": "/uscms/home/dbrehm/nobackup/CMSSW_11_0_0/src/rootfilesORFixesv7NoDEta21AK4JM2DTriggerFIXEDBASELINE5GEV"
     },
 
     "OPTIONS": {
@@ -38,7 +38,7 @@
             "FILE":"path/HHpreselection18_ttbar_deepTagMD_HbbvsQCD.root",
             "HISTPASS":"Pass_21",
             "HISTFAIL":"Fail_21",
-            "SYSTEMATICS":["lumi18","ttbar_xsec","TptAlpha","TptBeta","pdf18","Trig18","Pileup18","dbSF18ttbar","btagSF18","ttbar_norm","jes18","jms18","jer18","jmr18"],
+            "SYSTEMATICS":["lumi18","ttbar_xsec","TptAlpha","TptBeta","Trig18","Pileup18","dbSF18ttbar","btagSF18","ttbar_norm_18","jes18","jms18","jer18","jmr18","ak4jes18","ak4jer18"],
             "COLOR": 2,
             "CODE": 2,
             "SCALE": 1.0
@@ -48,7 +48,7 @@
             "FILE":"path/HHpreselection18_ttbar-semilep_deepTagMD_HbbvsQCD.root",
             "HISTPASS":"Pass_21",
             "HISTFAIL":"Fail_21",
-            "SYSTEMATICS":["lumi18","ttbar_xsec","TptAlpha","TptBeta","pdf18","Trig18","Pileup18","dbSF18ttbar","btagSF18","ttbar_norm","jes18","jms18","jer18","jmr18"],
+            "SYSTEMATICS":["lumi18","ttbar_xsec","TptAlpha","TptBeta","Trig18","Pileup18","dbSF18ttbar","btagSF18","ttbar_norm_18","jes18","jms18","jer18","jmr18","ak4jes18","ak4jer18"],
             "COLOR": 2,
             "CODE": 2,
             "SCALE": 1.0
@@ -57,7 +57,7 @@
             "FILE": "path/HHpreselection18_RadNar-1500_deepTagMD_HbbvsQCD.root",
             "HISTPASS": "Pass_21",
             "HISTFAIL": "Fail_21",
-            "SYSTEMATICS":["lumi18","htag","Pileup18","pdf18","Trig18","dbSF18","btagSF18","jes18","jms18","jer18","jmr18"],
+            "SYSTEMATICS":["lumi18","Pileup18","pdf18","Trig18","dbSF18","btagSF18","jes18","jms18","jer18","jmr18","ak4jes18","ak4jer18"],
             "CODE": 0,
             "SCALE": 1.0
         },
@@ -66,7 +66,7 @@
             "FILE":"path/HHpreselection17_ttbar_deepTagMD_HbbvsQCD.root",
             "HISTPASS":"Pass_21",
             "HISTFAIL":"Fail_21",
-            "SYSTEMATICS":["lumi17","ttbar_xsec","TptAlpha","TptBeta","pdf17","Trig17","Pileup17","dbSF17ttbar","btagSF17","ttbar_norm","jes17","jms17","jer17","jmr17"],
+            "SYSTEMATICS":["lumi17","ttbar_xsec","TptAlpha","TptBeta","Trig17","Pileup17","dbSF17ttbar","btagSF17","ttbar_norm_17","jes17","jms17","jer17","jmr17","Prefire17","ak4jes17","ak4jer17"],
             "COLOR": 2,
             "CODE": 2,
             "SCALE": 1.0
@@ -76,7 +76,7 @@
             "FILE":"path/HHpreselection17_ttbar-semilep_deepTagMD_HbbvsQCD.root",
             "HISTPASS":"Pass_21",
             "HISTFAIL":"Fail_21",
-            "SYSTEMATICS":["lumi17","ttbar_xsec","TptAlpha","TptBeta","pdf17","Trig17","Pileup17","dbSF17ttbar","btagSF17","ttbar_norm","jes17","jms17","jer17","jmr17"],
+            "SYSTEMATICS":["lumi17","ttbar_xsec","TptAlpha","TptBeta","Trig17","Pileup17","dbSF17ttbar","btagSF17","ttbar_norm_17","jes17","jms17","jer17","jmr17","Prefire17","ak4jes17","ak4jer17"],
             "COLOR": 2,
             "CODE": 2,
             "SCALE": 1.0
@@ -85,7 +85,7 @@
             "FILE": "path/HHpreselection17_RadNar-1500_deepTagMD_HbbvsQCD.root",
             "HISTPASS": "Pass_21",
             "HISTFAIL": "Fail_21",
-            "SYSTEMATICS":["lumi17","htag","Pileup17","pdf17","Trig17","dbSF17","btagSF17","jes17","jms17","jer17","jmr17"],
+            "SYSTEMATICS":["lumi17","Pileup17","pdf17","Trig17","dbSF17","btagSF17","jes17","jms17","jer17","jmr17","Prefire17","ak4jes17","ak4jer17"],
             "CODE": 0,
             "SCALE": 1.0
         },
@@ -94,7 +94,7 @@
             "FILE":"path/HHpreselection16_ttbar_deepTagMD_HbbvsQCD.root",
             "HISTPASS":"Pass_21",
             "HISTFAIL":"Fail_21",
-            "SYSTEMATICS":["lumi16","ttbar_xsec","TptAlpha","TptBeta","Pileup16","Trig16","pdf16","dbSF16ttbar","btagSF16","ttbar_norm","jes16","jms16","jer16","jmr16"],
+            "SYSTEMATICS":["lumi16","ttbar_xsec","TptAlpha","TptBeta","Pileup16","Trig16","dbSF16ttbar","btagSF16","ttbar_norm_16","jes16","jms16","jer16","jmr16","Prefire16","ak4jes16","ak4jer16"],
             "COLOR": 2,
             "CODE": 2,
             "SCALE": 1.0
@@ -103,7 +103,7 @@
             "FILE": "path/HHpreselection16_RadNar-1500_deepTagMD_HbbvsQCD.root",
             "HISTPASS": "Pass_21",
             "HISTFAIL": "Fail_21",
-            "SYSTEMATICS":["lumi16","htag","Pileup16","pdf16","Trig16","dbSF16","btagSF16","jes16","jms16","jer16","jmr16"],
+            "SYSTEMATICS":["lumi16","Pileup16","pdf16","Trig16","dbSF16","btagSF16","jes16","jms16","jer16","jmr16","Prefire16","ak4jes16","ak4jer16"],
             "CODE": 0,
             "SCALE": 1.0
         }
@@ -127,7 +127,23 @@
             "HISTFAIL_DOWN": "ATTT_21_topptAlphaDown",
             "SCALE": 1.0
         },
-        "ttbar_norm": {
+        "ttbar_norm_18": {
+            "CODE": 2,
+            "HISTPASS_UP": "SRTT_21_ttbarNormUp",
+            "HISTFAIL_UP": "ATTT_21_ttbarNormUp",
+            "HISTPASS_DOWN": "SRTT_21_ttbarNormDown",
+            "HISTFAIL_DOWN": "ATTT_21_ttbarNormDown",
+            "SCALE": 1.0
+        },
+        "ttbar_norm_17": {
+            "CODE": 2,
+            "HISTPASS_UP": "SRTT_21_ttbarNormUp",
+            "HISTFAIL_UP": "ATTT_21_ttbarNormUp",
+            "HISTPASS_DOWN": "SRTT_21_ttbarNormDown",
+            "HISTFAIL_DOWN": "ATTT_21_ttbarNormDown",
+            "SCALE": 1.0
+        },
+        "ttbar_norm_16": {
             "CODE": 2,
             "HISTPASS_UP": "SRTT_21_ttbarNormUp",
             "HISTFAIL_UP": "ATTT_21_ttbarNormUp",
@@ -188,7 +204,7 @@
             "HISTFAIL_UP": "ATTT_21_trigger_up",
             "HISTPASS_DOWN": "SRTT_21_trigger_down",
             "HISTFAIL_DOWN": "ATTT_21_trigger_down",
-            "SCALE": 1.0
+            "SCALE": 0.3
         },
         "Pileup18": {
             "CODE": 2,
@@ -210,6 +226,22 @@
             "CODE": 3,
             "FILE_UP_*": "path/HHpreselection*_JES_up_deepTagMD_HbbvsQCD.root",
             "FILE_DOWN_*": "path/HHpreselection*_JES_down_deepTagMD_HbbvsQCD.root",
+            "HISTPASS": "Pass_21",
+            "HISTFAIL": "Fail_21",
+            "SCALE": 1.0
+        },
+        "ak4jer18": {
+            "CODE": 3,
+            "FILE_UP_*": "path/HHpreselection*_SJER_up_deepTagMD_HbbvsQCD.root",
+            "FILE_DOWN_*": "path/HHpreselection*_SJER_down_deepTagMD_HbbvsQCD.root",
+            "HISTPASS": "Pass_21",
+            "HISTFAIL": "Fail_21",
+            "SCALE": 1.0
+        },
+        "ak4jes18": {
+            "CODE": 3,
+            "FILE_UP_*": "path/HHpreselection*_SJES_up_deepTagMD_HbbvsQCD.root",
+            "FILE_DOWN_*": "path/HHpreselection*_SJES_down_deepTagMD_HbbvsQCD.root",
             "HISTPASS": "Pass_21",
             "HISTFAIL": "Fail_21",
             "SCALE": 1.0
@@ -272,7 +304,7 @@
             "HISTFAIL_UP": "ATTT_21_trigger_up",
             "HISTPASS_DOWN": "SRTT_21_trigger_down",
             "HISTFAIL_DOWN": "ATTT_21_trigger_down",
-            "SCALE": 1.0
+            "SCALE": 0.3
         },
         "Pileup16": {
             "CODE": 2,
@@ -280,6 +312,14 @@
             "HISTFAIL_UP": "ATTT_21_pileupUp",
             "HISTPASS_DOWN": "SRTT_21_pileupDown",
             "HISTFAIL_DOWN": "ATTT_21_pileupDown",
+            "SCALE": 1.0
+        },
+        "Prefire16": {
+            "CODE": 2,
+            "HISTPASS_UP": "SRTT_21_prefireUp",
+            "HISTFAIL_UP": "ATTT_21_prefireUp",
+            "HISTPASS_DOWN": "SRTT_21_prefireDown",
+            "HISTFAIL_DOWN": "ATTT_21_prefireDown",
             "SCALE": 1.0
         },
         "jer16": {
@@ -294,6 +334,22 @@
             "CODE": 3,
             "FILE_UP_*": "path/HHpreselection*_JES_up_deepTagMD_HbbvsQCD.root",
             "FILE_DOWN_*": "path/HHpreselection*_JES_down_deepTagMD_HbbvsQCD.root",
+            "HISTPASS": "Pass_21",
+            "HISTFAIL": "Fail_21",
+            "SCALE": 1.0
+        },
+        "ak4jer16": {
+            "CODE": 3,
+            "FILE_UP_*": "path/HHpreselection*_SJER_up_deepTagMD_HbbvsQCD.root",
+            "FILE_DOWN_*": "path/HHpreselection*_SJER_down_deepTagMD_HbbvsQCD.root",
+            "HISTPASS": "Pass_21",
+            "HISTFAIL": "Fail_21",
+            "SCALE": 1.0
+        },
+        "ak4jes16": {
+            "CODE": 3,
+            "FILE_UP_*": "path/HHpreselection*_SJES_up_deepTagMD_HbbvsQCD.root",
+            "FILE_DOWN_*": "path/HHpreselection*_SJES_down_deepTagMD_HbbvsQCD.root",
             "HISTPASS": "Pass_21",
             "HISTFAIL": "Fail_21",
             "SCALE": 1.0
@@ -356,7 +412,7 @@
             "HISTFAIL_UP": "ATTT_21_trigger_up",
             "HISTPASS_DOWN": "SRTT_21_trigger_down",
             "HISTFAIL_DOWN": "ATTT_21_trigger_down",
-            "SCALE": 1.0
+            "SCALE": 0.3
         },
         "Pileup17": {
             "CODE": 2,
@@ -364,6 +420,14 @@
             "HISTFAIL_UP": "ATTT_21_pileupUp",
             "HISTPASS_DOWN": "SRTT_21_pileupDown",
             "HISTFAIL_DOWN": "ATTT_21_pileupDown",
+            "SCALE": 1.0
+        },
+        "Prefire17": {
+            "CODE": 2,
+            "HISTPASS_UP": "SRTT_21_prefireUp",
+            "HISTFAIL_UP": "ATTT_21_prefireUp",
+            "HISTPASS_DOWN": "SRTT_21_prefireDown",
+            "HISTFAIL_DOWN": "ATTT_21_prefireDown",
             "SCALE": 1.0
         },
         "jer17": {
@@ -378,6 +442,22 @@
             "CODE": 3,
             "FILE_UP_*": "path/HHpreselection*_JES_up_deepTagMD_HbbvsQCD.root",
             "FILE_DOWN_*": "path/HHpreselection*_JES_down_deepTagMD_HbbvsQCD.root",
+            "HISTPASS": "Pass_21",
+            "HISTFAIL": "Fail_21",
+            "SCALE": 1.0
+        },
+        "ak4jer17": {
+            "CODE": 3,
+            "FILE_UP_*": "path/HHpreselection*_SJER_up_deepTagMD_HbbvsQCD.root",
+            "FILE_DOWN_*": "path/HHpreselection*_SJER_down_deepTagMD_HbbvsQCD.root",
+            "HISTPASS": "Pass_21",
+            "HISTFAIL": "Fail_21",
+            "SCALE": 1.0
+        },
+        "ak4jes17": {
+            "CODE": 3,
+            "FILE_UP_*": "path/HHpreselection*_SJES_up_deepTagMD_HbbvsQCD.root",
+            "FILE_DOWN_*": "path/HHpreselection*_SJES_down_deepTagMD_HbbvsQCD.root",
             "HISTPASS": "Pass_21",
             "HISTFAIL": "Fail_21",
             "SCALE": 1.0
@@ -430,7 +510,7 @@
         "Y": {
             "NAME": "resmass",
             "TITLE": "m_{jj} (GeV)",
-            "BINS":[700,800,900,1000,1100,1200,1300,1400,1500,1700]
+            "BINS":[700,800,900,1000,1100,1200,1300,1400,1500,1700,2000]
         }
     },
 
@@ -439,27 +519,27 @@
         "FORM": "((@0*x+@1)*(@2*y*y+@3*y+1))",
         "0": {
             "NOMINAL": 0.5,
-            "MIN":-50.0,
-            "MAX":50.0,
-            "ERROR":0.1
+            "MIN": -50.0,
+            "MAX": 50.0,
+            "ERROR": 0.1
         },
         "1": {
             "NOMINAL": 0.5,
-            "MIN":-50.0,
-            "MAX":50.0,
-            "ERROR":0.1
+            "MIN": -50.0,
+            "MAX": 50.0,
+            "ERROR": 0.1
         },
         "2": {
             "NOMINAL": 0.5,
-            "MIN":-50.0,
-            "MAX":50.0,
-            "ERROR":0.1
+            "MIN": -50.0,
+            "MAX": 50.0,
+            "ERROR": 0.1
         },
         "3": {
             "NOMINAL": 0.5,
-            "MIN":-50.0,
-            "MAX":50.0,
-            "ERROR":0.1
+            "MIN": -50.0,
+            "MAX": 50.0,
+            "ERROR": 0.1
         }
     }
 }
