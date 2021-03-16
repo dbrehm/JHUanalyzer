@@ -87,7 +87,7 @@ if os.path.exists(options.config):
 if not a.isData: 
     # norm = (xsec*lumi)/a.genEventCount
     if 'QCD' in setname and not "btagHbb" in options.doublebtagger: norm = 1.
-    else: norm = (xsec*lumi)/a.genEventCount
+    else: norm = (xsec*lumi)/a.genEventSumw
 else: norm = 1.
 
 ##JECs for actual values.
@@ -459,7 +459,7 @@ if not a.isData:
         prefireStringUp = "*PrefireWeight_Up"
         prefireStringDown = "*PrefireWeight_Down"
 
-    if 'ttbar' in setname:
+    if "ttbar" in setname or "ttbar-semilep" in setname:
         correctionColumns.Add("topptvector","analyzer::PTWLookup(nGenPart, GenPart_pdgId, GenPart_statusFlags, GenPart_pt, GenPart_eta, GenPart_phi, GenPart_mass, lead_vect, sublead_vect)")
         correctionColumns.Add("topptvectorcheck","topptvector[0]")
 
@@ -557,16 +557,16 @@ if not a.isData:
 
     if 'QCD' in setname:
 
-        correctionColumns.Add("finalweightTight","dbSFnomtight*(dbSFnomtight)*puWeight"+topstringnom+prefireStringnom+"")
-        correctionColumns.Add("finalweightLoose","dbSFnomloose*(dbSFnomloose)*puWeight"+topstringnom+prefireStringnom+"")
-        correctionColumns.Add("finalweightTightFailFullSF","dbSFnomtight*(1-dbSFnomtight)*puWeight"+topstringnom+prefireStringnom+"")
-        correctionColumns.Add("finalweightLooseFailFullSF","dbSFnomloose*(1-dbSFnomloose)*puWeight"+topstringnom+prefireStringnom+"")
-        correctionColumns.Add("finalweightTightFailHalfSF","dbSFnomtight*puWeight"+topstringnom+prefireStringnom+"")
-        correctionColumns.Add("finalweightLooseFailHalfSF","dbSFnomloose*puWeight"+topstringnom+prefireStringnom+"")
+        correctionColumns.Add("finalweightTight","genWeight*dbSFnomtight*(dbSFnomtight)*puWeight"+topstringnom+prefireStringnom+"")
+        correctionColumns.Add("finalweightLoose","genWeight*dbSFnomloose*(dbSFnomloose)*puWeight"+topstringnom+prefireStringnom+"")
+        correctionColumns.Add("finalweightTightFailFullSF","genWeight*dbSFnomtight*(1-dbSFnomtight)*puWeight"+topstringnom+prefireStringnom+"")
+        correctionColumns.Add("finalweightLooseFailFullSF","genWeight*dbSFnomloose*(1-dbSFnomloose)*puWeight"+topstringnom+prefireStringnom+"")
+        correctionColumns.Add("finalweightTightFailHalfSF","genWeight*dbSFnomtight*puWeight"+topstringnom+prefireStringnom+"")
+        correctionColumns.Add("finalweightLooseFailHalfSF","genWeight*dbSFnomloose*puWeight"+topstringnom+prefireStringnom+"")
 
-        correctionColumns21.Add("finalweight21","dbSFnomtight*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+prefireStringnom+"")
-        correctionColumns21.Add("finalweight21FailFullSF","(1-dbSFnomtight)*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+prefireStringnom+"")
-        correctionColumns21.Add("finalweight21FailHalfSF","puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+prefireStringnom+"")
+        correctionColumns21.Add("finalweight21","genWeight*dbSFnomtight*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+prefireStringnom+"")
+        correctionColumns21.Add("finalweight21FailFullSF","genWeight*(1-dbSFnomtight)*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+prefireStringnom+"")
+        correctionColumns21.Add("finalweight21FailHalfSF","genWeight*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+prefireStringnom+"")
     else:
         # correctionColumns.Add("finalweightTight","dbSFnomtight*(dbSFnomtight)*puWeight"+topstringnom+"")
         # correctionColumns.Add("finalweightLoose","dbSFnomloose*(dbSFnomloose)*puWeight"+topstringnom+"")
@@ -579,16 +579,16 @@ if not a.isData:
         # correctionColumns21.Add("finalweight21FailFullSF","(1-dbSFnomloose)*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+"")
         # correctionColumns21.Add("finalweight21FailHalfSF","puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+"")
 
-        correctionColumns.Add("finalweightTight","dbSFnomtight*(dbSFnomtight)*triggerTight[0]*puWeight"+topstringnom+prefireStringnom+"")
-        correctionColumns.Add("finalweightLoose","dbSFnomloose*(dbSFnomloose)*triggerLoose[0]*puWeight"+topstringnom+prefireStringnom+"")
-        correctionColumns.Add("finalweightTightFailFullSF","dbSFnomtight*(1-dbSFnomtight)*triggerTight[0]*puWeight"+topstringnom+prefireStringnom+"")
-        correctionColumns.Add("finalweightLooseFailFullSF","dbSFnomloose*(1-dbSFnomloose)*triggerLoose[0]*puWeight"+topstringnom+prefireStringnom+"")
-        correctionColumns.Add("finalweightTightFailHalfSF","dbSFnomtight*triggerTight[0]*puWeight"+topstringnom+prefireStringnom+"")
-        correctionColumns.Add("finalweightLooseFailHalfSF","dbSFnomloose*triggerLoose[0]*puWeight"+topstringnom+prefireStringnom+"")
+        correctionColumns.Add("finalweightTight","genWeight*dbSFnomtight*(dbSFnomtight)*triggerTight[0]*puWeight"+topstringnom+prefireStringnom+"")
+        correctionColumns.Add("finalweightLoose","genWeight*dbSFnomloose*(dbSFnomloose)*triggerLoose[0]*puWeight"+topstringnom+prefireStringnom+"")
+        correctionColumns.Add("finalweightTightFailFullSF","genWeight*dbSFnomtight*(1-dbSFnomtight)*triggerTight[0]*puWeight"+topstringnom+prefireStringnom+"")
+        correctionColumns.Add("finalweightLooseFailFullSF","genWeight*dbSFnomloose*(1-dbSFnomloose)*triggerLoose[0]*puWeight"+topstringnom+prefireStringnom+"")
+        correctionColumns.Add("finalweightTightFailHalfSF","genWeight*dbSFnomtight*triggerTight[0]*puWeight"+topstringnom+prefireStringnom+"")
+        correctionColumns.Add("finalweightLooseFailHalfSF","genWeight*dbSFnomloose*triggerLoose[0]*puWeight"+topstringnom+prefireStringnom+"")
 
-        correctionColumns21.Add("finalweight21","dbSFnomtight*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+prefireStringnom+"")
-        correctionColumns21.Add("finalweight21FailFullSF","(1-dbSFnomtight)*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+prefireStringnom+"")
-        correctionColumns21.Add("finalweight21FailHalfSF","trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+prefireStringnom+"")
+        correctionColumns21.Add("finalweight21","genWeight*dbSFnomtight*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+prefireStringnom+"")
+        correctionColumns21.Add("finalweight21FailFullSF","genWeight*(1-dbSFnomtight)*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+prefireStringnom+"")
+        correctionColumns21.Add("finalweight21FailHalfSF","genWeight*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]"+topstringnom+prefireStringnom+"")
 
 
 ### Here I make the weights for the shape based uncertainties. This cannot be done inline with the Histo1D calls so it is done here.
@@ -596,139 +596,139 @@ if not a.isData:
 if not a.isData:
 
     if options.year == '17' or options.year == '16':
-        correctionColumns11.Add("prefireweight_tight_up",'dbSFnomtight*(dbSFnomtight)*puWeight*triggerTight[0]'+topstringnom+prefireStringUp+'')
-        correctionColumns11.Add("prefireweight_tight_down",'dbSFnomtight*(dbSFnomtight)*puWeight*triggerTight[0]'+topstringnom+prefireStringDown+'')
-        correctionColumns11.Add("prefireweight_loose_up",'dbSFnomloose*(dbSFnomloose)*puWeight*triggerLoose[0]'+topstringnom+prefireStringUp+'')
-        correctionColumns11.Add("prefireweight_loose_down",'dbSFnomloose*(dbSFnomloose)*puWeight*triggerLoose[0]'+topstringnom+prefireStringDown+'')
+        correctionColumns11.Add("prefireweight_tight_up",'genWeight*dbSFnomtight*(dbSFnomtight)*puWeight*triggerTight[0]'+topstringnom+prefireStringUp+'')
+        correctionColumns11.Add("prefireweight_tight_down",'genWeight*dbSFnomtight*(dbSFnomtight)*puWeight*triggerTight[0]'+topstringnom+prefireStringDown+'')
+        correctionColumns11.Add("prefireweight_loose_up",'genWeight*dbSFnomloose*(dbSFnomloose)*puWeight*triggerLoose[0]'+topstringnom+prefireStringUp+'')
+        correctionColumns11.Add("prefireweight_loose_down",'genWeight*dbSFnomloose*(dbSFnomloose)*puWeight*triggerLoose[0]'+topstringnom+prefireStringDown+'')
 
-        correctionColumns11.Add("prefireweight_tight_upFailFullSF",'dbSFnomtight*(1-dbSFnomtight)*puWeight*triggerTight[0]'+topstringnom+prefireStringUp+'')
-        correctionColumns11.Add("prefireweight_tight_downFailFullSF",'dbSFnomtight*(1-dbSFnomtight)*puWeight*triggerTight[0]'+topstringnom+prefireStringDown+'')
-        correctionColumns11.Add("prefireweight_loose_upFailFullSF",'dbSFnomloose*(1-dbSFnomloose)*puWeight*triggerLoose[0]'+topstringnom+prefireStringUp+'')
-        correctionColumns11.Add("prefireweight_loose_downFailFullSF",'dbSFnomloose*(1-dbSFnomloose)*puWeight*triggerLoose[0]'+topstringnom+prefireStringDown+'')
+        correctionColumns11.Add("prefireweight_tight_upFailFullSF",'genWeight*dbSFnomtight*(1-dbSFnomtight)*puWeight*triggerTight[0]'+topstringnom+prefireStringUp+'')
+        correctionColumns11.Add("prefireweight_tight_downFailFullSF",'genWeight*dbSFnomtight*(1-dbSFnomtight)*puWeight*triggerTight[0]'+topstringnom+prefireStringDown+'')
+        correctionColumns11.Add("prefireweight_loose_upFailFullSF",'genWeight*dbSFnomloose*(1-dbSFnomloose)*puWeight*triggerLoose[0]'+topstringnom+prefireStringUp+'')
+        correctionColumns11.Add("prefireweight_loose_downFailFullSF",'genWeight*dbSFnomloose*(1-dbSFnomloose)*puWeight*triggerLoose[0]'+topstringnom+prefireStringDown+'')
 
-        correctionColumns11.Add("prefireweight_tight_upFailHalfSF",'(dbSFnomtight)*puWeight*triggerTight[0]'+topstringnom+prefireStringUp+'')
-        correctionColumns11.Add("prefireweight_tight_downFailHalfSF",'(dbSFnomtight)*puWeight*triggerTight[0]'+topstringnom+prefireStringDown+'')
-        correctionColumns11.Add("prefireweight_loose_upFailHalfSF",'(dbSFnomloose)*puWeight*triggerLoose[0]'+topstringnom+prefireStringUp+'')
-        correctionColumns11.Add("prefireweight_loose_downFailHalfSF",'(dbSFnomloose)*puWeight*triggerLoose[0]'+topstringnom+prefireStringDown+'')
+        correctionColumns11.Add("prefireweight_tight_upFailHalfSF",'genWeight*(dbSFnomtight)*puWeight*triggerTight[0]'+topstringnom+prefireStringUp+'')
+        correctionColumns11.Add("prefireweight_tight_downFailHalfSF",'genWeight*(dbSFnomtight)*puWeight*triggerTight[0]'+topstringnom+prefireStringDown+'')
+        correctionColumns11.Add("prefireweight_loose_upFailHalfSF",'genWeight*(dbSFnomloose)*puWeight*triggerLoose[0]'+topstringnom+prefireStringUp+'')
+        correctionColumns11.Add("prefireweight_loose_downFailHalfSF",'genWeight*(dbSFnomloose)*puWeight*triggerLoose[0]'+topstringnom+prefireStringDown+'')
 
     correctionColumns.Add("Pdfweight", 'analyzer::PDFweight(LHEPdfWeight, "'+options.year+'")')
-    correctionColumns11.Add("Pdfweight_tight_up",'dbSFnomtight*(dbSFnomtight)*Pdfweight[0]*triggerTight[0]*puWeight'+topstringnom+prefireStringnom+'')
-    correctionColumns11.Add("Pdfweight_tight_down",'dbSFnomtight*(dbSFnomtight)*Pdfweight[1]*triggerTight[0]*puWeight'+topstringnom+prefireStringnom+'')
-    correctionColumns11.Add("Pdfweight_loose_up",'dbSFnomloose*(dbSFnomloose)*Pdfweight[0]*triggerLoose[0]*puWeight'+topstringnom+prefireStringnom+'')
-    correctionColumns11.Add("Pdfweight_loose_down",'dbSFnomloose*(dbSFnomloose)*Pdfweight[1]*triggerLoose[0]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("Pdfweight_tight_up",'genWeight*dbSFnomtight*(dbSFnomtight)*Pdfweight[0]*triggerTight[0]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("Pdfweight_tight_down",'genWeight*dbSFnomtight*(dbSFnomtight)*Pdfweight[1]*triggerTight[0]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("Pdfweight_loose_up",'genWeight*dbSFnomloose*(dbSFnomloose)*Pdfweight[0]*triggerLoose[0]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("Pdfweight_loose_down",'genWeight*dbSFnomloose*(dbSFnomloose)*Pdfweight[1]*triggerLoose[0]*puWeight'+topstringnom+prefireStringnom+'')
 
-    correctionColumns11.Add("Pdfweight_tight_upFailFullSF",'dbSFnomtight*(1-dbSFnomtight)*Pdfweight[0]*triggerTight[0]*puWeight'+topstringnom+prefireStringnom+'')
-    correctionColumns11.Add("Pdfweight_tight_downFailFullSF",'dbSFnomtight*(1-dbSFnomtight)*Pdfweight[1]*triggerTight[0]*puWeight'+topstringnom+prefireStringnom+'')
-    correctionColumns11.Add("Pdfweight_loose_upFailFullSF",'dbSFnomloose*(1-dbSFnomloose)*Pdfweight[0]*triggerLoose[0]*puWeight'+topstringnom+prefireStringnom+'')
-    correctionColumns11.Add("Pdfweight_loose_downFailFullSF",'dbSFnomloose*(1-dbSFnomloose)*Pdfweight[1]*triggerLoose[0]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("Pdfweight_tight_upFailFullSF",'genWeight*dbSFnomtight*(1-dbSFnomtight)*Pdfweight[0]*triggerTight[0]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("Pdfweight_tight_downFailFullSF",'genWeight*dbSFnomtight*(1-dbSFnomtight)*Pdfweight[1]*triggerTight[0]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("Pdfweight_loose_upFailFullSF",'genWeight*dbSFnomloose*(1-dbSFnomloose)*Pdfweight[0]*triggerLoose[0]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("Pdfweight_loose_downFailFullSF",'genWeight*dbSFnomloose*(1-dbSFnomloose)*Pdfweight[1]*triggerLoose[0]*puWeight'+topstringnom+prefireStringnom+'')
 
-    correctionColumns11.Add("Pdfweight_tight_upFailHalfSF",'(dbSFnomtight)*Pdfweight[0]*triggerTight[0]*puWeight'+topstringnom+prefireStringnom+'')
-    correctionColumns11.Add("Pdfweight_tight_downFailHalfSF",'(dbSFnomtight)*Pdfweight[1]*triggerTight[0]*puWeight'+topstringnom+prefireStringnom+'')
-    correctionColumns11.Add("Pdfweight_loose_upFailHalfSF",'(dbSFnomloose)*Pdfweight[0]*triggerLoose[0]*puWeight'+topstringnom+prefireStringnom+'')
-    correctionColumns11.Add("Pdfweight_loose_downFailHalfSF",'(dbSFnomloose)*Pdfweight[1]*triggerLoose[0]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("Pdfweight_tight_upFailHalfSF",'genWeight*(dbSFnomtight)*Pdfweight[0]*triggerTight[0]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("Pdfweight_tight_downFailHalfSF",'genWeight*(dbSFnomtight)*Pdfweight[1]*triggerTight[0]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("Pdfweight_loose_upFailHalfSF",'genWeight*(dbSFnomloose)*Pdfweight[0]*triggerLoose[0]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("Pdfweight_loose_downFailHalfSF",'genWeight*(dbSFnomloose)*Pdfweight[1]*triggerLoose[0]*puWeight'+topstringnom+prefireStringnom+'')
 
-    correctionColumns11.Add("pileupweight_tight_up",'dbSFnomtight*(dbSFnomtight)*puWeightUp*triggerTight[0]'+topstringnom+prefireStringnom+'')
-    correctionColumns11.Add("pileupweight_tight_down",'dbSFnomtight*(dbSFnomtight)*puWeightDown*triggerTight[0]'+topstringnom+prefireStringnom+'')
-    correctionColumns11.Add("pileupweight_loose_up",'dbSFnomloose*(dbSFnomloose)*puWeightUp*triggerLoose[0]'+topstringnom+prefireStringnom+'')
-    correctionColumns11.Add("pileupweight_loose_down",'dbSFnomloose*(dbSFnomloose)*puWeightDown*triggerLoose[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("pileupweight_tight_up",'genWeight*dbSFnomtight*(dbSFnomtight)*puWeightUp*triggerTight[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("pileupweight_tight_down",'genWeight*dbSFnomtight*(dbSFnomtight)*puWeightDown*triggerTight[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("pileupweight_loose_up",'genWeight*dbSFnomloose*(dbSFnomloose)*puWeightUp*triggerLoose[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("pileupweight_loose_down",'genWeight*dbSFnomloose*(dbSFnomloose)*puWeightDown*triggerLoose[0]'+topstringnom+prefireStringnom+'')
 
-    correctionColumns11.Add("pileupweight_tight_upFailFullSF",'dbSFnomtight*(1-dbSFnomtight)*puWeightUp*triggerTight[0]'+topstringnom+prefireStringnom+'')
-    correctionColumns11.Add("pileupweight_tight_downFailFullSF",'dbSFnomtight*(1-dbSFnomtight)*puWeightDown*triggerTight[0]'+topstringnom+prefireStringnom+'')
-    correctionColumns11.Add("pileupweight_loose_upFailFullSF",'dbSFnomloose*(1-dbSFnomloose)*puWeightUp*triggerLoose[0]'+topstringnom+prefireStringnom+'')
-    correctionColumns11.Add("pileupweight_loose_downFailFullSF",'dbSFnomloose*(1-dbSFnomloose)*puWeightDown*triggerLoose[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("pileupweight_tight_upFailFullSF",'genWeight*dbSFnomtight*(1-dbSFnomtight)*puWeightUp*triggerTight[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("pileupweight_tight_downFailFullSF",'genWeight*dbSFnomtight*(1-dbSFnomtight)*puWeightDown*triggerTight[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("pileupweight_loose_upFailFullSF",'genWeight*dbSFnomloose*(1-dbSFnomloose)*puWeightUp*triggerLoose[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("pileupweight_loose_downFailFullSF",'genWeight*dbSFnomloose*(1-dbSFnomloose)*puWeightDown*triggerLoose[0]'+topstringnom+prefireStringnom+'')
 
-    correctionColumns11.Add("pileupweight_tight_upFailHalfSF",'(dbSFnomtight)*puWeightUp*triggerTight[0]'+topstringnom+prefireStringnom+'')
-    correctionColumns11.Add("pileupweight_tight_downFailHalfSF",'(dbSFnomtight)*puWeightDown*triggerTight[0]'+topstringnom+prefireStringnom+'')
-    correctionColumns11.Add("pileupweight_loose_upFailHalfSF",'(dbSFnomloose)*puWeightUp*triggerLoose[0]'+topstringnom+prefireStringnom+'')
-    correctionColumns11.Add("pileupweight_loose_downFailHalfSF",'(dbSFnomloose)*puWeightDown*triggerLoose[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("pileupweight_tight_upFailHalfSF",'genWeight*(dbSFnomtight)*puWeightUp*triggerTight[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("pileupweight_tight_downFailHalfSF",'genWeight*(dbSFnomtight)*puWeightDown*triggerTight[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("pileupweight_loose_upFailHalfSF",'genWeight*(dbSFnomloose)*puWeightUp*triggerLoose[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("pileupweight_loose_downFailHalfSF",'genWeight*(dbSFnomloose)*puWeightDown*triggerLoose[0]'+topstringnom+prefireStringnom+'')
 
-    correctionColumns11.Add("triggertight_up",'dbSFnomtight*(dbSFnomtight)*triggerTight[1]*puWeight'+topstringnom+prefireStringnom+'')
-    correctionColumns11.Add("triggertight_down",'dbSFnomtight*(dbSFnomtight)*triggerTight[2]*puWeight'+topstringnom+prefireStringnom+'')
-    correctionColumns11.Add("triggerloose_up",'dbSFnomloose*(dbSFnomloose)*triggerLoose[1]*puWeight'+topstringnom+prefireStringnom+'')
-    correctionColumns11.Add("triggerloose_down",'dbSFnomloose*(dbSFnomloose)*triggerLoose[2]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("triggertight_up",'genWeight*dbSFnomtight*(dbSFnomtight)*triggerTight[1]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("triggertight_down",'genWeight*dbSFnomtight*(dbSFnomtight)*triggerTight[2]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("triggerloose_up",'genWeight*dbSFnomloose*(dbSFnomloose)*triggerLoose[1]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("triggerloose_down",'genWeight*dbSFnomloose*(dbSFnomloose)*triggerLoose[2]*puWeight'+topstringnom+prefireStringnom+'')
 
-    correctionColumns11.Add("triggertight_upFailFullSF",'dbSFnomtight*(1-dbSFnomtight)*triggerTight[1]*puWeight'+topstringnom+prefireStringnom+'')
-    correctionColumns11.Add("triggertight_downFailFullSF",'dbSFnomtight*(1-dbSFnomtight)*triggerTight[2]*puWeight'+topstringnom+prefireStringnom+'')
-    correctionColumns11.Add("triggerloose_upFailFullSF",'dbSFnomloose*(1-dbSFnomloose)*triggerLoose[1]*puWeight'+topstringnom+prefireStringnom+'')
-    correctionColumns11.Add("triggerloose_downFailFullSF",'dbSFnomloose*(1-dbSFnomloose)*triggerLoose[2]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("triggertight_upFailFullSF",'genWeight*dbSFnomtight*(1-dbSFnomtight)*triggerTight[1]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("triggertight_downFailFullSF",'genWeight*dbSFnomtight*(1-dbSFnomtight)*triggerTight[2]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("triggerloose_upFailFullSF",'genWeight*dbSFnomloose*(1-dbSFnomloose)*triggerLoose[1]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("triggerloose_downFailFullSF",'genWeight*dbSFnomloose*(1-dbSFnomloose)*triggerLoose[2]*puWeight'+topstringnom+prefireStringnom+'')
 
-    correctionColumns11.Add("triggertight_upFailHalfSF",'(dbSFnomtight)*triggerTight[1]*puWeight'+topstringnom+prefireStringnom+'')
-    correctionColumns11.Add("triggertight_downFailHalfSF",'(dbSFnomtight)*triggerTight[2]*puWeight'+topstringnom+prefireStringnom+'')
-    correctionColumns11.Add("triggerloose_upFailHalfSF",'(dbSFnomloose)*triggerLoose[1]*puWeight'+topstringnom+prefireStringnom+'')
-    correctionColumns11.Add("triggerloose_downFailHalfSF",'(dbSFnomloose)*triggerLoose[2]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("triggertight_upFailHalfSF",'genWeight*(dbSFnomtight)*triggerTight[1]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("triggertight_downFailHalfSF",'genWeight*(dbSFnomtight)*triggerTight[2]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("triggerloose_upFailHalfSF",'genWeight*(dbSFnomloose)*triggerLoose[1]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("triggerloose_downFailHalfSF",'genWeight*(dbSFnomloose)*triggerLoose[2]*puWeight'+topstringnom+prefireStringnom+'')
 
-    correctionColumns11.Add("dbsftight_up",'dbSFuptight*(dbSFuptight)*triggerTight[0]*puWeight'+topstringnom+prefireStringnom+'')
-    correctionColumns11.Add("dbsftight_down",'dbSFdowntight*(dbSFdowntight)*triggerTight[0]*puWeight'+topstringnom+prefireStringnom+'')
-    correctionColumns11.Add("dbsfloose_up",'dbSFuploose*(dbSFuploose)*triggerLoose[0]*puWeight'+topstringnom+prefireStringnom+'')
-    correctionColumns11.Add("dbsfloose_down",'dbSFdownloose*(dbSFdownloose)*triggerLoose[0]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("dbsftight_up",'genWeight*dbSFuptight*(dbSFuptight)*triggerTight[0]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("dbsftight_down",'genWeight*dbSFdowntight*(dbSFdowntight)*triggerTight[0]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("dbsfloose_up",'genWeight*dbSFuploose*(dbSFuploose)*triggerLoose[0]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("dbsfloose_down",'genWeight*dbSFdownloose*(dbSFdownloose)*triggerLoose[0]*puWeight'+topstringnom+prefireStringnom+'')
 
-    correctionColumns11.Add("dbsftight_upFailFullSF",'dbSFuptight*(1-dbSFuptight)*triggerTight[0]*puWeight'+topstringnom+prefireStringnom+'')
-    correctionColumns11.Add("dbsftight_downFailFullSF",'dbSFdowntight*(1-dbSFdowntight)*triggerTight[0]*puWeight'+topstringnom+prefireStringnom+'')
-    correctionColumns11.Add("dbsfloose_upFailFullSF",'dbSFuploose*(1-dbSFuploose)*triggerLoose[0]*puWeight'+topstringnom+prefireStringnom+'')
-    correctionColumns11.Add("dbsfloose_downFailFullSF",'dbSFdownloose*(1-dbSFdownloose)*triggerLoose[0]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("dbsftight_upFailFullSF",'genWeight*dbSFuptight*(1-dbSFuptight)*triggerTight[0]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("dbsftight_downFailFullSF",'genWeight*dbSFdowntight*(1-dbSFdowntight)*triggerTight[0]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("dbsfloose_upFailFullSF",'genWeight*dbSFuploose*(1-dbSFuploose)*triggerLoose[0]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("dbsfloose_downFailFullSF",'genWeight*dbSFdownloose*(1-dbSFdownloose)*triggerLoose[0]*puWeight'+topstringnom+prefireStringnom+'')
 
-    correctionColumns11.Add("dbsftight_upFailHalfSF",'(dbSFuptight)*triggerTight[0]*puWeight'+topstringnom+prefireStringnom+'')
-    correctionColumns11.Add("dbsftight_downFailHalfSF",'(dbSFdowntight)*triggerTight[0]*puWeight'+topstringnom+prefireStringnom+'')
-    correctionColumns11.Add("dbsfloose_upFailHalfSF",'(dbSFuploose)*triggerLoose[0]*puWeight'+topstringnom+prefireStringnom+'')
-    correctionColumns11.Add("dbsfloose_downFailHalfSF",'(dbSFdownloose)*triggerLoose[0]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("dbsftight_upFailHalfSF",'genWeight*(dbSFuptight)*triggerTight[0]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("dbsftight_downFailHalfSF",'genWeight*(dbSFdowntight)*triggerTight[0]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("dbsfloose_upFailHalfSF",'genWeight*(dbSFuploose)*triggerLoose[0]*puWeight'+topstringnom+prefireStringnom+'')
+    correctionColumns11.Add("dbsfloose_downFailHalfSF",'genWeight*(dbSFdownloose)*triggerLoose[0]*puWeight'+topstringnom+prefireStringnom+'')
 
 #### Now do 2+1 weights
 
     if options.year == '17' or options.year == '16':
-        correctionColumns21.Add("prefireweight_up",'dbSFnomtight*puWeight*trigger21[0]*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringUp+'')
-        correctionColumns21.Add("prefireweight_down",'dbSFnomtight*puWeight*trigger21[0]*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringDown+'')
+        correctionColumns21.Add("prefireweight_up",'genWeight*dbSFnomtight*puWeight*trigger21[0]*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringUp+'')
+        correctionColumns21.Add("prefireweight_down",'genWeight*dbSFnomtight*puWeight*trigger21[0]*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringDown+'')
 
-        correctionColumns21.Add("prefireweight_upFailFullSF",'(1-dbSFnomtight)*puWeight*trigger21[0]*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringUp+'')
-        correctionColumns21.Add("prefireweight_downFailFullSF",'(1-dbSFnomtight)*puWeight*trigger21[0]*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringUp+'')
+        correctionColumns21.Add("prefireweight_upFailFullSF",'genWeight*(1-dbSFnomtight)*puWeight*trigger21[0]*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringUp+'')
+        correctionColumns21.Add("prefireweight_downFailFullSF",'genWeight*(1-dbSFnomtight)*puWeight*trigger21[0]*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringUp+'')
 
-        correctionColumns21.Add("prefireweight_upFailHalfSF",'puWeight*trigger21[0]*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringUp+'')
-        correctionColumns21.Add("prefireweight_downFailHalfSF",'puWeight*trigger21[0]*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringDown+'')
+        correctionColumns21.Add("prefireweight_upFailHalfSF",'genWeight*puWeight*trigger21[0]*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringUp+'')
+        correctionColumns21.Add("prefireweight_downFailHalfSF",'genWeight*puWeight*trigger21[0]*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringDown+'')
 
 
-    correctionColumns21.Add("pileupweight_up",'dbSFnomtight*puWeightUp*trigger21[0]*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
-    correctionColumns21.Add("pileupweight_down",'dbSFnomtight*puWeightDown*trigger21[0]*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns21.Add("pileupweight_up",'genWeight*dbSFnomtight*puWeightUp*trigger21[0]*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns21.Add("pileupweight_down",'genWeight*dbSFnomtight*puWeightDown*trigger21[0]*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
 
-    correctionColumns21.Add("pileupweight_upFailFullSF",'(1-dbSFnomtight)*puWeightUp*trigger21[0]*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
-    correctionColumns21.Add("pileupweight_downFailFullSF",'(1-dbSFnomtight)*puWeightDown*trigger21[0]*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns21.Add("pileupweight_upFailFullSF",'genWeight*(1-dbSFnomtight)*puWeightUp*trigger21[0]*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns21.Add("pileupweight_downFailFullSF",'genWeight*(1-dbSFnomtight)*puWeightDown*trigger21[0]*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
 
-    correctionColumns21.Add("pileupweight_upFailHalfSF",'puWeightUp*trigger21[0]*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
-    correctionColumns21.Add("pileupweight_downFailHalfSF",'puWeightDown*trigger21[0]*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns21.Add("pileupweight_upFailHalfSF",'genWeight*puWeightUp*trigger21[0]*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns21.Add("pileupweight_downFailHalfSF",'genWeight*puWeightDown*trigger21[0]*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
 
-    correctionColumns21.Add("Pdfweight_up",'dbSFnomtight*Pdfweight[0]*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
-    correctionColumns21.Add("Pdfweight_down",'dbSFnomtight*Pdfweight[1]*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns21.Add("Pdfweight_up",'genWeight*dbSFnomtight*Pdfweight[0]*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns21.Add("Pdfweight_down",'genWeight*dbSFnomtight*Pdfweight[1]*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
 
-    correctionColumns21.Add("Pdfweight_upFailFullSF",'(1-dbSFnomtight)*Pdfweight[0]*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
-    correctionColumns21.Add("Pdfweight_downFailFullSF",'(1-dbSFnomtight)*Pdfweight[1]*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns21.Add("Pdfweight_upFailFullSF",'genWeight*(1-dbSFnomtight)*Pdfweight[0]*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns21.Add("Pdfweight_downFailFullSF",'genWeight*(1-dbSFnomtight)*Pdfweight[1]*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
 
-    correctionColumns21.Add("Pdfweight_upFailHalfSF",'Pdfweight[0]*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
-    correctionColumns21.Add("Pdfweight_downFailHalfSF",'Pdfweight[1]*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns21.Add("Pdfweight_upFailHalfSF",'genWeight*Pdfweight[0]*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns21.Add("Pdfweight_downFailHalfSF",'genWeight*Pdfweight[1]*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
 
-    correctionColumns21.Add("btagsfweight_up",'dbSFnomtight*puWeight*trigger21[0]*btagscalefactor[1]*btagscalefactor[1]'+topstringnom+prefireStringnom+'')
-    correctionColumns21.Add("btagsfweight_down",'dbSFnomtight*puWeight*trigger21[0]*btagscalefactor[2]*btagscalefactor[2]'+topstringnom+prefireStringnom+'')
+    correctionColumns21.Add("btagsfweight_up",'genWeight*dbSFnomtight*puWeight*trigger21[0]*btagscalefactor[1]*btagscalefactor[1]'+topstringnom+prefireStringnom+'')
+    correctionColumns21.Add("btagsfweight_down",'genWeight*dbSFnomtight*puWeight*trigger21[0]*btagscalefactor[2]*btagscalefactor[2]'+topstringnom+prefireStringnom+'')
 
-    correctionColumns21.Add("btagsfweight_upFailFullSF",'(1-dbSFnomtight)*puWeight*trigger21[0]*btagscalefactor[1]*btagscalefactor[1]'+topstringnom+prefireStringnom+'')
-    correctionColumns21.Add("btagsfweight_downFailFullSF",'(1-dbSFnomtight)*puWeight*trigger21[0]*btagscalefactor[2]*btagscalefactor[2]'+topstringnom+prefireStringnom+'')
+    correctionColumns21.Add("btagsfweight_upFailFullSF",'genWeight*(1-dbSFnomtight)*puWeight*trigger21[0]*btagscalefactor[1]*btagscalefactor[1]'+topstringnom+prefireStringnom+'')
+    correctionColumns21.Add("btagsfweight_downFailFullSF",'genWeight*(1-dbSFnomtight)*puWeight*trigger21[0]*btagscalefactor[2]*btagscalefactor[2]'+topstringnom+prefireStringnom+'')
 
-    correctionColumns21.Add("btagsfweight_upFailHalfSF",'puWeight*trigger21[0]*btagscalefactor[1]*btagscalefactor[1]'+topstringnom+prefireStringnom+'')
-    correctionColumns21.Add("btagsfweight_downFailHalfSF",'puWeight*trigger21[0]*btagscalefactor[2]*btagscalefactor[2]'+topstringnom+prefireStringnom+'')
+    correctionColumns21.Add("btagsfweight_upFailHalfSF",'genWeight*puWeight*trigger21[0]*btagscalefactor[1]*btagscalefactor[1]'+topstringnom+prefireStringnom+'')
+    correctionColumns21.Add("btagsfweight_downFailHalfSF",'genWeight*puWeight*trigger21[0]*btagscalefactor[2]*btagscalefactor[2]'+topstringnom+prefireStringnom+'')
 
-    correctionColumns21.Add("trigger_up",'dbSFnomtight*trigger21[1]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
-    correctionColumns21.Add("trigger_down",'dbSFnomtight*trigger21[2]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns21.Add("trigger_up",'genWeight*dbSFnomtight*trigger21[1]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns21.Add("trigger_down",'genWeight*dbSFnomtight*trigger21[2]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
 
-    correctionColumns21.Add("trigger_upFailFullSF",'(1-dbSFnomtight)*trigger21[1]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
-    correctionColumns21.Add("trigger_downFailFullSF",'(1-dbSFnomtight)*trigger21[2]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns21.Add("trigger_upFailFullSF",'genWeight*(1-dbSFnomtight)*trigger21[1]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns21.Add("trigger_downFailFullSF",'genWeight*(1-dbSFnomtight)*trigger21[2]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
 
-    correctionColumns21.Add("trigger_upFailHalfSF",'trigger21[1]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
-    correctionColumns21.Add("trigger_downFailHalfSF",'trigger21[2]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns21.Add("trigger_upFailHalfSF",'genWeight*trigger21[1]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns21.Add("trigger_downFailHalfSF",'genWeight*trigger21[2]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
 
-    correctionColumns21.Add("dbsfup",'dbSFuptight*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
-    correctionColumns21.Add("dbsfdown",'dbSFdowntight*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns21.Add("dbsfup",'genWeight*dbSFuptight*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns21.Add("dbsfdown",'genWeight*dbSFdowntight*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
 
-    correctionColumns21.Add("dbsfupFailFullSF",'(1-dbSFuptight)*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
-    correctionColumns21.Add("dbsfdownFailFullSF",'(1-dbSFdowntight)*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns21.Add("dbsfupFailFullSF",'genWeight*(1-dbSFuptight)*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns21.Add("dbsfdownFailFullSF",'genWeight*(1-dbSFdowntight)*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
 
-    correctionColumns21.Add("dbsfupFailHalfSF",'trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
-    correctionColumns21.Add("dbsfdownFailHalfSF",'trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns21.Add("dbsfupFailHalfSF",'genWeight*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
+    correctionColumns21.Add("dbsfdownFailHalfSF",'genWeight*trigger21[0]*puWeight*btagscalefactor[0]*btagscalefactor[0]'+topstringnom+prefireStringnom+'')
 
 
 #### 1+1 algorithm
