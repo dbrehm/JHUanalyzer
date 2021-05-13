@@ -25,7 +25,7 @@ Trig17         shape          1.0            -              -              -    
 Trig16         shape          -              1.0            1.0            -              -              -              -              -              -              -              1.0            1.0            -              -              -              -              -              -              -              1.0            1.0            -              -              -              -              -              -              -              1.0            1.0            -              -              -              -              -              -              -              1.0            1.0            -              -              -              -              -              -              -              1.0            1.0            -              -              -              -              -              -              
 jmr17          shape          1.0            -              -              -              1.0            1.0            -              -              -              1.0            -              -              -              1.0            1.0            -              -              -              1.0            -              -              -              1.0            1.0            -              -              -              1.0            -              -              -              1.0            1.0            -              -              -              1.0            -              -              -              1.0            1.0            -              -              -              1.0            -              -              -              1.0            1.0            -              -              -              
 jmr16          shape          -              1.0            1.0            -              -              -              -              -              -              -              1.0            1.0            -              -              -              -              -              -              -              1.0            1.0            -              -              -              -              -              -              -              1.0            1.0            -              -              -              -              -              -              -              1.0            1.0            -              -              -              -              -              -              -              1.0            1.0            -              -              -              -              -              -              
-TptAlpha       shape          -              1.0            -              1.0            1.0            1.0            -              1.0            -              -              1.0            -              1.0            1.0            1.0            -              1.0            -              -              1.0            -              1.0            1.0            1.0            -              1.0            -              -              1.0            -              1.0            1.0            1.0            -              1.0            -              -              1.0            -              1.0            1.0            1.0            -              1.0            -              -              1.0            -              1.0            1.0            1.0            -              1.0            -              
+TptAlpha       shape          -              -              -              -              -              -              -              -              -              -              -              -              -              -              -              -              -              -              -              -              -              -              -              -              -              -              -              -              -              -              -              -              -              -              -              -              -              -              -              -              -              -              -              -              -              -              -              -              -              -              -              -              -              -              
 jmr18          shape          -              -              -              1.0            -              -              1.0            1.0            -              -              -              -              1.0            -              -              1.0            1.0            -              -              -              -              1.0            -              -              1.0            1.0            -              -              -              -              1.0            -              -              1.0            1.0            -              -              -              -              1.0            -              -              1.0            1.0            -              -              -              -              1.0            -              -              1.0            1.0            -              
 Trig18         shape          -              -              -              1.0            -              -              1.0            1.0            -              -              -              -              1.0            -              -              1.0            1.0            -              -              -              -              1.0            -              -              1.0            1.0            -              -              -              -              1.0            -              -              1.0            1.0            -              -              -              -              1.0            -              -              1.0            1.0            -              -              -              -              1.0            -              -              1.0            1.0            -              
 Pileup18       shape          -              -              -              1.0            -              -              1.0            1.0            -              -              -              -              1.0            -              -              1.0            1.0            -              -              -              -              1.0            -              -              1.0            1.0            -              -              -              -              1.0            -              -              1.0            1.0            -              -              -              -              1.0            -              -              1.0            1.0            -              -              -              -              1.0            -              -              1.0            1.0            -              
@@ -70,6 +70,7 @@ rpf0_HHLL             flatParam
 rpf1_HHLL             flatParam
 rpf2_HHLL             flatParam
 rpf3_HHLL             flatParam
+rpf4_HHLL             flatParam
 Fail_bin_1-1_HHLL     flatParam
 Fail_bin_2-1_HHLL     flatParam
 Fail_bin_1-2_HHLL     flatParam
@@ -88,8 +89,6 @@ Fail_bin_1-8_HHLL     flatParam
 Fail_bin_2-8_HHLL     flatParam
 Fail_bin_1-9_HHLL     flatParam
 Fail_bin_2-9_HHLL     flatParam
-Fail_bin_1-10_HHLL    flatParam
-Fail_bin_2-10_HHLL    flatParam
 Fail_bin_3-1_HHLL     flatParam
 Fail_bin_4-1_HHLL     flatParam
 Fail_bin_5-1_HHLL     flatParam
@@ -117,56 +116,39 @@ Fail_bin_5-8_HHLL     flatParam
 Fail_bin_3-9_HHLL     flatParam
 Fail_bin_4-9_HHLL     flatParam
 Fail_bin_5-9_HHLL     flatParam
-Fail_bin_3-10_HHLL    flatParam
-Fail_bin_4-10_HHLL    flatParam
-Fail_bin_5-10_HHLL    flatParam
 Fail_bin_6-1_HHLL     flatParam
 Fail_bin_7-1_HHLL     flatParam
 Fail_bin_8-1_HHLL     flatParam
 Fail_bin_9-1_HHLL     flatParam
-Fail_bin_10-1_HHLL    flatParam
 Fail_bin_6-2_HHLL     flatParam
 Fail_bin_7-2_HHLL     flatParam
 Fail_bin_8-2_HHLL     flatParam
 Fail_bin_9-2_HHLL     flatParam
-Fail_bin_10-2_HHLL    flatParam
 Fail_bin_6-3_HHLL     flatParam
 Fail_bin_7-3_HHLL     flatParam
 Fail_bin_8-3_HHLL     flatParam
 Fail_bin_9-3_HHLL     flatParam
-Fail_bin_10-3_HHLL    flatParam
 Fail_bin_6-4_HHLL     flatParam
 Fail_bin_7-4_HHLL     flatParam
 Fail_bin_8-4_HHLL     flatParam
 Fail_bin_9-4_HHLL     flatParam
-Fail_bin_10-4_HHLL    flatParam
 Fail_bin_6-5_HHLL     flatParam
 Fail_bin_7-5_HHLL     flatParam
 Fail_bin_8-5_HHLL     flatParam
 Fail_bin_9-5_HHLL     flatParam
-Fail_bin_10-5_HHLL    flatParam
 Fail_bin_6-6_HHLL     flatParam
 Fail_bin_7-6_HHLL     flatParam
 Fail_bin_8-6_HHLL     flatParam
 Fail_bin_9-6_HHLL     flatParam
-Fail_bin_10-6_HHLL    flatParam
 Fail_bin_6-7_HHLL     flatParam
 Fail_bin_7-7_HHLL     flatParam
 Fail_bin_8-7_HHLL     flatParam
 Fail_bin_9-7_HHLL     flatParam
-Fail_bin_10-7_HHLL    flatParam
 Fail_bin_6-8_HHLL     flatParam
 Fail_bin_7-8_HHLL     flatParam
 Fail_bin_8-8_HHLL     flatParam
 Fail_bin_9-8_HHLL     flatParam
-Fail_bin_10-8_HHLL    flatParam
 Fail_bin_6-9_HHLL     flatParam
 Fail_bin_7-9_HHLL     flatParam
 Fail_bin_8-9_HHLL     flatParam
 Fail_bin_9-9_HHLL     flatParam
-Fail_bin_10-9_HHLL    flatParam
-Fail_bin_6-10_HHLL    flatParam
-Fail_bin_7-10_HHLL    flatParam
-Fail_bin_8-10_HHLL    flatParam
-Fail_bin_9-10_HHLL    flatParam
-Fail_bin_10-10_HHLL   flatParam
